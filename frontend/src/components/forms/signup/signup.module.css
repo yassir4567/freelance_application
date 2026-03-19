@@ -1,0 +1,69 @@
+.form_wrapper h1 {
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+
+.form {
+    width: 600px;
+}
+
+.row {
+  display: flex;
+  gap: 20px;
+}
+
+.row div {
+  flex: 1;
+}
+
+label {
+  display: block;
+  margin: 10px 0 5px;
+}
+
+input {
+  width: 100%;
+  padding: 12px;
+  border-radius: 15px;
+  border: 1px solid #ccc;
+}
+
+
+.full {
+  width: 100%;
+}
+
+.role {
+  margin: 15px 0;
+  display: flex;
+  gap: 30px;
+  align-items: center;
+
+}
+
+.role div {
+    display: flex; 
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.role div label {
+    margin-bottom: 10px;
+}
+
+button {
+  width: 100%;
+  padding: 12px;
+  background: var(--color-secondary);
+  border: none;
+  border-radius: 10px;
+  color: white;
+  font-size: 16px;
+  margin-bottom: 20px;
+}
+
+.form p span {
+    color: var(--color-success);
+}

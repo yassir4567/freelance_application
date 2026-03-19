@@ -1,0 +1,20 @@
+.wrapper {
+  height: 100vh;
+  background: #dcd8c9;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.auth_logo {
+  position: absolute;
+  top: 30px;
+  left: 30px;
+  width: 90px;
+  height: 90px;
+  color: var(--color-black);
+  font-size: 19px;
+  text-align: center;
+  font-weight: bold;
+}
