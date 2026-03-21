@@ -1,15 +1,16 @@
-.auth_logo {
+.logo {
   position: absolute;
-  top: 20px;
-  left: 20px;
+  top: 10px;
+  left: 50px;
   width: 90px;
   height: 90px;
-  background: #d9d9d9;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   text-align: center;
-  font-size: 12px;
+  font-size: 26px;
+  font-weight: bolder;
+  color: var(--color-success);
 }
 

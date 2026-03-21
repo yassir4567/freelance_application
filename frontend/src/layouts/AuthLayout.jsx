@@ -1,18 +1,16 @@
-import styles from './AuthLayout.module.css'
-import { Outlet} from "react-router-dom";
-
+import styles from "./AuthLayout.module.css";
+import { Outlet } from "react-router-dom";
+import Logo from "../components/common/Logo";
 
 function AuthLayout() {
-    return (
-        <div className={styles.wrapper}>
-            <div className={styles.auth_logo}>
-                Freelance Application
-            </div>
-            <div className={styles.form_card}>
-                <Outlet />
-            </div>
-        </div>
-    );
+  return (
+    <div className={styles.wrapper}>
+      <Logo />
+      <div className={styles.form_card}>
+        <Outlet />
+      </div>
+    </div>
+  );
 }
 
 export default AuthLayout;

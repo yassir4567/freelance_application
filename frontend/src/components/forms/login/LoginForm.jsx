@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import styles from "./login.module.css";
 
 function LoginForm() {
@@ -15,8 +16,12 @@ function LoginForm() {
         </div>
         <button className={styles.login}>Log in</button>
 
-        <p className={styles.signup_message}>
-          Don’t have an account ? <span className={styles.signup}>signup</span>
+        <p className={styles.auth_switch}>
+          <span>Don’t have an account ?</span>
+
+          <Link to="/signup">
+            <button className={styles.signup}>signup</button>
+          </Link>
         </p>
       </form>
     </div>

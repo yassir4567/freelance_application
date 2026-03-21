@@ -1,0 +1,19 @@
+
+.profile_menu {
+    background-color: var(--color-white);
+    width: 120px;
+    border: 1px solid var(--color-border);
+    border-radius: 10px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    /* height: 120px; */
+}
+
+.profile_menu button {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: var(--fs-base);
+}

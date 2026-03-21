@@ -3,9 +3,8 @@
   text-align: center;
 }
 
-
 .form {
-    width: 600px;
+  width: 600px;
 }
 
 .row {
@@ -24,11 +23,10 @@ label {
 
 input {
   width: 100%;
-  padding: 12px;
+  padding: var(--fs-xs);
   border-radius: 15px;
   border: 1px solid #ccc;
 }
-
 
 .full {
   width: 100%;
@@ -39,31 +37,38 @@ input {
   display: flex;
   gap: 30px;
   align-items: center;
-
 }
 
 .role div {
-    display: flex; 
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
 }
 
 .role div label {
-    margin-bottom: 10px;
+  margin-bottom: 10px;
 }
 
-button {
+.form .signup {
   width: 100%;
   padding: 12px;
   background: var(--color-secondary);
   border: none;
   border-radius: 10px;
   color: white;
-  font-size: 16px;
+  font-size: var(--fs-base);
   margin-bottom: 20px;
 }
 
-.form p span {
-    color: var(--color-success);
+.form .auth_switch .login {
+  color: var(--color-success);
+  font-size: var(--fs-base);
+  text-transform: capitalize;
+}
+
+.auth_switch {
+  display: flex;
+  align-items: center;
+  gap: 5px;
 }

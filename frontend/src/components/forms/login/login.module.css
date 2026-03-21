@@ -1,8 +1,3 @@
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
 
 .form_wrapper h1 {
   margin-bottom: 30px;
@@ -16,7 +11,7 @@
 .form input {
   display: block;
   width: 340px;
-  margin: 15px auto;
+  margin: 10px auto;
   padding: 12px;
   border-radius: 15px;
 }
@@ -34,21 +29,30 @@
   margin: 8px;
 }
 
-.login_btn {
+.remember label {
+  margin-bottom: 10px;
+}
+
+.login {
   width: 340px;
   padding: 12px;
   background: var(--color-secondary);
   border: none;
   border-radius: 10px;
   color: var(--color-white);
-  font-size: 16px;
+  font-size: var(--fs-base);
 }
 
 .signup {
   color: var(--color-success);
+  font-size: var(--fs-base);
+  text-transform: capitalize;
 }
 
-.signup_message {
+.auth_switch {
     margin-top: 20px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
 }
 

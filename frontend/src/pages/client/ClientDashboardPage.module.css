@@ -1,0 +1,69 @@
+.dashboard {
+  margin-top: 50px;
+  margin-inline: 10px;
+}
+
+.welcomeSection {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 25px;
+}
+
+.welcomeTitle {
+  color: var(--color-black);
+  font-size: var(--fs-3xl);
+  margin-bottom: 10px;
+  font-weight: 500;
+}
+
+.welcomeSubTitle {
+  color: var(--color-text-muted);
+  font-weight: 400;
+  font-size: var(--fs-base);
+  margin-left: 5px;
+}
+
+.post_project .post_job_btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  background-color: var(--color-secondary);
+  color: var(--color-white);
+  width: 130px;
+  height: 40px;
+  font-size: var(--fs-md);
+  border-radius: 5px;
+  text-decoration: none;
+}
+
+.post_job_btn:hover {
+  background-color: var(--color-success);
+}
+
+.overview {
+  margin-top: 25px;
+}
+
+.overviewTitle {
+    font-size: var(--fs-xl);
+    margin-bottom: 26px;
+    font-weight: 500;
+}
+
+.statsCards {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+.recentProjects {
+  margin-top: 40px;
+
+}
+
+.recentTitle {
+  font-size: var(--fs-xl);
+  margin-bottom: 20px;
+  font-weight: 500;
+}

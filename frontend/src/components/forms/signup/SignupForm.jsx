@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import styles from "./signup.module.css";
 
 function SignupForm() {
@@ -51,10 +52,13 @@ function SignupForm() {
           </div>
         </div>
 
-        <button className="signup">Sign up</button>
+        <button className={styles.signup}>Sign up</button>
 
-        <p>
-          Already have an account ? <span className="login">Log in</span>
+        <p className={styles.auth_switch}>
+          <span>Already have an account ?</span>
+          <Link to='/login'>
+            <button className={styles.login}>log in</button>
+          </Link>
         </p>
       </form>
     </div>
