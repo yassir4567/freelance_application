@@ -4,12 +4,11 @@
   left: 50px;
   width: 90px;
   height: 90px;
-  border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   text-align: center;
-  font-size: 26px;
+  font-size: var(--fs-2xl);
   font-weight: bolder;
   color: var(--color-success);
 }

@@ -1,0 +1,13 @@
+
+
+.postJobTitle {
+    font-size: var(--fs-3xl);
+    font-weight: 500;
+}
+
+
+.postJobFormSection {
+    margin-top: 35px;
+    margin-inline: 10px;
+}
+

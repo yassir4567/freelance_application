@@ -1,0 +1,116 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-bottom: 100px;
+}
+
+.row {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 25px;
+}
+
+select {
+  width: 100%;
+  height: 40px;
+  background-color: var(--color-white);
+}
+
+select,
+input:not(input[type="radio"]) {
+  border-radius: 10px;
+  padding-inline: 15px;
+  height: 45px;
+}
+
+textarea {
+  width: 100%;
+  height: 120px;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.selectedSkills {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 20px;
+  align-self: center;
+  height: 55px;
+  overflow: auto;
+}
+
+.selectedSkills .skill {
+  border: 1px solid var(--color-black);
+  min-width: 90px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  font-size: var(--fs-sm);
+  padding-inline: 10px;
+  border-radius: 20px;
+}
+
+.selectedSkills .skill button {
+  width: fit-content;
+  height: fit-content;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  padding: 3px;
+  border: 1px solid var(--color-border);
+}
+
+.tripleRow {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.radioBoxTitle {
+  margin-bottom: 10px;
+}
+
+.radioBox {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.radioBox input {
+  width: 17px;
+  height: 17px;
+}
+
+.post_job_btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  background-color: var(--color-secondary);
+  color: var(--color-white);
+  width: 200px;
+  height: 40px;
+  font-size: var(--fs-md);
+  border-radius: 5px;
+  text-decoration: none;
+  margin-top: 12px;
+}
+
+.post_job_btn:hover {
+  background-color: var(--color-success);
+}
+
+.error {
+    color: var(--color-danger);
+    font-size: var(--fs-base);
+    margin-top: 12px;
+    margin-left: 5px;
+    margin-bottom: 8px;
+}
+
