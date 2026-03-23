@@ -5,11 +5,13 @@
   --color-primary: #c44a3a;
   --color-secondary: #63b38f;
   --color-success: #118b50;
+  --color-light-green : #C7EABB ;
   --color-text-muted: #6b7280;
   --color-placeholder: #9ca3af;
-  --color-border: #d1d5db;
+  --color-border: #dcdfe5;
   --color-white: #ffffff;
   --color-black: #000;
+  --color-light : #f8f5f553 ;
 
   /* font-sizes */
   --fs-xs: 12px;

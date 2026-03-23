@@ -17,7 +17,9 @@ function UserHeader() {
               to="/dashboard/client"
               end
               className={({ isActive }) =>
-                isActive ? `${styles.active_link} ${styles.link}` : `${styles.link}`
+                isActive
+                  ? `${styles.active_link} ${styles.link}`
+                  : `${styles.link}`
               }
             >
               Home
@@ -27,13 +29,26 @@ function UserHeader() {
             <NavLink
               to="/dashboard/client/postjob"
               className={({ isActive }) =>
-                isActive ? `${styles.active_link} ${styles.link}` : `${styles.link}`
+                isActive
+                  ? `${styles.active_link} ${styles.link}`
+                  : `${styles.link}`
               }
             >
               Post Job
             </NavLink>
           </li>
-          <li className={styles.navbar_item}>Proposals</li>
+          <li className={styles.navbar_item}>
+            <NavLink
+              to="/dashboard/client/proposals"
+              className={({ isActive }) =>
+                isActive
+                  ? `${styles.active_link} ${styles.link}`
+                  : `${styles.link}`
+              }
+            >
+              Proposals
+            </NavLink>
+          </li>
           <li className={styles.navbar_item}>Contracts</li>
           <li className={styles.navbar_item}>Messages</li>
           <li className={styles.navbar_item}>My Projects</li>
