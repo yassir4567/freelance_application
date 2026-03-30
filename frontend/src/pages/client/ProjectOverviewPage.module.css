@@ -1,0 +1,28 @@
+
+.projectDetail {
+  border: 3px solid var(--color-border);
+  border-radius: 10px;
+  padding: 25px;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  margin-bottom: 90px;
+}
+
+
+.projectDetailItemTitle {
+  margin-bottom: 10px;
+  font-weight: 500;
+}
+
+.projectDetailItemSubText {
+  margin-left: 10px;
+  color: var(--color-text-muted);
+  text-transform: capitalize;
+}
+
+.hiredFreelancer h2 {
+  margin-bottom: 25px;
+  font-size: var(--fs-2xl);
+  font-weight: 500;
+}

@@ -6,7 +6,7 @@ import { RiFolderReceivedFill } from "react-icons/ri";
 import { HiRectangleStack } from "react-icons/hi2";
 import { RiContractFill } from "react-icons/ri";
 import SimpleCard from "../../components/cards/SimpleCard";
-import RecentProjectsTable from '../../components/tables/RecentProjectsTable';
+import RecentProjectsTable from "../../components/tables/RecentProjectsTable";
 
 function ClientDashboardPage() {
   const stats_cards = [
@@ -37,34 +37,67 @@ function ClientDashboardPage() {
   ];
 
   const recentProjects = [
-    { id: 1, title: 'Website Redesign', status: 'Active', proposals: 12, time: '2 hours ago' },
-    { id: 2, title: 'Mobile App Development', status: 'Under negotiation', proposals: 8, time: '1 day ago' },
-    { id: 3, title: 'Logo Design', status: 'Completed', proposals: 15, time: '3 days ago' },
-    { id: 4, title: 'SEO Optimization', status: 'Active', proposals: 6, time: '5 hours ago' },
-    { id: 5, title: 'Content Writing', status: 'Cancel', proposals: 4, time: '1 week ago' },
+    {
+      id: 1,
+      title: "Website Redesign",
+      status: "Active",
+      proposals: 12,
+      time: "2 hours ago",
+    },
+    {
+      id: 2,
+      title: "Mobile App Development",
+      status: "Under negotiation",
+      proposals: 8,
+      time: "1 day ago",
+    },
+    {
+      id: 3,
+      title: "Logo Design",
+      status: "Completed",
+      proposals: 15,
+      time: "3 days ago",
+    },
+    {
+      id: 4,
+      title: "SEO Optimization",
+      status: "Active",
+      proposals: 6,
+      time: "5 hours ago",
+    },
+    {
+      id: 5,
+      title: "Content Writing",
+      status: "Cancel",
+      proposals: 4,
+      time: "1 week ago",
+    },
   ];
 
   return (
     <div className={styles.dashboard}>
       <div className={styles.welcomeSection}>
         <div className={styles.welcomeContent}>
-          <h1 className={styles.welcomeTitle}>Welcome Username </h1>
+          <h1 className="pageTitle">Welcome Username </h1>
           <h3 className={styles.welcomeSubTitle}>
             Here's what happening with your projects today
           </h3>
         </div>
         <div className={styles.post_project}>
-          <NavLink to="/dashboard/client/postjob" className={styles.post_job_btn}>
+          <NavLink
+            to="/dashboard/client/postjob"
+            className={styles.post_job_btn}
+          >
             <span>Post Job</span> <IoMdAdd />
           </NavLink>
         </div>
       </div>
-    <hr />
+      <hr />
       <div className={styles.overview}>
         <h3 className={styles.overviewTitle}>Overview</h3>
         <div className={styles.statsCards}>
           {stats_cards.map((state) => (
-            <SimpleCard key={state.id} title={state.title} total={state.total}>
+            <SimpleCard key={state.id} icon={state.icon} title={state.title} value={state.total}>
               {state.icon}
             </SimpleCard>
           ))}

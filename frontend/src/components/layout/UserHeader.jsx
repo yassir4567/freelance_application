@@ -1,7 +1,7 @@
 import styles from "./UserHeader.module.css";
 import { IoMdNotificationsOutline } from "react-icons/io";
 import profile from "../../assets/images/profile.png";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import ProfileMenu from "../common/ProfileMenu";
 import { NavLink } from "react-router-dom";
 
@@ -39,19 +39,40 @@ function UserHeader() {
           </li>
           <li className={styles.navbar_item}>
             <NavLink
-              to="/dashboard/client/proposals"
+              to="/dashboard/client/projects"
               className={({ isActive }) =>
                 isActive
                   ? `${styles.active_link} ${styles.link}`
                   : `${styles.link}`
               }
             >
-              Proposals
+              Projects and Proposals
             </NavLink>
           </li>
-          <li className={styles.navbar_item}>Contracts</li>
-          <li className={styles.navbar_item}>Messages</li>
-          <li className={styles.navbar_item}>My Projects</li>
+          <li className={styles.navbar_item}>
+            <NavLink
+              to="/dashboard/client/contracts"
+              className={({ isActive }) =>
+                isActive
+                  ? `${styles.active_link} ${styles.link}`
+                  : `${styles.link}`
+              }
+            >
+              Contracts
+            </NavLink>
+          </li>
+          <li className={styles.navbar_item}>
+            <NavLink
+              to="/dashboard/client/messages"
+              className={({ isActive }) =>
+                isActive
+                  ? `${styles.active_link} ${styles.link}`
+                  : `${styles.link}`
+              }
+            >
+              Messages
+            </NavLink>
+          </li>
         </ul>
       </nav>
       <div className={styles.header_right}>

@@ -1,0 +1,95 @@
+.freelancerCard {
+  border: 2px solid var(--color-border);
+  padding: 25px 30px;
+  border-radius: 10px;
+  display: flex ;
+  flex-direction: column;
+}
+
+.avatar {
+  width: 80px;
+  height: 80px;
+}
+
+.freelancerCardHeader {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+}
+
+.freelancerInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 5px;
+}
+
+.freelancerFullName {
+  font-size: var(--fs-xl);
+  font-weight: 400;
+}
+.freelancerTitle {
+  font-size: var(--fs-xl);
+  font-weight: 450;
+}
+
+.freelancerCardMain {
+  margin-top: 25px;
+  margin-left: 30px;
+  margin-bottom: 25px;
+}
+
+.freelancerCategory {
+  font-size: var(--fs-lg);
+  margin-bottom: 15px;
+}
+
+.freelancerSkills {
+  display: flex;
+  gap: 10px;
+}
+
+.freelancerSkill {
+  border: 1px solid var(--color-black);
+  min-width: 80px;
+  height: 30px;
+  padding-inline: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.2s ease-in-out;
+}
+
+.freelancerSkill:hover {
+  background-color: var(--color-primary);
+  border-color: var(--color-danger);
+  color: white;
+  border-radius: 10px;
+}
+
+.freelancerCardActions {
+  display: flex;
+  gap: 10px;
+  align-self: flex-end;
+  margin-right: 20px;
+}
+
+.freelancerCardActions button {
+  border: 1px solid var(--color-success);
+  color: var(--color-success);
+  min-width: 100px;
+  height: 30px;
+  padding-inline: 15px;
+  font-size: var(--fs-base);
+  border-radius: 5px;
+  text-decoration: none;
+  transition: 0.3s;
+}
+
+.freelancerCardActions button:hover {
+  color: var(--color-white);
+  background-color: var(--color-success);
+  border-radius: 10px;
+}

@@ -1,7 +1,11 @@
 import ClientLayout from "../layouts/ClientLayout";
 import ClientDashboardPage from "../pages/client/ClientDashboardPage";
 import PostJobPage from "../pages/client/PostJobPage";
-import ProposalsPage from "../pages/client/ProposalsPage";
+import ProjectsPage from "../pages/client/ProjectsPage";
+import ProjectProposalsPage from "../pages/client/ProjectProposalsPage";
+import ProjectOverviewPage from "../pages/client/ProjectOverviewPage";
+import ProjectLayout from "../layouts/ProjectLayout";
+import ContractsPage from "../pages/client/ContractsPage";
 
 export const clientRoutes = [
   {
@@ -10,8 +14,16 @@ export const clientRoutes = [
     children: [
       { index: true, element: <ClientDashboardPage /> },
       { path: "postjob", element: <PostJobPage /> },
-      { path: "proposals", element: <ProposalsPage /> },
-
+      { path: "projects", element: <ProjectsPage /> },
+      {
+        path: "projects/:projectId",
+        element: <ProjectLayout />,
+        children: [
+          { index: true, element: <ProjectOverviewPage /> },
+          { path: "proposals", element: <ProjectProposalsPage /> },
+        ],
+      },
+      { path: "contracts", element: <ContractsPage /> },
     ],
   },
 ];

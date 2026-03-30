@@ -9,32 +9,31 @@ function SignupForm() {
       <form className={styles.form}>
         <div className={styles.row}>
           <div>
-            <label>First Name</label>
-            <input type="text" placeholder="Enter your first name" />
+            <label className={styles.label} >First Name</label>
+            <input className={styles.input}  type="text" placeholder="Enter your first name" />
           </div>
 
           <div>
-            <label>Last Name</label>
-            <input type="text" placeholder="Enter your last name" />
+            <label className={  styles.label} >Last Name</label>
+            <input className={styles.input}  type="text" placeholder="Enter your last name" />
           </div>
         </div>
 
-        <label>Email</label>
-        <input
+        <label className={styles.label} >Email</label>
+        <input className={`${styles.input} ${styles.full}`} 
           type="email"
           placeholder="Enter your email"
-          className={styles.full}
         />
 
         <div className={styles.row}>
           <div>
-            <label>Password</label>
-            <input type="password" placeholder="Enter your password" />
+            <label className={styles.label} >Password</label>
+            <input className={styles.input}  type="password" placeholder="Enter your password" />
           </div>
 
           <div>
-            <label>Confirm password</label>
-            <input type="password" placeholder="Confirm your password" />
+            <label className={styles.label} >Confirm password</label>
+            <input className={styles.input}  type="password" placeholder="Confirm your password" />
           </div>
         </div>
 
@@ -42,13 +41,13 @@ function SignupForm() {
           <span>signup as :</span>
 
           <div>
-            <input type="radio" name="role" id="freelancer" />
-            <label htmlFor="freelancer">Freelancer</label>
+            <input className={styles.input}  type="radio" name="role" id="freelancer" />
+            <label className={styles.label}  htmlFor="freelancer">Freelancer</label>
           </div>
 
           <div>
-            <input type="radio" name="role" id="client" />
-            <label htmlFor="client">Client</label>
+            <input className={styles.input}  type="radio" name="role" id="client" />
+            <label className={styles.label}  htmlFor="client">Client</label>
           </div>
         </div>
 

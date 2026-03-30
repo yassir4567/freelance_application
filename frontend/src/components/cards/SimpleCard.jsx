@@ -1,13 +1,25 @@
 import styles from "./SimpleCard.module.css";
-
-function SimpleCard({ title, total, children }) {
+function SimpleCard({
+  title,
+  value = null,
+  description = null,
+  icon,
+  className = "",
+}) {
   return (
-    <div className={styles.stateCard}>
-      <p>
-        <span className={styles.icon}>{children} </span>
-        <span className={styles.cardTitle}>{title}</span>
-      </p>
-      <p className="total">{total}</p>
+    <div className={`${styles.card} ${className}`}>
+      {(icon || title) && (
+        <div className={styles.cardHeader}>
+          {icon && <span className={styles.icon}>{icon}</span>}
+          {title && <h3 className={styles.title}>{title}</h3>}
+        </div>
+      )}
+
+      {value !== null && <p className={styles.value}>{value}</p>}
+
+      {description !== null && (
+        <p className={styles.description}>{description}</p>
+      )}
     </div>
   );
 }

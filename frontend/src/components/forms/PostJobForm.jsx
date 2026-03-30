@@ -1,5 +1,5 @@
 import { useState } from "react";
-import styles from "./PostJobForm.module.css";
+import styles from "./postJobForm.module.css";
 import { MdRemove } from "react-icons/md";
 import { emptyText, emptyArray } from "../../utils/helpers";
 
@@ -137,7 +137,7 @@ function PostJobForm() {
       <div className={styles.row}>
         <div className={styles.inputBox}>
           <label>Title</label>
-          <input
+          <input className={styles.select} 
             type="text"
             value={project.title}
             onChange={handleInputChange}
@@ -148,7 +148,7 @@ function PostJobForm() {
         </div>
         <div className={styles.inputBox}>
           <label>Category</label>
-          <select
+          <select className={styles.select} 
             value={project.category}
             onChange={handleInputChange}
             name="category"
@@ -170,7 +170,7 @@ function PostJobForm() {
       <div className={styles.row}>
         <div className={styles.inputBox}>
           <label>Skills</label>
-          <select value="" onChange={handleInputChange} name="skills">
+          <select className={styles.select}  value="" onChange={handleInputChange} name="skills">
             <option value="" disabled>
               Select required skills
             </option>
@@ -198,7 +198,7 @@ function PostJobForm() {
         <div className={styles.radioInput}>
           <p className={styles.radioBoxTitle}>Experience Level</p>
           <div className={styles.radioBox}>
-            <input
+            <input className={styles.select} 
               type="radio"
               value="junior"
               onChange={handleInputChange}
@@ -209,7 +209,7 @@ function PostJobForm() {
             <label htmlFor="junior">Junior</label>
           </div>
           <div className={styles.radioBox}>
-            <input
+            <input className={styles.select} 
               type="radio"
               value="mid-level"
               onChange={handleInputChange}
@@ -220,7 +220,7 @@ function PostJobForm() {
             <label htmlFor="midlevel">Mid-Level</label>
           </div>
           <div className={styles.radioBox}>
-            <input
+            <input className={styles.select} 
               type="radio"
               value="senior"
               onChange={handleInputChange}
@@ -238,7 +238,7 @@ function PostJobForm() {
         <div className={styles.radioInput}>
           <p className={styles.radioBoxTitle}>Project Size</p>
           <div className={styles.radioBox}>
-            <input
+            <input className={styles.select} 
               type="radio"
               value="small"
               onChange={handleInputChange}
@@ -249,7 +249,7 @@ function PostJobForm() {
             <label htmlFor="small">Small</label>
           </div>
           <div className={styles.radioBox}>
-            <input
+            <input className={styles.select} 
               type="radio"
               value="medium"
               onChange={handleInputChange}
@@ -260,7 +260,7 @@ function PostJobForm() {
             <label htmlFor="medium">Medium</label>
           </div>
           <div className={styles.radioBox}>
-            <input
+            <input className={styles.select} 
               type="radio"
               value="large"
               onChange={handleInputChange}
@@ -276,7 +276,7 @@ function PostJobForm() {
         <div className={styles.radioInput}>
           <p className={styles.radioBoxTitle}>How long will your work take ?</p>
           <div className={styles.radioBox}>
-            <input
+            <input className={styles.select} 
               type="radio"
               value="less than 1 month"
               onChange={handleInputChange}
@@ -287,7 +287,7 @@ function PostJobForm() {
             <label htmlFor="less1">Less than 1 Months</label>
           </div>
           <div className={styles.radioBox}>
-            <input
+            <input className={styles.select} 
               type="radio"
               value="1 to 3 months"
               onChange={handleInputChange}
@@ -298,7 +298,7 @@ function PostJobForm() {
             <label htmlFor="between_1_3">1 to 3 Months</label>
           </div>
           <div className={styles.radioBox}>
-            <input
+            <input className={styles.select} 
               type="radio"
               value="3 to 6 months"
               onChange={handleInputChange}
@@ -309,7 +309,7 @@ function PostJobForm() {
             <label htmlFor="between_3_6">3 to 6 Months</label>
           </div>
           <div className={styles.radioBox}>
-            <input
+            <input className={styles.select} 
               type="radio"
               value="more than 6 months"
               onChange={handleInputChange}
@@ -332,6 +332,7 @@ function PostJobForm() {
           </label>
           <textarea
             name="description"
+            className={styles.textarea}
             id="description"
             value={project.description}
             onChange={handleInputChange}
@@ -343,7 +344,7 @@ function PostJobForm() {
         </div>
         <div className={styles.inputBox}>
           <label htmlFor="budget">Fixed Budget</label>
-          <input
+          <input className={styles.select} 
             type="number"
             id="budget"
             name="budget"

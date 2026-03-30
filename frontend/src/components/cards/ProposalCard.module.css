@@ -1,0 +1,220 @@
+.proposalCard {
+  border: 2px solid var(--color-border);
+  border-radius: 10px;
+  padding: 25px 30px;
+  background-color: var(--color-light);
+}
+
+.proposalCard:hover {
+  background-color: var(--color-gray-light);
+}
+
+.avatar {
+  width: 80px;
+  height: 80px;
+}
+
+.proposalCardHeader {
+  display: flex;
+  justify-content: space-between;
+}
+
+.proposalCardHeaderLeft {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+}
+
+.freelancerInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 5px;
+}
+
+.freelancerFullName {
+  font-size: var(--fs-lg);
+  font-weight: 400;
+}
+.freelancerTitle {
+  font-size: var(--fs-lg);
+  font-weight: 500;
+}
+
+.freelancerHeaderRight .rating {
+  font-size: var(--fs-base);
+  text-transform: capitalize;
+  font-weight: 500;
+  display: flex;
+  gap: 5px;
+  color: var(--color-accent);
+  background-color: var(--color-accent-bg);
+  padding: 5px 12px;
+  border-radius: 20px;
+}
+
+.proposalCardContent {
+  margin: 20px 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.proposalCoverLetter {
+  color: var(--color-text-muted);
+  margin-top: 8px;
+  margin-bottom: 10px;
+}
+.proposalSubCardsContainer {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+
+.proposalSubCard {
+  background-color: var(--color-gray-light);
+  border: 1px solid var(--color-border);
+  min-height: 70px;
+  padding: 10px 20px;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  transition: 0.2s;
+}
+
+.proposalSubCard span:first-child {
+  color: var(--color-black);
+  font-size: var(--fs-sm);
+  margin-bottom: 10px;
+}
+
+.proposalSubCard span:last-child {
+  color: var(--color-black);
+  font-size: var(--fs-lg);
+  align-self: end;
+  position: relative;
+}
+
+.status {
+  font-size: var(--fs-sm) !important;
+  padding: 5px 15px 5px 25px;
+  border-radius: 30px;
+  text-transform: capitalize;
+}
+
+.status::before {
+  content: "";
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.pending {
+  color: var(--color-warning) !important;
+  background-color: var(--color-warning-bg) !important;
+  box-shadow: 0 0 5px var(--color-warning-soft);
+}
+
+.pending::before {
+  background-color: var(--color-warning-soft);
+}
+
+.accepted {
+  background-color: var(--color-success-bg) !important;
+  color: var(--color-success) !important;
+  box-shadow: 0 0 5px var(--color-success);
+}
+
+.accepted::before {
+  background-color: var(--color-success);
+}
+
+.rejected {
+  background-color: var(--color-danger-bg) !important;
+  color: var(--color-danger) !important;
+  box-shadow: 0 0 5px var(--color-danger);
+}
+
+.rejected::before {
+  background-color: var(--color-danger);
+}
+
+.proposalActions {
+  margin-inline: 10px;
+  display: grid;
+  gap: 15px;
+}
+
+.primaryActions,
+.secondaryActions {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 15px;
+}
+
+.primaryActions {
+  display: flex;
+}
+
+.link,
+.actionBtn {
+  width: 100%;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--fs-md);
+  border-radius: 5px;
+  text-transform: capitalize;
+  font-weight: 400;
+  transition: .3s;
+}
+
+.actionBtn.accept {
+  background-color: var(--color-light-green);
+}
+
+.actionBtn.accept:hover {
+  background-color: var(--color-secondary);
+  color: var(--color-white);
+}
+
+.actionBtn.reject {
+  background-color: var(--color-danger-bg);
+}
+
+.actionBtn.reject:hover {
+  background-color: var(--color-danger);
+  color: var(--color-white);
+}
+
+.secondaryActions .link,
+.secondaryActions .actionBtn {
+  font-size: var(--fs-base);
+}
+
+.link.detail {
+  color: var(--color-azure);
+  border-bottom: 1px solid var(--color-azure);
+}
+
+.link.detail:hover {
+  color: var(--color-info);
+  border-bottom: 1px solid var(--color-info);
+}
+
+.link.message {
+  color: var(--color-secondary);
+  border-bottom: 1px solid var(--color-secondary);
+}
+
+.link.message:hover {
+  color: var(--color-success);
+  border-bottom: 1px solid var(--color-success);
+}

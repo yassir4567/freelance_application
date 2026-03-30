@@ -1,0 +1,117 @@
+.contractsPage {
+  margin-bottom: 700px;
+}
+
+.contractsPageSubTitle {
+  margin-left: 5px;
+  color: var(--color-text-muted);
+  margin-top: 7px;
+}
+
+.overviewTitle {
+  font-size: var(--fs-xl);
+  margin-top: 50px;
+  margin-bottom: 20px;
+  font-weight: 450;
+}
+
+.contractsOverview {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 30px;
+}
+
+.contractsOverviewCard p:nth-child(2) {
+  text-align: start;
+  margin-left: 10px;
+  margin-block: 5px;
+}
+
+.contractsFilterSection {
+  margin-top: 50px;
+  display: grid;
+  align-items: center;
+  grid-template-columns: 600px 1fr 1fr 100px;
+  gap: 20px;
+}
+
+.searchBox {
+  width: 100%;
+  height: 50px;
+  position: relative;
+}
+
+.searchBox .searchInput {
+  width: 100%;
+  height: 100%;
+  border-radius: 25px;
+  padding-inline: 20px 50px;
+}
+
+.searchBox .searchIcon {
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--color-placeholder);
+}
+.searchBox:hover .searchIcon {
+  color: var(--color-secondary);
+}
+
+.filterStatusBox,
+.sortBox {
+  width: 100%;
+  height: 40px;
+}
+
+.filterStatusBox select,
+.sortBox select {
+  width: 100%;
+  height: 40px;
+  background-color: var(--color-white);
+  border-radius: 25px;
+  padding-inline: 10px;
+}
+
+.filterStatusBox select:hover,
+.sortBox select:hover {
+  border: 1px solid var(--color-secondary);
+}
+
+.clearAllFilters button{
+  color: var(--color-secondary);
+  border-bottom: 1px solid var(--color-success);
+  font-size: var(--fs-md);
+  transition: .2s;
+}
+
+.clearAllFilters button:hover {
+  color: var(--color-success);
+}
+
+
+.contractsListSection {
+  margin-top: 40px;
+}
+
+.contractsListHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.contractsListTitle {
+  font-size: var(--fs-xl);
+  font-weight: 500;
+  color: var(--color-success);
+}
+
+
+.contractsList {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  margin-top: 30px;
+}
+

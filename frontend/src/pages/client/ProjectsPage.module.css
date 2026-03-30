@@ -1,0 +1,114 @@
+.projectsPageTitle {
+  font-size: var(--fs-3xl);
+  font-weight: 600;
+}
+
+.projectsPageMain {
+  margin-top: 35px;
+}
+
+.searchBox {
+  width: 750px;
+  height: 50px;
+  position: relative;
+}
+
+.searchBox .searchInput {
+  width: 100%;
+  height: 100%;
+  border-radius: 25px;
+  padding-inline: 20px 50px;
+}
+
+.searchBox .searchIcon {
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--color-placeholder);
+}
+.searchBox:hover .searchIcon {
+  color: var(--color-secondary);
+}
+
+.filtersBox {
+  margin-top: 30px;
+  margin-left: 20px;
+  margin-bottom: 20px;
+}
+
+.filtersBoxHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 320px;
+  margin-bottom: 20px;
+}
+
+.clearFilters {
+  font-size: var(--fs-base);
+  color: var(--color-secondary);
+}
+
+.filtersTitle {
+  font-size: var(--fs-lg);
+  width: fit-content;
+  user-select: none;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  transition: color 0.3s ease;
+}
+
+.filtersTitle:hover {
+  color: var(--color-success);
+}
+
+.filtersItems {
+  display: flex;
+  gap: 100px;
+  width: fit-content;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+}
+
+.filtersItems.showFilters {
+  max-height: 300px;
+  margin-bottom: 30px;
+}
+
+.filtersTitle .arrow {
+  transform: rotate(0deg);
+  transition: transform 0.5s;
+  color: var(--color-success);
+  font-size: 17px;
+}
+
+.filtersTitle .rotateArrow {
+  transform: rotate(90deg);
+}
+
+.filterItem p {
+  margin-bottom: 13px;
+  font-size: var(--fs-base);
+}
+
+.filterBox {
+  margin-bottom: 7px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.filterBox label {
+  font-size: var(--fs-sm);
+  user-select: none;
+}
+
+.projectsSection {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  margin-bottom: 150px;
+}

@@ -1,4 +1,4 @@
-.stateCard {
+.card {
   background-color: var(--color-light);
   box-shadow: 0 0 20px #e6e6e6b6;
   padding: 20px;
@@ -9,18 +9,29 @@
   border: 1px solid var(--color-border);
 }
 
-.stateCard p:nth-child(1) {
+.cardHeader {
   display: flex;
-  align-items: center;
   gap: 10px;
 }
 
-.stateCard p:nth-child(1) .icon {
-  font-size: var(--fs-2xl);
+.title {
+  font-size: var(--fs-lg);
+  font-weight: 500;
 }
 
-.stateCard p:nth-child(2) {
-  font-size: var(--fs-2xl);
-  margin-left: auto;
-  margin-right: 5px;
+.value {
+  font-size: var(--fs-3xl);
+  text-align: end;
+  margin-right: 15px;
 }
+
+.icon {
+  font-size: var(--fs-xl);
+}
+
+.description {
+  text-transform: capitalize;
+  text-align: end;
+  font-size: var(--fs-nd);
+}
+
