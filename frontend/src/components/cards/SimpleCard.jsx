@@ -7,7 +7,7 @@ function SimpleCard({
   className = "",
 }) {
   return (
-    <div className={`${styles.card} ${className}`}>
+    <div className={`${className} ${styles.card}`}>
       {(icon || title) && (
         <div className={styles.cardHeader}>
           {icon && <span className={styles.icon}>{icon}</span>}

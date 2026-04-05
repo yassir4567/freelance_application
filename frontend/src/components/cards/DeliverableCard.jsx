@@ -23,7 +23,7 @@ function DeliverableCard({ deliverable }) {
     cancelled: "Cancelled",
   };
 
-  let user = "client";
+  let user = "freelancer";
 
   const helperMessage = {
     accepted: "This deliverable has been accepted",

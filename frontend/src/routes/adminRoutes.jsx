@@ -5,17 +5,16 @@ import AdminProjectsPage from "../pages/admin/AdminProjectsPage";
 import AdminSkillsPage from "../pages/admin/AdminSkillsPage";
 import AdminUsersPage from "../pages/admin/AdminUsersPage";
 
-
 export const adminRoutes = [
-    {
-        path : '/dashboard/admin' , 
-        element : <AdminLayout /> ,
-        children : [
-            {index : true , element : <AdminDashboard />} ,
-            {path : 'users' , element : <AdminUsersPage /> } ,
-            {path : 'projects' , element : <AdminProjectsPage /> } ,
-            {path : 'categories' , element : <AdminCategoriePage /> } ,
-            {path : 'skills' , element : <AdminSkillsPage /> } ,
-        ]
-    }
-]
+  {
+    path: "/dashboard/admin",
+    element: <AdminLayout />,
+    children: [
+      { index: true, element: <AdminDashboard /> },
+      { path: "users", element: <AdminUsersPage /> },
+      { path: "projects", element: <AdminProjectsPage /> },
+      { path: "categories", element: <AdminCategoriePage /> },
+      { path: "skills", element: <AdminSkillsPage /> },
+    ],
+  },
+];

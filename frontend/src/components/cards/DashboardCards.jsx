@@ -1,33 +1,45 @@
-import styles from "./DashboardCards.module.css"
+import styles from "./DashboardCards.module.css";
+import SimpleCard from "./SimpleCard";
 
-function AdminCards(){
-    return(
-          <div className={styles.cards}>
-          <div className={styles.card}>
-           
-            <p>Total Freelancers</p>
-            <h2>99</h2>
-          </div>
-
-          <div className={styles.card}>
-          
-            <p>Total Clients</p>
-            <h2>99</h2>
-          </div>
-
-          <div className={styles.card}>
-           
-            <p>Total Projects</p>
-            <h2>99</h2>
-          </div>
-
-          <div className={styles.card}>
-          
-            <p>Completed Projects</p>
-            <h2>99</h2>
-          </div>
-        </div>
-      
-    )
-};
+function AdminCards() {
+  const dashboardCards = [
+    {
+      id: 0,
+      title: "Total users",
+      value: 99,
+    },
+    {
+      id: 1,
+      title: "Total Projects",
+      value: 99,
+    },
+    {
+      id: 2,
+      title: "Total Client",
+      value: 99,
+    },
+    {
+      id: 3,
+      title: "Total Freelancer",
+      value: 99,
+    },
+    {
+      id: 4,
+      title: "Projects in progress",
+      value: 99,
+    },
+    {
+      id: 5,
+      title: "Escrow Amount",
+      value: "$999",
+    },
+  ];
+  return (
+    <div className={styles.cards}>
+      {dashboardCards.map((card) => (
+        <SimpleCard key={card.id} className={styles.dashboardCard} title={card.title} value={card.value} />
+      ))}
+    </div>
+  );
+}
 export default AdminCards;

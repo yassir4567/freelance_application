@@ -1,7 +1,6 @@
 import { Outlet } from "react-router-dom";
   import AdminSideBar from "../components/layout/AdminSideBar";
 import AdminHeader from "../components/layout/AdminHeader";
-import AdminCards from "../components/cards/DashboardCards";
 import styles from "./AdminLayout.module.css"
 
 
@@ -13,7 +12,6 @@ function AdminLayout() {
       </div>
       <div className={styles.main}>
         <AdminHeader />
-        <AdminCards/>
          <Outlet />
       </div>
      
