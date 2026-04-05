@@ -1,6 +1,6 @@
 .card {
   background-color: var(--color-light);
-  box-shadow: 0 0 20px #e6e6e6b6;
+  box-shadow: var(--bx-shadow-2);
   padding: 20px;
   border-radius: 10px;
   display: flex;

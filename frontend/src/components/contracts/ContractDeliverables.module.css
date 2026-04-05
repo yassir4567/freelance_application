@@ -1,0 +1,28 @@
+
+.subTitle {
+  font-size: var(--fs-lg);
+  font-weight: 500;
+  color: var(--color-success);
+  margin-bottom: 20px;
+}
+
+.deliverablesSection {
+  margin-top: 70px;
+}
+.deliverablesSectionHeader {
+  margin-bottom: 30px;
+  margin-top: 30px;
+}
+
+.deliverablesQuickInfo {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.deliverablesList {
+  margin-top: 30px;
+  display: flex;
+  gap: 25px;
+  flex-direction: column;
+}

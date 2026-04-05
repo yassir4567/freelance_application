@@ -1,0 +1,103 @@
+.subTitle {
+  font-size: var(--fs-lg);
+  font-weight: 500;
+  color: var(--color-success);
+  margin-bottom: 20px;
+}
+
+.paymentsSection {
+  margin-top: 70px;
+}
+
+
+.paymentsGrid {
+  display: grid;
+  grid-template-columns: 300px 1fr;
+  gap: 30px;
+  margin-top: 40px;
+}
+
+.paymentsSubCards {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.paymentCard h3 {
+  font-size: var(--fs-base);
+  color: var(--color-text-muted);
+  font-weight: 600;
+}
+
+.paymentCard p {
+  font-size: var(--fs-4xl);
+  text-align: start;
+  margin-left: 10px;
+}
+
+.paidOutCard p {
+  color: var(--color-success);
+}
+.escrowCard p {
+  color: var(--color-info);
+}
+
+.remainingCard p {
+  color: var(--color-warning);
+}
+
+.paymentsList {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.paymentItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--color-light);
+  border: 1px solid var(--color-border);
+  padding: 30px;
+  box-shadow: var(--bx-shadow-2);
+  border-radius: 10px;
+}
+
+.paymentItemSubTitle {
+  font-size: var(--fs-sm);
+  color: var(--color-text-muted);
+  margin-bottom: 10px;
+}
+
+.paymentItemTitle {
+  font-size: var(--fs-xl);
+  font-weight: 500;
+}
+
+.paymentItemright {
+  display: flex;
+  gap: 15px;
+}
+
+.paymentStatus {
+  height: fit-content;
+  padding: 5px 10px 5px 24px;
+  border-radius: 20px;
+  position: relative;
+  text-transform: capitalize;
+  font-size: var(--fs-xs);
+}
+
+.paymentStatus::before {
+  content: "";
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+

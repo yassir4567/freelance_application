@@ -1,5 +1,5 @@
 import { useState } from "react";
-import styles from "./postJobForm.module.css";
+import styles from "./PostJobForm.module.css";
 import { MdRemove } from "react-icons/md";
 import { emptyText, emptyArray } from "../../utils/helpers";
 

@@ -1,22 +1,13 @@
 import { NavLink } from "react-router-dom";
 import styles from "./ContractCard.module.css";
 
-
 function ContractCard({ contract }) {
-  const nextActions = [
-    "Continue negotiation",
-    "Fund deliverable",
-    "Review Deliverable",
-    "Waiting for freelancer",
-    "Leave feedback",
-  ];
-
   const statusClass = {
-    pending: styles.pending,
-    active: styles.active,
-    completed: styles.completed,
-    rejected: styles.rejected,
-    cancelled: styles.cancelled,
+    pending: "status-accent",
+    active: "status-success",
+    completed: "status-purple",
+    rejected: "status-danger",
+    cancelled: "status-warning",
   };
 
   return (
@@ -80,15 +71,18 @@ function ContractCard({ contract }) {
       </div>
 
       <div className={styles.contractCardRight}>
-        <button className={`${styles.actionBtn} ${styles.primaryBtn}`}>
-          <NavLink className={styles.navlink}>View details</NavLink>
-        </button>
-        <button className={`${styles.actionBtn}`}>
-          <NavLink className={styles.navlink}>View delivrables</NavLink>
-        </button>
-        <button className={`${styles.actionBtn}`}>
-          <NavLink className={styles.navlink}>Message freelancer</NavLink>
-        </button>
+        <NavLink
+          to={`${contract.id}`}
+          className={`${styles.primaryBtn} ${styles.navlink}`}
+        >
+          View details
+        </NavLink>
+        <NavLink className={styles.navlink}>
+          View delivrables
+        </NavLink>
+        <NavLink className={styles.navlink}>
+          Message freelancer
+        </NavLink>
       </div>
     </div>
   );

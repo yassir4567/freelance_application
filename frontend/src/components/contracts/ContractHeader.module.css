@@ -1,0 +1,44 @@
+.status {
+  height: fit-content;
+  padding: 5px 13px 5px 27px;
+  border-radius: 20px;
+  position: relative;
+  text-transform: capitalize;
+  font-size: var(--fs-xs);
+  display: inline;
+}
+
+.status::before {
+  content: "";
+  position: absolute;
+  left: 13px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  display: inline-block;
+}
+.contractDetailHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.headerTitle {
+  margin-top: 30px;
+  font-size: var(--fs-2xl);
+  font-weight: 500;
+}
+
+.totalBudget {
+  font-size: var(--fs-4xl);
+  font-weight: 500;
+}
+
+.headerRight p {
+  text-align: end;
+  color: var(--color-success);
+  font-weight: 500;
+  font-size: var(--fs-sm);
+}

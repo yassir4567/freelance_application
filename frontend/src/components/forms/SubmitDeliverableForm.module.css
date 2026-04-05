@@ -1,0 +1,95 @@
+.form {
+  margin-top: 30px;
+  margin-bottom: 50px;
+}
+
+.formTitle {
+  font-size: var(--fs-lg);
+  font-weight: 500;
+}
+
+.clarificationInfo {
+  font-size: var(--fs-md);
+  margin-top: 10px;
+  color: var(--color-text-muted);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+
+.inputBox ,
+.submissionNoteBox{
+  display: flex;
+  flex-direction: column;
+  margin-top: 30px;
+}
+
+.label {
+  font-size: var(--fs-sm);
+  font-weight: 500;
+  color: var(--color-success);
+  margin-bottom: 10px;
+}
+.inputBox input {
+    height: 50px;
+}
+.submissionNoteBox textarea {
+    min-height: 70px;
+    padding-top: 15px;
+
+}
+
+.inputBox input,
+.submissionNoteBox textarea {
+  padding-inline: 15px;
+  box-shadow: var(--bx-shadow);
+  border-radius: 10px;
+  font-size: var(--fs-md);
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  margin-top: 20px;
+  gap: 10px;
+}
+
+.addLinkBtn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-right: 10px;
+  color: var(--color-secondary);
+  transition: 0.2s;
+  cursor: pointer;
+}
+
+.addLinkBtn:hover {
+  color: var(--color-success);
+}
+
+.submitBtn {
+  border: 1px solid var(--color-success);
+  padding: 10px 25px;
+  height: 40px;
+  width: 150px;
+  border-radius: 10px;
+  color: var(--color-success);
+  transition: 0.2s;
+}
+
+.submitBtn:hover {
+  background-color: var(--color-success);
+  color: var(--color-white);
+}
+
+.inputBox input {
+  margin-bottom: 10px;
+}
+
+
+.error {
+    color: var(--color-danger);
+    margin-left: 5px;
+}

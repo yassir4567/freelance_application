@@ -51,6 +51,7 @@
 
   /* shadow */
   --bx-shadow: 0 0 10px #6a6a6a33;
+  --bx-shadow-2: 0 0 20px #e6e6e6b6;
 }
 
 * {
@@ -110,6 +111,7 @@ textarea {
   background: var(--color-secondary);
   border-radius: 5px;
 }
+
 ::-webkit-scrollbar-thumb:hover {
   background: var(--color-success);
 }

@@ -1,0 +1,81 @@
+
+
+
+.contractStaff {
+  margin-top: 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.userMinCardBox {
+  margin-bottom: 15px;
+}
+
+.userMinCardBox h5 {
+  font-size: var(--fs-sm);
+  color: var(--color-text-muted);
+  margin-bottom: 10px;
+  margin-left: 3px;
+  font-weight: 500;
+}
+
+.userMinCardContent {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.userAvatar {
+  width: 60px;
+}
+
+.userMinCardContent p {
+  font-size: var(--fs-lg);
+}
+
+.contractStaffRight {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+}
+
+.contractStaffRightItem h5 {
+  margin-bottom: 5px;
+  font-size: var(--fs-base);
+  color: var(--color-text-muted);
+  font-weight: 500;
+}
+
+.contractStaffRightItem p {
+  font-size: var(--fs-md);
+  font-weight: 600;
+}
+
+.openConv {
+  color: var(--color-secondary);
+  font-size: var(--fs-base);
+  position: relative;
+  padding-bottom: 5px;
+  transition: .2s;
+}
+
+.openConv:hover {
+  color: var(--color-success);
+}
+
+.openConv::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  background-color: var(--color-success);
+  width: 15px;
+  height: 2px;
+  transition: .5s;
+}
+
+.openConv:hover::after {
+  width: 100%;
+}

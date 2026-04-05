@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import styles from "./signup.module.css";
+import styles from "./Signup.module.css";
 
 function SignupForm() {
   return (
