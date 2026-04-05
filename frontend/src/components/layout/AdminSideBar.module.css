@@ -1,0 +1,58 @@
+.container {
+  display: flex;
+  height: 100vh;
+  background-color: #dedcd6;
+}
+
+
+.sidebar {
+  width: 250px;
+  background-color: #eee;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.title {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 30px;
+  margin-left: 20px;
+  
+}
+
+.menu {
+  list-style: none;
+  padding: 0;
+  margin-bottom: 150px;
+}
+
+.menu li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px;
+  cursor: pointer;
+  color: #333;
+}
+
+.menu li:hover {
+  color: #2e8b57;
+  background-color: #e2dddd;
+}
+
+.active {
+  color: #2e8b57;
+  font-weight: bold;
+}
+
+
+.logout {
+  background: none;
+  border: none;
+  color: red;
+  cursor: pointer;
+  font-size: 14px;
+  margin-left: 75px;
+}

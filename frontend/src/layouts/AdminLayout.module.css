@@ -1,0 +1,9 @@
+.admin_wrapper{
+    display: flex;
+}
+.main{
+    width: 80%;
+}
+.side{
+    width: 20%;
+}

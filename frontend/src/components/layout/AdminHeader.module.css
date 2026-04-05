@@ -1,0 +1,48 @@
+.main {
+  flex: 1;
+  padding: 40px;
+}
+
+/* Header */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0px;
+  margin-top: -20px;
+}
+
+.header h2 {
+  margin: 0;
+  font-size: 22px;
+}
+
+.header p {
+  margin: 5px 0 0;
+  font-size: 14px;
+  color: #555;
+}
+
+/* Profile */
+.profile {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #fff;
+  padding: 5px 12px;
+  border-radius: 20px;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+}
+
+.avatar {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+}
+.divider {
+  border: none;
+  height: 2px;
+  background: linear-gradient(to right, transparent, #aaa, transparent);
+  margin: 25px 0;
+  margin-bottom: 30px;
+}

@@ -1,7 +1,8 @@
+import AdminSideBar from "../../components/layout/AdminSideBar";
 
 
 function AdminDashboard() {
-    return <h1>Hello world</h1>
+    return
 }
 
 export default AdminDashboard;
