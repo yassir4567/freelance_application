@@ -1,0 +1,31 @@
+
+
+.messageItem {
+    width: 350px ;
+    color: var(--color-white);
+    min-height: 40px;
+    border-radius: 10px;
+    padding: 10px 15px;
+    margin-bottom: 10px;   
+    display: flex ;
+    flex-direction: column; 
+    gap: 10px   ;
+}
+
+.from {
+    margin-left: auto;
+    background-color: var(--color-secondary);
+}
+
+.to {
+    background-color: var(--color-success);
+}
+
+.message {
+    font-size: var(--fs-base);
+}
+
+.date {
+    font-size: var(--fs-xs);
+    margin-left: auto;
+}

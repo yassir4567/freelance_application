@@ -7,6 +7,7 @@ import ProjectOverviewPage from "../pages/client/ProjectOverviewPage";
 import ProjectLayout from "../layouts/ProjectLayout";
 import ContractsPage from "../pages/client/ContractsPage";
 import ContractDetail from "../pages/client/ContractDetail";
+import MessagesPage from "../pages/client/MessagesPage";
 
 export const clientRoutes = [
   {
@@ -26,6 +27,7 @@ export const clientRoutes = [
       },
       { path: "contracts", element: <ContractsPage /> },
       { path: "contracts/:contractId", element: <ContractDetail /> },
+      { path: "messages", element: <MessagesPage /> },
     ],
   },
 ];

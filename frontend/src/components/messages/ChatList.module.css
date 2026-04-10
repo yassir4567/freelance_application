@@ -1,0 +1,25 @@
+.chatList {
+  padding-top: 15px;
+  border-right: 2px solid var(--color-white);
+  box-shadow: var(--bx-shadow-2);
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+  background-color: var(--color-gray-light);
+}
+
+
+
+.chatListContainer {
+  padding-block: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  overflow-y: auto;
+  flex: 1;
+}
+
+.chatListContainer::-webkit-scrollbar {
+  width: 4px;
+}

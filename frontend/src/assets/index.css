@@ -3,8 +3,10 @@
   --color-bg-main: #f0f0f04a;
   --color-danger: #f95039;
   --color-primary: #c44a3a;
-  --color-secondary: #63b38f;
-  --color-success: #118b50;
+  --color-secondary: #25b977;
+  /* --color-secondary: #63b38f; */
+  --color-success: #1c8f1c;
+  --color-green : green ;
   --color-light-green: #c7eabb;
   --color-text-muted: #6b7280;
   --color-placeholder: #9ca3af;
@@ -76,12 +78,14 @@ input::placeholder,
 textarea::placeholder {
   color: var(--color-placeholder);
 }
+input:hover{
+  border: 1px solid var(--color-success-bg);
+}
 
 input:focus,
 textarea:focus,
-input:hover,
 textarea:hover {
-  border: 1px solid var(--color-secondary);
+  border: 1px solid var(--color-success);
 }
 
 button {

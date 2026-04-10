@@ -92,7 +92,6 @@ function ClientDashboardPage() {
           </NavLink>
         </div>
       </div>
-      <hr />
       <div className={styles.overview}>
         <h3 className={styles.overviewTitle}>Overview</h3>
         <div className={styles.statsCards}>

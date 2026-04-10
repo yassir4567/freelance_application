@@ -1,0 +1,34 @@
+.headerTitle {
+  font-size: var(--fs-2xl);
+  font-weight: 500;
+  padding-inline: 15px;
+}
+
+.searchBox {
+  margin-top: 15px;
+  height: 45px;
+  position: relative;
+  border-radius: 20px;
+  margin: 15px;
+}
+
+.searchBox .searchIcon {
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: var(--fs-md);
+}
+
+.searchBox input {
+  width: 100%;
+  height: 100%;
+  border-radius: 20px;
+  padding-right: 35px;
+  padding-left: 15px;
+}
+
+.devider {
+  margin-top: 20px;
+  border-color: var(--color-light);
+}

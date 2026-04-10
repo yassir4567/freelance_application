@@ -1,0 +1,50 @@
+.chatItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 5px;
+  margin-bottom: 0;
+  padding: 10px 13px;
+  cursor: pointer;
+  border-radius: 20px;
+}
+
+.chatItem:hover {
+  background-color: var(--color-success-bg);
+  box-shadow: var(--bx-shadow);
+}
+
+.chatItem_content {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.chatItem_avatar {
+  width: 50px;
+}
+
+.chatItem_info .chatItem_name {
+  font-size: var(--fs-md);
+  font-weight: 400;
+  margin-bottom: 5px;
+  color: var(--color-black);
+}
+
+.chatItem_info .chatItem_lastMessage {
+  font-size: var(--fs-xs);
+  color: var(--color-text-muted);
+}
+
+
+.chatItem_unread {
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: var(--fs-xs);
+    background-color: var(--color-secondary);
+    color: var(--color-white);
+}

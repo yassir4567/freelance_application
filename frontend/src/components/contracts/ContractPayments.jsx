@@ -50,7 +50,7 @@ function ContractPayments({ deliverables }) {
                 >
                   {deliverable.payment_status}
                 </div>
-                <div>${deliverable.amount}</div>
+                <div className={styles.amount}>${deliverable.amount}</div>
               </div>
             </div>
           ))}

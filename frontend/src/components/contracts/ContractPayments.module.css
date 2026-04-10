@@ -9,7 +9,6 @@
   margin-top: 70px;
 }
 
-
 .paymentsGrid {
   display: grid;
   grid-template-columns: 300px 1fr;
@@ -49,7 +48,7 @@
 .paymentsList {
   display: flex;
   flex-direction: column;
-  gap: 30px;
+  gap: 20px;
 }
 
 .paymentItem {
@@ -101,3 +100,6 @@
 }
 
 
+.amount {
+  font-size: var(--fs-lg);
+}

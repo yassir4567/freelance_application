@@ -1,0 +1,32 @@
+.chatMessages {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  height: 100%;
+}
+
+.messagesHeader {
+  position: absolute;
+  height: 70px;
+  left: 0;
+  right: 0;
+}
+.messagesContent {
+  margin-top: 70px;
+  flex: 1;
+  padding-inline: 20px;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  overflow: auto;
+}
+
+.messagesList {
+  margin-top: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.messagesInput {
+  margin-top: auto;
+}
