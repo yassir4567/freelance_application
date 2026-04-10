@@ -32,9 +32,8 @@ function FilterBox({
           </option>
           {statusValues.map((status) => {
             return (
-              <option key={status} value={status}>
-                {status[0].toUpperCase()}
-                {status.slice(1).toLowerCase()}
+              <option key={status} value={status} className={styles.option}>
+                {status.split("_").join(" ")}
               </option>
             );
           })}

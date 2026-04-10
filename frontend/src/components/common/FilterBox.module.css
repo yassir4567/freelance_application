@@ -60,3 +60,7 @@
 .clearAllFilters button:hover {
   color: var(--color-success);
 }
+
+.option {
+  text-transform: capitalize;
+}

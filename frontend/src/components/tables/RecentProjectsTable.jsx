@@ -1,6 +1,13 @@
 import styles from "./RecentProjectsTable.module.css";
 
 function RecentProjectsTable({ projects }) {
+  const statusClasses = {
+    open: "status-success",
+    in_review: "status-info",
+    in_progress: "status-warning",
+    completed: "status-purple",
+    cancelled: "status-danger",
+  };
   return (
     <table className={styles.table}>
       <thead>
@@ -16,7 +23,11 @@ function RecentProjectsTable({ projects }) {
         {projects.map((project) => (
           <tr key={project.id}>
             <td>{project.title}</td>
-            <td>{project.status}</td>
+            <td>
+              <span className={`${styles.status} ${statusClasses[project.status]}`}>
+                {project.status.split("_").join(" ")}
+              </span>
+            </td>
             <td>{project.proposals}</td>
             <td>{project.time}</td>
             <td className={styles.actions}>
