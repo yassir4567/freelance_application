@@ -1,18 +1,10 @@
-import { useEffect, useMemo, useState } from "react";
+import { useMemo } from "react";
 import styles from "./ProjectsPage.module.css";
-import { CiSearch } from "react-icons/ci";
-import { BiSolidRightArrow } from "react-icons/bi";
+import { PiEmptyBold } from "react-icons/pi";
 import { useSearchParams } from "react-router-dom";
 import ProjectCard from "../../components/cards/ProjectCard";
 import { projects } from "../../api/projects";
-
-const ALL_STATUS = [
-  "open",
-  "in_progress",
-  "in_review",
-  "completed",
-  "cancelled",
-];
+import FilterBox from "../../components/common/FilterBox";
 
 function ProjectsPage() {
   const [filterParams, setFilterParams] = useSearchParams();
@@ -20,18 +12,14 @@ function ProjectsPage() {
   // * get current query parameters from URL
   const currentParams = new URLSearchParams(filterParams);
 
-  // * if filters box open
-  const showFilters = currentParams.get("isopen") === "1";
-
   // * get query params
   const search = currentParams.get("search") || "";
   const sortedby = currentParams.get("sortedby") || "";
-  const statusUrl = currentParams.getAll("status");
-  const statuses = statusUrl.length ? statusUrl : ["all"];
+  const status = currentParams.get("status") || "";
 
   // * handle inputs changes
-  const handleInputChange = (e) => {
-    const { name, value, checked } = e.target;
+  const handleInputsChange = (e) => {
+    const { name, value } = e.target;
 
     // * change query params based on inputs
     setFilterParams((prev) => {
@@ -55,46 +43,14 @@ function ProjectsPage() {
       }
 
       if (name === "status") {
-        if (value === "all") {
-          nextParams.delete("status");
-          return nextParams;
-        }
-
-        const currentStatus = nextParams.getAll("status");
-        nextParams.delete("status");
-        let updateStatus;
-
-        if (checked) {
-          updateStatus = [...currentStatus, value];
+        if (value) {
+          nextParams.set("status", value);
         } else {
-          updateStatus = currentStatus.filter((status) => status !== value);
-        }
-
-        const hasAllStatus = ALL_STATUS.every((status) =>
-          updateStatus.includes(status),
-        );
-        
-        if (hasAllStatus || updateStatus.length === 0) {
           nextParams.delete("status");
-          return nextParams;
         }
-
-        updateStatus.forEach((status) => nextParams.append("status", status));
-
         return nextParams;
       }
     });
-  };
-
-  // * handle show filter box
-  const handleShowFilter = () => {
-    const isOpen = filterParams.get("isopen") === "1";
-    if (!isOpen) {
-      currentParams.set("isopen", 1);
-    } else {
-      currentParams.delete("isopen");
-    }
-    setFilterParams(currentParams);
   };
 
   // * clear all filters
@@ -117,13 +73,9 @@ function ProjectsPage() {
   // * filter projects before display them
   const filtredProjects = useMemo(() => {
     let res = [...processedProjects];
-    if (statuses.length > 0) {
-      if (statuses.includes("all")) {
-        res = res;
-      } else {
-        res = res.filter((project) => statuses.includes(project.status));
-      }
-    } 
+    if (status.trim()) {
+      res = res.filter((project) => project.status === status);
+    }
 
     if (search.trim()) {
       res = res.filter((project) =>
@@ -137,145 +89,47 @@ function ProjectsPage() {
       res = res.sort((a, b) => a.createdAtTimestamp - b.createdAtTimestamp);
     }
     return res;
-  }, [processedProjects, statuses, search, sortedby]);
+  }, [processedProjects, status, search, sortedby]);
+
+  // * inputs values
+  const inputValues = {
+    search: search,
+    status: status,
+    sortedby: sortedby,
+  };
+
+  const statusValues = [
+    "open",
+    "in_progress",
+    "in_review",
+    "completed",
+    "cancelled",
+  ];
 
   return (
     <div className={styles.projectsPage}>
       <h1 className="pageTitle">All Projects Posts</h1>
       <div className={styles.projectsPageMain}>
         <div className={styles.projectsFilterSection}>
-          <div className={styles.searchBox}>
-            <CiSearch className={styles.searchIcon} size={25} />
-            <input
-              type="text"
-              name="search"
-              className={styles.searchInput}
-              value={search}
-              onChange={handleInputChange}
-              placeholder="Search for projects by title ..."
-            />
-          </div>
-
-          <div className={styles.filtersBox}>
-            <div className={styles.filtersBoxHeader}>
-              <div className={styles.filtersTitle} onClick={handleShowFilter}>
-                <span>Filters</span>
-                <BiSolidRightArrow
-                  className={`${showFilters ? styles.rotateArrow : ""} ${styles.arrow}`}
-                />
-              </div>
-              <button
-                className={styles.clearFilters}
-                onClick={handleClearFilters}
-              >
-                Clear all filters
-              </button>
-            </div>
-            <div
-              className={`${styles.filtersItems} ${showFilters ? styles.showFilters : ""}`}
-            >
-              <div className={styles.filterItem}>
-                <p>Status</p>
-                <div className={styles.filterBox}>
-                  <input
-                    type="checkbox"
-                    name="status"
-                    id="all"
-                    value="all"
-                    onChange={handleInputChange}
-                    checked={statuses.includes("all")}
-                  />
-                  <label htmlFor="all">All</label>
-                </div>
-                <div className={styles.filterBox}>
-                  <input
-                    type="checkbox"
-                    name="status"
-                    id="open"
-                    value="open"
-                    onChange={handleInputChange}
-                    checked={statuses.includes("open")}
-                  />
-                  <label htmlFor="open">Open</label>
-                </div>
-                <div className={styles.filterBox}>
-                  <input
-                    type="checkbox"
-                    name="status"
-                    id="in_progress"
-                    value="in_progress"
-                    onChange={handleInputChange}
-                    checked={statuses.includes("in_progress")}
-                  />
-                  <label htmlFor="in_progress">In progress</label>
-                </div>
-                <div className={styles.filterBox}>
-                  <input
-                    type="checkbox"
-                    name="status"
-                    id="in_review"
-                    value="in_review"
-                    onChange={handleInputChange}
-                    checked={statuses.includes("in_review")}
-                  />
-                  <label htmlFor="in_review">In review</label>
-                </div>
-                <div className={styles.filterBox}>
-                  <input
-                    type="checkbox"
-                    name="status"
-                    id="completed"
-                    value="completed"
-                    onChange={handleInputChange}
-                    checked={statuses.includes("completed")}
-                  />
-                  <label htmlFor="completed">Completed</label>
-                </div>
-                <div className={styles.filterBox}>
-                  <input
-                    type="checkbox"
-                    name="status"
-                    id="cancelled"
-                    value="cancelled"
-                    onChange={handleInputChange}
-                    checked={statuses.includes("cancelled")}
-                  />
-                  <label htmlFor="cancelled">Cancelled</label>
-                </div>
-              </div>
-              <div className={styles.filterItem}>
-                <p>Sort by</p>
-                <div className={styles.filterBox}>
-                  <input
-                    type="radio"
-                    name="sortedby"
-                    id="newset first"
-                    value="newest"
-                    onChange={handleInputChange}
-                    checked={sortedby === "newest"}
-                  />
-                  <label htmlFor="newset first">Newest first</label>
-                </div>
-                <div className={styles.filterBox}>
-                  <input
-                    type="radio"
-                    name="sortedby"
-                    id="oldest first"
-                    value="oldest"
-                    onChange={handleInputChange}
-                    checked={sortedby === "oldest"}
-                  />
-                  <label htmlFor="oldest first">Oldest first</label>
-                </div>
-              </div>
-            </div>
-          </div>
+          <FilterBox
+            inputValues={inputValues}
+            statusValues={statusValues}
+            handleInputsChange={handleInputsChange}
+            handleClearFilters={handleClearFilters}
+          />
         </div>
 
         <div className={styles.projectsSection}>
-          {filtredProjects.map((project) => (
-            <ProjectCard key={project.id} project={project} />
-          ))}
+          {filtredProjects.length ? (
+            filtredProjects.map((project) => (
+              <ProjectCard key={project.id} project={project} />
+            ))
+          ) : (
+            <div className={styles.empty}>
+              <p className={styles.emptyMsg}>Empty projects ...</p>
+              <PiEmptyBold className={styles.emptyIcon} />
+            </div>
+          )}
         </div>
       </div>
     </div>

@@ -1,0 +1,62 @@
+.FilterSection {
+  margin-top: 50px;
+  display: grid;
+  align-items: center;
+  grid-template-columns: 600px 1fr 1fr 100px;
+  gap: 20px;
+}
+
+.searchBox {
+  width: 100%;
+  height: 50px;
+  position: relative;
+}
+
+.searchBox .searchInput {
+  width: 100%;
+  height: 100%;
+  border-radius: 25px;
+  padding-inline: 20px 50px;
+}
+
+.searchBox .searchIcon {
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--color-placeholder);
+}
+.searchBox:hover .searchIcon {
+  color: var(--color-secondary);
+}
+
+.StatusBox,
+.sortBox {
+  width: 100%;
+  height: 40px;
+}
+
+.StatusBox select,
+.sortBox select {
+  width: 100%;
+  height: 40px;
+  background-color: var(--color-white);
+  border-radius: 25px;
+  padding-inline: 10px;
+}
+
+.StatusBox select:hover,
+.sortBox select:hover {
+  border: 1px solid var(--color-secondary);
+}
+
+.clearAllFilters button {
+  color: var(--color-secondary);
+  border-bottom: 1px solid var(--color-success);
+  font-size: var(--fs-md);
+  transition: 0.2s;
+}
+
+.clearAllFilters button:hover {
+  color: var(--color-success);
+}

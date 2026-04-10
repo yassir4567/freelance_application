@@ -68,26 +68,9 @@
   display: flex;
   gap: 100px;
   width: fit-content;
-  max-height: 0;
-  overflow: hidden;
-  transition: max-height 0.3s ease;
 }
 
-.filtersItems.showFilters {
-  max-height: 300px;
-  margin-bottom: 30px;
-}
 
-.filtersTitle .arrow {
-  transform: rotate(0deg);
-  transition: transform 0.5s;
-  color: var(--color-success);
-  font-size: 17px;
-}
-
-.filtersTitle .rotateArrow {
-  transform: rotate(90deg);
-}
 
 .filterItem p {
   margin-bottom: 13px;
@@ -111,4 +94,20 @@
   flex-direction: column;
   gap: 30px;
   margin-bottom: 150px;
+  margin-top: 50px;
+}
+
+.empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row-reverse;
+  gap: 15px;
+  font-size: var(--fs-lg);
+  color: var(--color-primary-soft);
+  margin-top: 50px;
+}
+
+.emptyIcon {
+  font-size: var(--fs-3xl);
 }

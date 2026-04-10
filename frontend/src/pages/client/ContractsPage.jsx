@@ -5,6 +5,7 @@ import { contracts } from "../../api/contracts";
 import ContractCard from "../../components/cards/ContractCard";
 import { useMemo } from "react";
 import { useSearchParams } from "react-router-dom";
+import FilterBox from "../../components/common/FilterBox";
 
 function ContractsPage() {
   const [filterParams, setFilterParams] = useSearchParams();
@@ -45,8 +46,8 @@ function ContractsPage() {
       res = res.sort((a, b) => a.createdAtTimestamp - b.createdAtTimestamp);
     }
 
-    return res 
-  } , [processedContracts , search , sortedby , status]);
+    return res;
+  }, [processedContracts, search, sortedby, status]);
 
   // * handle filter inputs change
   const handleInputsChange = (e) => {
@@ -84,7 +85,7 @@ function ContractsPage() {
     });
   };
 
-  const handleclearFilters = () => {
+  const handleClearFilters = () => {
     currentParams.delete("search");
     currentParams.delete("status");
     currentParams.delete("sortedby");
@@ -119,6 +120,17 @@ function ContractsPage() {
     },
   ];
 
+  // * values object to send to FilterBox component
+  const values = {
+    search: search,
+    sortedBy: sortedby,
+    status: status,
+  };
+
+  // * status values
+  const statusValues = ["active", "pending", "completed", "cancelled"];
+
+
   return (
     <div className={styles.contractsPage}>
       <div className={styles.pageHeader}>
@@ -144,48 +156,12 @@ function ContractsPage() {
         </div>
       </div>
 
-      <div className={styles.contractsFilterSection}>
-        <div className={styles.searchBox}>
-          <CiSearch className={styles.searchIcon} size={30} />
-          <input
-            type="text"
-            name="search"
-            value={search}
-            onChange={handleInputsChange}
-            className={styles.searchInput}
-            placeholder="Search ..."
-          />
-        </div>
-
-        <div className={styles.filterStatusBox}>
-          <select name="status" value={status} onChange={handleInputsChange}>
-            <option value="" disabled>
-              Filter by status
-            </option>
-            <option value="active">Active</option>
-            <option value="pending">pending</option>
-            <option value="completed">completed</option>
-            <option value="cancelled">cancelled</option>
-          </select>
-        </div>
-
-        <div className={styles.sortBox}>
-          <select
-            name="sortedby"
-            value={sortedby}
-            onChange={handleInputsChange}
-          >
-            <option value="" disabled>
-              Sort by
-            </option>
-            <option value="newest">Latest contracts</option>
-            <option value="oldest">Oldest contracts</option>
-          </select>
-        </div>
-        <div className={styles.clearAllFilters}>
-          <button onClick={handleclearFilters}>Clear all</button>
-        </div>
-      </div>
+      <FilterBox
+        inputValues={values}
+        statusValues={statusValues}
+        handleInputsChange={handleInputsChange}
+        handleClearFilters={handleClearFilters}
+      />
 
       <div className={styles.contractsListSection}>
         <div className={styles.contractsListHeader}>
