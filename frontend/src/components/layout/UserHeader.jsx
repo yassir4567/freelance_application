@@ -5,74 +5,28 @@ import { useState } from "react";
 import ProfileMenu from "../common/ProfileMenu";
 import { NavLink } from "react-router-dom";
 
-function UserHeader() {
+function UserHeader({ links }) {
   const [showProfileMenu, setShowProfileMenu] = useState(false);
   return (
     <header className={styles.header}>
       <div className={styles.logo}>Freelancy</div>
       <nav className={styles.navbar}>
         <ul className={styles.navbar_list}>
-          <li className={styles.navbar_item}>
-            <NavLink
-              to="/dashboard/client"
-              end
-              className={({ isActive }) =>
-                isActive
-                  ? `${styles.active_link} ${styles.link}`
-                  : `${styles.link}`
-              }
-            >
-              Home
-            </NavLink>
-          </li>
-          <li className={styles.navbar_item}>
-            <NavLink
-              to="/dashboard/client/postjob"
-              className={({ isActive }) =>
-                isActive
-                  ? `${styles.active_link} ${styles.link}`
-                  : `${styles.link}`
-              }
-            >
-              Post Job
-            </NavLink>
-          </li>
-          <li className={styles.navbar_item}>
-            <NavLink
-              to="/dashboard/client/projects"
-              className={({ isActive }) =>
-                isActive
-                  ? `${styles.active_link} ${styles.link}`
-                  : `${styles.link}`
-              }
-            >
-              Projects and Proposals
-            </NavLink>
-          </li>
-          <li className={styles.navbar_item}>
-            <NavLink
-              to="/dashboard/client/contracts"
-              className={({ isActive }) =>
-                isActive
-                  ? `${styles.active_link} ${styles.link}`
-                  : `${styles.link}`
-              }
-            >
-              Contracts
-            </NavLink>
-          </li>
-          <li className={styles.navbar_item}>
-            <NavLink
-              to="/dashboard/client/messages"
-              className={({ isActive }) =>
-                isActive
-                  ? `${styles.active_link} ${styles.link}`
-                  : `${styles.link}`
-              }
-            >
-              Messages
-            </NavLink>
-          </li>
+          {links.map((link) => (
+            <li key={link.label} className={styles.navbar_item}>
+              <NavLink
+                to={link.to}
+                end
+                className={({ isActive }) =>
+                  isActive
+                    ? `${styles.active_link} ${styles.link}`
+                    : `${styles.link}`
+                }
+              >
+                {link.label}
+              </NavLink>
+            </li>
+          ))}
         </ul>
       </nav>
       <div className={styles.header_right}>
