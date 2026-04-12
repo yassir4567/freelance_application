@@ -2,7 +2,6 @@ import { useState } from "react";
 import styles from "./AdminUsersPage.module.css";
 import UsersTable from "../../components/tables/UsersTable";
 
-
 function AdminUsersPage() {
   const [users] = useState([
     { id: 1, name: "Ali", email: "ali@test.com", role: "Admin" },
@@ -29,7 +28,6 @@ function AdminUsersPage() {
         />
       </div>
 
-      
       <UsersTable filteredUsers={filteredUsers} />
     </div>
   );
