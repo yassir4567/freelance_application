@@ -3,6 +3,8 @@ import authRoutes from "./authRoutes";
 import HomePage from "../pages/HomePage";
 import { adminRoutes } from "./adminRoutes";
 import { clientRoutes } from "./clientRoutes";
+
+
 export const router = createBrowserRouter([
     {
         path : '/' , 

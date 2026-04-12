@@ -27,19 +27,16 @@ function ContractsPage() {
   // * filter projects before display them
   const filtredProjects = useMemo(() => {
     let res = [...processedContracts];
-
     if (search.trim()) {
       res = res.filter((contract) =>
         contract.searchText.includes(search.trim().toLowerCase()),
       );
     }
-
     if (status.trim()) {
       res = res.filter((contract) =>
         contract.searchText.includes(status.trim().toLowerCase()),
       );
     }
-
     if (sortedby === "newest") {
       res = res.sort((a, b) => b.createdAtTimestamp - a.createdAtTimestamp);
     } else if (sortedby === "oldest") {

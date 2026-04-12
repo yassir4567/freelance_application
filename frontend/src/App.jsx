@@ -1,12 +1,5 @@
-
-
 function App() {
-    return (
-        <>
-            <header>header</header>
-            
-        </>
-    )
+  return <></>;
 }
 
 export default App;
