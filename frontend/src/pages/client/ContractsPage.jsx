@@ -1,4 +1,3 @@
-import { CiSearch } from "react-icons/ci";
 import SimpleCard from "../../components/cards/SimpleCard";
 import styles from "./ContractsPage.module.css";
 import { contracts } from "../../api/contracts";
