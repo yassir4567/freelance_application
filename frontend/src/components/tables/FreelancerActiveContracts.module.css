@@ -1,0 +1,78 @@
+.table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0 10px;
+}
+
+.headerRow {
+  background-color: var(--color-gray-light);
+  height: 60px;
+}
+
+.headerRow th {
+  text-align: start;
+  font-size: var(--fs-sm);
+  padding: 12px 20px;
+  font-weight: 500;
+}
+
+.headerRow th:first-child {
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+}
+.headerRow th:last-child {
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+
+.row {
+  height: 60px;
+  background-color: var(--color-light);
+}
+.row td {
+  padding: 12px 16px;
+  border-top: 1px solid var(--color-border);
+  border-bottom: 1px solid var(--color-border);
+  font-size: var(--fs-sm);
+}
+
+.row td:first-child {
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+  border-left: 1px solid var(--color-border);
+}
+.row td:last-child {
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+  border-right: 1px solid var(--color-border);
+}
+
+.clientTD {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.link {
+  font-size: var(--fs-sm);
+  color: var(--color-success);
+  position: relative;
+  padding-bottom: 4px;
+  transition: 0.2s;
+}
+
+.link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  background-color: var(--color-success);
+  width: 25px;
+  height: 1px;
+  display: inline-block;
+  transition: 0.2s;
+}
+
+.link:hover::after {
+  width: 100%;
+}

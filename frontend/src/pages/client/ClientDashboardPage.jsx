@@ -7,32 +7,37 @@ import { HiRectangleStack } from "react-icons/hi2";
 import { RiContractFill } from "react-icons/ri";
 import SimpleCard from "../../components/cards/SimpleCard";
 import RecentProjectsTable from "../../components/tables/RecentProjectsTable";
+import Welcome from "../../components/common/Welcome";
 
 function ClientDashboardPage() {
   const stats_cards = [
     {
       id: 0,
       title: "Total Projects",
+      description: "All projects posted",
       total: 9,
-      icon: <IoBagSharp color="#c14343" />,
+      icon: <IoBagSharp />,
     },
     {
       id: 1,
       title: "Received Proposals",
+      description: "Offers from freelancers",
       total: 9,
-      icon: <RiFolderReceivedFill color="#c2c738" />,
+      icon: <RiFolderReceivedFill />,
     },
     {
       id: 2,
       title: "Freelancers Hired",
+      description: "People you've worked with",
       total: 9,
-      icon: <HiRectangleStack color="gray" />,
+      icon: <HiRectangleStack />,
     },
     {
       id: 3,
       title: "Ongoing Contracts",
+      description: "Projects in progress",
       total: 9,
-      icon: <RiContractFill color="#118b50" />,
+      icon: <RiContractFill />,
     },
   ];
 
@@ -76,13 +81,11 @@ function ClientDashboardPage() {
 
   return (
     <div className={styles.dashboard}>
-      <div className={styles.welcomeSection}>
-        <div className={styles.welcomeContent}>
-          <h1 className="pageTitle">Welcome Username </h1>
-          <h3 className={styles.welcomeSubTitle}>
-            Here's what happening with your projects today
-          </h3>
-        </div>
+      <div className={styles.dashboardHeader}>
+        <Welcome
+          username={"Ahmed"}
+          min_description="Here's what happening with your projects today"
+        />
         <div className={styles.post_project}>
           <NavLink
             to="/dashboard/client/postjob"
@@ -96,7 +99,13 @@ function ClientDashboardPage() {
         <h3 className={styles.overviewTitle}>Overview</h3>
         <div className={styles.statsCards}>
           {stats_cards.map((state) => (
-            <SimpleCard key={state.id} icon={state.icon} title={state.title} value={state.total}>
+            <SimpleCard
+              key={state.id}
+              icon={state.icon}
+              title={state.title}
+              description={state.description}
+              value={state.total}
+            >
               {state.icon}
             </SimpleCard>
           ))}

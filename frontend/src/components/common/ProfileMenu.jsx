@@ -1,13 +1,17 @@
 import styles from "./ProfileMenu.module.css";
-import { FaUserAlt } from "react-icons/fa";
+import { FaRegUser } from "react-icons/fa";
 import { RiLogoutCircleRLine } from "react-icons/ri";
 import { NavLink } from "react-router-dom";
+import { IoSettingsOutline } from "react-icons/io5";
 
 function ProfileMenu() {
   return (
     <div className={styles.profile_menu}>
       <NavLink className={styles.btn}>
-        <FaUserAlt color="green" /> <span>Profile</span>
+        <FaRegUser /> <span>Profile</span>
+      </NavLink>
+      <NavLink className={styles.btn}>
+        <IoSettingsOutline /> <span>Settings</span>
       </NavLink>
       <hr />
       <button className={styles.btn}>

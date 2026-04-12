@@ -3,6 +3,7 @@ import authRoutes from "./authRoutes";
 import HomePage from "../pages/HomePage";
 import { adminRoutes } from "./adminRoutes";
 import { clientRoutes } from "./clientRoutes";
+import { freelancerRoutes } from "./freelancerRoutes";
 
 
 export const router = createBrowserRouter([
@@ -12,5 +13,6 @@ export const router = createBrowserRouter([
     } ,
     ...authRoutes ,
     ...adminRoutes ,
-    ...clientRoutes
+    ...clientRoutes ,
+    ...freelancerRoutes
 ]);

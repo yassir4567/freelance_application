@@ -1,0 +1,13 @@
+.welcomeTitle {
+  color: var(--color-black);
+  font-size: var(--fs-3xl);
+  margin-bottom: 10px;
+  font-weight: 600;
+}
+
+.welcomeSubTitle {
+  color: var(--color-text-muted);
+  font-weight: 400;
+  font-size: var(--fs-base);
+  margin-left: 5px;
+}

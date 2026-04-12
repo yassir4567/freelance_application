@@ -2,18 +2,15 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: var(--color-white);
+  background-color: #f1f2f1;
   padding: 15px 100px;
   height: 70px;
-  box-shadow: 0 5px 5px rgba(166, 166, 166, 0.16);
+  box-shadow: 0 5px 15px rgba(166, 166, 166, 0.16);
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   z-index: 1000;
-  margin-inline: 60px;
-  border-bottom-left-radius: 20px;
-  border-bottom-right-radius: 20px;
 }
 
 .logo {
@@ -25,7 +22,7 @@
 .navbar_list {
   display: flex;
   align-items: center;
-  gap: 27px;
+  gap: 32px;
 }
 
 .navbar_item {
@@ -34,7 +31,7 @@
 
 .header_right {
   display: flex;
-  gap: 10px;
+  gap: 20px;
   align-items: center;
   justify-content: center;
 }
@@ -70,11 +67,10 @@
 
 .active_link {
   color: var(--color-secondary) !important;
-  font-size: var(--fs-sm);
 }
 
 .link {
   text-decoration: none;
   color: var(--color-black);
-  font-size: var(--fs-sm);
+  font-size: var(--fs-base);
 }

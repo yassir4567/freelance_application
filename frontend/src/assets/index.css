@@ -17,6 +17,10 @@
   --color-light: #f8f5f553;
 
   --color-primary-soft : #e94646;
+  --color-primary-bg : #f787874a;
+
+  --color-danger-bg: #fdecec;
+  --color-danger-soft: #f2b4b4c3;
 
   --color-warning: #b7791f;
   --color-warning-bg: #fff7e6;
@@ -27,9 +31,6 @@
   --color-info-bg: #e6f8ff;
 
   --color-success-bg: #c7fcde;
-
-  --color-danger-bg: #fdecec;
-  --color-danger-soft: #f2b4b4c3;
 
   --color-accent: #f79e17;
   --color-accent-x: #bc781f;

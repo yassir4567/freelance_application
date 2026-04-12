@@ -1,0 +1,97 @@
+.overview {
+  display: flex;
+  margin-top: 30px;
+  gap: 20px;
+}
+
+.overview_card div span {
+  font-size: var(--fs-3xl);
+}
+
+.overview_card p:nth-child(2) {
+  font-size: var(--fs-4xl);
+}
+
+.main {
+  margin-top: 60px;
+  margin-bottom: 160px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+}
+
+.activeContracts {
+  border: 2px solid var(--color-border);
+  border-radius: 10px;
+  padding: 30px 25px;
+  background-color: var(--color-light);
+  width: 1000px;
+}
+
+.title {
+  margin-bottom: 20px;
+  font-weight: 450;
+  font-size: var(--fs-lg);
+  color: var(--color-success);
+}
+
+.allContractsLink {
+  margin-top: 15px;
+  text-align: end;
+  margin-right: 10px;
+}
+
+.allContractsLink .link {
+  font-size: var(--fs-md);
+  color: var(--color-azure);
+  position: relative;
+  padding-bottom: 4px;
+  transition: 0.2s;
+}
+
+.allContractsLink .link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  background-color: var(--color-azure);
+  width: 25px;
+  height: 1px;
+  display: inline-block;
+  transition: 0.2s;
+}
+
+.allContractsLink .link:hover::after {
+  width: 100%;
+}
+
+
+.quickAction .title {
+    margin-top: 10px;
+}
+
+.quickAction .actions {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.actions .actionLink {
+    min-width: 200px;
+    height: 45px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--color-light);
+    border: 1px solid var(--color-success);
+    padding-inline: 15px;
+    color: var(--color-success);
+    border-radius: 10px;
+    transition: .2s;
+}
+
+.actions .actionLink:hover {
+    background-color: var(--color-success);
+    color: var(--color-white);
+    border-radius: 15px;
+}
