@@ -11,6 +11,11 @@ class User extends Model
     //
     protected $fillable = ['username', 'email', 'password', 'role', 'firstName', 'lastName', 'age', 'phone', 'country', 'avatar', 'address', 'city'];
 
+    public function freelancer(): HasOne
+    {
+        return $this->hasOne(Freelancer::class);
+    }
+
     // * if the user role is client
     public function projects(): HasMany
     {
@@ -25,5 +30,10 @@ class User extends Model
     public function notifications(): HasMany
     {
         return $this->hasMany(Notification::class);
+    }
+
+    public function messages(): HasMany
+    {
+        return $this->hasMany(Message::class, 'sender_id');
     }
 }

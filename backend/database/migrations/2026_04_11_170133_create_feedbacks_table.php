@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('feedbacks', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('contract_id')->constrained();
+            $table->foreignId('contract_id')->unique()->constrained();
             $table->integer('rating');
             $table->text('comment');
             $table->timestamps();

@@ -14,11 +14,11 @@ return new class extends Migration
         Schema::create('freelancers', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->unique()->constrained();
-            $table->foreignId('category_id')->unique()->constrained();
+            $table->foreignId('category_id')->constrained();
             $table->string('title')->nullable();
             $table->text('bio')->nullable();
-            $table->string('portfolio_url');
-            $table->string('resume_url');
+            $table->string('portfolio_url')->nullable();
+            $table->string('resume_url')->nullable();
             $table->timestamps();
         });
     }
