@@ -8,15 +8,20 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 class Skill extends Model
 {
     //
-    protected $fillable = ["name"];
+    protected $fillable = ['name'];
 
-    public function freelancers() : BelongsToMany {
-        return $this->belongsToMany(Freelancer::class) ;
+    public function freelancers(): BelongsToMany
+    {
+        return $this->belongsToMany(Freelancer::class);
     }
 
-    public function categories() : BelongsToMany {
-        return $this->belongsToMany(Category::class) ;
+    public function categories(): BelongsToMany
+    {
+        return $this->belongsToMany(Category::class);
     }
 
-    
+    public function projects(): BelongsToMany
+    {
+        return $this->belongsToMany(Project::class);
+    }
 }
