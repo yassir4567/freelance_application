@@ -1,6 +1,6 @@
 :root {
   /* Colors */
-  --color-bg-main: #f0f0f04a;
+  --color-bg-main: #fafafa75;
   --color-danger: #f95039;
   --color-primary: #c44a3a;
   --color-secondary: #25b977;
@@ -63,7 +63,9 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: "Roboto", sans-serif;
+  /* font-family: "Roboto", sans-serif; */
+    font-family: "Open Sans", sans-serif;
+
 }
 
 body {

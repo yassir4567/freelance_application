@@ -4,7 +4,7 @@ import { contracts } from "../../api/contracts";
 import ContractCard from "../../components/cards/ContractCard";
 import { useMemo } from "react";
 import { useSearchParams } from "react-router-dom";
-import FilterBox from "../../components/common/FilterBox";
+import FilterBox from "../../components/common/filters/FilterBox";
 
 function ContractsPage() {
   const [filterParams, setFilterParams] = useSearchParams();

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOne;
@@ -9,6 +10,7 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 class Proposal extends Model
 {
     //
+    use HasFactory;
     protected $fillable = ['project_id', 'freelancer_id', 'cover_letter', 'status', 'deadline', 'price'];
 
     public function freelancer(): BelongsTo

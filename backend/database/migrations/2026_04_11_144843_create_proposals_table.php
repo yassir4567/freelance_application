@@ -19,7 +19,7 @@ return new class extends Migration
             $table->text('cover_letter');
             $table->enum('status', ['pending', 'accepted', 'rejected']);
             $table->date('deadline');
-            $table->float('price');
+            $table->decimal('price' , 10 , 2);
             $table->timestamps();
         });
     }

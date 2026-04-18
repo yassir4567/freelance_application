@@ -4,7 +4,7 @@ import { PiEmptyBold } from "react-icons/pi";
 import { useSearchParams } from "react-router-dom";
 import ProjectCard from "../../components/cards/ProjectCard";
 import { projects } from "../../api/projects";
-import FilterBox from "../../components/common/FilterBox";
+import FilterBox from "../../components/common/filters/FilterBox";
 
 function ProjectsPage() {
   const [filterParams, setFilterParams] = useSearchParams();

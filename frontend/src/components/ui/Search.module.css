@@ -1,0 +1,23 @@
+.searchBox {
+  width: 100%;
+  height: 50px;
+  position: relative;
+}
+
+.searchBox .searchInput {
+  width: 100%;
+  height: 100%;
+  border-radius: 25px;
+  padding-inline: 20px 50px;
+}
+
+.searchBox .searchIcon {
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--color-placeholder);
+}
+.searchBox:hover .searchIcon {
+  color: var(--color-secondary);
+}

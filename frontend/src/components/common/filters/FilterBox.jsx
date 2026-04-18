@@ -1,5 +1,5 @@
-import { CiSearch } from "react-icons/ci";
 import styles from "./FilterBox.module.css";
+import Search from "../../ui/Search";
 
 function FilterBox({
   inputValues,
@@ -9,17 +9,8 @@ function FilterBox({
 }) {
   return (
     <div className={styles.FilterSection}>
-      <div className={styles.searchBox}>
-        <CiSearch className={styles.searchIcon} size={30} />
-        <input
-          type="text"
-          name="search"
-          value={inputValues.search}
-          onChange={handleInputsChange}
-          className={styles.searchInput}
-          placeholder="Search ..."
-        />
-      </div>
+
+      <Search value={inputValues.search} onChange={handleInputsChange} />
 
       <div className={styles.StatusBox}>
         <select

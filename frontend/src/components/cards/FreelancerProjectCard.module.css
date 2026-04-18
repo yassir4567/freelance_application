@@ -1,0 +1,99 @@
+.projectCard {
+  width: 100%;
+  padding-top: 25px;
+  padding-bottom: 25px;
+  border-bottom: 2px solid var(--color-gray-light);
+  padding-inline: 30px;
+}
+
+.projectCard:last-child {
+  border-bottom: none;
+}
+
+.projectCard:hover {
+  background-color: var(--color-light);
+}
+
+.cardHeader {
+  display: flex;
+  justify-content: space-between;
+}
+
+.postedDate {
+  font-size: var(--fs-xs);
+  font-weight: 400;
+  color: var(--color-text-muted);
+}
+
+.title {
+  font-size: var(--fs-2xl);
+  font-weight: 400;
+  text-transform: capitalize;
+  margin-top: 8px;
+}
+
+.detailBtn .btn {
+  color: var(--color-success);
+  position: relative;
+  padding-bottom: 5px;
+  transition: 0.2s;
+  font-size: var(--fs-sm);
+}
+
+.detailBtn .btn::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  background-color: var(--color-success);
+  width: 10px;
+  height: 1px;
+  transition: 0.2s;
+}
+
+.detailBtn .btn:hover::after {
+  width: 100%;
+}
+
+.description {
+  margin-top: 25px;
+  color: #414141;
+  font-weight: 400;
+  font-size: var(--fs-sm);
+  line-height: 20px;
+}
+
+.more {
+  color: var(--color-success);
+  font-size: var(--fs-sm);
+  cursor: pointer;
+}
+
+.requirements {
+  margin-top: 25px;
+  display: flex;
+  gap: 10px;
+  color: var(--color-success);
+  font-size: var(--fs-sm);
+  font-weight: 400;
+}
+
+.skills {
+  display: flex;
+  gap: 10px;
+  margin-top: 25px;
+}
+
+.skill {
+  background-color: var(--color-black);
+  padding: 6px 15px;
+  border-radius: 20px;
+  font-size: var(--fs-xs);
+  color: var(--color-white);
+}
+
+.proposalsCount {
+  margin-top: 20px;
+  display: flex;
+  gap: 15px;
+}

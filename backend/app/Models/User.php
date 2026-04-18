@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
@@ -9,6 +10,7 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 class User extends Model
 {
     //
+    use HasFactory;
     protected $fillable = ['username', 'email', 'password', 'role', 'firstName', 'lastName', 'age', 'phone', 'country', 'avatar', 'address', 'city'];
 
     public function freelancer(): HasOne

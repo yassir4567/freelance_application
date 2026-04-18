@@ -1,0 +1,22 @@
+/*  */
+
+.headerFilter {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+}
+
+.filterItem {
+  width: 300px;
+  height: 45px;
+}
+
+.filterItem select {
+  width: 100%;
+  height: 100%;
+  padding-left: 10px;
+  background-color: var(--color-white);
+  border-radius: 30px;
+  font-size: var(--fs-sm);
+}
