@@ -10,6 +10,7 @@ class Feedback extends Model
 {
     //
     use HasFactory;
+
     protected $fillable = ['contract_id', 'rating', 'comment'];
 
     public function contract(): BelongsTo

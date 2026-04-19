@@ -11,28 +11,32 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 class Contract extends Model
 {
     //
-    use HasFactory ;
+    use HasFactory;
+
     protected $fillable = ['proposal_id', 'fichierPdf', 'description', 'status', 'final_price', 'final_deadline'];
 
-    public function proposal() : BelongsTo {
-        return $this->belongsTo(Proposal::class) ;
+    public function proposal(): BelongsTo
+    {
+        return $this->belongsTo(Proposal::class);
     }
 
-    public function feedback() : HasOne {
-        return $this->hasOne(Feedback::class) ;
+    public function feedback(): HasOne
+    {
+        return $this->hasOne(Feedback::class);
     }
 
-    public function deliverables() : HasMany {
-        return $this->hasMany(Deliverable::class) ;
+    public function deliverables(): HasMany
+    {
+        return $this->hasMany(Deliverable::class);
     }
 
-    public function conversation() : HasOne {
-        return $this->hasOne(Conversation::class) ;
+    public function conversation(): HasOne
+    {
+        return $this->hasOne(Conversation::class);
     }
 
-    public function contractsTimelines() : HasMany {
-        return $this->hasMany(ContractTimeline::class) ;
+    public function contractsTimelines(): HasMany
+    {
+        return $this->hasMany(ContractTimeline::class);
     }
-    
-
 }

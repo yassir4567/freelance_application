@@ -14,11 +14,11 @@ return new class extends Migration
         Schema::create('experiences', function (Blueprint $table) {
             $table->id();
             $table->foreignId('freelancer_id')->constrained()->onDelete('cascade')->onUpdate('cascade');
-            $table->string('title') ;
-            $table->string('entreprise') ;
-            $table->text('description') ;
-            $table->date('startDate') ;
-            $table->date('endDate')->nullable() ;
+            $table->string('title');
+            $table->string('entreprise');
+            $table->text('description');
+            $table->date('startDate');
+            $table->date('endDate')->nullable();
             $table->timestamps();
         });
     }

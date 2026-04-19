@@ -10,6 +10,7 @@ class Experience extends Model
 {
     //
     use HasFactory;
+
     protected $fillable = ['freelancer_id', 'title', 'entreprise', 'description', 'startDate', 'endDate'];
 
     public function freelancer(): BelongsTo

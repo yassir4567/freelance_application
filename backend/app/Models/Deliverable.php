@@ -11,6 +11,7 @@ class Deliverable extends Model
 {
     //
     use HasFactory;
+
     protected $fillable = ['contract_id', 'title', 'description', 'amount', 'deadline', 'deliverable_links', 'unlocked_at', 'submitted_at', 'accepted_at', 'status', 'submission_note'];
 
     public function contract(): BelongsTo
@@ -18,7 +19,8 @@ class Deliverable extends Model
         return $this->belongsTo(Contract::class);
     }
 
-    public function payment() : HasOne {
-        return $this->hasOne(Payment::class) ;
+    public function payment(): HasOne
+    {
+        return $this->hasOne(Payment::class);
     }
 }

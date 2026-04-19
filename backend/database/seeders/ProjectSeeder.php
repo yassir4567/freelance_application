@@ -23,7 +23,7 @@ class ProjectSeeder extends Seeder
                 return $clientIds->random();
             },
             'category_id' => function () use ($categoryIds) {
-                return $categoryIds->random() ;
+                return $categoryIds->random();
             },
         ]);
     }

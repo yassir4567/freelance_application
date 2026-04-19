@@ -12,6 +12,7 @@ class Freelancer extends Model
 {
     //
     use HasFactory;
+
     protected $fillable = ['user_id', 'category_id', 'title', 'bio', 'portfolio_url', 'resume_url'];
 
     public function experiences(): HasMany
@@ -34,7 +35,8 @@ class Freelancer extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function proposals() : HasMany {
-        return $this->hasMany(Proposal::class) ;
+    public function proposals(): HasMany
+    {
+        return $this->hasMany(Proposal::class);
     }
 }

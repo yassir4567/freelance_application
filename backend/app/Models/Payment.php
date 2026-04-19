@@ -10,6 +10,7 @@ class Payment extends Model
 {
     //
     use HasFactory;
+
     protected $fillable = ['deliverable_id', 'price', 'status'];
 
     public function deliverable(): BelongsTo

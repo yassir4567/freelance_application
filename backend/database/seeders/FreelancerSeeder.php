@@ -24,6 +24,5 @@ class FreelancerSeeder extends Seeder
             }
         }
 
-        
     }
 }

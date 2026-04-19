@@ -13,13 +13,13 @@ return new class extends Migration
     {
         Schema::create('proposals', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('project_id')->constrained() ;
-            $table->foreignId('freelancer_id')->constrained() ;
-            $table->unique(['project_id' , 'freelancer_id']) ;
+            $table->foreignId('project_id')->constrained();
+            $table->foreignId('freelancer_id')->constrained();
+            $table->unique(['project_id', 'freelancer_id']);
             $table->text('cover_letter');
             $table->enum('status', ['pending', 'accepted', 'rejected']);
             $table->date('deadline');
-            $table->decimal('price' , 10 , 2);
+            $table->decimal('price', 10, 2);
             $table->timestamps();
         });
     }

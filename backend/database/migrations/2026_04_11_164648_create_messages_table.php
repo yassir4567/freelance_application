@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('messages', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('conversation_id')->constrained()->onDelete('cascade') ;
-            $table->foreignId('sender_id')->constrained('users') ;
+            $table->foreignId('conversation_id')->constrained()->onDelete('cascade');
+            $table->foreignId('sender_id')->constrained('users');
             $table->text('message');
             $table->boolean('read');
             $table->enum('type', ['text', 'image', 'pdf', 'link']);

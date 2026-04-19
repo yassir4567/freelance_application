@@ -13,10 +13,10 @@ return new class extends Migration
     {
         Schema::create('contract_timelines', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('contract_id')->constrained() ;
-            $table->string('event_type') ;
-            $table->string('title') ;
-            $table->text('description') ;
+            $table->foreignId('contract_id')->constrained();
+            $table->string('event_type');
+            $table->string('title');
+            $table->text('description');
             $table->timestamps();
         });
     }

@@ -11,6 +11,7 @@ class Proposal extends Model
 {
     //
     use HasFactory;
+
     protected $fillable = ['project_id', 'freelancer_id', 'cover_letter', 'status', 'deadline', 'price'];
 
     public function freelancer(): BelongsTo
@@ -27,6 +28,4 @@ class Proposal extends Model
     {
         return $this->hasOne(Contract::class);
     }
-
-    
 }

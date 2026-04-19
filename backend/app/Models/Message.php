@@ -10,6 +10,7 @@ class Message extends Model
 {
     //
     use HasFactory;
+
     protected $fillable = ['conversation_id', 'sender_id', 'message', 'read', 'type', 'fichier_url'];
 
     public function conversation(): BelongsTo

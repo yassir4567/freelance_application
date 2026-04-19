@@ -12,24 +12,26 @@ class Project extends Model
 {
     //
     use HasFactory;
-    protected $fillable = ["client_id" , "category_id" , 'title' , 'description' , "budget" , 'status' , 'experienceLevel' , "size" , "duration"];
 
-   
-    public function client() : BelongsTo {
-        return $this->belongsTo(User::class , 'client_id') ;
+    protected $fillable = ['client_id', 'category_id', 'title', 'description', 'budget', 'status', 'experienceLevel', 'size', 'duration'];
+
+    public function client(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'client_id');
     }
 
-    public function category() : BelongsTo {
-        return $this->belongsTo(Category::class) ;
+    public function category(): BelongsTo
+    {
+        return $this->belongsTo(Category::class);
     }
 
-    public function proposals() : HasMany {
-        return $this->hasMany(Proposal::class) ;
+    public function proposals(): HasMany
+    {
+        return $this->hasMany(Proposal::class);
     }
 
-    public function skills() : BelongsToMany {
+    public function skills(): BelongsToMany
+    {
         return $this->belongsToMany(Skill::class);
     }
-    
-    
 }

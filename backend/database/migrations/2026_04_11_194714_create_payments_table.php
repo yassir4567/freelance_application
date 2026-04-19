@@ -13,9 +13,9 @@ return new class extends Migration
     {
         Schema::create('payments', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('deliverable_id')->unique()->constrained() ;
-            $table->float('price') ;
-            $table->enum('status' , ['pending' , 'escrow' , 'released' , 'refunded']) ;
+            $table->foreignId('deliverable_id')->unique()->constrained();
+            $table->float('price');
+            $table->enum('status', ['pending', 'escrow', 'released', 'refunded']);
             $table->timestamps();
         });
     }

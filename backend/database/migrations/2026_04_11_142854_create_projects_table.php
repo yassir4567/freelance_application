@@ -17,7 +17,7 @@ return new class extends Migration
             $table->foreignId('category_id')->constrained();
             $table->string('title');
             $table->text('description');
-            $table->decimal('budget' , 10 , 2);
+            $table->decimal('budget', 10, 2);
             $table->enum('status', ['open', 'in review', 'in progress', 'completed', 'cancelled']);
             $table->enum('experience_level', ['junior', 'mid-level', 'senior']);
             $table->enum('size', ['small', 'medium', 'large']);
