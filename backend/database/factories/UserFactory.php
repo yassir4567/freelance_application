@@ -20,13 +20,11 @@ class UserFactory extends Factory
     {
         return [
             //
-            'username' => fake()->userName(),
             'email' => fake()->safeEmail(),
             'password' => Hash::make('password'),
             'role' => fake()->randomElement(['admin', 'client', 'freelancer']),
-            'firstName' => fake()->firstName(),
-            'lastName' => fake()->lastName(),
-            'age' => fake()->numberBetween(18, 50),
+            'first_name' => fake()->firstName(),
+            'last_name' => fake()->lastName(),
             'phone' => fake()->phoneNumber(),
             'country' => fake()->country(),
             'avatar' => fake()->imageUrl(),

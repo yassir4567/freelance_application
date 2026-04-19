@@ -23,7 +23,7 @@ class ProjectFactory extends Factory
             'description' => fake()->paragraph(),
             'budget' => fake()->randomFloat(2, 10, 5000),
             'status' => fake()->randomElement(['open', 'in review', 'in progress', 'completed', 'cancelled']),
-            'experienceLevel' => fake()->randomElement(['junior', 'mid-level', 'senior']),
+            'experience_level' => fake()->randomElement(['junior', 'mid-level', 'senior']),
             'size' => fake()->randomElement(['small', 'medium', 'large']),
             'duration' => fake()->randomElement(['less_than_1_month', '1_to_3_month', '3_to_6_month', 'more_than_6_month']),
 

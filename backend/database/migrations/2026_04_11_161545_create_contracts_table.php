@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('contracts', function (Blueprint $table) {
             $table->id();
             $table->foreignId('proposal_id')->constrained()->unique();
-            $table->string('fichierPdf')->nullable();
+            $table->string('fichier_pdf')->nullable();
             $table->text('description')->nullable();
             $table->enum('status', ['pending', 'active', 'completed', 'cancelled', 'rejected']);
             $table->float('final_price')->nullable();
