@@ -13,7 +13,7 @@ class Project extends Model
     //
     use HasFactory;
 
-    protected $fillable = ['client_id', 'category_id', 'title', 'description', 'budget', 'status', 'experienceLevel', 'size', 'duration'];
+    protected $fillable = ['client_id', 'category_id', 'title', 'description', 'budget', 'status', 'experience_level', 'size', 'duration'];
 
     public function client(): BelongsTo
     {

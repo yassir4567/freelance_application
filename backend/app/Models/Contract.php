@@ -13,7 +13,7 @@ class Contract extends Model
     //
     use HasFactory;
 
-    protected $fillable = ['proposal_id', 'fichierPdf', 'description', 'status', 'final_price', 'final_deadline'];
+    protected $fillable = ['proposal_id', 'fichier_pdf', 'description', 'status', 'final_price', 'final_deadline'];
 
     public function proposal(): BelongsTo
     {
