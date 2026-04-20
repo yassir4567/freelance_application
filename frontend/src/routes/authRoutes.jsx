@@ -12,4 +12,4 @@ const authRouter = [
   },
 ];
 
-export default authRouter 
+export default authRouter;

@@ -5,19 +5,24 @@ import AdminProjectsPage from "../features/admin/pages/AdminProjectsPage";
 import AdminSkillsPage from "../features/admin/pages/AdminSkillsPage";
 import AdminUsersPage from "../features/admin/pages/AdminUsersPage";
 import UserDetails from "../features/admin/pages/UserDetails";
-
+import ProtectedRoutes from "./ProtectedRoutes";
 
 export const adminRoutes = [
   {
-    path: "/dashboard/admin",
-    element: <AdminLayout />,
+    element: <ProtectedRoutes role={"admin"} />,
     children: [
-      { index: true, element: <AdminDashboard /> },
-      { path: "users", element: <AdminUsersPage /> },
-      { path: "userdetails", element: <UserDetails /> },
-      { path: "projects", element: <AdminProjectsPage /> },
-      { path: "categories", element: <AdminCategoriePage /> },
-      { path: "skills", element: <AdminSkillsPage /> },
+      {
+        path: "/dashboard/admin",
+        element: <AdminLayout />,
+        children: [
+          { index: true, element: <AdminDashboard /> },
+          { path: "users", element: <AdminUsersPage /> },
+          { path: "userdetails", element: <UserDetails /> },
+          { path: "projects", element: <AdminProjectsPage /> },
+          { path: "categories", element: <AdminCategoriePage /> },
+          { path: "skills", element: <AdminSkillsPage /> },
+        ],
+      },
     ],
   },
 ];

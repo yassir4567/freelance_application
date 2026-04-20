@@ -23,7 +23,8 @@ class AuthController extends Controller
             ], 401);
         }
 
-        $user = Auth::user();
+        $user = User::select('id', 'first_name', 'last_name', 'email', 'role')
+        ->find(Auth::id());
         $user->tokens()->delete();
         $token = $user->createToken('auth_token')->plainTextToken;
 
@@ -41,7 +42,7 @@ class AuthController extends Controller
             'last_name' => 'required|string|max:25',
             'email' => 'required|email|max:255|unique:users,email',
             'password' => 'required|string|min:8|confirmed',
-            'role' => 'required|in:client,freelancer',
+            'role' => 'required|in:client,freelancer,admin',
         ]);
 
         $user = User::create([
