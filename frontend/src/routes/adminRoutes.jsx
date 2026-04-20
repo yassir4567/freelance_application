@@ -1,10 +1,10 @@
 import AdminLayout from "../layouts/AdminLayout";
-import AdminCategoriePage from "../pages/admin/AdminCategoriesPage";
-import AdminDashboard from "../pages/admin/AdminDashboardPage";
-import AdminProjectsPage from "../pages/admin/AdminProjectsPage";
-import AdminSkillsPage from "../pages/admin/AdminSkillsPage";
-import AdminUsersPage from "../pages/admin/AdminUsersPage";
-import UserDetails from "../pages/admin/UserDetails";
+import AdminCategoriePage from "../features/admin/pages/AdminCategoriesPage";
+import AdminDashboard from "../features/admin/pages/AdminDashboardPage";
+import AdminProjectsPage from "../features/admin/pages/AdminProjectsPage";
+import AdminSkillsPage from "../features/admin/pages/AdminSkillsPage";
+import AdminUsersPage from "../features/admin/pages/AdminUsersPage";
+import UserDetails from "../features/admin/pages/UserDetails";
 
 
 export const adminRoutes = [

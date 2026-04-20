@@ -1,4 +1,4 @@
-import UserHeader from "../components/layout/UserHeader";
+import UserHeader from "../shared/layout/UserHeader";
 import { Outlet } from "react-router-dom";
 import styles from "./ClientLayout.module.css";
 

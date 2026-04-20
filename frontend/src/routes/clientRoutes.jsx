@@ -1,13 +1,13 @@
 import ClientLayout from "../layouts/ClientLayout";
-import ClientDashboardPage from "../pages/client/ClientDashboardPage";
-import PostJobPage from "../pages/client/PostJobPage";
-import ProjectsPage from "../pages/client/ProjectsPage";
-import ProjectProposalsPage from "../pages/client/ProjectProposalsPage";
-import ProjectOverviewPage from "../pages/client/ProjectOverviewPage";
-import ProjectLayout from "../layouts/ProjectLayout";
-import ContractsPage from "../pages/client/ContractsPage";
-import ContractDetail from "../pages/client/ContractDetail";
-import MessagesPage from "../pages/client/MessagesPage";
+import ClientDashboardPage from "../features/client-dashboard/pages/ClientDashboardPage";
+import PostJobPage from "../features/projects/pages/PostJobPage";
+import ProjectsPage from "../features/projects/pages/ProjectsPage";
+import ProjectProposalsPage from "../features/projects/pages/ProjectProposalsPage";
+import ProjectOverviewPage from "../features/projects/pages/ProjectOverviewPage";
+import ProjectLayout from "../features/projects/components/ProjectLayout";
+import ContractsPage from "../features/contracts/pages/ContractsPage";
+import ContractDetail from "../features/contracts/pages/ContractDetail";
+import MessagesPage from "../features/messages/pages/MessagesPage";
 
 export const clientRoutes = [
   {

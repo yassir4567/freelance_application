@@ -1,7 +1,7 @@
 import FreelancerLayout from "../layouts/FreelancerLayout";
-import FindProjectPage from "../pages/freelancer/FindProjectPage";
-import FreelancerDashboardPage from "../pages/freelancer/FreelancerDashboardPage";
-import ProjectDetailPage from "../pages/freelancer/ProjectDetailPage";
+import FindProjectPage from "../features/projects/pages/FindProjectPage";
+import FreelancerDashboardPage from "../features/freelancer-dashboard/pages/FreelancerDashboardPage";
+import ProjectDetailPage from "../features/projects/pages/ProjectDetailPage";
 
 export const freelancerRoutes = [
   {

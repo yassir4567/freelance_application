@@ -1,5 +1,5 @@
 import { Outlet } from "react-router-dom";
-import UserHeader from "../components/layout/UserHeader";
+import UserHeader from "../shared/layout/UserHeader";
 import styles from "./FreelancerLayout.module.css";
 function FreelancerLayout() {
   const links = [
