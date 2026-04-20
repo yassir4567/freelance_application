@@ -2,6 +2,7 @@ import { createContext, useContext, useEffect, useState } from "react";
 import { getCurrentUser } from "../api/auth/getCurrentUser";
 import { loginUser } from "../api/auth/login";
 import { logoutUser } from "../api/auth/logout";
+import { registerUser } from "../api/auth/register";
 
 const AuthContext = createContext(null);
 
@@ -22,7 +23,6 @@ const AuthProvider = ({ children }) => {
 
       if (!result.success) {
         localStorage.removeItem("token");
-        localStorage.removeItem("user");
         setUser(null);
         setIsLoading(false);
         return;
@@ -44,7 +44,6 @@ const AuthProvider = ({ children }) => {
     const { token, user } = result.data;
 
     localStorage.setItem("token", token);
-    localStorage.setItem("user", JSON.stringify(user));
     setUser(user);
 
     return {
@@ -57,15 +56,35 @@ const AuthProvider = ({ children }) => {
     const result = await logoutUser();
 
     localStorage.removeItem("token");
-    localStorage.removeItem("user");
     setUser(null);
   }
 
-  return (
-    <AuthContext.Provider value={{ user, isLoading, login, logout }}>
-      {children}
-    </AuthContext.Provider>
-  );
+  // * register user function
+  async function register(formData) {
+    const result = await registerUser(formData);
+
+    if (!result.success) {
+      return result;
+    }
+
+    const { token, user } = result.data;
+    localStorage.setItem("token", token);
+    setUser(user);
+    return {
+      success: true,
+      user,
+    };
+  }
+
+  const values = {
+    user,
+    isLoading,
+    login,
+    logout,
+    register,
+  };
+
+  return <AuthContext.Provider value={values}>{children}</AuthContext.Provider>;
 };
 
 function useAuth() {

@@ -1,4 +1,4 @@
-import { BASE_URL } from "../config";
+import { BASE_URL, getToken } from "../config";
 
 const registerUser = async (formData) => {
   try {
@@ -8,7 +8,7 @@ const registerUser = async (formData) => {
       headers: {
         "Content-Type": "application/json",
         Accept: "application/json",
-        Authorization: `Bearer ${token}`,
+        ...(token && { Authorization: `Bearer ${token}` }),
       },
       body: JSON.stringify(formData),
     });
@@ -18,15 +18,16 @@ const registerUser = async (formData) => {
       return {
         success: false,
         message: data.message || "",
-        errors: data.errors || null,
       };
-    }
+    }    
 
     return {
       success: true,
       data: data,
     };
   } catch (err) {
+    console.log(err);
+    
     return {
       success: false,
       message: "Network error",
@@ -34,4 +35,4 @@ const registerUser = async (formData) => {
   }
 };
 
-export const { registerUser };
+export { registerUser };

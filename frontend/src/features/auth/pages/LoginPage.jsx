@@ -38,7 +38,7 @@ function LoginPage() {
     } else if (result.user.role === "client") {
       navigate("/dashboard/client");
     } else {
-      navigate("/dashboard/client");
+      navigate("/dashboard/admin");
     }
   };
 

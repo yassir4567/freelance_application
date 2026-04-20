@@ -72,3 +72,15 @@
   align-items: center;
   gap: 5px;
 }
+
+.error {
+  color: var(--color-danger);
+  font-size: var(--fs-sm);
+  text-transform: capitalize;
+  margin-top: 5px;
+  margin-left: 5px;
+}
+
+.roleError {
+  display: block;
+}

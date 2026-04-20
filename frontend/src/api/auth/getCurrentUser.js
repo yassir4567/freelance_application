@@ -18,7 +18,6 @@ const getCurrentUser = async () => {
       return {
         success: false,
         message: data.message || "",
-        errors: data.errors || null,
       };
     }
 
