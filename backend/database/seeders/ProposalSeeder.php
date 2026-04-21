@@ -15,8 +15,8 @@ class ProposalSeeder extends Seeder
     public function run(): void
     {
         //
-        $projectIds = Project::all()->pluck('id');
-        $freelancerIds = Freelancer::all()->pluck('id');
+        $projectIds = Project::pluck('id');
+        $freelancerIds = Freelancer::pluck('id');
 
         foreach ($projectIds as $projectId) {
             $count = rand(0, $freelancerIds->count());

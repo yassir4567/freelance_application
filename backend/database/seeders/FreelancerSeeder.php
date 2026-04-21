@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\Category;
 use App\Models\Freelancer;
+use App\Models\Skill;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 
@@ -16,13 +17,15 @@ class FreelancerSeeder extends Seeder
     {
         //
         $users = User::where('role', 'freelancer')->get();
-        $categoryIds = Category::all()->pluck('id');
-
+        $categoryIds = Category::pluck('id');
+        $skillIds = Skill::pluck('id');
         foreach ($users as $user) {
             if (! Freelancer::where('user_id', $user->id)->exists()) {
-                Freelancer::factory()->create(['user_id' => $user->id, 'category_id' => $categoryIds->random()]);
+                Freelancer::factory()
+                    ->create(['user_id' => $user->id, 'category_id' => $categoryIds->random()])
+                    ->skills()
+                    ->attach($skillIds->random(rand(0, $skillIds->count())));
             }
         }
-
     }
 }

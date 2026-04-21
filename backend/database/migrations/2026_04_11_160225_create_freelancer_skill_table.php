@@ -12,10 +12,9 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('freelancer_skill', function (Blueprint $table) {
-            $table->id();
             $table->foreignId('freelancer_id')->constrained()->onDelete('cascade');
             $table->foreignId('skill_id')->constrained()->onDelete('cascade');
-            $table->unique(['freelancer_id', 'skill_id']);
+            $table->primary(['freelancer_id', 'skill_id']);
             $table->timestamps();
         });
     }

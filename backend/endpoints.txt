@@ -1,3 +1,4 @@
 
 
 // Dashboard endpoints 
+GET /dashboard-stats?role=(client | freelancer | admin)
