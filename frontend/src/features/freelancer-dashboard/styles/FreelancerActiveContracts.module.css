@@ -76,3 +76,12 @@
 .link:hover::after {
   width: 100%;
 }
+
+.empty {
+  height: 50px;
+  text-align: center;
+  border-radius: 10px;
+  font-size: var(--fs-sm);
+  background-color: var(--color-light);
+  border: 1px solid var(--color-border);
+}
