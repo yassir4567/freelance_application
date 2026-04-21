@@ -14,7 +14,7 @@ function RecentProjectsTable({ projects }) {
         <tr>
           <th>Title</th>
           <th>Status</th>
-          <th>Number of Proposals</th>
+          <th className={styles.numberProposalTr}>Number of Proposals</th>
           <th>Time</th>
           <th>Actions</th>
         </tr>
@@ -22,7 +22,9 @@ function RecentProjectsTable({ projects }) {
       <tbody>
         {projects?.map((project) => (
           <tr key={project.id}>
-            <td>{project.title}</td>
+            <td className={styles.titleCell}>
+              <span>{project.title}</span>
+            </td>
             <td>
               <span
                 className={`${styles.status} ${statusClasses[project.status]}`}
@@ -30,7 +32,9 @@ function RecentProjectsTable({ projects }) {
                 {project.status.split("_").join(" ")}
               </span>
             </td>
-            <td>{project.proposals_count}</td>
+            <td className={styles.numberProposalTd}>
+              <span>{project.proposals_count}</span>
+            </td>
             <td>{getRelativeTime(project.created_at)}</td>
             <td className={styles.actions}>
               <button className={styles.actionBtn}>View Details</button>

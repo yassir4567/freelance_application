@@ -13,8 +13,8 @@
 .table td {
   padding: 12px 15px;
   text-align: left;
+  min-height: 70px;
   border-bottom: 1px solid #c0c0c0;
-  height: 70px;
 }
 
 .table th {
@@ -48,7 +48,7 @@
   border: none;
   padding: 6px 12px;
   border-radius: 4px;
-  height: 40px;
+  min-height: 40px;
   cursor: pointer;
   flex: 1;
   font-size: var(--fs-sm);
@@ -81,4 +81,36 @@
   height: 7px;
   border-radius: 50%;
   display: inline-block;
+}
+
+.numberProposalTr {
+  max-width: 100px;
+}
+
+.titleCell {
+  max-width: 250px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  height: fit-content;
+}
+
+.titleCell span {
+  font-size: var(--fs-sm);
+  border-radius: 20px;
+  font-weight: 500;
+}
+
+.numberProposalTd span {
+  text-align: center;
+  display: block;
+  background-color: var(--color-secondary);
+  width: 35px;
+  height: 35px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--fs-md);
+  border-radius: 50%;
+  color: var(--color-white);
 }
