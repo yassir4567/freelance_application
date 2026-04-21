@@ -8,35 +8,47 @@ import { RiContractFill } from "react-icons/ri";
 import SimpleCard from "../../../shared/ui/SimpleCard";
 import RecentProjectsTable from "../components/RecentProjectsTable";
 import Welcome from "../../../shared/common/Welcome";
+import { useEffect, useState } from "react";
+import { getStats } from "../../../api/dashboard/getStats";
 
 function ClientDashboardPage() {
+  const [stats, setStats] = useState([]);
+
+  useEffect(() => {
+    const loadStats = async () => {
+      const result = await getStats();
+      setStats(result.stats);
+    };
+    loadStats();
+  }, []);
+
   const stats_cards = [
     {
       id: 0,
       title: "Total Projects",
       description: "All projects posted",
-      total: 9,
+      total: stats?.total_projects || 0,
       icon: <IoBagSharp />,
     },
     {
       id: 1,
       title: "Received Proposals",
       description: "Offers from freelancers",
-      total: 9,
+      total: stats?.received_proposals || 0,
       icon: <RiFolderReceivedFill />,
     },
     {
       id: 2,
       title: "Freelancers Hired",
       description: "People you've worked with",
-      total: 9,
+      total: stats?.freelancer_hired || 0,
       icon: <HiRectangleStack />,
     },
     {
       id: 3,
       title: "Ongoing Contracts",
       description: "Projects in progress",
-      total: 9,
+      total: stats?.ongoing_contracts || 0,
       icon: <RiContractFill />,
     },
   ];

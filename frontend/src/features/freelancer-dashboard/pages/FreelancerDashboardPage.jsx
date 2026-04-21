@@ -7,28 +7,41 @@ import { AiOutlineProject, AiOutlineDeliveredProcedure } from "react-icons/ai";
 import { VscGitPullRequestDone } from "react-icons/vsc";
 import profile from "../../../assets/images/profile.png";
 import { NavLink } from "react-router-dom";
+import { useEffect, useState } from "react";
+import {getStats} from "../../../api/dashboard/getStats";
 
 function FreelancerDashboardPage() {
+  const [stats , setStats] = useState([])
+
+  useEffect(() => {
+    const loadStats = async () => {
+      const result = await getStats() ;
+      setStats(result.stats)
+    }
+    loadStats()
+  } , [])
+  
+
   const overview_cards = [
     {
       id: 0,
       title: "Active Projects",
       description: "Track all your projects",
-      total: 99,
+      total: stats?.active_projects || 0,
       icon: <AiOutlineProject />,
     },
     {
       id: 1,
       title: "Accepted proposals",
       description: "Proposals that turned into negotiation",
-      total: 99,
+      total: stats?.accepted_proposals || 0,
       icon: <VscGitPullRequestDone />,
     },
     {
       id: 3,
       title: "Completed Contracts",
       description: "Projects you've successfully delivered",
-      total: 99,
+      total: stats?.completed_contracts || 0,
       icon: <AiOutlineDeliveredProcedure />,
     },
   ];

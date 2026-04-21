@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Contract;
 use App\Models\Freelancer;
 use App\Models\Proposal;
-use App\Models\User;
 use Illuminate\Http\Request;
 
 class DashboardController extends Controller
@@ -44,10 +43,10 @@ class DashboardController extends Controller
                 $q->where('client_id', $client->id);
             })->count();
 
-            $freelancer_hired = Contract::whereIn('status', ['active', 'completed', 'cancelled'])
-                ->whereHas('proposal.project', function ($q) use ($client) {
-                    $q->where('client_id', $client->id);
-                })->join('proposals', 'contracts.proposal_id', '=', 'proposals.id')
+            $freelancer_hired = Contract::join('proposals', 'contracts.proposal_id', '=', 'proposals.id')
+                ->join('projects', 'proposals.project_id', '=', 'projects.id')
+                ->whereIn('contracts.status', ['active', 'completed', 'cancelled'])
+                ->where('projects.client_id', $client->id)
                 ->distinct('proposals.freelancer_id')
                 ->count('proposals.freelancer_id');
 
@@ -62,6 +61,10 @@ class DashboardController extends Controller
             $stats['ongoing_contracts'] = $ongoing_contracts;
         }
 
-        return response()->json(['data' => $stats]);
+        return response()->json([
+            'success' => true,
+            'message' => "Stats retrieved successfully",
+            'data' => $stats
+        ], 200);
     }
 }
