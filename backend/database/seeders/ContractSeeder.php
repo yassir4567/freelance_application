@@ -26,7 +26,7 @@ class ContractSeeder extends Seeder
         $contractsByProjects = [];
 
         foreach ($acceptedProposals as $proposal) {
-            $contract = Contract::create([
+            $contract = Contract::factory()->create([
                 'proposal_id' => $proposal->id
             ]);
             $contractsByProjects[$proposal->project_id][] = $contract;
@@ -37,16 +37,18 @@ class ContractSeeder extends Seeder
                 continue;
             }
 
-            $active = fake()->boolean(70);
+            $notPending = fake()->boolean(70);
 
-            if (!$active) {
+            if (!$notPending) {
                 continue;
             }
+
+            $randomStats = fake()->randomElement(['active' , 'completed' , 'cancelled']) ;
 
             $activeContract = collect($contracts)->random();
 
             $activeContract->update([
-                'status' => 'active'
+                'status' => $randomStats
             ]);
 
             foreach ($contracts as $contract) {

@@ -31,8 +31,8 @@ class UserSeeder extends Seeder
 
         User::factory()->create(['role' => 'admin']);
 
-        User::factory()->count(5)->create(['role' => 'client']);
+        User::factory()->count(7)->create(['role' => 'client']);
 
-        User::factory()->count(5)->create(['role' => 'freelancer']);
+        User::factory()->count(7)->create(['role' => 'freelancer']);
     }
 }

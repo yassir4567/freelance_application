@@ -17,13 +17,13 @@ function FreelancerDashboardPage() {
       total: 99,
       icon: <AiOutlineProject />,
     },
-    {
-      id: 1,
-      title: "Accepted proposals",
-      description: "Proposals that turned into negotiation",
-      total: 99,
-      icon: <VscGitPullRequestDone />,
-    },
+    // {
+    //   id: 1,
+    //   title: "Accepted proposals",
+    //   description: "Proposals that turned into negotiation",
+    //   total: 99,
+    //   icon: <VscGitPullRequestDone />,
+    // },
     {
       id: 3,
       title: "Completed Contracts",

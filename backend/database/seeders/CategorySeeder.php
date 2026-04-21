@@ -26,7 +26,7 @@ class CategorySeeder extends Seeder
         foreach ($categories as $category) {
             Category::firstOrCreate($category)
                 ->skills()
-                ->attach($skillIds->random(rand(1, min(6, $skillIds->count()))));
+                ->attach($skillIds->random(rand(3, min(7, $skillIds->count()))));
         }
     }
 }
