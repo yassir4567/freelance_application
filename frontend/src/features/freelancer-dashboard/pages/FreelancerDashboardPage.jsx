@@ -8,77 +8,45 @@ import { VscGitPullRequestDone } from "react-icons/vsc";
 import profile from "../../../assets/images/profile.png";
 import { NavLink } from "react-router-dom";
 import { useEffect, useState } from "react";
-import {getStats} from "../../../api/dashboard/getStats";
+import { getDashboardData } from "../../../api/dashboard/getDashboardData";
+import { useAuth } from "../../../context/AuthContext";
 
 function FreelancerDashboardPage() {
-  const [stats , setStats] = useState([])
+  const [data, setData] = useState([]);
+  const {
+    user: { first_name, last_name },
+  } = useAuth();
 
   useEffect(() => {
     const loadStats = async () => {
-      const result = await getStats() ;
-      setStats(result.stats)
-    }
-    loadStats()
-  } , [])
-  
+      const result = await getDashboardData("freelancer");
+      setData(result.data);
+      
+    };
+    loadStats();
+  }, []);
 
   const overview_cards = [
     {
       id: 0,
       title: "Active Projects",
       description: "Track all your projects",
-      total: stats?.active_projects || 0,
+      total: data?.stats?.active_projects || 0,
       icon: <AiOutlineProject />,
     },
     {
       id: 1,
       title: "Accepted proposals",
       description: "Proposals that turned into negotiation",
-      total: stats?.accepted_proposals || 0,
+      total: data?.stats?.accepted_proposals || 0,
       icon: <VscGitPullRequestDone />,
     },
     {
       id: 3,
       title: "Completed Contracts",
       description: "Projects you've successfully delivered",
-      total: stats?.completed_contracts || 0,
+      total: data?.stats?.completed_contracts || 0,
       icon: <AiOutlineDeliveredProcedure />,
-    },
-  ];
-
-  const active_contracts = [
-    {
-      id: 0,
-      title: "E-commerce web site",
-      budget: 299,
-      deadline: "2026-05-20",
-      client: {
-        id: 0,
-        fullName: "Ahmed ahmed",
-        avatar: profile,
-      },
-    },
-    {
-      id: 1,
-      title: "Resume generator",
-      budget: 39,
-      deadline: "2026-04-20",
-      client: {
-        id: 1,
-        fullName: "Khaled khaled",
-        avatar: profile,
-      },
-    },
-    {
-      id: 2,
-      title: "Restaurant website",
-      budget: 29,
-      deadline: "2026-04-22",
-      client: {
-        id: 2,
-        fullName: "Nasr Nasr",
-        avatar: profile,
-      },
     },
   ];
 
@@ -86,7 +54,7 @@ function FreelancerDashboardPage() {
     <div className={styles.dashboard}>
       <div className={styles.dashboardHeader}>
         <Welcome
-          username={"Yassir"}
+          username={`${first_name} ${last_name}`}
           min_description={"Discover projects that match your skills"}
         />
         <CompleteProfileAlert />
@@ -108,7 +76,7 @@ function FreelancerDashboardPage() {
       <div className={styles.main}>
         <div className={styles.activeContracts}>
           <h3 className={styles.title}>Active contracts</h3>
-          <FreelancerActiveContracts contracts={active_contracts} />
+          <FreelancerActiveContracts contracts={data?.active_contracts} />
           <div className={styles.allContractsLink}>
             <NavLink className={styles.link}>View active contracts</NavLink>
           </div>

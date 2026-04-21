@@ -1,10 +1,10 @@
 import styles from "../styles/RecentProjectsTable.module.css";
-
+import { getRelativeTime } from "../../../utils/helpers";
 function RecentProjectsTable({ projects }) {
   const statusClasses = {
     open: "status-success",
-    in_review: "status-info",
-    in_progress: "status-warning",
+    "in review": "status-info",
+    "in progress": "status-warning",
     completed: "status-purple",
     cancelled: "status-danger",
   };
@@ -20,16 +20,18 @@ function RecentProjectsTable({ projects }) {
         </tr>
       </thead>
       <tbody>
-        {projects.map((project) => (
+        {projects?.map((project) => (
           <tr key={project.id}>
             <td>{project.title}</td>
             <td>
-              <span className={`${styles.status} ${statusClasses[project.status]}`}>
+              <span
+                className={`${styles.status} ${statusClasses[project.status]}`}
+              >
                 {project.status.split("_").join(" ")}
               </span>
             </td>
-            <td>{project.proposals}</td>
-            <td>{project.time}</td>
+            <td>{project.proposals_count}</td>
+            <td>{getRelativeTime(project.created_at)}</td>
             <td className={styles.actions}>
               <button className={styles.actionBtn}>View Details</button>
               <button className={styles.actionBtn}>View Proposals</button>

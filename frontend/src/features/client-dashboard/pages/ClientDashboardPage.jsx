@@ -9,15 +9,20 @@ import SimpleCard from "../../../shared/ui/SimpleCard";
 import RecentProjectsTable from "../components/RecentProjectsTable";
 import Welcome from "../../../shared/common/Welcome";
 import { useEffect, useState } from "react";
-import { getStats } from "../../../api/dashboard/getStats";
+import { getDashboardData } from "../../../api/dashboard/getDashboardData";
+import { useAuth } from "../../../context/AuthContext";
+
 
 function ClientDashboardPage() {
-  const [stats, setStats] = useState([]);
+  const [data, setData] = useState([]);
+  const {
+    user: { first_name, last_name },
+  } = useAuth();
 
   useEffect(() => {
     const loadStats = async () => {
-      const result = await getStats();
-      setStats(result.stats);
+      const result = await getDashboardData("client");
+      setData(result.data);
     };
     loadStats();
   }, []);
@@ -27,75 +32,38 @@ function ClientDashboardPage() {
       id: 0,
       title: "Total Projects",
       description: "All projects posted",
-      total: stats?.total_projects || 0,
+      total: data.stats?.total_projects || 0,
       icon: <IoBagSharp />,
     },
     {
       id: 1,
       title: "Received Proposals",
       description: "Offers from freelancers",
-      total: stats?.received_proposals || 0,
+      total: data.stats?.received_proposals || 0,
       icon: <RiFolderReceivedFill />,
     },
     {
       id: 2,
       title: "Freelancers Hired",
       description: "People you've worked with",
-      total: stats?.freelancer_hired || 0,
+      total: data.stats?.freelancer_hired || 0,
       icon: <HiRectangleStack />,
     },
     {
       id: 3,
       title: "Ongoing Contracts",
       description: "Projects in progress",
-      total: stats?.ongoing_contracts || 0,
+      total: data.stats?.ongoing_contracts || 0,
       icon: <RiContractFill />,
     },
   ];
 
-  const recentProjects = [
-    {
-      id: 1,
-      title: "Website Redesign",
-      status: "open",
-      proposals: 12,
-      time: "2 hours ago",
-    },
-    {
-      id: 2,
-      title: "Mobile App Development",
-      status: "in_review",
-      proposals: 8,
-      time: "1 day ago",
-    },
-    {
-      id: 3,
-      title: "Logo Design",
-      status: "completed",
-      proposals: 15,
-      time: "3 days ago",
-    },
-    {
-      id: 4,
-      title: "SEO Optimization",
-      status: "open",
-      proposals: 6,
-      time: "5 hours ago",
-    },
-    {
-      id: 5,
-      title: "Content Writing",
-      status: "cancelled",
-      proposals: 4,
-      time: "1 week ago",
-    },
-  ];
 
   return (
     <div className={styles.dashboard}>
       <div className={styles.dashboardHeader}>
         <Welcome
-          username={"Ahmed"}
+          username={`${first_name} ${last_name}`}
           min_description="Here's what happening with your projects today"
         />
         <div className={styles.post_project}>
@@ -126,7 +94,7 @@ function ClientDashboardPage() {
 
       <div className={styles.recentProjects}>
         <h1 className={styles.recentTitle}>Recent Projects</h1>
-        <RecentProjectsTable projects={recentProjects} />
+        <RecentProjectsTable projects={data?.recent_projects} />
       </div>
     </div>
   );

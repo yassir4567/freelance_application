@@ -1,9 +1,9 @@
 import { BASE_URL, getToken } from "../config";
 
-const getStats = async () => {
+const getDashboardData = async (role) => {
   try {
     const token = getToken();
-    const response = await fetch(`${BASE_URL}/dashboard-stats`, {
+    const response = await fetch(`${BASE_URL}/${role}/dashboard`, {
       method: "GET",
       headers: {
         Accept: "application/json",
@@ -22,7 +22,7 @@ const getStats = async () => {
     return {
       success: data.success,
       message: data.message,
-      stats: data.data,
+      data: data.data,
     };
   } catch (err) {
     return {
@@ -32,4 +32,4 @@ const getStats = async () => {
   }
 };
 
-export { getStats };
+export { getDashboardData };

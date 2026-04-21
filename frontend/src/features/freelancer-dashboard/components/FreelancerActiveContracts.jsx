@@ -1,6 +1,7 @@
 import { NavLink } from "react-router-dom";
 import styles from "../styles/FreelancerActiveContracts.module.css";
 import { formatDate } from "../../../utils/helpers";
+import avatar from "../../../assets/images/profile.png";
 
 function FreelancerActiveContracts({ contracts }) {
   return (
@@ -15,22 +16,38 @@ function FreelancerActiveContracts({ contracts }) {
         </tr>
       </thead>
       <tbody>
-        {contracts.map((contract) => (
-          <tr key={contract.id} className={styles.row}>
-            <td>{contract.title}</td>
-            <td>
-              <div className={styles.clientTD}>
-                <img src={contract.client.avatar} width={37} alt="Avatar" />
-              <span>{contract.client.fullName}</span>
-              </div>
-            </td>
-            <td className={styles.budget}> $ {contract.budget} </td>
-            <td className={styles.deadline}> {formatDate(contract.deadline)} </td>
-            <td>
-              <NavLink className={styles.link}>View details</NavLink>
-            </td>
-          </tr>
-        ))}
+        {contracts?.map((contract) => {
+          const {
+            id,
+            final_price,
+            final_deadline,
+            proposal: {
+              project: {
+                title,
+                client: { first_name, last_name },
+              },
+            },
+          } = contract;
+
+          return (
+            <tr key={id} className={styles.row}>
+              <td>{title}</td>
+              <td>
+                <div className={styles.clientTD}>
+                  <img src={avatar} width={37} alt="Avatar" />
+                  <span>
+                    {first_name} {last_name}
+                  </span>
+                </div>
+              </td>
+              <td className={styles.budget}> ${final_price} </td>
+              <td className={styles.deadline}> {formatDate(final_deadline)}</td>
+              <td>
+                <NavLink className={styles.link}>View details</NavLink>
+              </td>
+            </tr>
+          );
+        })}
       </tbody>
     </table>
   );

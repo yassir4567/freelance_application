@@ -16,6 +16,7 @@
 .pageTitle {
   font-size: var(--fs-3xl);
   font-weight: 600;
+  text-transform: capitalize;
 }
 
 .status-accent  {
