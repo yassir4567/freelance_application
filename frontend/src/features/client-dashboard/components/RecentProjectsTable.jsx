@@ -47,7 +47,7 @@ function RecentProjectsTable({ projects }) {
           ))
         ) : (
           <tr>
-            <td colspan="5" className={styles.empty}>
+            <td colSpan="5" className={styles.empty}>
               You don't have active contracts yet
             </td>
           </tr>

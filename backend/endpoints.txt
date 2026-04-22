@@ -1,4 +1,9 @@
 
 
 // Dashboard endpoints 
-GET /dashboard-stats?role=(client | freelancer | admin)
+GET /dashboard/client 
+GET /dashboard/freelancer
+
+// projects endpoints 
+GET /projects
+GET /projects?category=&price=&experience=&size=&total_proposals=&search=&

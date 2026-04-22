@@ -22,7 +22,7 @@ class ContractFactory extends Factory
             'fichier_pdf' => fake()->url(),
             'description' => fake()->paragraph(),
             'status' => 'pending',
-            'final_price' => fake()->randomFloat(2, 1, 5000),
+            'final_price' => fake()->randomFloat(2, 1, 1000),
             'final_deadline' => fake()->dateTimeBetween('-2 months', '+ 1 year'),
         ];
     }

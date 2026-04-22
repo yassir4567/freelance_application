@@ -42,7 +42,11 @@ class ClientDashboardController extends Controller
         $stats['freelancer_hired'] = $freelancer_hired;
         $stats['ongoing_contracts'] = $ongoing_contracts;
 
-        $recent_projects = Project::select('id', 'title', 'status', 'created_at')->withCount('proposals')->where('client_id', $client->id)->get();
+        $recent_projects = Project::select('id', 'title', 'status', 'created_at')
+            ->withCount('proposals')
+            ->where('client_id', $client->id)
+            ->take(3)
+            ->get();
 
 
         return response()->json([

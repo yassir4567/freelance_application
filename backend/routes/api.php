@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ClientDashboardController;
 use App\Http\Controllers\FreelancerDashboardController;
 use App\Http\Controllers\ProjectController;
@@ -20,4 +21,7 @@ Route::middleware('auth:sanctum')->group(function () {
 
     // * projects routes 
     Route::get('/projects', [ProjectController::class, 'index']);
+
+    // * categories routes 
+    Route::get('/categories' , [CategoryController::class , 'index']) ;
 });

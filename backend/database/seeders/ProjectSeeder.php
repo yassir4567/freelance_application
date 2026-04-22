@@ -20,7 +20,7 @@ class ProjectSeeder extends Seeder
         $categoryIds = Category::pluck('id');
         $skillIds = Skill::pluck('id');
 
-        Project::factory()->count(12)->create([
+        Project::factory()->count(100)->create([
             'client_id' => function () use ($clientIds) {
                 return $clientIds->random();
             },

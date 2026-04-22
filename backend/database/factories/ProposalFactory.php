@@ -22,7 +22,7 @@ class ProposalFactory extends Factory
             'cover_letter' => fake()->paragraph(4, true),
             'status' => fake()->randomElement(['pending', 'accepted', 'rejected']),
             'deadline' => fake()->dateTimeBetween('-4 months', 'now'),
-            'price' => fake()->randomFloat(2, 1, 5000),
+            'price' => fake()->randomFloat(2, 1, 1000),
         ];
     }
 }
