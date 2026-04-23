@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Project;
+use App\Models\Proposal;
 use Illuminate\Http\Request;
 
 class ClientProjectController extends Controller
@@ -13,7 +14,7 @@ class ClientProjectController extends Controller
     {
         $client = $request->user();
 
-        $query = Project::select('id', 'title', 'budget', 'status', 'created_at')
+        $query = Project::select('id', 'client_id', 'title', 'budget', 'status', 'created_at')
             ->where('client_id', $client->id)
             ->withCount('proposals');
 
@@ -43,5 +44,49 @@ class ClientProjectController extends Controller
         ]);
     }
 
-    public function show(Request $request) {}
+    public function show(Request $request, string $id)
+    {
+        $client = $request->user();
+
+        $project = $client->projects()
+            ->select(
+                'id',
+                'client_id',
+                'category_id',
+                'title',
+                'description',
+                'budget',
+                'status',
+                'experience_level',
+                'size',
+                'duration',
+                'created_at'
+            )
+            ->where('id', $id)
+            ->withCount('proposals')
+            ->with(['category:id,name', 'skills:id,name'])
+            ->firstOrFail();
+
+        $freelancer = null;
+        if (in_array($project->status, ['completed', 'in_progress'])) {
+            $acceptedProposal = Proposal::where('project_id', $project->id)
+                ->where('status', 'accepted')
+                ->with([
+                    'freelancer:id,user_id,category_id,title',
+                    'freelancer.user:id,first_name,last_name',
+                    'freelancer.category:id,name',
+                    'freelancer.skills:id,name'
+                ])->first();
+            $freelancer = $acceptedProposal?->freelancer;
+        }
+
+        $projectData = $project->toArray();
+        $projectData['freelancer'] = $freelancer;
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Project retrieved successfully',
+            'data' => $projectData
+        ]);
+    }
 }

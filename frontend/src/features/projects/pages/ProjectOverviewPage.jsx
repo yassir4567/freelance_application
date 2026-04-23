@@ -73,7 +73,7 @@ function ProjectOverviewPage() {
       {showAssignedFreelancer && (
         <div className={styles.hiredFreelancer}>
           <h2>Assigned Freelancer</h2>
-           <AssignedFreelancerCard />
+          <AssignedFreelancerCard />
         </div>
       )}
     </div>

@@ -24,7 +24,7 @@ class FreelancerSeeder extends Seeder
                 Freelancer::factory()
                     ->create(['user_id' => $user->id, 'category_id' => $categoryIds->random()])
                     ->skills()
-                    ->attach($skillIds->random(rand(0, $skillIds->count())));
+                    ->attach($skillIds->random(rand(0, 6)));
             }
         }
     }
