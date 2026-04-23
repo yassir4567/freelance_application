@@ -3,157 +3,178 @@ import FreelancerProjectsFilter from "../components/FreelancerProjectsFilter";
 import FreelancerProjectsHeaderFilter from "../components/FreelancerProjectsHeaderFilter";
 import Search from "../../../shared/ui/Search";
 import styles from "../styles/FindProjectPage.module.css";
-
-export const projects = [
-  {
-    id: 1,
-    title: "e-commerce web site",
-    description:
-      "Build a modern and scalable e-commerce platform that allows users to browse products, add items to a cart, and complete secure online payments. The system should include user authentication, account management, and order tracking features. You will need to design both frontend and backend components, ensuring smooth communication between them. Performance optimization and clean UI/UX are essential to provide a seamless shopping experience. Integration with payment gateways such as Stripe is required. The platform should also support responsive design for mobile users. Code quality, maintainability, and scalability should be taken into consideration.",
-    budget: 200,
-    createdAt: "2026-03-20",
-    status: "completed",
-    proposalsCount: 3,
-    experience: "mid-level",
-    size: "medium",
-    duration: "1 to 3 months",
-    category: "Web Development",
-    skills: ["React", "Laravel", "Stripe", "MySQL"],
-  },
-  {
-    id: 2,
-    title: "restaurant frontend",
-    description:
-      "Develop a responsive frontend for a restaurant website including menu display, reservation form, and smooth UI animations.",
-    budget: 180,
-    createdAt: "2026-03-21",
-    status: "open",
-    proposalsCount: 2,
-    experience: "junior",
-    size: "small",
-    duration: "less than 1 month",
-    category: "Frontend Development",
-    skills: ["HTML", "CSS", "JavaScript", "React"],
-  },
-  {
-    id: 3,
-    title: "weather api",
-    description:
-      "Create a REST API that provides real-time weather data based on location, with caching and error handling for external API requests.",
-    budget: 100,
-    createdAt: "2026-03-17",
-    status: "open",
-    proposalsCount: 2,
-    experience: "junior",
-    size: "small",
-    duration: "less than 1 month",
-
-    category: "Backend Development",
-    skills: ["Laravel", "REST API", "Caching", "JSON"],
-  },
-  {
-    id: 4,
-    title: "ui/ux design",
-    description:
-      "Design a clean and intuitive UI/UX for a mobile and web application, including wireframes, prototypes, and design system guidelines.",
-    budget: 320,
-    createdAt: "2026-03-23",
-    status: "open",
-    proposalsCount: 1,
-    experience: "mid-level",
-    size: "medium",
-    duration: "1 to 3 months",
-    category: "Design",
-    skills: ["Figma", "Wireframing", "Prototyping", "Design System"],
-  },
-  {
-    id: 5,
-    title: "Barber website",
-    description:
-      "Improve an existing e-commerce website by optimizing performance, redesigning product pages, and enhancing user experience.",
-    budget: 255,
-    createdAt: "2026-03-22",
-    status: "in_review",
-    proposalsCount: 3,
-    experience: "mid-level",
-    size: "medium",
-    duration: "1 to 3 months",
-
-    category: "Web Development",
-    skills: ["Performance Optimization", "React", "UX", "SEO"],
-  },
-  {
-    id: 6,
-    title: "freelance app",
-    description:
-      "Develop a freelance marketplace platform with client and freelancer roles, proposal system, messaging, and basic payment workflow.",
-    budget: 255,
-    createdAt: "2026-01-24",
-    status: "cancelled",
-    proposalsCount: 0,
-    experience: "senior",
-    size: "large",
-    duration: "3 to 6 months",
-
-    category: "Full Stack Development",
-    skills: ["React", "Laravel", "Redux", "WebSockets"],
-  },
-  {
-    id: 7,
-    title: "portfolio",
-    description:
-      "Create a personal portfolio website showcasing projects, skills, and experience with a modern and responsive design.",
-    budget: 40,
-    createdAt: "2026-03-24",
-    status: "in_review",
-    proposalsCount: 1,
-    experience: "junior",
-    size: "small",
-    duration: "less than 1 month",
-    category: "Web Development",
-    skills: ["HTML", "CSS", "JavaScript"],
-  },
-  {
-    id: 8,
-    title: "social media app",
-    description:
-      "Build a scalable social media application with user profiles, posts, likes, comments, and real-time notifications.",
-    budget: 1000,
-    createdAt: "2026-03-25",
-    status: "in_progress",
-    proposalsCount: 3,
-    experience: "senior",
-    size: "large",
-    duration: "more than 6 months",
-    category: "Full Stack Development",
-    skills: ["Node.js", "React", "Socket.io", "MongoDB"],
-  },
-];
+import { useEffect, useState } from "react";
+import { getCategories } from "../../../api/categories/getCategories";
+import { getProjects } from "../../../api/projects/getProjects";
+import { emptyText } from "../../../utils/helpers";
+import { useSearchParams } from "react-router-dom";
 
 function FindProjectPage() {
+  const [categories, setCategories] = useState([]);
+  const [projects, setProjects] = useState([]);
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [filters, setFilters] = useState({
+    search: "",
+    price: "",
+    experience: "",
+    size: "",
+    nbr_proposals: "",
+    sort: "",
+    category_id: "",
+  });
+
+  // * get filters from url query params
+  useEffect(() => {
+    let nbr_proposals = "";
+    let price = "";
+
+    let nbrProposalsMin = searchParams.get("nbr_proposals_min") || "";
+    let nbrProposalsMax = searchParams.get("nbr_proposals_max") || "";
+
+    if (nbrProposalsMin && nbrProposalsMax) {
+      nbr_proposals = `${nbrProposalsMin}-${nbrProposalsMax}`;
+    } else if (nbrProposalsMin) {
+      nbr_proposals = `${nbrProposalsMin}+`;
+    }
+
+    let budgetMin = searchParams.get("budget_min") || "";
+    let budgetMax = searchParams.get("budget_max") || "";
+
+    if (budgetMin && budgetMax) {
+      price = `${budgetMin}-${budgetMax}`;
+    } else if (budgetMin) {
+      price = `${budgetMin}+`;
+    }
+
+    setFilters({
+      search: searchParams.get("search") || "",
+      category_id: searchParams.get("category_id") || "",
+      sort: searchParams.get("sort") || "",
+      experience: searchParams.get("experience") || "",
+      size: searchParams.get("size") || "",
+      nbr_proposals,
+      price,
+    });
+  }, []);
+
+  // * load categories from API
+  useEffect(() => {
+    const loadCategories = async () => {
+      const result = await getCategories();
+      setCategories(result.data);
+    };
+    loadCategories();
+  }, []);
+
+  const handleInputsChange = (e) => {
+    const { name, value } = e.target;
+
+    setFilters((prev) => ({ ...prev, [name]: value }));
+  };
+
+  // * apply filters
+  const handleApplyFilters = async () => {
+    const params = new URLSearchParams();
+    if (!emptyText(filters.search)) {
+      params.set("search", filters.search);
+    }
+    if (!emptyText(filters.category_id)) {
+      params.set("category_id", filters.category_id);
+    }
+    if (!emptyText(filters.sort)) {
+      params.set("sort", filters.sort);
+    }
+    if (!emptyText(filters.experience)) {
+      params.set("experience", filters.experience);
+    }
+    if (!emptyText(filters.size)) {
+      params.set("size", filters.size);
+    }
+    if (!emptyText(filters.nbr_proposals)) {
+      if (filters.nbr_proposals.includes("-")) {
+        let [min, max] = filters.nbr_proposals.split("-");
+        params.set("nbr_proposals_min", min);
+        params.set("nbr_proposals_max", max);
+      } else if (filters.nbr_proposals.includes("+")) {
+        let min = filters.nbr_proposals.replace("+", "");
+        params.set("nbr_proposals_min", min);
+      }
+    }
+    if (!emptyText(filters.price)) {
+      if (filters.price.includes("-")) {
+        let [min, max] = filters.price.split("-");
+        params.set("budget_min", min);
+        params.set("budget_max", max);
+      } else if (filters.price.includes("+")) {
+        let min = filters.price.replace("+", "");
+        params.set("budget_min", min);
+      }
+    }
+    setSearchParams(params);
+  };
+
+  // * send get projects request
+  useEffect(() => {
+    const loadProjects = async () => {
+      const result = await getProjects(searchParams.toString());
+      setProjects(result.data);
+    };
+    loadProjects();
+  }, [searchParams]);
+
+  // * clear all filters
+  const handleClearAllFilters = () => {
+    setFilters({
+      search: "",
+      price: "",
+      experience: "",
+      size: "",
+      nbr_proposals: "",
+      sort: "",
+      category_id: "",
+    });
+    setSearchParams({});
+  };
+
   return (
     <div className={styles.findProjectPage}>
       <h1 className="pageTitle">Browse all projects</h1>
       <div className={styles.searchBox}>
         <div className={styles.search}>
-          <Search />
+          <Search value={filters.search} onChange={handleInputsChange} />
         </div>
-        <button className={styles.clearAll}>Clear all</button>
+        <button className={styles.clearAll} onClick={handleApplyFilters}>
+          Apply filters
+        </button>
+        <button className={styles.clearAll} onClick={handleClearAllFilters}>
+          Clear all
+        </button>
       </div>
 
       <div className={styles.main}>
         <div className={styles.filters}>
-          <FreelancerProjectsFilter />
+          <FreelancerProjectsFilter
+            filters={filters}
+            onChange={handleInputsChange}
+          />
         </div>
         <div className={styles.projectsSection}>
           <div className={styles.headerFilter}>
-            <FreelancerProjectsHeaderFilter />
+            <FreelancerProjectsHeaderFilter
+              filters={filters}
+              onChange={handleInputsChange}
+              categories={categories}
+            />
           </div>
 
           <div className={styles.projects}>
-            {projects.map((project) => (
-              <FreelancerProjectCard key={project.id} project={project} />
-            ))}
+            {projects.length > 0 ? (
+              projects.map((project) => (
+                <FreelancerProjectCard key={project.id} project={project} />
+              ))
+            ) : (
+              <div className={styles.empty}>No projects found</div>
+            )}
           </div>
         </div>
       </div>

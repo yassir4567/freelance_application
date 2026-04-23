@@ -59,7 +59,7 @@ class ProjectController extends Controller
 
         if ($request->filled('sort')) {
             $sort = $request->sort;
-            if ($sort == 'recent') {
+            if ($sort == 'most_recent') {
                 $query->latest();
             }
             if ($sort == 'best_match') {

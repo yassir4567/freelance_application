@@ -21,7 +21,7 @@ class ProjectFactory extends Factory
             //
             'title' => fake()->sentence(),
             'description' => fake()->paragraph(),
-            'budget' => fake()->randomFloat(2, 10, 1000),
+            'budget' => fake()->randomFloat(2, 10, 500),
             'status' => fake()->randomElement(['open', 'in review', 'in progress', 'completed', 'cancelled']),
             'experience_level' => fake()->randomElement(['junior', 'mid-level', 'senior']),
             'size' => fake()->randomElement(['small', 'medium', 'large']),

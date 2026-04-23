@@ -26,7 +26,9 @@ function FreelancerProjectCard({ project }) {
           <h2 className={styles.title}>{project.title}</h2>
         </div>
         <div className={styles.detailBtn}>
-          <NavLink to={`../projects/${project.id}`} className={styles.btn}>View detail</NavLink>
+          <NavLink to={`../projects/${project.id}`} className={styles.btn}>
+            View detail
+          </NavLink>
         </div>
       </div>
 
@@ -36,22 +38,22 @@ function FreelancerProjectCard({ project }) {
         <div className={styles.requirements}>
           <span>Price : ${project.budget}</span>
           <span>|</span>
-          <span>Experience level : {project.experience}</span>
+          <span>Experience level : {project.experience_level}</span>
           <span>|</span>
           <span>Size : {project.size}</span>
         </div>
 
         <div className={styles.skills}>
           {project.skills.map((skill) => (
-            <div key={skill} className={styles.skill}>
-              {skill}
+            <div key={skill.id} className={styles.skill}>
+              {skill.name}
             </div>
           ))}
         </div>
 
         <p className={styles.proposalsCount}>
           <span>Proposals :</span>
-          <span>{project.proposalsCount}</span>
+          <span>{project.proposals_count}</span>
         </p>
       </div>
     </div>
