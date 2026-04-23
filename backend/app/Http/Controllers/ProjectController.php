@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Project;
+use App\Models\User;
+use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 
 class ProjectController extends Controller
@@ -78,4 +80,33 @@ class ProjectController extends Controller
             'data' => $projects
         ]);
     }
+
+    public function showForFreelancer(Request $request, string $id)
+    {
+        $user = $request->user();
+        if (!$user || $user->role !== 'freelancer') {
+            return response()->json([
+                'success' => false,
+                'message' => 'unauthorized'
+            ]);
+        }
+        $project = Project::with([
+            'client:id,role,first_name,last_name,country,address,created_at',
+            'category:id,name',
+            'skills:id,name'
+        ])->findOrFail($id);
+
+        $countClientProjects = Project::where('client_id', $project->client_id)->count();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Project Retrieved successfully',
+            'data' => [
+                'project' => $project,
+                'client_projects_count' => $countClientProjects
+            ]
+        ]);
+    }
+
+    public function showForClient($id) {}
 }

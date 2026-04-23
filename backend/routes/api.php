@@ -21,7 +21,9 @@ Route::middleware('auth:sanctum')->group(function () {
 
     // * projects routes 
     Route::get('/projects', [ProjectController::class, 'index']);
+    Route::get('/browse-projects/{id}', [ProjectController::class, 'showForFreelancer']);
+    Route::get('/client/projects/{id}', [ProjectController::class, 'showForClient']);
 
     // * categories routes 
-    Route::get('/categories' , [CategoryController::class , 'index']) ;
+    Route::get('/categories', [CategoryController::class, 'index']);
 });
