@@ -21,7 +21,7 @@ function FreelancerProjectCard({ project }) {
       <div className={styles.cardHeader}>
         <div className={styles.headerLeft}>
           <h6 className={styles.postedDate}>
-            Posted : {formatDate(project.createdAt)}
+            Posted : {formatDate(project.created_at)}
           </h6>
           <h2 className={styles.title}>{project.title}</h2>
         </div>
