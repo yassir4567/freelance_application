@@ -6,7 +6,6 @@ use App\Http\Controllers\ClientDashboardController;
 use App\Http\Controllers\ClientProjectController;
 use App\Http\Controllers\FreelancerDashboardController;
 use App\Http\Controllers\FreelancerProjectController;
-use App\Http\Controllers\ProjectController;
 use Illuminate\Support\Facades\Route;
 
 // * auth routes

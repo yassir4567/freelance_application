@@ -3,8 +3,8 @@ import ClientDashboardPage from "../features/client-dashboard/pages/ClientDashbo
 import PostJobPage from "../features/projects/pages/PostJobPage";
 import ClientProjectsPage from "../features/projects/pages/ClientProjectsPage";
 import ProjectProposalsPage from "../features/projects/pages/ProjectProposalsPage";
-import ProjectOverviewPage from "../features/projects/pages/ProjectOverviewPage";
-import ProjectLayout from "../features/projects/components/ProjectLayout";
+import ClientProjectDetail from "../features/projects/pages/ClientProjectDetail";
+import ProjectLayout from "../features/projects/layouts/ProjectLayout";
 import ContractsPage from "../features/contracts/pages/ContractsPage";
 import ContractDetail from "../features/contracts/pages/ContractDetail";
 import MessagesPage from "../features/messages/pages/MessagesPage";
@@ -25,7 +25,7 @@ export const clientRoutes = [
             path: "projects/:projectId",
             element: <ProjectLayout />,
             children: [
-              { index: true, element: <ProjectOverviewPage /> },
+              { index: true, element: <ClientProjectDetail /> },
               { path: "proposals", element: <ProjectProposalsPage /> },
             ],
           },

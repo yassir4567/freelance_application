@@ -2,26 +2,29 @@ import styles from "../styles/AssignedFreelancerCard.module.css";
 import profile from "../../../assets/images/profile.png";
 import { NavLink } from "react-router-dom";
 
-function AssignedFreelancerCard() {
-  const skills = ["React", "Laravel", "MySql"];
+function AssignedFreelancerCard({ freelancer }) {
+  const skills = freelancer?.skills.map((sk) => ({ id: sk.id, name: sk.name }));
+
   return (
     <div className={styles.freelancerCard}>
       <div className={styles.freelancerCardHeader}>
         <img src={profile} alt="freelancer image" className={styles.avatar} />
         <div className={styles.freelancerInfo}>
-          <h3 className={styles.freelancerFullName}>Full Name</h3>
-          <p className={styles.freelancerTitle}>
-            Full Stack developer with React & Laravel
-          </p>
+          <h3 className={styles.freelancerFullName}>
+            {freelancer.user.first_name} {freelancer.user.last_name}{" "}
+          </h3>
+          <p className={styles.freelancerTitle}>{freelancer.title}</p>
         </div>
       </div>
 
       <div className={styles.freelancerCardMain}>
-        <div className={styles.freelancerCategory}>Full stack developer</div>
+        <div className={styles.freelancerCategory}>
+          {freelancer.category.name}
+        </div>
         <div className={styles.freelancerSkills}>
           {skills.map((skill) => (
-            <div key={skill} className={styles.freelancerSkill}>
-              {skill}
+            <div key={skill.id} className={styles.freelancerSkill}>
+              {skill.name}
             </div>
           ))}
         </div>

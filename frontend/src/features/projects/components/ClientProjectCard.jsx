@@ -1,5 +1,5 @@
 import { NavLink } from "react-router-dom";
-import styles from "../styles/ProjectCard.module.css";
+import styles from "../styles/ClientProjectCard.module.css";
 import { formatDate } from "../../../utils/helpers";
 
 function ClientProjectCard({ project }) {

@@ -1,4 +1,8 @@
 
+.detailProjectPage {
+  margin-bottom: 100px;
+}
+
 .projectDetail {
   border: 3px solid var(--color-border);
   border-radius: 10px;

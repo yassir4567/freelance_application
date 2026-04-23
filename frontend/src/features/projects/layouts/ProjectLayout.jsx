@@ -1,18 +1,37 @@
-import { NavLink, Outlet, useParams } from "react-router-dom";
+import {
+  Navigate,
+  NavLink,
+  Outlet,
+  useNavigate,
+  useParams,
+} from "react-router-dom";
 import styles from "../styles/ProjectLayout.module.css";
-import { projects } from "../api/projects";
+import { getClientProjectDetail } from "../../../api/projects/getClientProjectDetail";
+import { useEffect, useState } from "react";
 
 function ProjectLayout() {
+  const navigate = useNavigate();
   const { projectId } = useParams();
-  const project = projects.find((p) => p.id === +projectId);
-  if (!project) return <h1>Not found</h1>;
+  const [project, setProject] = useState();
+
+  useEffect(() => {
+    const loadProject = async () => {
+      const result = await getClientProjectDetail(projectId);
+      if (!result.success) {
+        navigate("/dashboard/client/projects");
+      }
+
+      setProject(result.data);
+    };
+    loadProject();
+  }, []);
 
   return (
     <div>
       <div className={styles.projectLayoutHeader}>
         <h1 className={styles.projectTitle}>
-          {project.title[0].toUpperCase()}
-          {project.title.slice(1)}
+          {project?.title[0].toUpperCase()}
+          {project?.title.slice(1)}
         </h1>
         <div className={styles.quickLinks}>
           <NavLink
@@ -33,11 +52,16 @@ function ProjectLayout() {
           >
             view proposals
           </NavLink>
-          <NavLink to={`/dashboard/client/projects`} className={styles.toAllProjects}>all projects</NavLink>
+          <NavLink
+            to={`/dashboard/client/projects`}
+            className={styles.toAllProjects}
+          >
+            all projects
+          </NavLink>
         </div>
       </div>
       <div>
-        <Outlet />
+        <Outlet context={{ project }} />
       </div>
     </div>
   );

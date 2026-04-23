@@ -17,7 +17,6 @@ function ClientProjectsPage() {
 
   useEffect(() => {
     const loadProjects = async () => {
-      console.log(filterParams.toString());
       const result = await getClientProjects(filterParams.toString());
       setProjects(result.data);
     };
