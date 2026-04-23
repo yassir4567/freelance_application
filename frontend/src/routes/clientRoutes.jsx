@@ -1,7 +1,7 @@
 import ClientLayout from "../layouts/ClientLayout";
 import ClientDashboardPage from "../features/client-dashboard/pages/ClientDashboardPage";
 import PostJobPage from "../features/projects/pages/PostJobPage";
-import ProjectsPage from "../features/projects/pages/ProjectsPage";
+import ClientProjectsPage from "../features/projects/pages/ClientProjectsPage";
 import ProjectProposalsPage from "../features/projects/pages/ProjectProposalsPage";
 import ProjectOverviewPage from "../features/projects/pages/ProjectOverviewPage";
 import ProjectLayout from "../features/projects/components/ProjectLayout";
@@ -20,7 +20,7 @@ export const clientRoutes = [
         children: [
           { index: true, element: <ClientDashboardPage /> },
           { path: "postjob", element: <PostJobPage /> },
-          { path: "projects", element: <ProjectsPage /> },
+          { path: "projects", element: <ClientProjectsPage /> },
           {
             path: "projects/:projectId",
             element: <ProjectLayout />,

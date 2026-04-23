@@ -1,15 +1,15 @@
 import { NavLink } from "react-router-dom";
 import styles from "../styles/ProjectCard.module.css";
+import { formatDate } from "../../../utils/helpers";
 
-function ProjectCard({ project }) {
-
+function ClientProjectCard({ project }) {
   const projectStatus = {
-    open : styles.open , 
-    in_review : styles.in_review , 
-    in_progress : styles.in_progress , 
-    completed : styles.completed , 
-    cancelled : styles.cancelled 
-  }
+    open: styles.open,
+    in_review: styles.in_review,
+    in_progress: styles.in_progress,
+    completed: styles.completed,
+    cancelled: styles.cancelled,
+  };
   return (
     <div className={styles.projectCard}>
       <div className={styles.leftProject}>
@@ -18,13 +18,17 @@ function ProjectCard({ project }) {
           {project.title.slice(1)}
         </h3>
         <p className={styles.projectCardBudget}>Budget {project.budget}$ </p>
-        <p className={styles.projectCardDate}>Created at {project.createdAt}</p>
+        <p className={styles.projectCardDate}>
+          Created at {formatDate(project.created_at)}
+        </p>
         <p className={styles.projectCardCountProposals}>
-          Number of proposals : {project.proposalsCount}
+          Number of proposals : {project.proposals_count}
         </p>
       </div>
       <div className={styles.rightProject}>
-        <p className={`${styles.projectCardStatus} ${projectStatus[project.status]}`}>
+        <p
+          className={`${styles.projectCardStatus} ${projectStatus[project.status]}`}
+        >
           {project.status[0].toUpperCase()}
           {project.status.slice(1).split("_").join(" ")}
         </p>
@@ -44,4 +48,4 @@ function ProjectCard({ project }) {
   );
 }
 
-export default ProjectCard;
+export default ClientProjectCard;

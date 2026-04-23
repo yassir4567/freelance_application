@@ -9,7 +9,6 @@ function FilterBox({
 }) {
   return (
     <div className={styles.FilterSection}>
-
       <Search value={inputValues.search} onChange={handleInputsChange} />
 
       <div className={styles.StatusBox}>
@@ -33,8 +32,8 @@ function FilterBox({
 
       <div className={styles.sortBox}>
         <select
-          name="sortedby"
-          value={inputValues.sortedby}
+          name="sort"
+          value={inputValues.sort}
           onChange={handleInputsChange}
         >
           <option value="" disabled>
