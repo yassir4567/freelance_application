@@ -24,6 +24,7 @@ class ContractFactory extends Factory
             'status' => 'pending',
             'final_price' => fake()->randomFloat(2, 1, 500),
             'final_deadline' => fake()->dateTimeBetween('-2 months', '+ 1 year'),
+            'created_at' => fake()->dateTimeBetween('-1 year', 'now'),
         ];
     }
 }

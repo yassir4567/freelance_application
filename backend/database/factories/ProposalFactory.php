@@ -23,6 +23,7 @@ class ProposalFactory extends Factory
             'status' => fake()->randomElement(['pending', 'accepted', 'rejected']),
             'deadline' => fake()->dateTimeBetween('-4 months', 'now'),
             'price' => fake()->randomFloat(2, 1, 500),
+            'created_at' => fake()->dateTimeBetween('-1 year', 'now'),
         ];
     }
 }
