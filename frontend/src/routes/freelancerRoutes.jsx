@@ -1,7 +1,7 @@
 import FreelancerLayout from "../layouts/FreelancerLayout";
-import FindProjectPage from "../features/projects/pages/FindProjectPage";
+import BrowseProjectsPage from "../features/projects/pages/BrowseProjectsPage";
 import FreelancerDashboardPage from "../features/freelancer-dashboard/pages/FreelancerDashboardPage";
-import ProjectDetailPage from "../features/projects/pages/ProjectDetailPage";
+import BrowseProjectDetail from "../features/projects/pages/BrowseProjectDetail";
 import ProtectedRoutes from "./ProtectedRoutes";
 
 export const freelancerRoutes = [
@@ -13,8 +13,8 @@ export const freelancerRoutes = [
         element: <FreelancerLayout />,
         children: [
           { index: true, element: <FreelancerDashboardPage /> },
-          { path: "find-project", element: <FindProjectPage /> },
-          { path: "projects/:projectId", element: <ProjectDetailPage /> },
+          { path: "find-project", element: <BrowseProjectsPage /> },
+          { path: "projects/:projectId", element: <BrowseProjectDetail /> },
         ],
       },
     ],

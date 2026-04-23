@@ -20,7 +20,7 @@ class ProjectFactory extends Factory
         return [
             //
             'title' => fake()->sentence(),
-            'description' => fake()->paragraph(),
+            'description' => fake()->paragraph(5 , true),
             'budget' => fake()->randomFloat(2, 10, 500),
             'status' => fake()->randomElement(['open', 'in review', 'in progress', 'completed', 'cancelled']),
             'experience_level' => fake()->randomElement(['junior', 'mid-level', 'senior']),

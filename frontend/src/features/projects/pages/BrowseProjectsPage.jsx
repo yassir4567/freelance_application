@@ -2,14 +2,14 @@ import FreelancerProjectCard from "../components/FreelancerProjectCard";
 import FreelancerProjectsFilter from "../components/FreelancerProjectsFilter";
 import FreelancerProjectsHeaderFilter from "../components/FreelancerProjectsHeaderFilter";
 import Search from "../../../shared/ui/Search";
-import styles from "../styles/FindProjectPage.module.css";
+import styles from "../styles/BrowseProjectsPage.module.css";
 import { useEffect, useState } from "react";
 import { getCategories } from "../../../api/categories/getCategories";
 import { getProjects } from "../../../api/projects/getProjects";
 import { emptyText } from "../../../utils/helpers";
 import { useSearchParams } from "react-router-dom";
 
-function FindProjectPage() {
+function BrowseProjectsPage() {
   const [categories, setCategories] = useState([]);
   const [projects, setProjects] = useState([]);
   const [searchParams, setSearchParams] = useSearchParams();
@@ -182,4 +182,4 @@ function FindProjectPage() {
   );
 }
 
-export default FindProjectPage;
+export default BrowseProjectsPage;
