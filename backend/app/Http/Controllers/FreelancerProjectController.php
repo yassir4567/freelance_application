@@ -3,11 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Project;
-use App\Models\User;
-use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 
-class ProjectController extends Controller
+class FreelancerProjectController extends Controller
 {
     //
     public function index(Request $request)
@@ -81,7 +79,7 @@ class ProjectController extends Controller
         ]);
     }
 
-    public function showForFreelancer(Request $request, string $id)
+    public function show(Request $request, string $id)
     {
         $user = $request->user();
         if (!$user || $user->role !== 'freelancer') {
@@ -107,6 +105,4 @@ class ProjectController extends Controller
             ]
         ]);
     }
-
-    public function showForClient($id) {}
 }

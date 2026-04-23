@@ -1,9 +1,9 @@
 import { BASE_URL, getToken } from "../config";
 
-const getProjects = async (query) => {
+const getBrowseProjects = async (query) => {
   const token = getToken();
   try {
-    const url = query ? `projects?${query}` : "projects";
+    const url = query ? `freelancer/projects?${query}` : "freelancer/projects";
     const response = await fetch(`${BASE_URL}/${url}`, {
       method: "GET",
       headers: {
@@ -35,4 +35,4 @@ const getProjects = async (query) => {
   }
 };
 
-export { getProjects };
+export { getBrowseProjects };

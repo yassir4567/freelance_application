@@ -5,7 +5,7 @@ import Search from "../../../shared/ui/Search";
 import styles from "../styles/BrowseProjectsPage.module.css";
 import { useEffect, useState } from "react";
 import { getCategories } from "../../../api/categories/getCategories";
-import { getProjects } from "../../../api/projects/getProjects";
+import { getBrowseProjects } from "../../../api/projects/getBrowseProjects";
 import { emptyText } from "../../../utils/helpers";
 import { useSearchParams } from "react-router-dom";
 
@@ -116,7 +116,7 @@ function BrowseProjectsPage() {
   // * send get projects request
   useEffect(() => {
     const loadProjects = async () => {
-      const result = await getProjects(searchParams.toString());
+      const result = await getBrowseProjects(searchParams.toString());
       setProjects(result.data);
     };
     loadProjects();
