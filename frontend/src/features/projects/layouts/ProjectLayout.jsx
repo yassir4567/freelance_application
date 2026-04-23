@@ -20,14 +20,13 @@ function ProjectLayout() {
       if (!result.success) {
         navigate("/dashboard/client/projects");
       }
-
       setProject(result.data);
     };
     loadProject();
   }, []);
 
   return (
-    <div>
+    <div className={styles.projectLayout}>
       <div className={styles.projectLayoutHeader}>
         <h1 className={styles.projectTitle}>
           {project?.title[0].toUpperCase()}
