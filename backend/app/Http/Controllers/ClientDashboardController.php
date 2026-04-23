@@ -13,12 +13,7 @@ class ClientDashboardController extends Controller
     public function index(Request $request)
     {
         $client = $request->user();
-        if ($client->role !== 'client') {
-            return response()->json([
-                'success' => false,
-                'message' => 'unauthorized'
-            ], 403);
-        }
+
         $total_projects = $client->projects()->count();
 
         $received_proposals = Proposal::whereHas('project', function ($q) use ($client) {

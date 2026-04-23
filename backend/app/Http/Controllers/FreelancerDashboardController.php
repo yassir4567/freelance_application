@@ -14,12 +14,6 @@ class FreelancerDashboardController extends Controller
         $user = $request->user();
         $stats = [];
 
-        if ($user->role !== 'freelancer') {
-            return response()->json([
-                'success' => false,
-                'message' => 'unauthorized'
-            ], 403);
-        }
         $freelancer = Freelancer::where('user_id', $user->id)->firstOrFail();
 
         $active_projects = Contract::where('status', 'active')

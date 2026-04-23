@@ -82,12 +82,7 @@ class FreelancerProjectController extends Controller
     public function show(Request $request, string $id)
     {
         $user = $request->user();
-        if (!$user || $user->role !== 'freelancer') {
-            return response()->json([
-                'success' => false,
-                'message' => 'unauthorized'
-            ]);
-        }
+
         $project = Project::with([
             'client:id,role,first_name,last_name,country,address,created_at',
             'category:id,name',

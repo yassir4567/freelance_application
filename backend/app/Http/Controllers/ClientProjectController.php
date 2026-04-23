@@ -8,7 +8,9 @@ class ClientProjectController extends Controller
 {
     //
 
-    public function index(Request $request) {}
+    public function index(Request $request)
+    {
+    }
 
     public function show(Request $request) {}
 }
