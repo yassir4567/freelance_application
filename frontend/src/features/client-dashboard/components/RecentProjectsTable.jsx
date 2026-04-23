@@ -3,8 +3,8 @@ import { getRelativeTime } from "../../../utils/helpers";
 function RecentProjectsTable({ projects }) {
   const statusClasses = {
     open: "status-success",
-    "in review": "status-info",
-    "in progress": "status-warning",
+    in_review: "status-info",
+    in_progress: "status-warning",
     completed: "status-purple",
     cancelled: "status-danger",
   };
