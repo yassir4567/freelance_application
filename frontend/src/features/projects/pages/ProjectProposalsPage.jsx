@@ -10,8 +10,6 @@ function ProposalsList() {
     (proposal) => proposal.projectId === +projectId,
   );
 
-  console.log(projectProposals);
-
   return (
     <div className={styles.proposalsListPage}>
       {projectProposals.length === 0 ? (

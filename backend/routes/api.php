@@ -4,6 +4,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ClientDashboardController;
 use App\Http\Controllers\ClientProjectController;
+use App\Http\Controllers\ClientProposalController;
 use App\Http\Controllers\FreelancerDashboardController;
 use App\Http\Controllers\FreelancerProjectController;
 use Illuminate\Support\Facades\Route;
@@ -18,8 +19,11 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::middleware('role:client')->group(function () {
         Route::get('/client/dashboard', [ClientDashboardController::class, 'index']);
+
         Route::get('/client/projects', [ClientProjectController::class, 'index']);
         Route::get('/client/projects/{id}', [ClientProjectController::class, 'show']);
+
+        Route::get('/client/projects/{id}/proposals', [ClientProposalController::class, 'index']);
     });
 
     Route::middleware('role:freelancer')->group(function () {
