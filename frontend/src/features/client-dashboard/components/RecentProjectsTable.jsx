@@ -1,5 +1,7 @@
 import styles from "../styles/RecentProjectsTable.module.css";
 import { getRelativeTime } from "../../../utils/helpers";
+import { NavLink } from "react-router-dom";
+
 function RecentProjectsTable({ projects }) {
   const statusClasses = {
     open: "status-success",
@@ -40,8 +42,18 @@ function RecentProjectsTable({ projects }) {
               </td>
               <td>{getRelativeTime(project.created_at)}</td>
               <td className={styles.actions}>
-                <button className={styles.actionBtn}>View Details</button>
-                <button className={styles.actionBtn}>View Proposals</button>
+                <NavLink
+                  to={`projects/${project.id}`}
+                  className={styles.actionBtn}
+                >
+                  View Details
+                </NavLink>
+                <NavLink
+                  to={`projects/${project.id}/proposals`}
+                  className={styles.actionBtn}
+                >
+                  View Proposals
+                </NavLink>
               </td>
             </tr>
           ))

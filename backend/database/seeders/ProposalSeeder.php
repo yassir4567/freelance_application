@@ -80,7 +80,7 @@ class ProposalSeeder extends Seeder
                 Proposal::factory()->create([
                     'project_id' => $project->id,
                     'freelancer_id' => $freelancerId,
-                    'status' => fake()->randomElement(['pending' , 'accepted' , 'rejected'])
+                    'status' => fake()->randomElement(['pending', 'accepted', 'rejected'])
                 ]);
             }
         }
