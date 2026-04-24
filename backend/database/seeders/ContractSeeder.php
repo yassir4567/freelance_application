@@ -43,7 +43,7 @@ class ContractSeeder extends Seeder
                 continue;
             }
 
-            $randomStats = fake()->randomElement(['active' , 'completed' , 'cancelled']) ;
+            $randomStats = fake()->randomElement(['active', 'completed', 'cancelled']);
 
             $activeContract = collect($contracts)->random();
 
@@ -60,7 +60,7 @@ class ContractSeeder extends Seeder
             }
 
             Proposal::where('project_id', $project_id)
-                ->where('id' ,  "!=" , $activeContract->proposal_id)
+                ->where('id',  "!=", $activeContract->proposal_id)
                 ->update([
                     'status' => 'rejected'
                 ]);

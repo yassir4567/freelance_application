@@ -15,18 +15,72 @@ class ProposalSeeder extends Seeder
     public function run(): void
     {
         //
-        $projectIds = Project::pluck('id');
+        $projects = Project::select('id', 'status')->get();
         $freelancerIds = Freelancer::pluck('id');
 
-        foreach ($projectIds as $projectId) {
-            $count = rand(0, $freelancerIds->count());
+        foreach ($projects as $project) {
+
+            if ($freelancerIds->isEmpty()) {
+                return;
+            }
+
+            if ($project->status === 'open') {
+                $count = rand(0, $freelancerIds->count());
+
+                $selectedFreelancers = $freelancerIds->shuffle()->take($count);
+
+                foreach ($selectedFreelancers as $freelancerId) {
+                    Proposal::factory()->create([
+                        'project_id' => $project->id,
+                        'freelancer_id' => $freelancerId,
+                        'status' => fake()->randomElement(['pending', 'rejected'])
+                    ]);
+                }
+
+                continue;
+            }
+
+            if (in_array($project->status, ['completed', 'cancelled', 'in_progress'])) {
+                $count = rand(1, $freelancerIds->count());
+
+                $selectedFreelancers = $freelancerIds->shuffle()->take($count);
+
+                $acceptedFreelancerId = $selectedFreelancers->first();
+
+                Proposal::factory()->create([
+                    'project_id' => $project->id,
+                    'freelancer_id' => $acceptedFreelancerId,
+                    'status' => 'accepted',
+                ]);
+
+                foreach ($selectedFreelancers->skip(1) as $freelancerId) {
+                    Proposal::factory()->create([
+                        'project_id' => $project->id,
+                        'freelancer_id' => $freelancerId,
+                        'status' => 'rejected',
+                    ]);
+                }
+
+                continue;
+            }
+
+            $count = rand(1, $freelancerIds->count());
 
             $selectedFreelancers = $freelancerIds->shuffle()->take($count);
 
-            foreach ($selectedFreelancers as $freelancerId) {
+            $acceptedFreelancerId = $selectedFreelancers->first();
+
+            Proposal::factory()->create([
+                'project_id' => $project->id,
+                'freelancer_id' => $acceptedFreelancerId,
+                'status' => 'accepted'
+            ]);
+
+            foreach ($selectedFreelancers->skip(1) as $freelancerId) {
                 Proposal::factory()->create([
-                    'project_id' => $projectId,
+                    'project_id' => $project->id,
                     'freelancer_id' => $freelancerId,
+                    'status' => fake()->randomElement(['pending' , 'accepted' , 'rejected'])
                 ]);
             }
         }
