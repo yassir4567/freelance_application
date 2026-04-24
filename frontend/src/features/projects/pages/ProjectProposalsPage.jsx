@@ -2,21 +2,28 @@ import styles from "../styles/ProjectProposalsPage.module.css";
 import { proposals } from "../api/proposals";
 import { useParams } from "react-router-dom";
 import ProposalCard from "../components/ProposalCard";
+import { useEffect, useState } from "react";
+import { getClientProjectProposals } from "../../../api/proposals/getClientProjectProposals";
 
 function ProposalsList() {
   const { projectId } = useParams();
+  const [proposals, setProposals] = useState([]);
 
-  const projectProposals = proposals.filter(
-    (proposal) => proposal.projectId === +projectId,
-  );
+  useEffect(() => {
+    const loadProposals = async () => {
+      const result = await getClientProjectProposals(projectId);
+      setProposals(result.data);
+    };
+    loadProposals();
+  }, []);
 
   return (
     <div className={styles.proposalsListPage}>
-      {projectProposals.length === 0 ? (
+      {proposals?.length === 0 ? (
         <div className={styles.noPorposals}>No proposals</div>
       ) : (
         <div className={styles.proposalsList}>
-          {projectProposals.map((proposal) => (
+          {proposals?.map((proposal) => (
             <ProposalCard key={proposal.id} proposal={proposal} />
           ))}
         </div>

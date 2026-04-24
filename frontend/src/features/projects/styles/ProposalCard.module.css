@@ -37,20 +37,25 @@
   font-weight: 400;
 }
 .freelancerTitle {
-  font-size: var(--fs-lg);
+  font-size: var(--fs-md);
   font-weight: 500;
 }
 
-.freelancerHeaderRight .rating {
-  font-size: var(--fs-base);
+.freelancerHeaderRight {
+  min-width: 120px;
+}
+
+.freelancerHeaderRight .send_at {
+  font-size: var(--fs-sm);
   text-transform: capitalize;
   font-weight: 500;
-  display: flex;
-  gap: 5px;
   color: var(--color-accent);
   background-color: var(--color-accent-bg);
   padding: 5px 12px;
   border-radius: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .proposalCardContent {
@@ -173,7 +178,7 @@
   border-radius: 5px;
   text-transform: capitalize;
   font-weight: 400;
-  transition: .3s;
+  transition: 0.3s;
 }
 
 .actionBtn.accept {

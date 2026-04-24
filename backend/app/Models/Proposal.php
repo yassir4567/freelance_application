@@ -12,7 +12,7 @@ class Proposal extends Model
     //
     use HasFactory;
 
-    protected $fillable = ['project_id', 'freelancer_id', 'cover_letter', 'status', 'deadline', 'price'];
+    protected $fillable = ['project_id', 'freelancer_id', 'cover_letter', 'status', 'delivery_time', 'price'];
 
     public function freelancer(): BelongsTo
     {

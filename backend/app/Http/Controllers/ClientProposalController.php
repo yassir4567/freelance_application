@@ -22,7 +22,7 @@ class ClientProposalController extends Controller
             'cover_letter',
             'status',
             'price',
-            'deadline',
+            'delivery_time',
             'created_at'
         )
             ->with([

@@ -18,7 +18,7 @@ return new class extends Migration
             $table->unique(['project_id', 'freelancer_id']);
             $table->text('cover_letter');
             $table->enum('status', ['pending', 'accepted', 'rejected']);
-            $table->date('deadline');
+            $table->string('delivery_time');
             $table->decimal('price', 10, 2);
             $table->timestamps();
         });

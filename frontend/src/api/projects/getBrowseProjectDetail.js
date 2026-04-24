@@ -7,7 +7,6 @@ const getBrowseProjectDetail = async (id) => {
       method: "GET",
       headers: {
         Accept: "application/json",
-        "Content-type": "application/json",
         Authorization: `Bearer ${token}`,
       },
     });

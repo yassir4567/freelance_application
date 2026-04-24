@@ -7,7 +7,6 @@ const getBrowseProjects = async (query) => {
     const response = await fetch(`${BASE_URL}/${url}`, {
       method: "GET",
       headers: {
-        "Content-type": "application/json",
         Accept: "application/json",
         Authorization: `Bearer ${token}`,
       },

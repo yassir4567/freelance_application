@@ -6,7 +6,6 @@ const getCategories = async (filters) => {
     const response = await fetch(`${BASE_URL}/categories`, {
       method: "GET",
       headers: {
-        "Content-type": "application/json",
         Accept: "application/json",
         Authorization: `Bearer ${token}`,
       },
