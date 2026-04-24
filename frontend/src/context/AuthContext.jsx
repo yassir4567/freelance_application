@@ -40,14 +40,13 @@ const AuthProvider = ({ children }) => {
     if (!result.success) {
       return result;
     }
-    
 
     const { token, user } = result.data;
 
     localStorage.setItem("token", token);
     console.log(user);
     setUser(user);
-    
+
     return {
       success: true,
       user,

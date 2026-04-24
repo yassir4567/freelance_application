@@ -26,7 +26,7 @@ class AuthController extends Controller
         }
 
         $user = User::select('id', 'first_name', 'last_name', 'email', 'role')
-        ->find(Auth::id());
+            ->find(Auth::id());
         $user->tokens()->delete();
         $token = $user->createToken('auth_token')->plainTextToken;
 
@@ -56,33 +56,36 @@ class AuthController extends Controller
                 'password' => Hash::make($validated['password']),
                 'role' => $validated['role'],
             ]);
-    
-            if($validated['role'] === 'freelancer') {
+
+            if ($validated['role'] === 'freelancer') {
                 Freelancer::create([
                     'user_id' => $user->id
-                ]) ;
+                ]);
             }
-    
-            $token = $user->createToken('auth_token')->plainTextToken ;
+
+            $token = $user->createToken('auth_token')->plainTextToken;
 
             return [
-                'user' => $user ,
+                'user' => $user,
                 'token' => $token
-            ] ;
-        }) ;
+            ];
+        });
 
 
-        return response()->json([
-            'message' => 'User created successfully', 
-            'user' => [
-                'id' => $result['user']->id ,
-                'first_name' => $result['user']->first_name ,
-                'last_name' => $result['user']->last_name ,
-                'email' => $result['user']->email ,
-                'role' => $result['user']->role ,
-            ], 
-            'token' => $result['token']],
-         201);
+        return response()->json(
+            [
+                'message' => 'User created successfully',
+                'user' => [
+                    'id' => $result['user']->id,
+                    'first_name' => $result['user']->first_name,
+                    'last_name' => $result['user']->last_name,
+                    'email' => $result['user']->email,
+                    'role' => $result['user']->role,
+                ],
+                'token' => $result['token']
+            ],
+            201
+        );
     }
 
     public function logout(Request $request)
