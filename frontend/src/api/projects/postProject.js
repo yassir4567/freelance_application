@@ -10,6 +10,7 @@ const postProject = async (form) => {
         "Content-type": "application/json",
         ...(token && { Authorization: `Bearer ${token}` }),
       },
+      body: JSON.stringify(form),
     });
 
     const data = await response.json();
