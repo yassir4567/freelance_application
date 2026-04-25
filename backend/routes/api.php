@@ -24,6 +24,9 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::get('/client/projects/{id}', [ClientProjectController::class, 'show']);
 
         Route::get('/client/projects/{id}/proposals', [ClientProposalController::class, 'index']);
+
+        // ! : create new project for the client
+        Route::post('/client/create-project', [ClientProjectController::class, 'store']);
     });
 
     Route::middleware('role:freelancer')->group(function () {
