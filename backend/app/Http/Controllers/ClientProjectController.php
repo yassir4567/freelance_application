@@ -36,7 +36,7 @@ class ClientProjectController extends Controller
             }
         }
 
-        $projects = $query->get();
+        $projects = $query->latest()->get();
 
         return response()->json([
             'success' => true,
