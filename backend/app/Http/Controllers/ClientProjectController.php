@@ -126,7 +126,7 @@ class ClientProjectController extends Controller
         return response()->json([
             'success' => 'true',
             'message' => 'Project created successfully',
-            'project' => $project->load('skills:id,name')
+            'project' => $project->load(['skills:id,name', 'category:id,name'])
         ]);
     }
 }
