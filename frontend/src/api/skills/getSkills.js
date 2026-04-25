@@ -1,38 +1,36 @@
 import { BASE_URL, getToken } from "../config";
 
-const postProject = async (form) => {
+const getSkills = async (filters) => {
   const token = getToken();
   try {
-    const response = await fetch(`${BASE_URL}/client/create-project`, {
-      method: "POST",
+    const response = await fetch(`${BASE_URL}/skills`, {
+      method: "GET",
       headers: {
         Accept: "application/json",
-        "Content-type": "application/json",
-        ...(token && { Authorization: `Bearer ${token}` }),
+        Authorization: `Bearer ${token}`,
       },
     });
-
     const data = await response.json();
 
     if (!response.ok) {
       return {
         success: false,
-        message: data.message || "fetch error",
+        message: data.message || "Request error",
       };
     }
 
     return {
       success: true,
-      message: data.message || "project created successfully",
+      message: data.message,
       data: data.data,
     };
   } catch (err) {
     return {
       success: false,
-      message: err.message || "Network error",
+      message: "Network error",
       errors: err,
     };
   }
 };
 
-export { postProject };
+export { getSkills };

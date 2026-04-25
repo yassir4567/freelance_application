@@ -7,6 +7,7 @@ use App\Http\Controllers\ClientProjectController;
 use App\Http\Controllers\ClientProposalController;
 use App\Http\Controllers\FreelancerDashboardController;
 use App\Http\Controllers\FreelancerProjectController;
+use App\Http\Controllers\SkillController;
 use Illuminate\Support\Facades\Route;
 
 // * auth routes
@@ -36,4 +37,5 @@ Route::middleware('auth:sanctum')->group(function () {
     });
 
     Route::get('/categories', [CategoryController::class, 'index']);
+    Route::get('/skills', [SkillController::class, 'index']);
 });
