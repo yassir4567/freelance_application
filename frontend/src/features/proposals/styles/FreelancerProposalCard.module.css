@@ -1,0 +1,124 @@
+.proposalCard {
+  border: 2px solid var(--color-border);
+  border-radius: 10px;
+  background-color: var(--color-light);
+  box-shadow: var(--bx-shadow-2);
+  padding: 40px 30px;
+  width: 100%;
+}
+
+.headerTop {
+  display: flex;
+  gap: 8px;
+}
+
+.categoryName {
+  background-color: var(--color-gray-light);
+  padding: 5px 28px;
+  font-size: var(--fs-sm);
+  border-radius: 15px;
+}
+
+.proposalStatus {
+  font-size: var(--fs-xs);
+  padding: 5px 15px 5px 30px;
+  border-radius: 20px;
+  position: relative;
+  text-transform: capitalize;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: none;
+}
+
+.proposalStatus::before {
+  content: "";
+  position: absolute;
+  left: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.header {
+  margin-top: 15px;
+}
+
+.header .title {
+  font-weight: 500;
+  font-size: var(--fs-lg);
+  margin-bottom: 5px;
+}
+
+.header .client {
+  color: var(--color-text-muted);
+  font-size: var(--fs-sm);
+  text-transform: capitalize;
+  margin-left: 5px;
+}
+
+.coverLetterBox,
+.infosBox {
+  margin-top: 25px;
+}
+
+.coverLetter {
+  font-size: var(--fs-base);
+  line-height: 25px;
+}
+
+.infosBoxWrapper {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  background-color: var(--color-gray-light);
+  min-height: 70px;
+  border-radius: 15px;
+  padding-block: 15px;
+}
+
+.infoItem {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 7px;
+}
+
+
+.infoItem .label {
+    font-size: var(--fs-sm);
+    font-weight: 600;
+    color: var(--color-text-muted);
+}
+
+.infoItem .value {
+    font-size: var(--fs-md);
+}
+
+.action {
+    margin-top: 25px;
+    display: flex;
+
+}
+
+.action .link {
+    color: var(--color-secondary);
+    border: 1px solid var(--color-secondary);
+    width: 100%;
+    height: 50px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: .2s;
+    font-size: var(--fs-lg);
+}
+
+.action .link:hover {
+    background-color: var(--color-secondary);
+    color: var(--color-white);
+}

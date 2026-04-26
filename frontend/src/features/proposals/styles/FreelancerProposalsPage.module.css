@@ -1,0 +1,90 @@
+.filterBtnsContainer {
+  margin-top: 40px;
+}
+
+.filterBtnsWrapper {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+}
+
+.pageDescription {
+  font-size: var(--fs-base);
+  color: var(--color-text-muted);
+  margin: 3px 0 0px 5px;
+}
+
+.statusBtn {
+  min-width: 150px;
+  font-size: var(--fs-md);
+  text-transform: capitalize;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  transition: 0.2s;
+}
+
+.statusBtn.all {
+  border: 1px solid var(--color-azure);
+  color: var(--color-azure);
+}
+
+.statusBtn.all.active {
+  background-color: var(--color-azure);
+  color: var(--color-white);
+  border: 1px solid var(--color-info);
+}
+
+.statusBtn.pending {
+  border: 1px solid var(--color-accent);
+  color: var(--color-accent);
+}
+
+.statusBtn.pending.active {
+  background-color: var(--color-accent);
+  color: var(--color-white);
+  border: 1px solid var(--color-warning);
+}
+
+.statusBtn.accepted {
+  border: 1px solid var(--color-secondary);
+  color: var(--color-secondary);
+}
+
+.statusBtn.accepted.active {
+  background-color: var(--color-secondary);
+  color: var(--color-white);
+  border: 1px solid var(--color-success);
+}
+
+.statusBtn.rejected {
+  border: 1px solid var(--color-danger);
+  color: var(--color-danger);
+}
+
+.statusBtn.rejected.active {
+  background-color: var(--color-danger);
+  color: var(--color-white);
+  border: 1px solid var(--color-primary);
+}
+
+.totalProposals {
+  margin-bottom: 20px;
+  font-size: var(--fs-sm);
+  display: flex;
+  gap: 5px;
+  background-color: var(--color-gray-light);
+  width: fit-content;
+  padding: 4px 25px;
+  border-radius: 15px;
+}
+
+.proposalsCards {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  margin-top: 50px;
+  margin-bottom: 100px;
+}

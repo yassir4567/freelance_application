@@ -19,10 +19,9 @@
   text-transform: capitalize;
 }
 
-.status-accent  {
+.status-accent {
   background: var(--color-accent-bg);
   color: var(--color-accent-x);
-  box-shadow: 0 0 10px var(--color-accent);
 }
 
 .status-accent::before {
@@ -32,7 +31,6 @@
 .status-success {
   background-color: var(--color-success-bg);
   color: var(--color-success);
-  box-shadow: 0 0 5px var(--color-success);
 }
 
 .status-success::before {
@@ -42,7 +40,6 @@
 .status-purple {
   background-color: var(--color-purple-light);
   color: var(--color-purple-main);
-  box-shadow: 0 0 10px var(--color-purple-main);
 }
 
 .status-purple::before {
@@ -52,7 +49,6 @@
 .status-warning {
   background-color: var(--color-warning-bg);
   color: var(--color-warning);
-  box-shadow: 0 0 5px var(--color-warning);
 }
 
 .status-warning::before {
@@ -62,7 +58,6 @@
 .status-danger {
   background-color: var(--color-danger-bg);
   color: var(--color-danger);
-  box-shadow: 0 0 5px var(--color-danger);
 }
 
 .status-danger::before {
@@ -72,7 +67,6 @@
 .status-info {
   background-color: var(--color-info-bg);
   color: var(--color-info);
-  box-shadow: 0 0 10px var(--color-info);
 }
 
 .status-info::before {

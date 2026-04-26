@@ -1,6 +1,6 @@
 import styles from "../styles/ProjectProposalsPage.module.css";
 import { useParams } from "react-router-dom";
-import ProposalCard from "../components/ProposalCard";
+import ClientProposalCard from "../components/ClientProposalCard";
 import { useEffect, useState } from "react";
 import { getClientProjectProposals } from "../../../api/proposals/getClientProjectProposals";
 
@@ -23,7 +23,7 @@ function ProposalsList() {
       ) : (
         <div className={styles.proposalsList}>
           {proposals?.map((proposal) => (
-            <ProposalCard key={proposal.id} proposal={proposal} />
+            <ClientProposalCard key={proposal.id} proposal={proposal} />
           ))}
         </div>
       )}

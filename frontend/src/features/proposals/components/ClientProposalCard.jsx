@@ -1,9 +1,9 @@
 import { NavLink } from "react-router-dom";
-import styles from "../styles/ProposalCard.module.css";
+import styles from "../styles/ClientProposalCard.module.css";
 import { IoStarSharp } from "react-icons/io5";
 import profile from "../../../assets/images/profile.png";
 import { formatDate } from "../../../utils/helpers";
-function ProposalCard({ proposal }) {
+function ClientProposalCard({ proposal }) {
   const freelancer = proposal.freelancer;
 
   const statusClass = {
@@ -85,4 +85,4 @@ function ProposalCard({ proposal }) {
   );
 }
 
-export default ProposalCard;
+export default ClientProposalCard;

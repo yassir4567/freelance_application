@@ -1,9 +1,9 @@
 import { BASE_URL, getToken } from "../config";
 
-const getFreelancerProposals = async (id) => {
+const getFreelancerProposals = async (query) => {
   try {
     const token = getToken();
-    const response = await fetch(`${BASE_URL}/freelancer/proposals`, {
+    const response = await fetch(`${BASE_URL}/freelancer/proposals?${query}`, {
       method: "GET",
       headers: {
         Accept: "application/json",

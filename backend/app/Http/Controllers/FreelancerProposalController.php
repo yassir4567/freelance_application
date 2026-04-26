@@ -14,7 +14,12 @@ class FreelancerProposalController extends Controller
 
         $freelancer = $user->freelancer;
 
-        $query = Proposal::where('freelancer_id', $freelancer->id)->with('project');
+        $query = Proposal::where('freelancer_id', $freelancer->id)
+            ->with([
+                'project:id,client_id,category_id,title',
+                'project.client:id,first_name,last_name',
+                'project.category:id,name'
+            ]);
 
         $query->when($request->status, function ($q, $status) {
             $q->where('status', $status);
