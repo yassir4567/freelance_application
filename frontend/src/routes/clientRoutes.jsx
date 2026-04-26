@@ -2,7 +2,7 @@ import ClientLayout from "../layouts/ClientLayout";
 import ClientDashboardPage from "../features/client-dashboard/pages/ClientDashboardPage";
 import PostProjectPage from "../features/projects/pages/PostProjectPage";
 import ClientProjectsPage from "../features/projects/pages/ClientProjectsPage";
-import ProjectProposalsPage from "../features/projects/pages/ProjectProposalsPage";
+import ProjectProposalsPage from "../features/proposals/pages/ProjectProposalsPage";
 import ClientProjectDetail from "../features/projects/pages/ClientProjectDetail";
 import ProjectLayout from "../features/projects/layouts/ProjectLayout";
 import ContractsPage from "../features/contracts/pages/ContractsPage";

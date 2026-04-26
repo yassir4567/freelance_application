@@ -1,5 +1,4 @@
 import styles from "../styles/ProjectProposalsPage.module.css";
-import { proposals } from "../api/proposals";
 import { useParams } from "react-router-dom";
 import ProposalCard from "../components/ProposalCard";
 import { useEffect, useState } from "react";
