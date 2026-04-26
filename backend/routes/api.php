@@ -7,6 +7,7 @@ use App\Http\Controllers\ClientProjectController;
 use App\Http\Controllers\ClientProposalController;
 use App\Http\Controllers\FreelancerDashboardController;
 use App\Http\Controllers\FreelancerProjectController;
+use App\Http\Controllers\FreelancerProposalController;
 use App\Http\Controllers\SkillController;
 use Illuminate\Support\Facades\Route;
 
@@ -34,6 +35,8 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::get('/freelancer/dashboard', [FreelancerDashboardController::class, 'index']);
         Route::get('/freelancer/projects', [FreelancerProjectController::class, 'index']);
         Route::get('/browse-projects/{id}', [FreelancerProjectController::class, 'show']);
+
+        Route::get('/freelancer/proposals', [FreelancerProposalController::class, 'index']);
     });
 
     Route::get('/categories', [CategoryController::class, 'index']);
