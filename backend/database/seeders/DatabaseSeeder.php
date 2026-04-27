@@ -22,7 +22,8 @@ class DatabaseSeeder extends Seeder
             ProjectSeeder::class,
             ProposalSeeder::class,
             ContractSeeder::class,
-            DeliverableSeeder::class
+            DeliverableSeeder::class,
+            PaymentSeeder::class
         ]);
     }
 }

@@ -31,7 +31,7 @@ class DeliverableFactory extends Factory
         return $this->state(function () {
             $created_at = fake()->dateTimeBetween('-2 months', '-1 month');
             $unlocked_at = fake()->dateTimeBetween($created_at, '-3 weeks');
-            $submitted_at = fake()->dateTimeBetween($unlocked_at, '-1 week');
+            $submitted_at = fake()->dateTimeBetween($unlocked_at, 'now');
             return [
                 'status' => 'submitted',
                 'deadline' => fake()->dateTimeBetween($created_at, '+1 month'),
@@ -49,7 +49,7 @@ class DeliverableFactory extends Factory
         return $this->state(function () {
             $created_at = fake()->dateTimeBetween('-2 months', '-1 month');
             $unlocked_at = fake()->dateTimeBetween($created_at, '-3 weeks');
-            $submitted_at = fake()->dateTimeBetween($unlocked_at, '-1 week');
+            $submitted_at = fake()->dateTimeBetween($unlocked_at, 'now');
             $accepted_at = fake()->dateTimeBetween($submitted_at, 'now');
 
             return [
@@ -69,7 +69,7 @@ class DeliverableFactory extends Factory
         return $this->state(function () {
             $created_at = fake()->dateTimeBetween('-2 months', '-1 month');
             $unlocked_at = fake()->dateTimeBetween($created_at, '-3 weeks');
-            $submitted_at = fake()->dateTimeBetween($unlocked_at, '-1 week');
+            $submitted_at = fake()->dateTimeBetween($unlocked_at, 'now');
             return [
                 'status' => 'revision_request',
                 'deadline' => fake()->dateTimeBetween($created_at, '+1 month'),
