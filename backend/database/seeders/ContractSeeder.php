@@ -43,7 +43,7 @@ class ContractSeeder extends Seeder
                 continue;
             }
 
-            $randomStats = fake()->randomElement(['active', 'completed', 'cancelled']);
+            $randomStats = fake()->randomElement(['active', 'completed']);
 
             $activeContract = collect($contracts)->random();
 

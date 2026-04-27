@@ -21,7 +21,8 @@ class DatabaseSeeder extends Seeder
             FreelancerSeeder::class,
             ProjectSeeder::class,
             ProposalSeeder::class,
-            ContractSeeder::class
+            ContractSeeder::class,
+            DeliverableSeeder::class
         ]);
     }
 }
