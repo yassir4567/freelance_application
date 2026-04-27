@@ -40,7 +40,7 @@ class ProposalSeeder extends Seeder
                 continue;
             }
 
-            if (in_array($project->status, ['completed', 'cancelled', 'in_progress'])) {
+            if (in_array($project->status, ['completed', 'in_progress'])) {
                 $count = rand(1, $freelancerIds->count());
 
                 $selectedFreelancers = $freelancerIds->shuffle()->take($count);
