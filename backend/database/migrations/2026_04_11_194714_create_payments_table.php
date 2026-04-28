@@ -14,8 +14,10 @@ return new class extends Migration
         Schema::create('payments', function (Blueprint $table) {
             $table->id();
             $table->foreignId('deliverable_id')->unique()->constrained();
-            $table->float('price');
-            $table->enum('status', ['pending', 'escrow', 'released', 'refunded']);
+            $table->foreignId('client_id')->constrained('users');
+            $table->foreignId('freelancer_id')->constrained();
+            $table->float('amount');
+            $table->enum('status', ['escrow', 'released', 'refunded']);
             $table->timestamps();
         });
     }

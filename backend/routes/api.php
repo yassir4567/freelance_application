@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\ClientContractController;
 use App\Http\Controllers\ClientDashboardController;
 use App\Http\Controllers\ClientProjectController;
 use App\Http\Controllers\ClientProposalController;
@@ -22,13 +23,18 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::middleware('role:client')->group(function () {
         Route::get('/client/dashboard', [ClientDashboardController::class, 'index']);
 
+        // ? project
         Route::get('/client/projects', [ClientProjectController::class, 'index']);
         Route::get('/client/projects/{id}', [ClientProjectController::class, 'show']);
-
         Route::get('/client/projects/{id}/proposals', [ClientProposalController::class, 'index']);
-
-        // ! : create new project for the client
         Route::post('/client/create-project', [ClientProjectController::class, 'store']);
+
+        // ? contracts
+        Route::get('/client/contracts', [ClientContractController::class, 'index']);
+        Route::get('/client/contracts/stats', [ClientContractController::class, 'stats']);
+
+        
+
     });
 
     Route::middleware('role:freelancer')->group(function () {

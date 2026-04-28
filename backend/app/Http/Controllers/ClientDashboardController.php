@@ -43,14 +43,13 @@ class ClientDashboardController extends Controller
             ->take(3)
             ->get();
 
-
         return response()->json([
             'success' => true,
             'message' => 'Stats retrieved successfully',
             'data' => [
                 'stats' => $stats,
-                'recent_projects' => $recent_projects
-            ]
+                'recent_projects' => $recent_projects,
+            ],
         ]);
     }
 }
