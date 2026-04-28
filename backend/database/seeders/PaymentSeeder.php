@@ -4,7 +4,6 @@ namespace Database\Seeders;
 
 use App\Models\Deliverable;
 use App\Models\Payment;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class PaymentSeeder extends Seeder
@@ -15,23 +14,27 @@ class PaymentSeeder extends Seeder
     public function run(): void
     {
         //
-        $deliverables = Deliverable::all();
+        $deliverables = Deliverable::with([
+            'contract.proposal.project',
+        ])->get();
 
         foreach ($deliverables as $deliverable) {
             $delStatus = $deliverable->status;
+            $freelancer_id = $deliverable->contract->proposal->freelancer_id;
+            $client_id = $deliverable->contract->proposal->project->client_id;
 
-
-            if ($delStatus === 'pending') {
-                $status = 'pending';
-            } else if (in_array($delStatus, ['unlocked', 'submitted', 'revision_request'])) {
+            if (in_array($delStatus, ['unlocked', 'submitted', 'revision_request'])) {
                 $status = 'escrow';
-            } else if ($delStatus === 'accepted') {
+            } elseif ($delStatus === 'accepted') {
                 $status = 'released';
             }
+
             Payment::create([
                 'deliverable_id' => $deliverable->id,
-                'price' => $deliverable->amount,
-                'status' => $status
+                'freelancer_id' => $freelancer_id,
+                'client_id' => $client_id,
+                'amount' => $deliverable->amount,
+                'status' => $status,
             ]);
         }
     }

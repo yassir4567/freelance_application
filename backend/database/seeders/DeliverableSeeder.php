@@ -4,7 +4,6 @@ namespace Database\Seeders;
 
 use App\Models\Contract;
 use App\Models\Deliverable;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class DeliverableSeeder extends Seeder
@@ -23,13 +22,13 @@ class DeliverableSeeder extends Seeder
                 Deliverable::factory()->accepted()->create([
                     'contract_id' => $contract->id,
                     'title' => 'First deliverable',
-                    'amount' => $deliverablePrice
+                    'amount' => $deliverablePrice,
                 ]);
 
                 Deliverable::factory()->accepted()->create([
                     'contract_id' => $contract->id,
                     'title' => 'Second deliverable',
-                    'amount' => $deliverablePrice
+                    'amount' => $deliverablePrice,
 
                 ]);
 
@@ -37,25 +36,25 @@ class DeliverableSeeder extends Seeder
                     Deliverable::factory()->submitted()->create([
                         'contract_id' => $contract->id,
                         'title' => 'Third deliverable',
-                        'amount' => $deliverablePrice
+                        'amount' => $deliverablePrice,
                     ]);
                 } else {
                     Deliverable::factory()->revisionRequest()->create([
                         'contract_id' => $contract->id,
                         'title' => 'Third deliverable',
-                        'amount' => $deliverablePrice
+                        'amount' => $deliverablePrice,
                     ]);
                 }
 
                 Deliverable::factory()->create([
                     'contract_id' => $contract->id,
                     'title' => 'Final deliverable',
-                    'amount' => $deliverablePrice
+                    'amount' => $deliverablePrice,
                 ]);
-            } else if ($contract->status === 'completed') {
+            } elseif ($contract->status === 'completed') {
                 Deliverable::factory()->count(4)->accepted()->create([
                     'contract_id' => $contract->id,
-                    'amount' => $deliverablePrice
+                    'amount' => $deliverablePrice,
                 ]);
             }
         }
