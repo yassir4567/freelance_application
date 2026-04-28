@@ -3,13 +3,16 @@ import { BASE_URL, getToken } from "../config";
 const getClientContractStats = async () => {
   try {
     const token = getToken();
-    const response = await fetch(`${BASE_URL}/client/contracts/stats`, {
-      method: "GET",
-      headers: {
-        Accept: "application/json",
-        ...(token && { Authorization: `Bearer ${token}` }),
+    const response = await fetch(
+      `${BASE_URL}/client/contracts/stats`,
+      {
+        method: "GET",
+        headers: {
+          Accept: "application/json",
+          ...(token && { Authorization: `Bearer ${token}` }),
+        },
       },
-    });
+    );
 
     const data = await response.json();
 

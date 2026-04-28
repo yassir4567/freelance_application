@@ -1,9 +1,9 @@
 import { BASE_URL, getToken } from "../config";
 
-const getClientContracts = async () => {
+const getClientContracts = async (filters) => {
   try {
     const token = getToken();
-    const response = await fetch(`${BASE_URL}/client/contracts`, {
+    const response = await fetch(`${BASE_URL}/client/contracts?${filters}`, {
       method: "GET",
       headers: {
         Accept: "application/json",

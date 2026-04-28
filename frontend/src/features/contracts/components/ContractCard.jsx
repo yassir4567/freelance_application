@@ -53,16 +53,18 @@ function ContractCard({ contract }) {
             </div>
           </div>
 
-          <div className={styles.contractInfos}>
-            <div className={styles.contractInfoItem}>
-              <p>Current livrable </p>{" "}
-              <p>{contract.current_deliverable?.title}</p>
+          {contract.status === "active" && (
+            <div className={styles.contractInfos}>
+              <div className={styles.contractInfoItem}>
+                <p>Current livrable </p>{" "}
+                <p>{contract.current_deliverable?.title}</p>
+              </div>
+              <div className={styles.contractInfoItem}>
+                <p>Deliverable Deadline </p>
+                <p> {contract.current_deliverable?.deadline} </p>
+              </div>
             </div>
-            <div className={styles.contractInfoItem}>
-              <p>Deliverable Deadline </p>
-              <p> {contract.current_deliverable?.deadline} </p>
-            </div>
-          </div>
+          )}
         </div>
       </div>
 

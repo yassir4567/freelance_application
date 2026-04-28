@@ -26,11 +26,11 @@ function ContractsPage() {
 
   useEffect(() => {
     const loadContracts = async () => {
-      const result = await getClientContracts();
+      const result = await getClientContracts(filterParams.toString());
       setContracts(result.data);
     };
     loadContracts();
-  }, []);
+  }, [filterParams]);
 
   // * handle filter inputs change
   const handleInputsChange = (e) => {
@@ -39,39 +39,16 @@ function ContractsPage() {
     setFilterParams((prev) => {
       const nextParams = new URLSearchParams(prev);
 
-      if (name === "search") {
-        if (value) {
-          nextParams.set("search", value);
-        } else {
-          nextParams.delete("search");
-        }
-        return nextParams;
+      if (value && value.trim() !== "") {
+        nextParams.set(name, value);
+      } else {
+        nextParams.delete(name);
       }
-
-      if (name === "sort") {
-        if (value) {
-          nextParams.set("sort", value);
-        } else {
-          nextParams.delete("sort");
-        }
-        return nextParams;
-      }
-
-      if (name === "status") {
-        if (value) {
-          nextParams.set("status", value);
-        } else {
-          nextParams.delete("status");
-        }
-        return nextParams;
-      }
+      return nextParams;
     });
   };
 
   const handleClearFilters = () => {
-    currentParams.delete("search");
-    currentParams.delete("status");
-    currentParams.delete("sort");
     setFilterParams({});
   };
 
@@ -111,7 +88,7 @@ function ContractsPage() {
   };
 
   // * status values
-  const statusValues = ["active", "pending", "completed", "cancelled"];
+  const statusValues = ["active", "completed", "cancelled"];
 
   return (
     <div className={styles.contractsPage}>
@@ -148,7 +125,6 @@ function ContractsPage() {
       <div className={styles.contractsListSection}>
         <div className={styles.contractsListHeader}>
           <h3 className={styles.contractsListTitle}>Contracts List</h3>
-          <p>99 contract</p>
         </div>
 
         <div className={styles.contractsList}>
