@@ -33,7 +33,7 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::get('/client/contracts', [ClientContractController::class, 'index']);
         Route::get('/client/contracts/stats', [ClientContractController::class, 'stats']);
 
-        
+
 
     });
 
