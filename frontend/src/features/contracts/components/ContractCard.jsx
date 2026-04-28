@@ -1,13 +1,12 @@
 import { NavLink } from "react-router-dom";
 import styles from "../styles/ContractCard.module.css";
+import profile from "../../../assets/images/profile.png";
 
 function ContractCard({ contract }) {
   const statusClass = {
-    pending: "status-accent",
     active: "status-success",
     completed: "status-purple",
-    rejected: "status-danger",
-    cancelled: "status-warning",
+    cancelled: "status-danger",
   };
 
   return (
@@ -16,14 +15,15 @@ function ContractCard({ contract }) {
         <div className={styles.contractCardHeader}>
           <div className={styles.contractCardHeaderLeft}>
             <img
-              src={contract.avatar}
+              src={profile}
               className={styles.freelancerAvatar}
               alt="freelancer profile"
             />
             <div className={styles.contractCardHeaderTitleBox}>
-              <h2 className={styles.projectTitle}>{contract.projectTitle}</h2>
+              <h2 className={styles.projectTitle}>{contract.project_title}</h2>
               <p className={styles.freelancerName}>
-                {contract.freelancerName} | Freelancer
+                {contract.freelancer.first_name} {contract.freelancer.last_name}
+                | Freelancer
               </p>
             </div>
           </div>
@@ -39,7 +39,7 @@ function ContractCard({ contract }) {
             <div className={styles.contractSubCard}>
               <h5 className={styles.contractSubCardTitle}>Budget</h5>
               <div className={styles.contractSubCardContent}>
-                ${contract.budget}
+                ${contract.final_price}
               </div>
             </div>
             <div className={styles.contractSubCard}>
@@ -47,26 +47,24 @@ function ContractCard({ contract }) {
               <div
                 className={`${styles.contractSubCardContent} ${styles.progress}`}
               >
-                {contract.completedDelivrables} / {contract.deliverablesCount}
+                {contract.completed_deliverables} /{" "}
+                {contract.total_deliverables}
               </div>
-            </div>
-            <div className={styles.contractSubCard}>
-              <h5 className={styles.contractSubCardTitle}>
-                Delivrable Payment
-              </h5>
-              <div className={styles.contractSubCardContent}>Escrow</div>
             </div>
           </div>
 
-          <div className={styles.contractInfos}>
-            <div className={styles.contractInfoItem}>
-              <p>Current livrable </p> <p>Dashboard UI/UX</p>
+          {contract.status === "active" && (
+            <div className={styles.contractInfos}>
+              <div className={styles.contractInfoItem}>
+                <p>Current livrable </p>{" "}
+                <p>{contract.current_deliverable?.title}</p>
+              </div>
+              <div className={styles.contractInfoItem}>
+                <p>Deliverable Deadline </p>
+                <p> {contract.current_deliverable?.deadline} </p>
+              </div>
             </div>
-            <div className={styles.contractInfoItem}>
-              <p>Deliverable Deadline </p>
-              <p> {contract.deliverableDeadline} </p>
-            </div>
-          </div>
+          )}
         </div>
       </div>
 
@@ -77,12 +75,8 @@ function ContractCard({ contract }) {
         >
           View details
         </NavLink>
-        <NavLink className={styles.navlink}>
-          View delivrables
-        </NavLink>
-        <NavLink className={styles.navlink}>
-          Message freelancer
-        </NavLink>
+        <NavLink className={styles.navlink}>View delivrables</NavLink>
+        <NavLink className={styles.navlink}>Message freelancer</NavLink>
       </div>
     </div>
   );

@@ -1,49 +1,36 @@
 import SimpleCard from "../../../shared/ui/SimpleCard";
 import styles from "../styles/ContractsPage.module.css";
-import { contracts } from "../api/contracts";
 import ContractCard from "../components/ContractCard";
-import { useMemo } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import FilterBox from "../../../shared/common/filters/FilterBox";
+import { getClientContractStats } from "../../../api/contracts/getClientContractStats";
+import { getClientContracts } from "../../../api/contracts/getClientContracts";
 
 function ContractsPage() {
+  const [contracts, setContracts] = useState([]);
+  const [contractStats, setContractStats] = useState([]);
   const [filterParams, setFilterParams] = useSearchParams();
-  const currentParams = new URLSearchParams(filterParams);
 
-  const search = currentParams.get("search") || "";
-  const sortedby = currentParams.get("sortedby") || "";
-  const status = currentParams.get("status") || "";
+  const search = filterParams.get("search") || "";
+  const sort = filterParams.get("sort") || "";
+  const status = filterParams.get("status") || "";
 
-  // * add two keys to facilitate the contracts filtering
-  const processedContracts = useMemo(() => {
-    return contracts.map((contract) => ({
-      ...contract,
-      createdAtTimestamp: new Date(contract.createdAt).getTime(),
-      searchText: `${contract.projectTitle} ${contract.status}`.toLowerCase(),
-    }));
-  }, [contracts]);
+  useEffect(() => {
+    const loadContractStats = async () => {
+      const result = await getClientContractStats();
+      setContractStats(result.data);
+    };
+    loadContractStats();
+  }, []);
 
-  // * filter projects before display them
-  const filtredProjects = useMemo(() => {
-    let res = [...processedContracts];
-    if (search.trim()) {
-      res = res.filter((contract) =>
-        contract.searchText.includes(search.trim().toLowerCase()),
-      );
-    }
-    if (status.trim()) {
-      res = res.filter((contract) =>
-        contract.searchText.includes(status.trim().toLowerCase()),
-      );
-    }
-    if (sortedby === "newest") {
-      res = res.sort((a, b) => b.createdAtTimestamp - a.createdAtTimestamp);
-    } else if (sortedby === "oldest") {
-      res = res.sort((a, b) => a.createdAtTimestamp - b.createdAtTimestamp);
-    }
-
-    return res;
-  }, [processedContracts, search, sortedby, status]);
+  useEffect(() => {
+    const loadContracts = async () => {
+      const result = await getClientContracts(filterParams.toString());
+      setContracts(result.data);
+    };
+    loadContracts();
+  }, [filterParams]);
 
   // * handle filter inputs change
   const handleInputsChange = (e) => {
@@ -52,80 +39,56 @@ function ContractsPage() {
     setFilterParams((prev) => {
       const nextParams = new URLSearchParams(prev);
 
-      if (name === "search") {
-        if (value) {
-          nextParams.set("search", value);
-        } else {
-          nextParams.delete("search");
-        }
-        return nextParams;
+      if (value && value.trim() !== "") {
+        nextParams.set(name, value);
+      } else {
+        nextParams.delete(name);
       }
-
-      if (name === "sortedby") {
-        if (value) {
-          nextParams.set("sortedby", value);
-        } else {
-          nextParams.delete("sortedby");
-        }
-        return nextParams;
-      }
-
-      if (name === "status") {
-        if (value) {
-          nextParams.set("status", value);
-        } else {
-          nextParams.delete("status");
-        }
-        return nextParams;
-      }
+      return nextParams;
     });
   };
 
   const handleClearFilters = () => {
-    currentParams.delete("search");
-    currentParams.delete("status");
-    currentParams.delete("sortedby");
-    setFilterParams(currentParams);
+    setFilterParams({});
   };
 
   // * overview cards
   const overviewCards = [
     {
       id: 0,
-      title: "Completed",
-      total: 19,
+      title: "Completed Contracts",
+      total: contractStats?.completed_contracts_count || "__",
       subTitle: "all time",
-    },
-    {
-      id: 1,
-      title: "Total Spending",
-      total: "$999",
-      subTitle: "across all contracts",
     },
     {
       id: 2,
       title: "Active Contracts",
-      total: 5,
+      total: contractStats?.active_contracts_count || "__",
       subTitle: "Currently running",
     },
     {
+      id: 1,
+      title: "Total Spending",
+      total: `$${contractStats?.total_spent?.toFixed(3)}` || "__",
+      subTitle: "across all contracts",
+    },
+    {
       id: 3,
-      title: "Pending Payment",
-      total: "$120",
-      subTitle: "awaiting relaise",
+      title: "In Escrow",
+      total: `$${contractStats?.total_in_escrow?.toFixed(3)}` || "__",
+      subTitle: "Funds awaiting release",
     },
   ];
 
   // * values object to send to FilterBox component
   const values = {
     search: search,
-    sortedBy: sortedby,
+    sort: sort,
     status: status,
   };
 
   // * status values
-  const statusValues = ["active", "pending", "completed", "cancelled"];
-
+  const statusValues = ["active", "completed", "cancelled"];
 
   return (
     <div className={styles.contractsPage}>
@@ -162,11 +125,10 @@ function ContractsPage() {
       <div className={styles.contractsListSection}>
         <div className={styles.contractsListHeader}>
           <h3 className={styles.contractsListTitle}>Contracts List</h3>
-          <p>99 contract</p>
         </div>
 
         <div className={styles.contractsList}>
-          {filtredProjects.map((contract) => (
+          {contracts.map((contract) => (
             <ContractCard key={contract.id} contract={contract} />
           ))}
         </div>
