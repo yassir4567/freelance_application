@@ -25,7 +25,7 @@ class FreelancerProposalController extends Controller
             $q->where('status', $status);
         });
 
-        $proposals = $query->get();
+        $proposals = $query->latest()->get();
 
         return response()->json([
             'success' => true,
