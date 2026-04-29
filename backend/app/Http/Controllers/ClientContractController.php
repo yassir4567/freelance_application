@@ -90,7 +90,22 @@ class ClientContractController extends Controller
             ->with([
                 'contractsTimelines:id,contract_id,event_type,title,description,created_at',
                 'deliverables' => function ($q) {
-                    $q->select('id', 'contract_id', 'title', 'description', 'status', 'position')
+                    $q->select(
+                        'id',
+                        'contract_id',
+                        'title',
+                        'description',
+                        'status',
+                        'position',
+                        'amount',
+                        'deadline',
+                        'deliverable_links',
+                        'created_at',
+                        'unlocked_at',
+                        'submitted_at',
+                        'accepted_at',
+                        'submission_note',
+                    )
                         ->with('payment')
                         ->orderBy('position', 'asc');
                 },
