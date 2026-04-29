@@ -1,6 +1,16 @@
+import { formatDate } from "../../../utils/helpers";
 import styles from "../styles/ContractSummary.module.css";
 
-function ContractSummary() {
+function ContractSummary({ summary }) {
+  const paid = summary?.payments?.reduce(
+    (acc, cur) => (cur.status == "released" ? acc + +cur.amount : acc),
+    0,
+  );
+
+  const budget = +summary?.budget || 0;
+
+  const paymentProgress = budget > 0 ? Math.round((paid / budget) * 100) : 0;
+
   return (
     <div className={styles.contractSummary}>
       <h2 className={styles.subTitle}>Contract Summary</h2>
@@ -8,59 +18,39 @@ function ContractSummary() {
         <div className={styles.summaryRowGrid}>
           <div className={styles.summaryDescription}>
             <h5 className={styles.summaryItemMinTitle}>Description</h5>
-            <p className={styles.summaryItemContent}>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti
-              rerum in molestiae doloribus nobis recusandae eos incidunt esse?
-              Consequatur perferendis doloremque magni nihil assumenda modi
-              velit? Laborum, cumque perferendis dolor culpa sequi ipsa odio
-              magni mollitia libero! Beatae repudiandae, veniam dolorum ut in a,
-              sed ab unde sint officia perferendis. Lorem ipsum dolor sit amet
-              consectetur adipisicing elit. Rerum minima voluptatum nisi eaque
-              pariatur! Accusantium corporis ab voluptates voluptas inventore?
-            </p>
+            <p className={styles.summaryItemContent}>{summary.description}</p>
           </div>
-          <div className={styles.summaryScope}>
-            <h5 className={styles.summaryItemMinTitle}>Scope</h5>
-            <p className={styles.summaryItemContent}>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti
-              rerum in molestiae doloribus nobis recusandae eos incidunt esse?
-              Consequatur perferendis doloremque magni nihil assumenda modi
-              velit? Laborum, cumque perferendis dolor culpa sequi ipsa odio
-              magni mollitia libero! Beatae repudiandae.
-            </p>
+          <div>
+            <h5 className={styles.summaryItemMinTitle}>Agreed Terms</h5>
+            <div className={styles.agreedTerms}>
+              <ul>
+                <li>💰 Final price: ${budget}</li>
+                <li>📅 Final deadline: {formatDate(summary.deadline)}</li>
+                <li>📦 Number of deliverables: {summary.total_deliverables}</li>
+              </ul>
+            </div>
           </div>
         </div>
 
         <div className={styles.summaryCardGrid}>
           <div>
-            <h5 className={styles.summaryItemMinTitle}>Agreed Terms</h5>
-            <div className={styles.agreedTerms}>
-              <ul>
-                <li>💰 Final price: $6200</li>
-                <li>📅 Final deadline: Feb 14, 2026</li>
-                <li>📦 Number of deliverables: 5</li>
-              </ul>
-            </div>
-          </div>
-
-          <div>
             <h5 className={styles.summaryItemMinTitle}>Quick info</h5>
             <div className={styles.quickInfoItems}>
               <div className={styles.quickInfoItem}>
                 <span>Completed deliverables :</span>
-                <span> 2</span>
+                <span> {summary.completed_deliverables}</span>
               </div>
-              
+
               <div className={styles.quickInfoItem}>
                 <span>Paid :</span>
-                <span> $2400</span>
+                <span> ${paid}</span>
               </div>
               <div className={styles.progress_container}>
                 <p className={styles.quickProgress}>Payment Progress : </p>
                 <div className={styles.progress_bar_container}>
-                  <div className={styles.progress_bar}></div>
+                  <div className={styles.progress_bar} style={{width : `${paymentProgress}%`}}></div>
                 </div>
-                <p className={styles.cmp}>20% completed</p>
+                <p className={styles.cmp}>{paymentProgress}% completed</p>
               </div>
             </div>
           </div>

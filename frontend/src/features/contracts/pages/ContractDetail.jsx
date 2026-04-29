@@ -188,6 +188,26 @@ function ContractDetail() {
     };
   }, [contract]);
 
+  const summary = useMemo(() => {
+    const completed_deliverables = contract?.deliverables?.filter(
+      (del) => del.status === "accepted",
+    ).length;
+
+    const payments = contract?.deliverables
+      ?.map((del) => del.payment)
+      .filter((payment) => payment !== null);
+
+    return {
+      description: contract?.description,
+      budget: contract?.final_price,
+      deadline: contract?.final_deadline,
+      total_deliverables: contract?.deliverables?.length,
+      completed_deliverables: completed_deliverables,
+      payments: payments,
+      contract_pdf: contract?.fichier_pdf,
+    };
+  }, [contract]);
+
   return (
     <div className={styles.contractDetailPage}>
       <ContractHeader
@@ -195,7 +215,7 @@ function ContractDetail() {
         headerContent={headerContent}
       />
       <ContractParty role={role} user={userInfo} headerInfo={headerInfo} />
-      <ContractSummary />
+      <ContractSummary summary={summary} />
       <ContractTimeline contractTimeline={contractTimeline} />
       <ContractDeliverables deliverables={deliverables} />
       <ContractPayments deliverables={deliverables} />

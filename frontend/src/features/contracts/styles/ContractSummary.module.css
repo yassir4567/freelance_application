@@ -1,6 +1,5 @@
-
 .contractSummary {
-    margin-top: 70px;
+  margin-top: 70px;
 }
 
 .subTitle {
@@ -34,7 +33,7 @@
 
 .summaryCardGrid {
   display: grid;
-  grid-template-columns: 350px 500px 1fr;
+  grid-template-columns: 1fr 1fr;
   gap: 25px;
   margin-top: 40px;
 }
