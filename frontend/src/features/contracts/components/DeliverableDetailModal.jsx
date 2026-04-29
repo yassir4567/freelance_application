@@ -2,6 +2,7 @@ import { Fragment, useEffect, useState } from "react";
 import { IoClose } from "react-icons/io5";
 import styles from "../styles/DeliverableDetailModal.module.css";
 import SubmitDeliverableForm from "./SubmitDeliverableForm";
+import { formatDate } from "../../../utils/helpers";
 
 function DeliverableDetailModal({
   deliverable,
@@ -76,7 +77,7 @@ function DeliverableDetailModal({
           </button>
         </Fragment>
       );
-    } else if (deliverable.status === "revision_requested") {
+    } else if (deliverable.status === "revision_request") {
       content = (
         <Fragment>
           <button
@@ -93,9 +94,8 @@ function DeliverableDetailModal({
   const hasSubmissionContent = [
     "accepted",
     "submitted",
-    "revision_requested",
+    "revision_request",
   ].includes(deliverable.status);
-
 
   return (
     <div className={styles.overlay} onClick={onClose}>
@@ -134,12 +134,12 @@ function DeliverableDetailModal({
         <div className={styles.contentGrid}>
           <p className={styles.contentItem}>
             <span>Amount</span>
-            <span>${deliverable.amount}</span>
+            <span>${deliverable.amount.toFixed(3)}</span>
           </p>
 
           <p className={styles.contentItem}>
             <span>Deadline</span>
-            <span>{deliverable.deadline || "Not available"}</span>
+            <span>{formatDate(deliverable.deadline) || "Not available"}</span>
           </p>
 
           <p className={styles.contentItem}>
@@ -161,9 +161,9 @@ function DeliverableDetailModal({
         {hasSubmissionContent && (
           <div className={styles.submissionContentSection}>
             <h4 className={styles.submissionContentTitle}>Submission Links</h4>
-            {deliverable.submission_links?.length ? (
+            {deliverable.deliverable_links?.length ? (
               <div className={styles.links}>
-                {deliverable.submission_links.map((link, index) => (
+                {deliverable.deliverable_links.map((link, index) => (
                   <div key={index} className={styles.linkItem}>
                     <span>Link {index + 1}:</span>
                     <a href={link} target="_blank" rel="noreferrer">

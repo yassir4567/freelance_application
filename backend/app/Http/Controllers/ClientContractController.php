@@ -97,12 +97,14 @@ class ClientContractController extends Controller
                         'description',
                         'status',
                         'position',
+                        'amount',
+                        'deadline',
                         'deliverable_links',
                         'created_at',
                         'unlocked_at',
                         'submitted_at',
-                        'accepted_at' ,
-                        'submission_note'
+                        'accepted_at',
+                        'submission_note',
                     )
                         ->with('payment')
                         ->orderBy('position', 'asc');
