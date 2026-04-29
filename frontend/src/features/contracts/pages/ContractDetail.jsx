@@ -31,92 +31,6 @@ function ContractDetail() {
     cancelled: "status-danger",
   };
 
-  const deliverables = [
-    {
-      id: 1,
-      title: "Homepage UI Design",
-      description:
-        "Design and implement the homepage with a responsive layout and modern UI.",
-      amount: 1500,
-      deadline: "2026-01-23",
-      status: "accepted",
-      unlocked_at: "2026-01-15",
-      submitted_at: "2026-01-23",
-      accepted_at: "2026-01-24",
-      submission_links: [
-        "https://figma.com/file/homepage-design",
-        "https://demo-homepage.vercel.app",
-      ],
-      submission_note:
-        "Homepage fully implemented with responsive design and animations.",
-      payment_status: "released",
-    },
-    {
-      id: 2,
-      title: "Authentication System",
-      description: "Implement login, register, and role-based authentication.",
-      amount: 1200,
-      deadline: "2026-02-06",
-      status: "revision_requested",
-      unlocked_at: "2026-01-28",
-      submitted_at: "2026-02-05",
-      accepted_at: null,
-      submission_links: [
-        "https://github.com/user/auth-module",
-        "https://auth-demo.vercel.app",
-      ],
-      submission_note:
-        "Authentication system is working but requires UI fixes based on client feedback.",
-      payment_status: "escrow",
-    },
-    {
-      id: 3,
-      title: "Project & Proposal Module",
-      description: "Build project posting and proposal submission system.",
-      amount: 1800,
-      deadline: "2026-02-18",
-      status: "unlocked",
-      unlocked_at: "2026-02-10",
-      submitted_at: null,
-      accepted_at: null,
-      submission_links: [],
-      submission_note: "",
-      payment_status: "refunded",
-    },
-    {
-      id: 4,
-      title: "Payment & Escrow Simulation",
-      description: "Integrate payment flow and escrow logic in test mode.",
-      amount: 1700,
-      deadline: "2026-02-28",
-      status: "pending",
-      unlocked_at: null,
-      submitted_at: null,
-      accepted_at: null,
-      submission_links: [],
-      submission_note: "",
-      payment_status: "pending",
-    },
-    {
-      id: 5,
-      title: "Payment & Escrow Simulation",
-      description: "Integrate payment flow and escrow logic in test mode.",
-      amount: 1700,
-      deadline: "2026-02-28",
-      status: "submitted",
-      unlocked_at: "2026-02-28",
-      submitted_at: "2026-02-28",
-      accepted_at: null,
-      submission_links: [
-        "https://github.com/user/auth-module",
-        "https://auth-demo.vercel.app",
-      ],
-      submission_note:
-        "Authentication system is working but requires UI fixes based on client feedback.",
-      payment_status: "escrow",
-    },
-  ];
-
   const contractTimeline = [
     {
       id: 1,
@@ -208,6 +122,8 @@ function ContractDetail() {
     };
   }, [contract]);
 
+  const deliverables = useMemo(() => contract?.deliverables, [contract]);
+
   return (
     <div className={styles.contractDetailPage}>
       <ContractHeader
@@ -221,7 +137,7 @@ function ContractDetail() {
         contractTimeline={contractTimeline} // for the test
       />
       <ContractDeliverables deliverables={deliverables} />
-      <ContractPayments deliverables={deliverables} />
+      {/* <ContractPayments deliverables={deliverables} /> */}
     </div>
   );
 }

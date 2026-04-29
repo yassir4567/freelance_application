@@ -24,7 +24,7 @@ class PaymentSeeder extends Seeder
             $client_id = $deliverable->contract->proposal->project->client_id;
 
             if ($delStatus === 'pending') {
-                return;
+                continue ;
             }
 
             if (in_array($delStatus, ['unlocked', 'submitted', 'revision_request'])) {

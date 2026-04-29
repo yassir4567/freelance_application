@@ -19,6 +19,8 @@ function ContractsPage() {
   useEffect(() => {
     const loadContractStats = async () => {
       const result = await getClientContractStats();
+      console.log(result.data);
+      
       setContractStats(result.data);
     };
     loadContractStats();

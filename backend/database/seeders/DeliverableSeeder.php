@@ -16,8 +16,8 @@ class DeliverableSeeder extends Seeder
         //
         $contracts = Contract::whereIn('status', ['active', 'completed'])->get();
 
-        $position = 1;
         foreach ($contracts as $index => $contract) {
+            $position = 1;
             $deliverablePrice = $contract->final_price / 4;
             if ($contract->status === 'active') {
                 Deliverable::factory()->accepted()->create([
