@@ -97,7 +97,7 @@ class ClientContractController extends Controller
                         'description',
                         'status',
                         'position',
-                        'deliverables_links',
+                        'deliverable_links',
                         'created_at',
                         'unlocked_at',
                         'submitted_at',
