@@ -23,6 +23,10 @@ class PaymentSeeder extends Seeder
             $freelancer_id = $deliverable->contract->proposal->freelancer_id;
             $client_id = $deliverable->contract->proposal->project->client_id;
 
+            if ($delStatus === 'pending') {
+                return;
+            }
+
             if (in_array($delStatus, ['unlocked', 'submitted', 'revision_request'])) {
                 $status = 'escrow';
             } elseif ($delStatus === 'accepted') {

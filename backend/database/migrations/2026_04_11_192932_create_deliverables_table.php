@@ -31,6 +31,7 @@ return new class extends Migration {
                 'revision_request',
                 'cancelled',
             ]);
+            $table->unsignedInteger('position');
             $table->text('submission_note')->nullable();
 
         });

@@ -79,6 +79,34 @@ class ClientContractController extends Controller
         ]);
     }
 
+    public function show(Request $request, string $id)
+    {
+        $client = $request->user();
+
+        $contract = Contract::where('id', $id)
+            ->whereHas('proposal.project', function ($q) use ($client) {
+                $q->where('client_id', $client->id);
+            })
+            ->with([
+                'contractsTimelines:id,contract_id,event_type,title,description,created_at',
+                'deliverables' => function ($q) {
+                    $q->select('id', 'contract_id', 'title', 'description', 'status', 'position')
+                        ->with('payment')
+                        ->orderBy('position', 'asc');
+                },
+                'proposal.project:id,title',
+                'proposal.freelancer:id,user_id,title',
+                'proposal.freelancer.user:id,first_name,last_name,avatar',
+            ])->firstOrFail();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Client contract detail retrieved successfully',
+            'data' => $contract
+        ]);
+
+    }
+
     public function stats(Request $request)
     {
         $client = $request->user();

@@ -16,6 +16,7 @@ class DeliverableSeeder extends Seeder
         //
         $contracts = Contract::whereIn('status', ['active', 'completed'])->get();
 
+        $position = 1;
         foreach ($contracts as $index => $contract) {
             $deliverablePrice = $contract->final_price / 4;
             if ($contract->status === 'active') {
@@ -23,12 +24,14 @@ class DeliverableSeeder extends Seeder
                     'contract_id' => $contract->id,
                     'title' => 'First deliverable',
                     'amount' => $deliverablePrice,
+                    'position' => $position++
                 ]);
 
                 Deliverable::factory()->accepted()->create([
                     'contract_id' => $contract->id,
                     'title' => 'Second deliverable',
                     'amount' => $deliverablePrice,
+                    'position' => $position++
 
                 ]);
 
@@ -37,12 +40,14 @@ class DeliverableSeeder extends Seeder
                         'contract_id' => $contract->id,
                         'title' => 'Third deliverable',
                         'amount' => $deliverablePrice,
+                        'position' => $position++
                     ]);
                 } else {
                     Deliverable::factory()->revisionRequest()->create([
                         'contract_id' => $contract->id,
                         'title' => 'Third deliverable',
                         'amount' => $deliverablePrice,
+                        'position' => $position++
                     ]);
                 }
 
@@ -50,11 +55,13 @@ class DeliverableSeeder extends Seeder
                     'contract_id' => $contract->id,
                     'title' => 'Final deliverable',
                     'amount' => $deliverablePrice,
+                    'position' => $position++
                 ]);
             } elseif ($contract->status === 'completed') {
                 Deliverable::factory()->count(4)->accepted()->create([
                     'contract_id' => $contract->id,
                     'amount' => $deliverablePrice,
+                    'position' => $position++
                 ]);
             }
         }
