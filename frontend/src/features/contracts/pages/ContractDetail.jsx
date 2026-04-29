@@ -216,7 +216,10 @@ function ContractDetail() {
       />
       <ContractParty role={role} user={userInfo} headerInfo={headerInfo} />
       <ContractSummary summary={summary} />
-      <ContractTimeline contractTimeline={contractTimeline} />
+      <ContractTimeline
+        // contractTimeline={contract?.contract_timelines}
+        contractTimeline={contractTimeline} // for the test
+      />
       <ContractDeliverables deliverables={deliverables} />
       <ContractPayments deliverables={deliverables} />
     </div>

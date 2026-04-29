@@ -11,10 +11,6 @@
   flex-wrap: wrap;
 }
 
-.timelineHeaderNote {
-  color: var(--color-text-muted);
-}
-
 .timelineEyebrow {
   font-size: var(--fs-sm);
   color: var(--color-text-muted);
@@ -111,4 +107,9 @@
   font-size: var(--fs-base);
   color: var(--color-text-muted);
   line-height: 25px;
+}
+
+.empty {
+  text-align: center;
+  color: var(--color-danger);
 }
