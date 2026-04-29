@@ -137,7 +137,7 @@ function ContractDetail() {
         contractTimeline={contractTimeline} // for the test
       />
       <ContractDeliverables deliverables={deliverables} />
-      {/* <ContractPayments deliverables={deliverables} /> */}
+      <ContractPayments deliverables={deliverables} />
     </div>
   );
 }

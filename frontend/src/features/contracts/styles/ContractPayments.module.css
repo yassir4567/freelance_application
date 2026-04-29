@@ -10,37 +10,45 @@
 }
 
 .paymentsGrid {
-  display: grid;
-  grid-template-columns: 300px 1fr;
-  gap: 30px;
   margin-top: 40px;
 }
 
 .paymentsSubCards {
   display: flex;
-  flex-direction: column;
   gap: 20px;
+  margin-bottom: 40px;
 }
 
 .paymentCard h3 {
   font-size: var(--fs-base);
   color: var(--color-text-muted);
-  font-weight: 600;
+  font-weight: 650;
 }
 
 .paymentCard p {
   font-size: var(--fs-4xl);
   text-align: start;
   margin-left: 10px;
+  font-weight: 500;
 }
 
+.paidOutCard {
+  background-color: var(--color-secondary-light);
+}
 .paidOutCard p {
-  color: var(--color-success);
+  color: var(--color-success-dark);
+}
+
+.escrowCard {
+  background-color: var(--color-info-bg);
 }
 .escrowCard p {
   color: var(--color-info);
 }
 
+.remainingCard {
+  background-color: var(--color-accent-bg);
+}
 .remainingCard p {
   color: var(--color-warning);
 }
@@ -98,7 +106,6 @@
   border-radius: 50%;
   display: inline-block;
 }
-
 
 .amount {
   font-size: var(--fs-lg);
