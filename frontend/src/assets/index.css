@@ -4,9 +4,10 @@
   --color-danger: #f95039;
   --color-primary: #c44a3a;
   --color-secondary: #25b977;
+  --color-secondary-light: #c3ffe4;
   /* --color-secondary: #63b38f; */
   --color-success: #1c8f1c;
-  --color-green : green ;
+  --color-success-dark : #004500 ;
   --color-light-green: #c7eabb;
   --color-text-muted: #6b7280;
   --color-placeholder: #9ca3af;
