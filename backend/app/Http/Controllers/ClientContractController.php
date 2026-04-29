@@ -102,7 +102,29 @@ class ClientContractController extends Controller
         return response()->json([
             'success' => true,
             'message' => 'Client contract detail retrieved successfully',
-            'data' => $contract
+            'data' => [
+                'id' => $contract->id,
+                'fichier_pdf' => $contract->fichier_pdf,
+                'description' => $contract->description,
+                'status' => $contract->status,
+                'final_price' => $contract->final_price,
+                'final_deadline' => $contract->final_deadline,
+                'created_at' => $contract->created_at,
+                'contract_timelines' => $contract->contractsTimelines,
+                'deliverables' => $contract->deliverables,
+                'project' => [
+                    'id' => $contract->proposal->project->id,
+                    'title' => $contract->proposal->project->title
+                ],
+                'freelancer' => [
+                    'id' => $contract->proposal->freelancer->id,
+                    'user_id' => $contract->proposal->freelancer->user_id,
+                    'title' => $contract->proposal->freelancer->title,
+                    'first_name' => $contract->proposal->freelancer->user->first_name,
+                    'last_name' => $contract->proposal->freelancer->user->last_name,
+                    'avatar' => $contract->proposal->freelancer->user->avatar,
+                ]
+            ]
         ]);
 
     }

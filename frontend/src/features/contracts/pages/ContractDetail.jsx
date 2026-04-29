@@ -5,8 +5,25 @@ import ContractSummary from "../components/ContractSummary";
 import ContractDeliverables from "../components/ContractDeliverables";
 import ContractPayments from "../components/ContractPayments";
 import ContractTimeline from "../components/ContractTimeline";
+import { useEffect, useMemo, useState } from "react";
+import { useParams } from "react-router-dom";
+import { getClientContractDetail } from "../../../api/contracts/getClientContractDetail";
+import { useAuth } from "../../../context/AuthContext";
+import { formatDate, getRelativeTime } from "../../../utils/helpers";
 
 function ContractDetail() {
+  const { contractId } = useParams();
+  const [contract, setContract] = useState();
+  const { user } = useAuth();
+
+  useEffect(() => {
+    const loadContract = async () => {
+      const result = await getClientContractDetail(contractId);
+      setContract(result.data);
+    };
+    loadContract();
+  }, []);
+
   const deliverableStatusClass = {
     active: "status-success",
     completed: "status-purple",
@@ -139,12 +156,45 @@ function ContractDetail() {
     },
   ];
 
-  let user = "client";
+  let role = user.role;
+
+  const headerContent = useMemo(() => {
+    return {
+      status: contract?.status,
+      project_title: contract?.project?.title,
+      budget: contract?.final_price,
+    };
+  }, [contract]);
+
+  const userInfo = useMemo(() => {
+    return {
+      fullname: `${contract?.freelancer.first_name} ${contract?.freelancer.last_name}`,
+      avatar: contract?.freelancer.avatar,
+      id: contract?.freelancer.user_id,
+    };
+  }, [contract]);
+
+  const headerInfo = useMemo(() => {
+    return {
+      status: contract?.status,
+      created_at: formatDate(contract?.created_at),
+      ...(contract?.status === "active" && {
+        cur_deliverable_deadline: formatDate(
+          contract?.deliverables?.find((del) =>
+            ["unlocked", "revision_request", "submitted"].includes(del.status),
+          )?.created_at,
+        ),
+      }),
+    };
+  }, [contract]);
 
   return (
     <div className={styles.contractDetailPage}>
-      <ContractHeader deliverableStatusClass={deliverableStatusClass} />
-      <ContractParty user={user} />
+      <ContractHeader
+        deliverableStatusClass={deliverableStatusClass}
+        headerContent={headerContent}
+      />
+      <ContractParty role={role} user={userInfo} headerInfo={headerInfo} />
       <ContractSummary />
       <ContractTimeline contractTimeline={contractTimeline} />
       <ContractDeliverables deliverables={deliverables} />
