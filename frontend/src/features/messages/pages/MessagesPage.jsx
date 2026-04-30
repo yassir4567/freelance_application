@@ -4,6 +4,7 @@ import ChatMessages from "../components/ChatMessages";
 import styles from "../styles/MessagesPage.module.css";
 import { getConversations } from "../../../api/messages/getConversations";
 import { useSearchParams } from "react-router-dom";
+
 function MessagesPage() {
   const [conversations, setConversations] = useState([]);
 
@@ -25,6 +26,11 @@ function MessagesPage() {
 
   const conversationIds = conversations.map((cnv) => cnv.id);
 
+
+  const currentConversation = conversations.filter(
+    (cnv) => cnv.id === +conversationId,
+  )[0];
+
   return (
     <div className={styles.chatContainer}>
       <div className={styles.chatListContainer}>
@@ -35,7 +41,7 @@ function MessagesPage() {
       </div>
       <div className={styles.chatMessagesContainer}>
         {conversationId !== "" && conversationIds.includes(+conversationId) ? (
-          <ChatMessages />
+          <ChatMessages conversation={currentConversation} />
         ) : (
           <div className={styles.select_conv}>
             <p>Select Conversation</p>

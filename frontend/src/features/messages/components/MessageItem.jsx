@@ -1,17 +1,13 @@
+import { formatDate } from "../../../utils/helpers";
 import styles from "../styles/MessageItem.module.css";
 
-function MessageItem({ dir }) {
+function MessageItem({ message, dir }) {
   return (
     <div
       className={`${styles.messageItem} ${dir === "from" ? styles.from : styles.to}`}
     >
-      <p className={styles.message}>
-        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Laboriosam
-        sint minus ipsam ratione sunt! Ullam, laborum voluptate delectus
-        consectetur similique nostrum perferendis dignissimos ea omnis
-        praesentium corporis? Et, quis! Natus!
-      </p>
-      <p className={styles.date}>Nov 15 , 2025</p>
+      <p className={styles.message}>{message.message}</p>
+      <p className={styles.date}>{formatDate(message.created_at)}</p>
     </div>
   );
 }
