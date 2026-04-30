@@ -31,25 +31,25 @@ function ContractPayments({ deliverables }) {
     {
       id: 1,
       title: "Total",
-      value: totalAmount,
+      value: totalAmount.toFixed(2),
       className: styles.paymentCard,
     },
     {
       id: 2,
       title: "Paid out",
-      value: paidAmount,
+      value: paidAmount.toFixed(2),
       className: `${styles.paymentCard} ${styles.paidOutCard}`,
     },
     {
       id: 3,
       title: "Escrow",
-      value: escrowAmount,
+      value: escrowAmount.toFixed(2),
       className: `${styles.paymentCard} ${styles.escrowCard}`,
     },
     {
       id: 4,
       title: "Pending",
-      value: pendingAmount,
+      value: pendingAmount.toFixed(2),
       className: `${styles.paymentCard} ${styles.remainingCard}`,
     },
   ];
@@ -84,7 +84,9 @@ function ContractPayments({ deliverables }) {
                 >
                   {deliverable.payment?.status ?? "pending"}
                 </div>
-                <div className={styles.amount}>${deliverable.amount}</div>
+                <div className={styles.amount}>
+                  ${deliverable.amount.toFixed(2)}
+                </div>
               </div>
             </div>
           ))}
