@@ -4,7 +4,7 @@ import MessageInput from "./MessageInput";
 import MessageItem from "./MessageItem";
 import MessagesHeader from "./MessagesHeader";
 
-function ChatMessages() {
+function ChatMessages({ conversation }) {
   const messagesRef = useRef(null);
 
   useEffect(() => {

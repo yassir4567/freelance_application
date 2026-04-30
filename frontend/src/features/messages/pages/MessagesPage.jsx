@@ -1,10 +1,15 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import ChatList from "../components/ChatList";
 import ChatMessages from "../components/ChatMessages";
 import styles from "../styles/MessagesPage.module.css";
 import { getConversations } from "../../../api/messages/getConversations";
+import { useSearchParams } from "react-router-dom";
 function MessagesPage() {
   const [conversations, setConversations] = useState([]);
+
+  const [params, setParams] = useSearchParams();
+
+  const conversationId = params.get("chat") || "";
 
   useEffect(() => {
     const loadConversations = async () => {
@@ -14,13 +19,28 @@ function MessagesPage() {
     loadConversations();
   }, []);
 
+  const handleOpenConversation = (id) => {
+    setParams({ chat: id });
+  };
+
+  const conversationIds = conversations.map((cnv) => cnv.id);
+
   return (
     <div className={styles.chatContainer}>
       <div className={styles.chatListContainer}>
-        <ChatList conversations={conversations} />
+        <ChatList
+          conversations={conversations}
+          handleOpenConversation={handleOpenConversation}
+        />
       </div>
       <div className={styles.chatMessagesContainer}>
-        <ChatMessages />
+        {conversationId !== "" && conversationIds.includes(+conversationId) ? (
+          <ChatMessages />
+        ) : (
+          <div className={styles.select_conv}>
+            <p>Select Conversation</p>
+          </div>
+        )}
       </div>
     </div>
   );

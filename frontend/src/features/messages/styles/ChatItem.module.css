@@ -9,7 +9,8 @@
   border-radius: 20px;
 }
 
-.chatItem:hover {
+.chatItem:hover ,
+.activeChat{
   background-color: var(--color-success-bg);
   box-shadow: var(--bx-shadow);
 }
