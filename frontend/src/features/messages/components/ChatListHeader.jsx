@@ -5,10 +5,10 @@ function ChatListHeader() {
   return (
     <header className={styles.chatListHeader}>
       <h1 className={styles.headerTitle}>Chats</h1>
-      <div className={styles.searchBox}>
+      {/* <div className={styles.searchBox}>
         <IoSearchOutline className={styles.searchIcon} />
         <input type="text" placeholder="Search by name ..." />
-      </div>
+      </div> */}
       <hr className={styles.devider} />
     </header>
   );

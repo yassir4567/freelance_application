@@ -31,20 +31,19 @@
   color: var(--color-black);
 }
 
-.chatItem_info .chatItem_lastMessage {
-  font-size: var(--fs-xs);
+.chatItem_info .chatItem_title {
+  font-size: var(--fs-sm);
   color: var(--color-text-muted);
 }
 
-
 .chatItem_unread {
-    border-radius: 50%;
-    width: 20px;
-    height: 20px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: var(--fs-xs);
-    background-color: var(--color-secondary);
-    color: var(--color-white);
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--fs-xs);
+  background-color: var(--color-secondary);
+  color: var(--color-white);
 }
