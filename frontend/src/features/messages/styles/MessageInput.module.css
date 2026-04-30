@@ -39,7 +39,7 @@
 .fillSend {
     width: 45px;
     height: 45px;
-    background-color: var(--color-green);
+    background-color: var(--color-success);
     border-radius: 50%;
     display: flex;
     align-items: center;
