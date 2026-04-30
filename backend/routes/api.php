@@ -10,6 +10,7 @@ use App\Http\Controllers\ConversationController;
 use App\Http\Controllers\FreelancerDashboardController;
 use App\Http\Controllers\FreelancerProjectController;
 use App\Http\Controllers\FreelancerProposalController;
+use App\Http\Controllers\MessageController;
 use App\Http\Controllers\SkillController;
 use Illuminate\Support\Facades\Route;
 
@@ -50,4 +51,7 @@ Route::middleware('auth:sanctum')->group(function () {
 
     // ? conversations 
     Route::get('/conversations', [ConversationController::class, 'index']);
+
+    // ? messages 
+    Route::get('/conversations/{id}/messages' , [MessageController::class , 'index']) ;
 });
