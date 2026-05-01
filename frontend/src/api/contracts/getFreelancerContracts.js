@@ -1,6 +1,6 @@
 import { BASE_URL, getToken } from "../config";
 
-const getClientContracts = async (filters) => {
+const getFreelancerContracts = async (filters) => {
   try {
     const token = getToken();
     const response = await fetch(
@@ -37,4 +37,4 @@ const getClientContracts = async (filters) => {
   }
 };
 
-export { getClientContracts };
+export { getFreelancerContracts };

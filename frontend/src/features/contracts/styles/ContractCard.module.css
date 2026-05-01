@@ -34,14 +34,14 @@
   color: var(--color-black);
 }
 
-.freelancerName {
+.name {
   color: var(--color-text-muted);
   font-size: var(--fs-base);
   margin-left: 3px;
   font-weight: 400;
 }
 
-.freelancerAvatar {
+.avatar {
   width: 60px;
   height: 60px;
 }

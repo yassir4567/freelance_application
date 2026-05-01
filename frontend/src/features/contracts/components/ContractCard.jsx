@@ -1,13 +1,22 @@
 import { NavLink } from "react-router-dom";
 import styles from "../styles/ContractCard.module.css";
 import profile from "../../../assets/images/profile.png";
+import { useAuth } from "../../../context/AuthContext";
 
 function ContractCard({ contract }) {
+  const {
+    user: { role },
+  } = useAuth();
+
   const statusClass = {
     active: "status-success",
     completed: "status-purple",
     cancelled: "status-danger",
   };
+
+  let other_user = contract.freelancer ?? contract.client;
+
+  console.log(other_user);
 
   return (
     <div className={styles.contractCard}>
@@ -16,14 +25,14 @@ function ContractCard({ contract }) {
           <div className={styles.contractCardHeaderLeft}>
             <img
               src={profile}
-              className={styles.freelancerAvatar}
-              alt="freelancer profile"
+              className={styles.avatar}
+              alt="User profile"
             />
             <div className={styles.contractCardHeaderTitleBox}>
               <h2 className={styles.projectTitle}>{contract.project_title}</h2>
-              <p className={styles.freelancerName}>
-                {contract.freelancer.first_name} {contract.freelancer.last_name}
-                | Freelancer
+              <p className={styles.name}>
+                {other_user.first_name} {other_user.last_name}|
+                {role === "client" ? "Freelancer" : "Client"}
               </p>
             </div>
           </div>

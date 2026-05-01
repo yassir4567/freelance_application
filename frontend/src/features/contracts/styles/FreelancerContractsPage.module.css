@@ -33,3 +33,26 @@
   margin-left: 10px;
   margin-block: 5px;
 }
+
+.contractsListSection {
+  margin-top: 40px;
+}
+
+.contractsListHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.contractsListTitle {
+  font-size: var(--fs-xl);
+  font-weight: 500;
+  color: var(--color-success);
+}
+
+.contractsList {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  margin-top: 30px;
+}
