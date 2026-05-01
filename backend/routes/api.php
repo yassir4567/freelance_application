@@ -7,6 +7,7 @@ use App\Http\Controllers\ClientDashboardController;
 use App\Http\Controllers\ClientProjectController;
 use App\Http\Controllers\ClientProposalController;
 use App\Http\Controllers\ConversationController;
+use App\Http\Controllers\FreelancerContractController;
 use App\Http\Controllers\FreelancerDashboardController;
 use App\Http\Controllers\FreelancerProjectController;
 use App\Http\Controllers\FreelancerProposalController;
@@ -43,6 +44,9 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::get('/browse-projects/{id}', [FreelancerProjectController::class, 'show']);
 
         Route::get('/freelancer/proposals', [FreelancerProposalController::class, 'index']);
+
+        // ? contracts 
+        Route::get('/freelancer/contracts/stats', [FreelancerContractController::class, 'stats']);
     });
 
     // ? categories & skills
@@ -53,5 +57,5 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/conversations', [ConversationController::class, 'index']);
 
     // ? messages 
-    Route::get('/conversations/{id}/messages' , [MessageController::class , 'index']) ;
+    Route::get('/conversations/{id}/messages', [MessageController::class, 'index']);
 });
