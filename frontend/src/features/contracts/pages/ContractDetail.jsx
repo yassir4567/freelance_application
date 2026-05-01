@@ -10,6 +10,7 @@ import { useParams } from "react-router-dom";
 import { getClientContractDetail } from "../../../api/contracts/getClientContractDetail";
 import { useAuth } from "../../../context/AuthContext";
 import { formatDate, getRelativeTime } from "../../../utils/helpers";
+import { getFreelancerContractDetail } from "../../../api/contracts/getFreelancerContractDetail";
 
 function ContractDetail() {
   const { contractId } = useParams();
@@ -17,9 +18,17 @@ function ContractDetail() {
   const [isNotFound, setIsNotFound] = useState(false);
   const { user } = useAuth();
 
+  let role = user.role;
+
   useEffect(() => {
     const loadContract = async () => {
-      const result = await getClientContractDetail(contractId);
+      if (!user || !contractId) {
+        return;
+      }
+      const result =
+        role === "client"
+          ? await getClientContractDetail(contractId)
+          : await getFreelancerContractDetail(contractId);
       if (result.success) {
         setContract(result.data);
         return;
@@ -27,7 +36,7 @@ function ContractDetail() {
       setIsNotFound(true);
     };
     loadContract();
-  }, []);
+  }, [user, contractId]);
 
   const deliverableStatusClass = {
     active: "status-success",
@@ -75,8 +84,6 @@ function ContractDetail() {
     },
   ];
 
-  let role = user.role;
-
   const headerContent = useMemo(() => {
     return {
       status: contract?.status,
@@ -85,11 +92,14 @@ function ContractDetail() {
     };
   }, [contract]);
 
+  const other_user =
+    role === "client" ? contract?.freelancer : contract?.client;
+
   const userInfo = useMemo(() => {
     return {
-      fullname: `${contract?.freelancer.first_name} ${contract?.freelancer.last_name}`,
-      avatar: contract?.freelancer.avatar,
-      id: contract?.freelancer.user_id,
+      fullname: `${other_user?.first_name} ${other_user?.last_name}`,
+      avatar: other_user?.avatar,
+      id: other_user?.user_id,
     };
   }, [contract]);
 
