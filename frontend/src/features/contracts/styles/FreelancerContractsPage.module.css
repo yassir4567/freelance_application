@@ -1,0 +1,35 @@
+.contractsPage {
+  margin-bottom: 150px;
+}
+
+.contractsPageSubTitle {
+  margin-left: 5px;
+  color: var(--color-text-muted);
+  margin-top: 7px;
+}
+
+.overviewTitle {
+  font-size: var(--fs-xl);
+  margin-top: 50px;
+  margin-bottom: 20px;
+  font-weight: 450;
+}
+
+.overviewTitle {
+  font-size: var(--fs-xl);
+  margin-top: 50px;
+  margin-bottom: 20px;
+  font-weight: 450;
+}
+
+.contractsOverview {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+}
+
+.contractsOverviewCard p:nth-child(2) {
+  text-align: start;
+  margin-left: 10px;
+  margin-block: 5px;
+}

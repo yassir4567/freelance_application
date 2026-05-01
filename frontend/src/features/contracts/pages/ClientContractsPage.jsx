@@ -1,5 +1,5 @@
 import SimpleCard from "../../../shared/ui/SimpleCard";
-import styles from "../styles/ContractsPage.module.css";
+import styles from "../styles/ClientContractsPage.module.css";
 import ContractCard from "../components/ContractCard";
 import { useEffect, useMemo, useState } from "react";
 import { useSearchParams } from "react-router-dom";
@@ -7,7 +7,7 @@ import FilterBox from "../../../shared/common/filters/FilterBox";
 import { getClientContractStats } from "../../../api/contracts/getClientContractStats";
 import { getClientContracts } from "../../../api/contracts/getClientContracts";
 
-function ContractsPage() {
+function ClientContractsPage() {
   const [contracts, setContracts] = useState([]);
   const [contractStats, setContractStats] = useState([]);
   const [filterParams, setFilterParams] = useSearchParams();
@@ -95,7 +95,7 @@ function ContractsPage() {
   return (
     <div className={styles.contractsPage}>
       <div className={styles.pageHeader}>
-        <h1 className="pageTitle">Client Contracts</h1>
+        <h1 className="pageTitle">My Contracts</h1>
         <p className={styles.contractsPageSubTitle}>
           Track negotiations, active work, and completed agreements in one
           place.
@@ -139,4 +139,4 @@ function ContractsPage() {
   );
 }
 
-export default ContractsPage;
+export default ClientContractsPage;

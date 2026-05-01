@@ -4,6 +4,7 @@ import FreelancerDashboardPage from "../features/freelancer-dashboard/pages/Free
 import BrowseProjectDetail from "../features/projects/pages/BrowseProjectDetail";
 import ProtectedRoutes from "./ProtectedRoutes";
 import FreelancerProposalsPage from "../features/proposals/pages/FreelancerProposalsPage";
+import FreelancerContractsPage from "../features/contracts/pages/FreelancerContractsPage";
 
 export const freelancerRoutes = [
   {
@@ -17,6 +18,7 @@ export const freelancerRoutes = [
           { path: "find-project", element: <BrowseProjectsPage /> },
           { path: "projects/:projectId", element: <BrowseProjectDetail /> },
           { path: "my-proposals", element: <FreelancerProposalsPage /> },
+          { path: "contracts", element: <FreelancerContractsPage /> },
         ],
       },
     ],

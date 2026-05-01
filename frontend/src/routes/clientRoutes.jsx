@@ -5,7 +5,7 @@ import ClientProjectsPage from "../features/projects/pages/ClientProjectsPage";
 import ProjectProposalsPage from "../features/proposals/pages/ProjectProposalsPage";
 import ClientProjectDetail from "../features/projects/pages/ClientProjectDetail";
 import ProjectLayout from "../features/projects/layouts/ProjectLayout";
-import ContractsPage from "../features/contracts/pages/ContractsPage";
+import ClientContractsPage from "../features/contracts/pages/ClientContractsPage";
 import ContractDetail from "../features/contracts/pages/ContractDetail";
 import MessagesPage from "../features/messages/pages/MessagesPage";
 import ProtectedRoutes from "./ProtectedRoutes";
@@ -29,7 +29,7 @@ export const clientRoutes = [
               { path: "proposals", element: <ProjectProposalsPage /> },
             ],
           },
-          { path: "contracts", element: <ContractsPage /> },
+          { path: "contracts", element: <ClientContractsPage /> },
           { path: "contracts/:contractId", element: <ContractDetail /> },
           { path: "messages", element: <MessagesPage /> },
         ],
