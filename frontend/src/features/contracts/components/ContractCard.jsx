@@ -16,7 +16,6 @@ function ContractCard({ contract }) {
 
   let other_user = contract.freelancer ?? contract.client;
 
-  console.log(other_user);
 
   return (
     <div className={styles.contractCard}>

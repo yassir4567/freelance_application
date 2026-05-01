@@ -14,12 +14,17 @@ import { formatDate, getRelativeTime } from "../../../utils/helpers";
 function ContractDetail() {
   const { contractId } = useParams();
   const [contract, setContract] = useState();
+  const [isNotFound, setIsNotFound] = useState(false);
   const { user } = useAuth();
 
   useEffect(() => {
     const loadContract = async () => {
       const result = await getClientContractDetail(contractId);
-      setContract(result.data);
+      if (result.success) {
+        setContract(result.data);
+        return;
+      }
+      setIsNotFound(true);
     };
     loadContract();
   }, []);
@@ -123,6 +128,10 @@ function ContractDetail() {
   }, [contract]);
 
   const deliverables = useMemo(() => contract?.deliverables, [contract]);
+
+  if (isNotFound) {
+    return <div>Not found</div>;
+  }
 
   return (
     <div className={styles.contractDetailPage}>
