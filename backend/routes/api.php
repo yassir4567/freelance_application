@@ -48,6 +48,8 @@ Route::middleware('auth:sanctum')->group(function () {
         // ? contracts 
         Route::get('/freelancer/contracts/stats', [FreelancerContractController::class, 'stats']);
         Route::get('/freelancer/contracts', [FreelancerContractController::class, 'index']);
+        Route::get('/freelancer/contracts/{id}', [FreelancerContractController::class, 'show']);
+
     });
 
     // ? categories & skills

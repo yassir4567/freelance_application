@@ -78,6 +78,68 @@ class FreelancerContractController extends Controller
         ]);
     }
 
+    public function show(Request $request, string $id)
+    {
+        $freelancer = $request->user()->freelancer;
+
+        $contract = Contract::where('id', $id)
+            ->whereHas('proposal', function ($q) use ($freelancer) {
+                $q->where('freelancer_id', $freelancer->id);
+            })->with([
+                    'contractsTimelines:id,contract_id,event_type,title,description,created_at',
+                    'deliverables' => function ($q) {
+                        $q->select(
+                            'id',
+                            'contract_id',
+                            'title',
+                            'description',
+                            'status',
+                            'position',
+                            'amount',
+                            'deadline',
+                            'deliverable_links',
+                            'created_at',
+                            'unlocked_at',
+                            'submitted_at',
+                            'accepted_at',
+                            'submission_note',
+                        )
+                            ->with('payment')
+                            ->orderBy('position', 'asc');
+                    },
+                    'proposal.project:id,client_id,title',
+                    'proposal.project.client:id,first_name,last_name,avatar',
+                ])->firstOrFail();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Freelancer contract detail retrieved successfully',
+            'data' => [
+                'id' => $contract->id,
+                'fichier_pdf' => $contract->fichier_pdf,
+                'description' => $contract->description,
+                'status' => $contract->status,
+                'final_price' => $contract->final_price,
+                'final_deadline' => $contract->final_deadline,
+                'created_at' => $contract->created_at,
+                'contract_timelines' => $contract->contractsTimelines,
+                'deliverables' => $contract->deliverables,
+                'project' => [
+                    'id' => $contract->proposal->project->id,
+                    'title' => $contract->proposal->project->title
+                ],
+                'client' => [
+                    'id' => $contract->proposal->project->id,
+                    'user_id' => $contract->proposal->project->client_id,
+                    'title' => $contract->proposal->project->title,
+                    'first_name' => $contract->proposal->project->client->first_name,
+                    'last_name' => $contract->proposal->project->client->last_name,
+                    'avatar' => $contract->proposal->project->client->avatar,
+                ]
+            ]
+        ]);
+    }
+
     public function stats(Request $request)
     {
         $freelancer = $request->user()->freelancer;
