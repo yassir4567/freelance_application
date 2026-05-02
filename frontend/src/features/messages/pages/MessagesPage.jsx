@@ -16,6 +16,7 @@ function MessagesPage() {
     const loadConversations = async () => {
       const result = await getConversations();
       setConversations(result.data);
+      console.log(result.data);
     };
     loadConversations();
   }, []);
@@ -25,7 +26,6 @@ function MessagesPage() {
   };
 
   const conversationIds = conversations.map((cnv) => cnv.id);
-
 
   const currentConversation = conversations.filter(
     (cnv) => cnv.id === +conversationId,

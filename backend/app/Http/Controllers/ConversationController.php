@@ -25,13 +25,13 @@ class ConversationController extends Controller
 
         if ($role === 'client') {
             $with[] = 'contract.proposal.freelancer:id,user_id';
-            $with[] = 'contract.proposal.freelancer.user:id,first_name,last_name,avatar';
+            $with[] = 'contract.proposal.freelancer.user:id,first_name,last_name,avatar,role';
 
             $query->whereHas('contract.proposal.project', function ($q) use ($user) {
                 $q->where('client_id', $user->id);
             });
         } else if ($role === 'freelancer') {
-            $with[] = 'contract.proposal.project.client:id,first_name,last_name,avatar';
+            $with[] = 'contract.proposal.project.client:id,first_name,last_name,avatar,role';
             $query->whereHas('contract.proposal.freelancer', function ($q) use ($user) {
                 $q->where('user_id', $user->id);
             });
@@ -70,7 +70,8 @@ class ConversationController extends Controller
                     'id' => $otherUser->id,
                     'first_name' => $otherUser->first_name,
                     'last_name' => $otherUser->last_name,
-                    'avatar' => $otherUser->avatar
+                    'avatar' => $otherUser->avatar,
+                    'role' => $otherUser->role,
                 ]
             ];
         });

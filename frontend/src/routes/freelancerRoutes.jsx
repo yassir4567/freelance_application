@@ -6,6 +6,7 @@ import ProtectedRoutes from "./ProtectedRoutes";
 import FreelancerProposalsPage from "../features/proposals/pages/FreelancerProposalsPage";
 import FreelancerContractsPage from "../features/contracts/pages/FreelancerContractsPage";
 import ContractDetail from "../features/contracts/pages/ContractDetail";
+import MessagesPage from "../features/messages/pages/MessagesPage";
 
 export const freelancerRoutes = [
   {
@@ -21,7 +22,7 @@ export const freelancerRoutes = [
           { path: "my-proposals", element: <FreelancerProposalsPage /> },
           { path: "contracts", element: <FreelancerContractsPage /> },
           { path: "contracts/:contractId", element: <ContractDetail /> },
-          
+          { path: "messages", element: <MessagesPage /> },
         ],
       },
     ],
