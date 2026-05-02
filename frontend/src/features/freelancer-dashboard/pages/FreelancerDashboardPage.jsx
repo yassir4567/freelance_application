@@ -87,7 +87,7 @@ function FreelancerDashboardPage() {
             <NavLink to="find-project" className={styles.actionLink}>
               Browse Projects
             </NavLink>
-            <NavLink className={styles.actionLink}>View my proposals </NavLink>
+            <NavLink to="my-proposals" className={styles.actionLink}>View my proposals </NavLink>
             <NavLink className={styles.actionLink}>Check Messages</NavLink>
           </div>
         </div>

@@ -45,11 +45,12 @@ function FreelancerActiveContracts({ contracts }) {
                 </td>
                 <td className={styles.budget}> ${final_price} </td>
                 <td className={styles.deadline}>
-                  {" "}
                   {formatDate(final_deadline)}
                 </td>
                 <td>
-                  <NavLink className={styles.link}>View details</NavLink>
+                  <NavLink to={`contracts/${id}`} className={styles.link}>
+                    View details
+                  </NavLink>
                 </td>
               </tr>
             );
