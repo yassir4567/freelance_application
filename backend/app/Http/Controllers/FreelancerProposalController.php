@@ -61,7 +61,7 @@ class FreelancerProposalController extends Controller
             return response()->json([
                 'success' => false,
                 'message' => 'You already sent a proposal to this project'
-            ]);
+            ], 422);
         }
 
         $proposal = Proposal::create([

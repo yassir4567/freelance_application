@@ -1,4 +1,3 @@
-
 .projectDetailPage {
     display: flex;
     margin-bottom: 100px;
@@ -19,14 +18,14 @@
     gap: 30px;
 }
 
-.postedDate , 
+.postedDate,
 .country {
     display: flex;
     align-items: center;
     gap: 10px;
 }
 
-.postedDate .icon ,
+.postedDate .icon,
 .country .icon {
     font-size: var(--fs-md);
 }
@@ -54,22 +53,22 @@
 
 
 .skills {
-  display: flex;
-  gap: 10px;
+    display: flex;
+    gap: 10px;
 }
 
 .skill {
-  background-color: var(--color-black);
-  padding: 6px 15px;
-  border-radius: 20px;
-  font-size: var(--fs-xs);
-  color: var(--color-white);
-  text-transform: capitalize;
+    background-color: var(--color-black);
+    padding: 6px 15px;
+    border-radius: 20px;
+    font-size: var(--fs-xs);
+    color: var(--color-white);
+    text-transform: capitalize;
 }
 
 .projectInfos {
     display: grid;
-    grid-template-columns: repeat(2 , 1fr);
+    grid-template-columns: repeat(2, 1fr);
     gap: 30px;
 }
 
@@ -137,3 +136,43 @@
     margin-top: 20px;
 }
 
+.proposalAlreadySent {
+    border: 1px solid var(--color-secondary);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 15px 0;
+    border-radius: 5px;
+}
+
+.proposalAlreadySent p {
+    margin-bottom: 8px;
+    font-size: var(--fs-base);
+}
+
+.proposalAlreadySent .viewProposalsLink {
+    font-size: var(--fs-sm);
+    color: var(--color-azure);
+    text-transform: capitalize;
+    font-weight: 400;
+    position: relative;
+    transition: .2s;
+}
+.proposalAlreadySent .viewProposalsLink:hover {
+    color: var(--color-info);
+}
+
+.proposalAlreadySent .viewProposalsLink::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 1px;
+    width: 13px;
+    background-color: var(--color-info);
+    transition: .2s;
+}
+.proposalAlreadySent .viewProposalsLink:hover::after {
+    width: 100%;
+}

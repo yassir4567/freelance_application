@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Project;
+use App\Models\Proposal;
 use Illuminate\Http\Request;
 
 class FreelancerProjectController extends Controller
@@ -81,7 +82,7 @@ class FreelancerProjectController extends Controller
 
     public function show(Request $request, string $id)
     {
-        $user = $request->user();
+        $freelancer = $request->user()->freelancer;
 
         $project = Project::with([
             'client:id,role,first_name,last_name,country,address,created_at',
@@ -91,12 +92,16 @@ class FreelancerProjectController extends Controller
 
         $countClientProjects = Project::where('client_id', $project->client_id)->count();
 
+        $isAlreadySent = Proposal::where('project_id', $id)
+            ->where('freelancer_id', $freelancer->id)->exists();
+
         return response()->json([
             'success' => true,
             'message' => 'Project Retrieved successfully',
             'data' => [
                 'project' => $project,
-                'client_projects_count' => $countClientProjects
+                'client_projects_count' => $countClientProjects,
+                'isProposalSent' => $isAlreadySent
             ]
         ]);
     }

@@ -13,18 +13,20 @@ import SendProposalModal from "../../proposals/components/SendProposalModal";
 
 function BrowseProjectDetail() {
   const { projectId } = useParams();
-  const [data, setData] = useState({});
+  const [project, setData] = useState({});
   const [showSendProposalModal, setShowSendProposalModal] = useState(false);
 
   useEffect(() => {
     const loadProject = async () => {
       const response = await getBrowseProjectDetail(projectId);
+      console.log(response.data);
+
       setData(response.data);
     };
     loadProject();
   }, []);
 
-  const client = data?.project?.client;
+  const client = project?.project?.client;
 
   const onClose = () => {
     setShowSendProposalModal(false);
@@ -35,12 +37,12 @@ function BrowseProjectDetail() {
       <div className={styles.leftSide}>
         <div className={styles.header}>
           <h1 className={`pageTitle ${styles.projectTitle}`}>
-            {data.project?.title}
+            {project.project?.title}
           </h1>
           <div className={styles.minHeader}>
             <div className={styles.postedDate}>
               <MdOutlineDateRange className={styles.icon} />
-              <span>{formatDate(data.project?.created_at)}</span>
+              <span>{formatDate(project.project?.created_at)}</span>
             </div>
             <div className={styles.country}>
               <CiLocationOn className={styles.icon} />
@@ -52,7 +54,7 @@ function BrowseProjectDetail() {
 
         <div className={styles.summary}>
           <h5 className={styles.sectionTitle}>Description</h5>
-          <p className={styles.description}>{data.project?.description}</p>
+          <p className={styles.description}>{project.project?.description}</p>
 
           <div className={styles.devider}></div>
 
@@ -62,7 +64,7 @@ function BrowseProjectDetail() {
                 <IoPricetagsOutline className={styles.icon} />
                 <span>Price</span>
               </h5>
-              <p className={styles.infoP}>{data.project?.budget}$</p>
+              <p className={styles.infoP}>{project.project?.budget}$</p>
             </div>
 
             <div className={styles.info}>
@@ -71,7 +73,7 @@ function BrowseProjectDetail() {
                 <span>Duration</span>
               </h5>
               <p className={styles.infoP}>
-                {data.project?.duration.split("_").join(" ")}
+                {project.project?.duration.split("_").join(" ")}
               </p>
             </div>
 
@@ -80,7 +82,7 @@ function BrowseProjectDetail() {
                 <SiLevelsdotfyi className={styles.icon} />
                 <span>Experience</span>
               </h5>
-              <p className={styles.infoP}>{data.project?.experience_level}</p>
+              <p className={styles.infoP}>{project.project?.experience_level}</p>
             </div>
 
             <div className={styles.info}>
@@ -88,7 +90,7 @@ function BrowseProjectDetail() {
                 <SlSizeFullscreen className={styles.icon} />
                 <span>Project size</span>
               </h5>
-              <p className={styles.infoP}>{data.project?.size}</p>
+              <p className={styles.infoP}>{project.project?.size}</p>
             </div>
           </div>
 
@@ -97,7 +99,7 @@ function BrowseProjectDetail() {
           <div>
             <h5 className={styles.sectionTitle}>Required skills</h5>
             <div className={styles.skills}>
-              {data.project?.skills.map((skill) => (
+              {project.project?.skills.map((skill) => (
                 <div key={skill.id} className={styles.skill}>
                   {skill.name}
                 </div>
@@ -109,12 +111,19 @@ function BrowseProjectDetail() {
 
       <div className={styles.rightSide}>
         <div className={styles.actions}>
-          <NavLink
-            className={styles.actionLink}
-            onClick={() => setShowSendProposalModal(true)}
-          >
-            Send proposal
-          </NavLink>
+          {project.isProposalSent ? (
+            <div className={styles.proposalAlreadySent}>
+              <p>Proposal already sent </p>
+              <NavLink className={styles.viewProposalsLink} to="/dashboard/freelancer/my-proposals">view proposals</NavLink>
+            </div>
+          ) : (
+            <NavLink
+              className={styles.actionLink}
+              onClick={() => setShowSendProposalModal(true)}
+            >
+              Send proposal
+            </NavLink>
+          )}
         </div>
 
         <div className={styles.clientInfos}>
@@ -123,7 +132,7 @@ function BrowseProjectDetail() {
             <p>
               Full name : {client?.first_name} {client?.last_name}
             </p>
-            <p>{data.client_projects_count} posted projects</p>
+            <p>{project.client_projects_count} posted projects</p>
             <p>Member since {formatDate(client?.created_at)}</p>
           </div>
         </div>
