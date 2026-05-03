@@ -43,7 +43,9 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::get('/freelancer/projects', [FreelancerProjectController::class, 'index']);
         Route::get('/browse-projects/{id}', [FreelancerProjectController::class, 'show']);
 
+        // ? proposals
         Route::get('/freelancer/proposals', [FreelancerProposalController::class, 'index']);
+        Route::post('/projects/{projectId}/send-proposal', [FreelancerProposalController::class, 'sendProposal']);
 
         // ? contracts 
         Route::get('/freelancer/contracts/stats', [FreelancerContractController::class, 'stats']);
