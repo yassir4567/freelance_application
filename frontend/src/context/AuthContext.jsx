@@ -8,6 +8,7 @@ const AuthContext = createContext(null);
 
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
+  const [profileCompletionState, setProfileCompletionState] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -29,6 +30,8 @@ const AuthProvider = ({ children }) => {
       }
 
       setUser(result.data.user);
+      setProfileCompletionState(result.data.profile);
+
       setIsLoading(false);
     }
     loadUser();
@@ -41,10 +44,11 @@ const AuthProvider = ({ children }) => {
       return result;
     }
 
-    const { token, user } = result.data;
+    const { user, profile, token } = result.data;
 
     localStorage.setItem("token", token);
     setUser(user);
+    setProfileCompletionState(profile);
 
     return {
       success: true,
@@ -57,6 +61,7 @@ const AuthProvider = ({ children }) => {
 
     localStorage.removeItem("token");
     setUser(null);
+    setProfileCompletionState(null);
   }
 
   // * register user function
@@ -67,17 +72,21 @@ const AuthProvider = ({ children }) => {
       return result;
     }
 
-    const { token, user } = result.data;
+    const { token, user, profile } = result.data;
     localStorage.setItem("token", token);
     setUser(user);
+    setProfileCompletionState(profile);
+
     return {
       success: true,
       user,
+      profile,
     };
   }
 
   const values = {
     user,
+    profileCompletionState,
     isLoading,
     login,
     logout,

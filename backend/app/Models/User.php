@@ -116,7 +116,7 @@ class User extends Authenticatable
         return [
             'percentage' => $percentage,
             'is_profile_completed' => $completed === $total,
-            'missing_fields' => $missing_fields
+            'missing_fields' => $missing_fields,
         ];
     }
 

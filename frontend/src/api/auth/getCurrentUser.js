@@ -23,7 +23,7 @@ const getCurrentUser = async () => {
 
     return {
       success: true,
-      data: data,
+      data: data.data,
     };
   } catch (err) {
     return {

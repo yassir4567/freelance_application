@@ -19,21 +19,28 @@ class AuthController extends Controller
             'password' => 'required|string',
         ]);
 
-        if (! Auth::attempt($credentials)) {
+        if (!Auth::attempt($credentials)) {
             return response()->json([
                 'message' => 'Invalid email or password',
             ], 401);
         }
 
-        $user = User::select('id', 'first_name', 'last_name', 'email', 'role')
-            ->find(Auth::id());
+        $user = User::find(Auth::id());
         $user->tokens()->delete();
         $token = $user->createToken('auth_token')->plainTextToken;
 
         return response()->json([
             'message' => 'Logged in successfully',
-            'user' => $user,
-            'token' => $token,
+            'data' => [
+                'user' => [
+                    'id' => $user->id,
+                    'first_name' => $user->first_name,
+                    'last_name' => $user->last_name,
+                    'role' => $user->role,
+                ],
+                'profile' => $user->getProfileCompletion(),
+                'token' => $token,
+            ],
         ], 200);
     }
 
@@ -75,14 +82,17 @@ class AuthController extends Controller
         return response()->json(
             [
                 'message' => 'User created successfully',
-                'user' => [
-                    'id' => $result['user']->id,
-                    'first_name' => $result['user']->first_name,
-                    'last_name' => $result['user']->last_name,
-                    'email' => $result['user']->email,
-                    'role' => $result['user']->role,
-                ],
-                'token' => $result['token']
+                'data' => [
+                    'user' => [
+                        'id' => $result['user']->id,
+                        'first_name' => $result['user']->first_name,
+                        'last_name' => $result['user']->last_name,
+                        'email' => $result['user']->email,
+                        'role' => $result['user']->role,
+                    ],
+                    'profile' => $result['user']->getProfileCompletion(),
+                    'token' => $result['token']
+                ]
             ],
             201
         );
@@ -99,13 +109,13 @@ class AuthController extends Controller
     public function me(Request $request)
     {
 
-        $user = $request->user() ;
+        $user = $request->user();
 
         return response()->json([
-            'success' => true , 
+            'success' => true,
             'data' => [
                 'user' => $user,
-                'profile' => $user->getProfileCompletion() 
+                'profile' => $user->getProfileCompletion()
             ]
         ]);
     }

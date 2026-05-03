@@ -13,15 +13,12 @@ import { useAuth } from "../../../context/AuthContext";
 
 function FreelancerDashboardPage() {
   const [data, setData] = useState([]);
-  const {
-    user: { first_name, last_name },
-  } = useAuth();
+  const { user, isLoading, profileCompletionState } = useAuth();
 
   useEffect(() => {
     const loadStats = async () => {
       const result = await getDashboardData("freelancer");
       setData(result.data);
-      
     };
     loadStats();
   }, []);
@@ -50,14 +47,20 @@ function FreelancerDashboardPage() {
     },
   ];
 
+  // console.log(user);
+
+  // console.log(profileCompletionState);
+
   return (
     <div className={styles.dashboard}>
       <div className={styles.dashboardHeader}>
         <Welcome
-          username={`${first_name} ${last_name}`}
+          username={`${user.first_name} ${user.last_name}`}
           min_description={"Discover projects that match your skills"}
         />
-        <CompleteProfileAlert />
+        {!profileCompletionState.is_profile_completed && (
+          <CompleteProfileAlert />
+        )}
       </div>
 
       <div className={styles.overview}>
@@ -87,7 +90,9 @@ function FreelancerDashboardPage() {
             <NavLink to="find-project" className={styles.actionLink}>
               Browse Projects
             </NavLink>
-            <NavLink to="my-proposals" className={styles.actionLink}>View my proposals </NavLink>
+            <NavLink to="my-proposals" className={styles.actionLink}>
+              View my proposals{" "}
+            </NavLink>
             <NavLink className={styles.actionLink}>Check Messages</NavLink>
           </div>
         </div>

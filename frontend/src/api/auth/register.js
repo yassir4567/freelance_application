@@ -21,9 +21,10 @@ const registerUser = async (formData) => {
       };
     }    
 
+    
     return {
       success: true,
-      data: data,
+      data: data.data,
     };
   } catch (err) {
     console.log(err);

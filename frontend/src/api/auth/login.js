@@ -19,10 +19,10 @@ const loginUser = async (formData) => {
         message: data.message || "",
       };
     }
-
+    
     return {
       success: true,
-      data: data,
+      data: data.data,
     };
   } catch (err) {
     return {
