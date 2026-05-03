@@ -92,15 +92,21 @@ class AuthController extends Controller
     {
 
         $token = $request->user()->currentAccessToken();
-        /** @var PersonalAccessToken $token */
         $token->delete();
         return response()->json(['message' => 'Logged out successefuly']);
     }
 
     public function me(Request $request)
     {
+
+        $user = $request->user() ;
+
         return response()->json([
-            'user' => $request->user(),
+            'success' => true , 
+            'data' => [
+                'user' => $user,
+                'profile' => $user->getProfileCompletion() 
+            ]
         ]);
     }
 }
