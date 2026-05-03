@@ -9,10 +9,12 @@ import { SlSizeFullscreen } from "react-icons/sl";
 import { useEffect, useState } from "react";
 import { getBrowseProjectDetail } from "../../../api/projects/getBrowseProjectDetail";
 import { formatDate } from "../../../utils/helpers";
+import SendProposalModal from "../../proposals/components/SendProposalModal";
 
 function BrowseProjectDetail() {
   const { projectId } = useParams();
   const [data, setData] = useState({});
+  const [showSendProposalModal, setShowSendProposalModal] = useState(false);
 
   useEffect(() => {
     const loadProject = async () => {
@@ -23,6 +25,11 @@ function BrowseProjectDetail() {
   }, []);
 
   const client = data?.project?.client;
+
+
+  const onClose = () => {
+    setShowSendProposalModal(false)
+  }
 
   return (
     <div className={styles.projectDetailPage}>
@@ -103,7 +110,12 @@ function BrowseProjectDetail() {
 
       <div className={styles.rightSide}>
         <div className={styles.actions}>
-          <NavLink className={styles.actionLink}>Send proposal</NavLink>
+          <NavLink
+            className={styles.actionLink}
+            onClick={() => setShowSendProposalModal(true)}
+          >
+            Send proposal
+          </NavLink>
         </div>
 
         <div className={styles.clientInfos}>
@@ -117,6 +129,12 @@ function BrowseProjectDetail() {
           </div>
         </div>
       </div>
+      {showSendProposalModal && (
+        <SendProposalModal
+          isOpen={showSendProposalModal}
+          onClose={onClose}
+        />
+      )}
     </div>
   );
 }
