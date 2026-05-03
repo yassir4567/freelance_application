@@ -1,14 +1,34 @@
 import styles from "./UserHeader.module.css";
 import { IoMdNotificationsOutline } from "react-icons/io";
 import profile from "../../assets/images/profile.png";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import ProfileMenu from "../common/ProfileMenu";
 import { NavLink } from "react-router-dom";
 
 function UserHeader({ links }) {
   const [showProfileMenu, setShowProfileMenu] = useState(false);
+  const ref = useRef(null);
+
+  const onClose = () => {
+    setShowProfileMenu(false);
+  };
+
+  useEffect(() => {
+    const handleClickOutside = (e) => {
+      if (ref.current && !ref.current.contains(e.target)) {
+        setShowProfileMenu(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
   return (
-    <header className={styles.header}>
+    <header className={styles.header} ref={ref}>
       <div className={styles.logo}>Freelancy</div>
       <nav className={styles.navbar}>
         <ul className={styles.navbar_list}>
@@ -37,14 +57,14 @@ function UserHeader({ links }) {
           onClick={() => setShowProfileMenu(!showProfileMenu)}
           className={styles.profile_icon}
         >
-          <img src={profile} alt="profile icon" />
+          <img src={profile} className={styles.profile} alt="profile icon" />
         </div>
       </div>
-      <div
-        className={`${styles.profile_dropdown} ${showProfileMenu && styles.show}`}
-      >
-        <ProfileMenu />
-      </div>
+      {showProfileMenu && (
+        <div className={styles.profile_dropdown}>
+          <ProfileMenu />
+        </div>
+      )}
     </header>
   );
 }
