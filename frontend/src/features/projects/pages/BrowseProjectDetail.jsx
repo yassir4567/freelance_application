@@ -26,10 +26,9 @@ function BrowseProjectDetail() {
 
   const client = data?.project?.client;
 
-
   const onClose = () => {
-    setShowSendProposalModal(false)
-  }
+    setShowSendProposalModal(false);
+  };
 
   return (
     <div className={styles.projectDetailPage}>
@@ -133,6 +132,7 @@ function BrowseProjectDetail() {
         <SendProposalModal
           isOpen={showSendProposalModal}
           onClose={onClose}
+          projectId={projectId}
         />
       )}
     </div>

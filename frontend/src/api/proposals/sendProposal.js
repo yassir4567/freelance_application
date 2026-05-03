@@ -17,6 +17,8 @@ const sendProposal = async (projectId, formData) => {
     );
     const data = await response.json();
 
+    console.log(data);
+    
     if (!response.ok) {
       return {
         success: false,

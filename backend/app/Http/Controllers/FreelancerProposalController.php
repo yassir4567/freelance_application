@@ -35,7 +35,7 @@ class FreelancerProposalController extends Controller
         ], 200);
     }
 
-    public function send(Request $request, string $projectId)
+    public function sendProposal(Request $request, string $projectId)
     {
         $project = Project::findOrFail($projectId);
 
