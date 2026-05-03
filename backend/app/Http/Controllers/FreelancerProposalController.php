@@ -70,6 +70,7 @@ class FreelancerProposalController extends Controller
             'cover_letter' => $validated['cover_letter'],
             'delivery_time' => $validated['delivery_time'],
             'price' => $validated['price'],
+            'status' => 'pending'
         ]);
 
         return response()->json([
