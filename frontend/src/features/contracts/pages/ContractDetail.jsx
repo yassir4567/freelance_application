@@ -4,7 +4,6 @@ import ContractParty from "../components/ContractParty";
 import ContractSummary from "../components/ContractSummary";
 import ContractDeliverables from "../components/ContractDeliverables";
 import ContractPayments from "../components/ContractPayments";
-import ContractTimeline from "../components/ContractTimeline";
 import { useEffect, useMemo, useState } from "react";
 import { useParams } from "react-router-dom";
 import { getClientContractDetail } from "../../../api/contracts/getClientContractDetail";
@@ -44,45 +43,6 @@ function ContractDetail() {
     rejected: "status-danger",
     cancelled: "status-danger",
   };
-
-  const contractTimeline = [
-    {
-      id: 1,
-      date: "Jan 14, 2026",
-      label: "Contract created",
-      title: "Project kickoff and scope confirmed",
-      description:
-        "Both parties agreed on the deliverables, milestones, and initial escrow allocation.",
-      status: "completed",
-    },
-    {
-      id: 2,
-      date: "Jan 18, 2026",
-      label: "First milestone",
-      title: "Homepage design delivered",
-      description:
-        "The homepage concept and responsive layouts were submitted and approved by the client.",
-      status: "completed",
-    },
-    {
-      id: 3,
-      date: "Feb 05, 2026",
-      label: "Revision cycle",
-      title: "Authentication module feedback shared",
-      description:
-        "A revision round was requested to refine the UI flow and account recovery screens.",
-      status: "current",
-    },
-    {
-      id: 4,
-      date: "Feb 14, 2026",
-      label: "Upcoming deadline",
-      title: "Next deliverable due for review",
-      description:
-        "The freelancer is expected to submit the revised authentication system for client approval.",
-      status: "upcoming",
-    },
-  ];
 
   const headerContent = useMemo(() => {
     return {
@@ -151,10 +111,6 @@ function ContractDetail() {
       />
       <ContractParty role={role} user={userInfo} headerInfo={headerInfo} />
       <ContractSummary summary={summary} />
-      <ContractTimeline
-        // contractTimeline={contract?.contract_timelines}
-        contractTimeline={contractTimeline} // for the test
-      />
       <ContractDeliverables deliverables={deliverables} />
       <ContractPayments deliverables={deliverables} />
     </div>

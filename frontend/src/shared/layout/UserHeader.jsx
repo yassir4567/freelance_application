@@ -4,10 +4,12 @@ import profile from "../../assets/images/profile.png";
 import { useEffect, useRef, useState } from "react";
 import ProfileMenu from "../common/ProfileMenu";
 import { NavLink } from "react-router-dom";
+import { useAuth } from "../../context/AuthContext";
 
 function UserHeader({ links }) {
   const [showProfileMenu, setShowProfileMenu] = useState(false);
   const ref = useRef(null);
+  const { user } = useAuth();
 
   const onClose = () => {
     setShowProfileMenu(false);
@@ -62,7 +64,7 @@ function UserHeader({ links }) {
       </div>
       {showProfileMenu && (
         <div className={styles.profile_dropdown}>
-          <ProfileMenu />
+          <ProfileMenu user={user} onClose={onClose} />
         </div>
       )}
     </header>

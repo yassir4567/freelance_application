@@ -14,12 +14,12 @@ function ProfileMenu({ onClose }) {
   return (
     <div className={styles.wrapper}>
       <div className={styles.profile_menu}>
-        <NavLink className={styles.btn}>
+        <NavLink to="profile" className={styles.btn} onClick={onClose}>
           <FaRegUser /> <span>Profile</span>
         </NavLink>
-        <NavLink className={styles.btn}>
+        {/* <NavLink className={styles.btn}>
           <IoSettingsOutline /> <span>Settings</span>
-        </NavLink>
+        </NavLink> */}
         <hr />
         <button onClick={handleLogout} className={styles.btn}>
           <RiLogoutCircleRLine color="red" /> <span>Logout</span>
