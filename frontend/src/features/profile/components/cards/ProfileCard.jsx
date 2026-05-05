@@ -1,7 +1,12 @@
 import styles from "../../styles/ProfileCard.module.css";
 import profile from "../../../../assets/images/profile.png";
+import { useAuth } from "../../../../context/AuthContext";
 
 function ProfileCard() {
+  const { user } = useAuth();
+
+  console.log(user);
+
   return (
     <div className={styles.container}>
       <div className={styles.wrapper}>
@@ -14,8 +19,10 @@ function ProfileCard() {
         </div>
 
         <div className={styles.userInfo}>
-          <h3 className={styles.name}>Full Name</h3>
-          <p className={styles.email}>fullname@gmail.com</p>
+          <h3 className={styles.name}>
+            {user.first_name} {user.last_name}
+          </h3>
+          <p className={styles.email}>{user.email}</p>
         </div>
       </div>
     </div>
