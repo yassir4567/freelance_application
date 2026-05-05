@@ -7,20 +7,32 @@
     border: 1px solid var(--color-border);
     box-shadow: 0 0 10px rgb(237, 235, 235);
     border-radius: 15px;
+    overflow: hidden;
 }
 
 
 .profileSideBar {
-    width: 350px;
+    width: 400px;
     position: relative;
+    padding: 20px 25px;
 }
 
 .profileSideBar::after {
     content: "";
     height: 100%;
-    width: 2px;
-    background-color: var(--color-secondary);
+    width: 1px;
+    background-color: var(--color-border);
     position: absolute;
     right: 0;
     top: 0;
+}
+
+.profileOutlet {
+    overflow: auto;
+    width: 100%;
+}
+
+.outletWrapper {
+    margin: 20px 20px 17px 15px;
+
 }

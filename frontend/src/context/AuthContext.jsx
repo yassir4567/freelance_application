@@ -47,6 +47,7 @@ const AuthProvider = ({ children }) => {
     const { user, profile, token } = result.data;
 
     localStorage.setItem("token", token);
+
     setUser(user);
     setProfileCompletionState(profile);
 

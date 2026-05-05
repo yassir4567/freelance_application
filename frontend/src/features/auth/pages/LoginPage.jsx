@@ -12,6 +12,7 @@ function LoginPage() {
   });
   const [error, setError] = useState("");
 
+  
   // * if user already logged in redirect him to his dashboard
   if (user) {
     if (user.role === "freelancer") {
