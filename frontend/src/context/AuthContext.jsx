@@ -87,6 +87,7 @@ const AuthProvider = ({ children }) => {
 
   const values = {
     user,
+    setUser,
     profileCompletionState,
     isLoading,
     login,
