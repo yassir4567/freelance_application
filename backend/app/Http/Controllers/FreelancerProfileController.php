@@ -21,7 +21,8 @@ class FreelancerProfileController extends Controller
             'city' => 'nullable|string',
             'title' => 'nullable|string',
             'portfolio' => 'nullable|url',
-            'bio' => 'nullable|string'
+            'bio' => 'nullable|string',
+            'category_id' => 'nullable|exists:categories,id'
         ]);
 
         $user->update([
@@ -38,6 +39,7 @@ class FreelancerProfileController extends Controller
             'title' => $validated['title'] ?? null,
             'bio' => $validated['bio'] ?? null,
             'portfolio_url' => $validated['portfolio'] ?? null,
+            'category_id' => $validated['category_id'] ?? null
         ]);
 
 

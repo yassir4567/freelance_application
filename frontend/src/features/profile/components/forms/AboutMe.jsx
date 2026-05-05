@@ -1,6 +1,20 @@
+import { useEffect, useState } from "react";
 import styles from "../../styles/AboutMe.module.css";
+import { getCategories } from "../../../../api/categories/getCategories";
 
 function AboutMe({ isEdited, form, setForm }) {
+  const [categories, setCategories] = useState([]);
+
+  useEffect(() => {
+    const loadCategories = async () => {
+      const result = await getCategories();
+      if (result.success) {
+        setCategories(result.data);
+      }
+    };
+    loadCategories();
+  }, []);
+
   const handleOnChange = (e) => {
     const { name, value } = e.target;
 
@@ -34,6 +48,20 @@ function AboutMe({ isEdited, form, setForm }) {
               placeholder="Unregistered"
               disabled={!isEdited}
             />
+          </div>
+          <div className={styles.inputBox}>
+            <label>Category</label>
+            <select
+              name="category_id"
+              value={form.category_id}
+              onChange={handleOnChange}
+              disabled={!isEdited}
+            >
+              <option value="">Select category</option>
+              {categories.map((category) => (
+                <option value={category.id} key={category.id}>{category.name}</option>
+              ))}
+            </select>
           </div>
         </div>
         <div className={styles.bioRow}>

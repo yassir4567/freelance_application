@@ -27,6 +27,7 @@ function ProfilePage() {
     title: user.freelancer?.title || "",
     bio: user.freelancer?.bio || "",
     portfolio: user.freelancer?.portfolio || "",
+    category_id: user.freelancer?.category_id || "",
   });
 
   const handleOpenEdit = () => {
