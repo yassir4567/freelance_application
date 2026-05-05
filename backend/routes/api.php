@@ -4,6 +4,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ClientContractController;
 use App\Http\Controllers\ClientDashboardController;
+use App\Http\Controllers\ClientProfileController;
 use App\Http\Controllers\ClientProjectController;
 use App\Http\Controllers\ClientProposalController;
 use App\Http\Controllers\ConversationController;
@@ -36,6 +37,9 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::get('/client/contracts', [ClientContractController::class, 'index']);
         Route::get('/client/contracts/stats', [ClientContractController::class, 'stats']);
         Route::get('/client/contracts/{id}', [ClientContractController::class, 'show']);
+
+        // ? profile 
+        Route::put('/client/update-profile', [ClientProfileController::class, 'update']);
     });
 
     Route::middleware('role:freelancer')->group(function () {
