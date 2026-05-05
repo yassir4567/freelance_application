@@ -10,7 +10,9 @@ function ProfileLayout() {
       </div>
 
       <div className={styles.profileOutlet}>
-        <Outlet />
+        <div className={styles.outletWrapper}>
+          <Outlet />
+        </div>
       </div>
     </div>
   );

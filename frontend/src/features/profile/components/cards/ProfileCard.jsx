@@ -5,7 +5,6 @@ import { useAuth } from "../../../../context/AuthContext";
 function ProfileCard() {
   const { user } = useAuth();
 
-  console.log(user);
 
   return (
     <div className={styles.container}>
