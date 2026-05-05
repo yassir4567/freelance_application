@@ -8,9 +8,9 @@ function ProfileInformation() {
   console.log(user);
 
   const [form, setForm] = useState({
-    first_name: user.first_name || "",
-    last_name: user.last_name || "",
-    phone: user.phone || "",
+    first_name: user.first_name || "Unregistered",
+    last_name: user.last_name || "Unregistered",
+    phone: user.phone || "Unregistered",
   });
 
   const handleOnChange = (e) => {

@@ -6,9 +6,9 @@ function ProfileAddress() {
   const { user } = useAuth();
 
   const [form, setForm] = useState({
-    address: user.address || "",
-    country: user.country || "",
-    city: user.city || "",
+    address: user.address || "Unregistered",
+    country: user.country || "Unregistered",
+    city: user.city || "Unregistered",
   });
 
   const handleOnChange = (e) => {
