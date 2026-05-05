@@ -37,7 +37,7 @@ class FreelancerProfileController extends Controller
         $user->freelancer()->update([
             'title' => $validated['title'] ?? null,
             'bio' => $validated['bio'] ?? null,
-            'portfolio' => $validated['portfolio'] ?? null,
+            'portfolio_url' => $validated['portfolio'] ?? null,
         ]);
 
 

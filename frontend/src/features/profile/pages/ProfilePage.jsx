@@ -52,12 +52,11 @@ function ProfilePage() {
         ...aboutFreelancer,
       };
 
-      const result = await updateFreelancerProfile(payload)
+      const result = await updateFreelancerProfile(payload);
       console.log(result);
-      
-      setUser(result.data)
-      setIsEdited(false)
 
+      setUser(result.data);
+      setIsEdited(false);
     }
   };
 
