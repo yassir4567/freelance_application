@@ -2,15 +2,7 @@ import { useState } from "react";
 import { useAuth } from "../../../../context/AuthContext";
 import styles from "../../styles/ProfileAddress.module.css";
 
-function ProfileAddress() {
-  const { user } = useAuth();
-
-  const [form, setForm] = useState({
-    address: user.address || "Unregistered",
-    country: user.country || "Unregistered",
-    city: user.city || "Unregistered",
-  });
-
+function ProfileAddress({ isEdited, form, setForm }) {
   const handleOnChange = (e) => {
     const { name, value } = e.target;
 
@@ -21,7 +13,7 @@ function ProfileAddress() {
     <div className={styles.container}>
       <h2 className={styles.title}>Address informations</h2>
 
-      <form>
+      <div>
         <div className={styles.row}>
           <div className={styles.inputBox}>
             <label>Address</label>
@@ -30,7 +22,7 @@ function ProfileAddress() {
               name="address"
               value={form.address}
               onChange={handleOnChange}
-              disabled
+              disabled={!isEdited}
             />
           </div>
           <div className={styles.inputBox}>
@@ -40,7 +32,7 @@ function ProfileAddress() {
               name="country"
               value={form.country}
               onChange={handleOnChange}
-              disabled
+              disabled={!isEdited}
             />
           </div>
           <div className={styles.inputBox}>
@@ -50,11 +42,11 @@ function ProfileAddress() {
               name="city"
               value={form.city}
               onChange={handleOnChange}
-              disabled
+              disabled={!isEdited}
             />
           </div>
         </div>
-      </form>
+      </div>
     </div>
   );
 }
