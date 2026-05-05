@@ -5,6 +5,7 @@ import ProfileSideBar from "../components/ProfileSideBar";
 import styles from "../styles/ProfilePage.module.css";
 import { useAuth } from "../../../context/AuthContext";
 import updateClientProfile from "../../../api/profiles/updateClientProfile";
+import AboutMe from "../components/forms/AboutMe";
 function ProfilePage() {
   const { user, setUser } = useAuth();
   const [isEdited, setIsEdited] = useState(false);
@@ -19,6 +20,12 @@ function ProfilePage() {
     address: user.address || "Unregistered",
     country: user.country || "Unregistered",
     city: user.city || "Unregistered",
+  });
+
+  const [aboutFreelancer, setAboutFreelancer] = useState({
+    title: user.freelancer.title || "Unregistered",
+    bio: user.freelancer.bio || "Unregistered",
+    portfolio: user.freelancer.portfolio || "http://...",
   });
 
   const handleOpenEdit = () => {
@@ -64,6 +71,13 @@ function ProfilePage() {
           form={profileAddress}
           setForm={setProfileAddress}
         />
+        {user.role === "freelancer" && (
+          <AboutMe
+            isEdited={isEdited}
+            form={aboutFreelancer}
+            setForm={setAboutFreelancer}
+          />
+        )}
       </form>
     </div>
   );

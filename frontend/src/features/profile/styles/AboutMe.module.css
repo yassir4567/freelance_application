@@ -1,0 +1,44 @@
+.container {
+    margin-top: 40px;
+}
+
+.title {
+    font-size: var(--fs-md);
+    font-weight: 500;
+    color: var(--color-secondary);
+    margin-bottom: 20px;
+}
+
+
+.row {
+    display: flex;
+    gap: 20px;
+}
+
+.inputBox,
+.textareaBox {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.inputBox label,
+.textareaBox label {
+    font-size: var(--fs-sm);
+    margin-bottom: 10px;
+}
+
+.inputBox input {
+    height: 40px;
+    padding-inline: 14px;
+    border-radius: 10px;
+}
+
+.bioRow {
+    margin-top: 20px;
+}
+
+.textareaBox textarea {
+    height: 70px;
+    padding: 10px 14px;
+}
