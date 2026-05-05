@@ -56,6 +56,8 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::get('/freelancer/contracts', [FreelancerContractController::class, 'index']);
         Route::get('/freelancer/contracts/{id}', [FreelancerContractController::class, 'show']);
 
+        // ? profile 
+        Route::put('/freelancer/update-profile', [FreelancerProjectController::class, 'update']);
     });
 
     // ? categories & skills
