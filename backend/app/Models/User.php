@@ -81,7 +81,7 @@ class User extends Authenticatable
         $fields = [
             'phone' => $this->phone,
             'country' => $this->country,
-            'avatar' => $this->avatar,
+            // 'avatar' => $this->avatar,
             'address' => $this->address,
             'city' => $this->city,
 
@@ -89,7 +89,7 @@ class User extends Authenticatable
             'title' => $freelancer->title,
             'bio' => $freelancer->bio,
             'portfolio_url' => $freelancer->portfolio_url,
-            'resume_url' => $freelancer->resume_url,
+            // 'resume_url' => $freelancer->resume_url,
 
         ];
 

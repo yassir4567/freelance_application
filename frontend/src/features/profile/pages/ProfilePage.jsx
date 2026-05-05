@@ -26,7 +26,7 @@ function ProfilePage() {
   const [aboutFreelancer, setAboutFreelancer] = useState({
     title: user.freelancer?.title || "",
     bio: user.freelancer?.bio || "",
-    portfolio: user.freelancer?.portfolio || "",
+    portfolio: user.freelancer?.portfolio_url || "",
     category_id: user.freelancer?.category_id || "",
   });
 
