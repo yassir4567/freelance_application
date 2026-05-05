@@ -21,6 +21,7 @@ function ProfileAddress({ isEdited, form, setForm }) {
               type="text"
               name="address"
               value={form.address}
+              placeholder="Unregistered"
               onChange={handleOnChange}
               disabled={!isEdited}
             />
@@ -31,6 +32,7 @@ function ProfileAddress({ isEdited, form, setForm }) {
               type="text"
               name="country"
               value={form.country}
+              placeholder="Unregistered"
               onChange={handleOnChange}
               disabled={!isEdited}
             />
@@ -41,6 +43,7 @@ function ProfileAddress({ isEdited, form, setForm }) {
               type="text"
               name="city"
               value={form.city}
+              placeholder="Unregistered"
               onChange={handleOnChange}
               disabled={!isEdited}
             />

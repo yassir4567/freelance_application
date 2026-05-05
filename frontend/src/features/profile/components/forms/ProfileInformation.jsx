@@ -21,6 +21,7 @@ function ProfileInformation({ isEdited, form, setForm }) {
               type="text"
               name="first_name"
               value={form.first_name}
+              placeholder="Unregistered"
               onChange={handleOnChange}
               disabled={!isEdited}
             />
@@ -31,6 +32,7 @@ function ProfileInformation({ isEdited, form, setForm }) {
               type="text"
               name="last_name"
               value={form.last_name}
+              placeholder="Unregistered"
               onChange={handleOnChange}
               disabled={!isEdited}
             />
@@ -41,6 +43,7 @@ function ProfileInformation({ isEdited, form, setForm }) {
               type="text"
               name="phone"
               value={form.phone}
+              placeholder="Unregistered"
               onChange={handleOnChange}
               disabled={!isEdited}
             />

@@ -10,6 +10,7 @@ use App\Http\Controllers\ClientProposalController;
 use App\Http\Controllers\ConversationController;
 use App\Http\Controllers\FreelancerContractController;
 use App\Http\Controllers\FreelancerDashboardController;
+use App\Http\Controllers\FreelancerProfileController;
 use App\Http\Controllers\FreelancerProjectController;
 use App\Http\Controllers\FreelancerProposalController;
 use App\Http\Controllers\MessageController;
@@ -57,7 +58,7 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::get('/freelancer/contracts/{id}', [FreelancerContractController::class, 'show']);
 
         // ? profile 
-        Route::put('/freelancer/update-profile', [FreelancerProjectController::class, 'update']);
+        Route::put('/freelancer/update-profile', [FreelancerProfileController::class, 'update']);
     });
 
     // ? categories & skills

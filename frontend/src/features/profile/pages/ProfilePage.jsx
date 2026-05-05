@@ -6,26 +6,27 @@ import styles from "../styles/ProfilePage.module.css";
 import { useAuth } from "../../../context/AuthContext";
 import updateClientProfile from "../../../api/profiles/updateClientProfile";
 import AboutMe from "../components/forms/AboutMe";
+import updateFreelancerProfile from "../../../api/profiles/updateFreelancerProfile";
 function ProfilePage() {
   const { user, setUser } = useAuth();
   const [isEdited, setIsEdited] = useState(false);
 
   const [personalInformationForm, setPersonalInformationForm] = useState({
-    first_name: user.first_name || "Unregistered",
-    last_name: user.last_name || "Unregistered",
-    phone: user.phone || "Unregistered",
+    first_name: user.first_name || "",
+    last_name: user.last_name || "",
+    phone: user.phone || "",
   });
 
   const [profileAddress, setProfileAddress] = useState({
-    address: user.address || "Unregistered",
-    country: user.country || "Unregistered",
-    city: user.city || "Unregistered",
+    address: user.address || "",
+    country: user.country || "",
+    city: user.city || "",
   });
 
   const [aboutFreelancer, setAboutFreelancer] = useState({
-    title: user.freelancer.title || "Unregistered",
-    bio: user.freelancer.bio || "Unregistered",
-    portfolio: user.freelancer.portfolio || "http://...",
+    title: user.freelancer?.title || "",
+    bio: user.freelancer?.bio || "",
+    portfolio: user.freelancer?.portfolio || "",
   });
 
   const handleOpenEdit = () => {
@@ -42,6 +43,21 @@ function ProfilePage() {
       const result = await updateClientProfile(payload);
       setUser(result.data);
       setIsEdited(false);
+    }
+
+    if (user.role === "freelancer") {
+      const payload = {
+        ...personalInformationForm,
+        ...profileAddress,
+        ...aboutFreelancer,
+      };
+
+      const result = await updateFreelancerProfile(payload)
+      console.log(result);
+      
+      setUser(result.data)
+      setIsEdited(false)
+
     }
   };
 

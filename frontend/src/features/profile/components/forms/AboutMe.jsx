@@ -20,6 +20,7 @@ function AboutMe({ isEdited, form, setForm }) {
               name="title"
               value={form.title}
               onChange={handleOnChange}
+              placeholder="Unregistered"
               disabled={!isEdited}
             />
           </div>
@@ -30,10 +31,11 @@ function AboutMe({ isEdited, form, setForm }) {
               name="portfolio"
               value={form.portfolio}
               onChange={handleOnChange}
+              placeholder="Unregistered"
               disabled={!isEdited}
             />
           </div>
-        </div>  
+        </div>
         <div className={styles.bioRow}>
           <div className={styles.textareaBox}>
             <label>Bio</label>
@@ -42,6 +44,7 @@ function AboutMe({ isEdited, form, setForm }) {
               name="bio"
               value={form.bio}
               onChange={handleOnChange}
+              placeholder="Unregistered"
               disabled={!isEdited}
             />
           </div>
