@@ -4,8 +4,9 @@ import ProfileInformation from "../components/forms/ProfileInformation";
 import ProfileSideBar from "../components/ProfileSideBar";
 import styles from "../styles/ProfilePage.module.css";
 import { useAuth } from "../../../context/AuthContext";
+import updateClientProfile from "../../../api/profiles/updateClientProfile";
 function ProfilePage() {
-  const { user } = useAuth();
+  const { user, setUser } = useAuth();
   const [isEdited, setIsEdited] = useState(false);
 
   const [personalInformationForm, setPersonalInformationForm] = useState({
@@ -20,14 +21,21 @@ function ProfilePage() {
     city: user.city || "Unregistered",
   });
 
-  console.log(user);
-
   const handleOpenEdit = () => {
     setIsEdited(true);
   };
 
-  const handleSaveEdit = () => {
-    setIsEdited(false);
+  const handleSaveEdit = async () => {
+    if (user.role === "client") {
+      const payload = {
+        ...personalInformationForm,
+        ...profileAddress,
+      };
+
+      const result = await updateClientProfile(payload);
+      setUser(result.data);
+      setIsEdited(false);
+    }
   };
 
   return (
