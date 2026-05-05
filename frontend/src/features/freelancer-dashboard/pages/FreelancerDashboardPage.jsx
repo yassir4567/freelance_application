@@ -1,7 +1,6 @@
 import SimpleCard from "../../../shared/ui/SimpleCard";
 import Welcome from "../../../shared/common/Welcome";
 import FreelancerActiveContracts from "../components/FreelancerActiveContracts";
-import CompleteProfileAlert from "../components/CompleteProfileAlert";
 import styles from "../styles/FreelancerDashboardPage.module.css";
 import { AiOutlineProject, AiOutlineDeliveredProcedure } from "react-icons/ai";
 import { VscGitPullRequestDone } from "react-icons/vsc";
@@ -10,6 +9,7 @@ import { NavLink } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { getDashboardData } from "../../../api/dashboard/getDashboardData";
 import { useAuth } from "../../../context/AuthContext";
+import CompleteProfileAlert from "../../../shared/common/CompleteProfileAlert";
 
 function FreelancerDashboardPage() {
   const [data, setData] = useState([]);
@@ -47,9 +47,6 @@ function FreelancerDashboardPage() {
     },
   ];
 
-  // console.log(user);
-
-  // console.log(profileCompletionState);
 
   return (
     <div className={styles.dashboard}>
@@ -59,7 +56,7 @@ function FreelancerDashboardPage() {
           min_description={"Discover projects that match your skills"}
         />
         {!profileCompletionState.is_profile_completed && (
-          <CompleteProfileAlert />
+          <CompleteProfileAlert role="freelancer" />
         )}
       </div>
 

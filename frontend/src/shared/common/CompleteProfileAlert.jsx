@@ -1,23 +1,20 @@
 import { NavLink } from "react-router-dom";
-import styles from "../styles/CompleteProfileAlert.module.css";
+import styles from "./CompleteProfileAlert.module.css";
 
-function CompleteProfileAlert() {
+function CompleteProfileAlert({ role }) {
   return (
     <div className={styles.alertBox}>
       <div className={styles.completeMsgs}>
-        <h3 className={styles.title}>
-          Complete your profile
-        </h3>
+        <h3 className={styles.title}>Complete your profile</h3>
         <p className={styles.description}>
           A complete profile helps clients trust you faster
         </p>
       </div>
       <div className={styles.linkBox}>
-        <NavLink className={styles.link}>
-            Complete profile
+        <NavLink to={`/dashboard/${role}/profile`} className={styles.link}>
+          Complete profile
         </NavLink>
       </div>
-
     </div>
   );
 }

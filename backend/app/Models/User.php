@@ -67,7 +67,7 @@ class User extends Authenticatable
         $fields = [
             'phone' => $this->phone,
             'country' => $this->country,
-            'avatar' => $this->avatar,
+            // 'avatar' => $this->avatar,
             'address' => $this->address,
             'city' => $this->city,
         ];

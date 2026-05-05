@@ -11,13 +11,13 @@ import Welcome from "../../../shared/common/Welcome";
 import { useEffect, useState } from "react";
 import { getDashboardData } from "../../../api/dashboard/getDashboardData";
 import { useAuth } from "../../../context/AuthContext";
-
+import CompleteProfileAlert from "../../../shared/common/CompleteProfileAlert";
 
 function ClientDashboardPage() {
   const [data, setData] = useState([]);
-  const {
-    user: { first_name, last_name },
-  } = useAuth();
+  const { user, profileCompletionState } = useAuth();
+
+  console.log(profileCompletionState);
 
   useEffect(() => {
     const loadStats = async () => {
@@ -58,22 +58,26 @@ function ClientDashboardPage() {
     },
   ];
 
-
   return (
     <div className={styles.dashboard}>
-      <div className={styles.dashboardHeader}>
-        <Welcome
-          username={`${first_name} ${last_name}`}
-          min_description="Here's what happening with your projects today"
-        />
-        <div className={styles.post_project}>
-          <NavLink
-            to="/dashboard/client/postjob"
-            className={styles.post_job_btn}
-          >
-            <span>Post Job</span> <IoMdAdd />
-          </NavLink>
+      <div>
+        <div className={styles.dashboardHeader}>
+          <Welcome
+            username={`${user.first_name} ${user.last_name}`}
+            min_description="Here's what happening with your projects today"
+          />
+          <div className={styles.post_project}>
+            <NavLink
+              to="/dashboard/client/postjob"
+              className={styles.post_job_btn}
+            >
+              <span>Post Job</span> <IoMdAdd />
+            </NavLink>
+          </div>
         </div>
+        {!profileCompletionState.is_profile_completed && (
+          <CompleteProfileAlert role="client" />
+        )}
       </div>
       <div className={styles.overview}>
         <h3 className={styles.overviewTitle}>Overview</h3>
