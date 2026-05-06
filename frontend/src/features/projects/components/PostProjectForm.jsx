@@ -7,7 +7,7 @@ import { getCategories } from "../../../api/categories/getCategories";
 import { postProject } from "../../../api/projects/postProject";
 import { useNavigate } from "react-router-dom";
 
-function PostProjectForm() {
+function PostProjectForm({ is_profile_complete }) {
   const navigate = useNavigate();
   const [skills, setSkills] = useState([]);
   const [categories, setCategories] = useState([]);
@@ -189,6 +189,7 @@ function PostProjectForm() {
             onChange={handleInputChange}
             name="title"
             placeholder="Enter your project title"
+            disabled={!is_profile_complete}
           />
           {errors.title && <div className={styles.error}>{errors.title}</div>}
         </div>
@@ -199,6 +200,7 @@ function PostProjectForm() {
             value={project.category_id}
             onChange={handleInputChange}
             name="category_id"
+            disabled={!is_profile_complete}
           >
             <option value="" disabled>
               Select project category
@@ -222,7 +224,11 @@ function PostProjectForm() {
             value=""
             onChange={handleInputChange}
             name="skills"
-            disabled={!project.category_id || skillsOptions.length === 0}
+            disabled={
+              !project.category_id ||
+              skillsOptions.length === 0 ||
+              !is_profile_complete
+            }
           >
             <option value="" disabled>
               {!project.category_id
@@ -263,6 +269,7 @@ function PostProjectForm() {
               id="junior"
               name="experience_level"
               checked={project.experience_level === "junior"}
+              disabled={!is_profile_complete}
             />
             <label htmlFor="junior">Junior</label>
           </div>
@@ -275,6 +282,7 @@ function PostProjectForm() {
               id="midlevel"
               name="experience_level"
               checked={project.experience_level === "mid-level"}
+              disabled={!is_profile_complete}
             />
             <label htmlFor="midlevel">Mid-Level</label>
           </div>
@@ -287,6 +295,7 @@ function PostProjectForm() {
               id="senior"
               name="experience_level"
               checked={project.experience_level === "senior"}
+              disabled={!is_profile_complete}
             />
             <label htmlFor="senior">Senior</label>
           </div>
@@ -306,6 +315,7 @@ function PostProjectForm() {
               id="small"
               name="size"
               checked={project.size === "small"}
+              disabled={!is_profile_complete}
             />
             <label htmlFor="small">Small</label>
           </div>
@@ -318,6 +328,7 @@ function PostProjectForm() {
               id="medium"
               name="size"
               checked={project.size === "medium"}
+              disabled={!is_profile_complete}
             />
             <label htmlFor="medium">Medium</label>
           </div>
@@ -330,6 +341,7 @@ function PostProjectForm() {
               id="large"
               name="size"
               checked={project.size === "large"}
+              disabled={!is_profile_complete}
             />
             <label htmlFor="large">Large</label>
           </div>
@@ -347,6 +359,7 @@ function PostProjectForm() {
               id="less1"
               name="duration"
               checked={project.duration === "less_than_1_month"}
+              disabled={!is_profile_complete}
             />
             <label htmlFor="less1">Less than 1 Months</label>
           </div>
@@ -359,6 +372,7 @@ function PostProjectForm() {
               id="between_1_3"
               name="duration"
               checked={project.duration === "1_to_3_month"}
+              disabled={!is_profile_complete}
             />
             <label htmlFor="between_1_3">1 to 3 Months</label>
           </div>
@@ -371,6 +385,7 @@ function PostProjectForm() {
               id="between_3_6"
               name="duration"
               checked={project.duration === "3_to_6_month"}
+              disabled={!is_profile_complete}
             />
             <label htmlFor="between_3_6">3 to 6 Months</label>
           </div>
@@ -383,6 +398,7 @@ function PostProjectForm() {
               id="more6"
               name="duration"
               checked={project.duration === "more_than_6_month"}
+              disabled={!is_profile_complete}
             />
             <label htmlFor="more6">More than 6 Months</label>
           </div>
@@ -404,6 +420,7 @@ function PostProjectForm() {
             value={project.description}
             onChange={handleInputChange}
             placeholder="Enter your project description"
+            disabled={!is_profile_complete}
           />
           {errors.description && (
             <div className={styles.error}>{errors.description}</div>
@@ -419,6 +436,7 @@ function PostProjectForm() {
             value={project.budget}
             onChange={handleInputChange}
             placeholder="Enter your project budget"
+            disabled={!is_profile_complete}
           />
           {errors.budget && <div className={styles.error}>{errors.budget}</div>}
         </div>

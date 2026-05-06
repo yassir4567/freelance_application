@@ -25,6 +25,15 @@
   margin-top: 5px;
 }
 
+.select:disabled {
+  background-color: var(--color-light);
+  background-color: var(--color-light);
+}
+
+.select:disabled:hover {
+  border: 1px solid var(--color-border);
+}
+
 .inputBox label {
   margin-bottom: 20px;
 }
@@ -36,6 +45,12 @@
   border-radius: 10px;
   margin-top: 5px;
 }
+
+.textarea:disabled:hover {
+  border: 1px solid var(--color-border);
+}
+
+
 
 .selectedSkills {
   display: flex;
