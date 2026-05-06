@@ -4,7 +4,7 @@ const rejectProposal = async (projectId, proposalId) => {
   try {
     const token = getToken();
     const response = await fetch(
-      `${BASE_URL}/client/projects/${projectId}/proposals${proposalId}/reject`,
+      `${BASE_URL}/client/projects/${projectId}/proposals/${proposalId}/reject`,
       {
         method: "PUT",
         headers: {

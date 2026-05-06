@@ -4,9 +4,9 @@ const acceptProposal = async (projectId, proposalId) => {
   try {
     const token = getToken();
     const response = await fetch(
-      `${BASE_URL}/client/projects/${projectId}/proposals${proposalId}/accept`,
+      `${BASE_URL}/client/projects/${projectId}/proposals/${proposalId}/accept`,
       {
-        method: "PUY",
+        method: "PUT",
         headers: {
           Accept: "application/json",
           "Content-Type": "application/json",
@@ -15,8 +15,6 @@ const acceptProposal = async (projectId, proposalId) => {
       },
     );
     const data = await response.json();
-
-    console.log(data);
 
     if (!response.ok) {
       return {

@@ -3,14 +3,21 @@ import styles from "../styles/ClientProposalCard.module.css";
 import { IoStarSharp } from "react-icons/io5";
 import profile from "../../../assets/images/profile.png";
 import { formatDate } from "../../../utils/helpers";
-function ClientProposalCard({ proposal }) {
-  const freelancer = proposal.freelancer;
+function ClientProposalCard({
+  proposal,
+  acceptFreelancerProposal,
+  rejectFreelancerProposal,
+}) {
+  const freelancer = proposal?.freelancer;
 
   const statusClass = {
     pending: styles.pending,
     accepted: styles.accepted,
     rejected: styles.rejected,
   };
+
+  
+
   return (
     <div className={styles.proposalCard}>
       <div className={styles.proposalCardHeader}>
@@ -61,10 +68,16 @@ function ClientProposalCard({ proposal }) {
         <div className={styles.primaryActions}>
           {proposal.status === "pending" && (
             <>
-              <button className={`${styles.actionBtn} ${styles.accept}`}>
+              <button
+                className={`${styles.actionBtn} ${styles.accept}`}
+                onClick={() => acceptFreelancerProposal(proposal.id)}
+              >
                 accept
               </button>
-              <button className={`${styles.actionBtn} ${styles.reject}`}>
+              <button
+                className={`${styles.actionBtn} ${styles.reject}`}
+                onClick={() => rejectFreelancerProposal(proposal.id)}
+              >
                 reject
               </button>
             </>
@@ -72,7 +85,7 @@ function ClientProposalCard({ proposal }) {
         </div>
         <div className={styles.secondaryActions}>
           {proposal.status === "accepted" && (
-            <NavLink className={`${styles.link} ${styles.message}`}>
+            <NavLink to={`/dashboard/client/messages?chat=${proposal.contract?.conversation.id}`} className={`${styles.link} ${styles.message}`}>
               message
             </NavLink>
           )}

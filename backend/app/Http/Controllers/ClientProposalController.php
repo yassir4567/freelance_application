@@ -31,7 +31,9 @@ class ClientProposalController extends Controller
         )
             ->with([
                 'freelancer:id,title,user_id',
-                'freelancer.user:id,first_name,last_name,avatar'
+                'freelancer.user:id,first_name,last_name,avatar',
+                'contract:id,proposal_id',
+                'contract.conversation:id,contract_id'
             ])->latest()->get();
         return response()->json([
             'success' => true,
@@ -93,11 +95,12 @@ class ClientProposalController extends Controller
                 'contract_id' => $contract->id,
             ]);
 
-            return [
-                'proposal' => $proposal->fresh(),
-                'contract' => $contract->fresh(),
-                'conversation' => $conversation->fresh()
-            ];
+            return $proposal->fresh()->load([
+                'freelancer:id,title,user_id',
+                'freelancer.user:id,first_name,last_name,avatar',
+                'contract:id,proposal_id',
+                'contract.conversation:id,contract_id,created_at'
+            ]);
         });
 
         return response()->json([
@@ -142,7 +145,12 @@ class ClientProposalController extends Controller
         return response()->json([
             'success' => true,
             'message' => 'Proposal rejected successfully',
-            'data' => $proposal->fresh(),
+            'data' => $proposal->fresh()->load([
+                'freelancer:id,title,user_id',
+                'freelancer.user:id,first_name,last_name,avatar',
+                'contract:id,proposal_id',
+                'contract.conversation:id,contract_id,created_at'
+            ]),
         ], 200);
     }
 }
