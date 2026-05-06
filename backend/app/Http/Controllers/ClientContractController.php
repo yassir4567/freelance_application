@@ -12,7 +12,7 @@ class ClientContractController extends Controller
     public function index(Request $request)
     {
         $client = $request->user();
-        $query = Contract::whereIn('status', ['active', 'completed'])
+        $query = Contract::whereIn('status', ['pending', 'active', 'completed'])
             ->whereHas('proposal.project', function ($q) use ($client) {
                 $q->where('client_id', $client->id);
             })->with([
@@ -20,7 +20,8 @@ class ClientContractController extends Controller
                     'proposal.project:id,title',
                     'proposal.freelancer:id,user_id,title',
                     'proposal.freelancer.user:id,first_name,last_name,avatar',
-                    'deliverables:id,contract_id,title,deadline,status,created_at'
+                    'deliverables:id,contract_id,title,deadline,status,created_at',
+                    'conversation:id,contract_id'
                 ]);
 
         if ($request->filled('search')) {
@@ -67,6 +68,7 @@ class ClientContractController extends Controller
                     'current_deliverable' => $current_deliverable,
                     'total_deliverables' => $total_deliverables,
                     'completed_deliverables' => $completed_deliverables,
+                    'conversation' => $contract->conversation
                 ];
 
             });
@@ -125,7 +127,7 @@ class ClientContractController extends Controller
                 'final_price' => $contract->final_price,
                 'final_deadline' => $contract->final_deadline,
                 'created_at' => $contract->created_at,
-                'contract_timelines' => $contract->contractsTimelines,
+                // 'contract_timelines' => $contract->contractsTimelines,
                 'deliverables' => $contract->deliverables,
                 'project' => [
                     'id' => $contract->proposal->project->id,

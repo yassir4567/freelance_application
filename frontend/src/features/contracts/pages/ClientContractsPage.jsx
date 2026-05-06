@@ -19,8 +19,6 @@ function ClientContractsPage() {
   useEffect(() => {
     const loadContractStats = async () => {
       const result = await getClientContractStats();
-      console.log(result.data);
-      
       setContractStats(result.data);
     };
     loadContractStats();
@@ -90,7 +88,7 @@ function ClientContractsPage() {
   };
 
   // * status values
-  const statusValues = ["active", "completed", "cancelled"];
+  const statusValues = ["pending", "active", "completed", "cancelled"];
 
   return (
     <div className={styles.contractsPage}>
