@@ -16,7 +16,6 @@ function MessagesPage() {
     const loadConversations = async () => {
       const result = await getConversations();
       setConversations(result.data);
-      console.log(result.data);
     };
     loadConversations();
   }, []);

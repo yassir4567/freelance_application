@@ -12,6 +12,7 @@ function ChatMessages({ conversation }) {
 
   const { user } = useAuth();
 
+  
   const other_user = conversation?.other_user;
 
   useEffect(() => {
@@ -48,7 +49,7 @@ function ChatMessages({ conversation }) {
         </div>
       </div>
       <div className={styles.messagesInput}>
-        <MessageInput />
+        <MessageInput setMessages={setMessages} />
       </div>
     </div>
   );

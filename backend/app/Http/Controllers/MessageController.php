@@ -31,7 +31,7 @@ class MessageController extends Controller
 
         $message = Message::create([
             'sender_id' => $sender->id,
-            'conversation_id' => $id,
+            'conversation_id' => (int) $id,
             'message' => $validated['message'],
         ]);
 
