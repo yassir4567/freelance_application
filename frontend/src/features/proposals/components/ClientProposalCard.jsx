@@ -71,9 +71,6 @@ function ClientProposalCard({ proposal }) {
           )}
         </div>
         <div className={styles.secondaryActions}>
-          <NavLink className={`${styles.link} ${styles.detail}`}>
-            view detail
-          </NavLink>
           {proposal.status === "accepted" && (
             <NavLink className={`${styles.link} ${styles.message}`}>
               message
