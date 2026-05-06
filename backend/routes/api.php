@@ -35,8 +35,8 @@ Route::middleware('auth:sanctum')->group(function () {
 
         // ? proposals
         Route::get('/client/projects/{id}/proposals', [ClientProposalController::class, 'index']);
-        Route::put('/client/projects/{projectId}/proposals/{proposalId}', [ClientProposalController::class, 'accept']);
-        Route::put('/client/projects/{projectId}/proposals/{proposalId}', [ClientProposalController::class, 'reject']);
+        Route::put('/client/projects/{projectId}/proposals/{proposalId}/accept', [ClientProposalController::class, 'accept']);
+        Route::put('/client/projects/{projectId}/proposals/{proposalId}/reject', [ClientProposalController::class, 'reject']);
 
         // ? contracts
         Route::get('/client/contracts', [ClientContractController::class, 'index']);
