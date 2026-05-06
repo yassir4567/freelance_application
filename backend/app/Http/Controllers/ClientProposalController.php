@@ -106,4 +106,43 @@ class ClientProposalController extends Controller
             'data' => $result
         ]);
     }
+
+    public function reject(Request $request, string $projectId, string $proposalId)
+    {
+        $client = $request->user();
+        $project = $client->projects()->where('id', $projectId)->first();
+
+        if (!$project) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Project not found'
+            ], 404);
+        }
+
+        $proposal = $project->proposals()->where('id', $proposalId)->first();
+
+        if (!$proposal) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Proposal not found'
+            ], 404);
+        }
+
+        if ($proposal->status !== 'pending') {
+            return response()->json([
+                'success' => false,
+                'message' => 'Only pending proposals can be rejected'
+            ], 409);
+        }
+
+        $proposal->update([
+            'status' => 'rejected',
+        ]);
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Proposal rejected successfully',
+            'data' => $proposal->fresh(),
+        ], 200);
+    }
 }
