@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Conversation;
+use App\Models\Message;
 use Illuminate\Http\Request;
 
 class MessageController extends Controller
@@ -20,4 +21,26 @@ class MessageController extends Controller
             'data' => $conversation
         ]);
     }
+
+    public function send(Request $request, string $id)
+    {
+        $sender = $request->user();
+        $validated = $request->validate([
+            'message' => 'required|max:255',
+        ]);
+
+        $message = Message::create([
+            'sender_id' => $sender->id,
+            'conversation_id' => $id,
+            'message' => $validated['message'],
+        ]);
+
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Message created successfully',
+            'data' => $message
+        ]);
+    }
+
 }

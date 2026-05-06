@@ -74,4 +74,5 @@ Route::middleware('auth:sanctum')->group(function () {
 
     // ? messages 
     Route::get('/conversations/{id}/messages', [MessageController::class, 'index']);
+    Route::post('/conversations/{id}/send-message', [MessageController::class, 'send']);
 });
