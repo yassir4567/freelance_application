@@ -37,6 +37,14 @@ class ConversationController extends Controller
             });
         }
 
+        if ($request->filled('contract_status') && $request->contract_status !== 'all') {
+            $contract_status = $request->contract_status;
+            $query->whereHas('contract', function ($q) use ($contract_status) {
+                $q->where('status', $contract_status);
+                ;
+            });
+        }
+
         $conversations = $query
             ->with($with)
             ->latest()

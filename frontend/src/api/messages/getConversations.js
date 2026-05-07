@@ -1,15 +1,18 @@
 import { BASE_URL, getToken } from "../config";
 
-const getConversations = async () => {
+const getConversations = async (contract_status) => {
   try {
     const token = getToken();
-    const response = await fetch(`${BASE_URL}/conversations`, {
-      method: "GET",
-      headers: {
-        Accept: "application/json",
-        ...(token && { Authorization: `Bearer ${token}` }),
+    const response = await fetch(
+      `${BASE_URL}/conversations?contract_status=${contract_status}`,
+      {
+        method: "GET",
+        headers: {
+          Accept: "application/json",
+          ...(token && { Authorization: `Bearer ${token}` }),
+        },
       },
-    });
+    );
 
     const data = await response.json();
 

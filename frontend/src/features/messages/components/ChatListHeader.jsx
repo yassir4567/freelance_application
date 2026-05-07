@@ -1,14 +1,20 @@
 import styles from "../styles/ChatListHeader.module.css";
 import { IoSearchOutline } from "react-icons/io5";
 
-function ChatListHeader() {
+function ChatListHeader({ value, onChange }) {
   return (
     <header className={styles.chatListHeader}>
-      <h1 className={styles.headerTitle}>Chats</h1>
-      {/* <div className={styles.searchBox}>
-        <IoSearchOutline className={styles.searchIcon} />
-        <input type="text" placeholder="Search by name ..." />
-      </div> */}
+      <div className={styles.headerMain}>
+        <h1 className={styles.headerTitle}>Chats</h1>
+        <div className={styles.selectBox}>
+          <select name="contract_stats" value={value} onChange={onChange}>
+            <option value="">All</option>
+            <option value="active">Active</option>
+            <option value="pending">Pending</option>
+            <option value="rejected">Rejected</option>
+          </select>
+        </div>
+      </div>
       <hr className={styles.devider} />
     </header>
   );

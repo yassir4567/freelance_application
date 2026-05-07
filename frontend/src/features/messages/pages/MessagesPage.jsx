@@ -7,21 +7,34 @@ import { useSearchParams } from "react-router-dom";
 
 function MessagesPage() {
   const [conversations, setConversations] = useState([]);
+  const [queryParams, setQueryParams] = useSearchParams();
+  const conversationId = queryParams.get("chat") || "";
+  const contract_status = queryParams.get("status") || "all";
 
-  const [params, setParams] = useSearchParams();
-
-  const conversationId = params.get("chat") || "";
 
   useEffect(() => {
     const loadConversations = async () => {
-      const result = await getConversations();
+      const result = await getConversations(contract_status);
       setConversations(result.data);
     };
     loadConversations();
-  }, []);
+  }, [contract_status]);
 
   const handleOpenConversation = (id) => {
-    setParams({ chat: id });
+    const params = new URLSearchParams(queryParams);
+    params.set("chat", id);
+    setQueryParams(params);
+  };
+
+  const handleChangeContractStatus = (e) => {
+    const params = new URLSearchParams(queryParams);
+
+    if (e.target.value === "") {
+      params.delete("status");
+    } else {
+      params.set("status", e.target.value);
+    }
+    setQueryParams(params);
   };
 
   const conversationIds = conversations.map((cnv) => cnv.id);
@@ -36,6 +49,8 @@ function MessagesPage() {
         <ChatList
           conversations={conversations}
           handleOpenConversation={handleOpenConversation}
+          onChange={handleChangeContractStatus}
+          value={contract_status}
         />
       </div>
       <div className={styles.chatMessagesContainer}>
