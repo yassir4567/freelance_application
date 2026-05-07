@@ -19,7 +19,9 @@ class FreelancerProposalController extends Controller
             ->with([
                 'project:id,client_id,category_id,title',
                 'project.client:id,first_name,last_name',
-                'project.category:id,name'
+                'project.category:id,name',
+                'contract:id,proposal_id',
+                'contract.conversation:id,contract_id,created_at'
             ]);
 
         $query->when($request->status, function ($q, $status) {

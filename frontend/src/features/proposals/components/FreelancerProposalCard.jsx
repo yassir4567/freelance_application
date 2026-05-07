@@ -8,6 +8,7 @@ function FreelancerProposalCard({ proposal }) {
     accepted: "status-success",
     rejected: "status-danger",
   };
+  console.log(proposal);
 
   return (
     <div className={styles.proposalCard}>
@@ -58,7 +59,12 @@ function FreelancerProposalCard({ proposal }) {
 
         {proposal.status === "accepted" && (
           <div className={styles.action}>
-            <NavLink className={styles.link}>Message client</NavLink>
+            <NavLink
+              to={`/dashboard/freelancer/messages?chat=${proposal.contract.conversation.id}`}
+              className={styles.link}
+            >
+              Message client
+            </NavLink>
           </div>
         )}
       </div>
