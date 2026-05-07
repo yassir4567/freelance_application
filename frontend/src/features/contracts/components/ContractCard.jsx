@@ -89,7 +89,7 @@ function ContractCard({ contract }) {
           </>
         )}
         <NavLink
-          to={`/dashboard/client/messages?chat=${contract.conversation.id}`}
+          to={`/dashboard/${role}/messages?chat=${contract.conversation?.id}`}
           className={styles.navlink}
         >
           Message freelancer

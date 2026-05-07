@@ -20,7 +20,8 @@ class FreelancerContractController extends Controller
                     'proposal:id,project_id',
                     'proposal.project:id,title,client_id',
                     'proposal.project.client:id,first_name,last_name,avatar',
-                    'deliverables:id,contract_id,title,deadline,status,created_at'
+                    'deliverables:id,contract_id,title,deadline,status,created_at',
+                    'conversation:id,contract_id'
                 ]);
 
         if ($request->filled('search')) {
@@ -68,6 +69,7 @@ class FreelancerContractController extends Controller
                     'current_deliverable' => $current_deliverable,
                     'total_deliverables' => $total_deliverables,
                     'completed_deliverables' => $completed_deliverables,
+                    'conversation' => $contract->conversation
                 ];
             });
 
