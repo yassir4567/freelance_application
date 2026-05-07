@@ -57,23 +57,3 @@
 .errorState .stateKicker {
   color: var(--color-danger);
 }
-
-@media (max-width: 1100px) {
-  .contractWorkspace {
-    grid-template-columns: 1fr;
-  }
-
-  .sidebar {
-    position: static;
-  }
-}
-
-@media (max-width: 760px) {
-  .contractDetailPage {
-    margin-bottom: 80px;
-  }
-
-  .contractWorkspace {
-    gap: 18px;
-  }
-}
