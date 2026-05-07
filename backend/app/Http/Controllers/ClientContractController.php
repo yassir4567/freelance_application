@@ -211,7 +211,7 @@ class ClientContractController extends Controller
 
         $contract->load('proposal.project');
 
-        if ($contract->proposal->project->client_id !== (int) $client->id) {
+        if ($contract->proposal->project->client_id !== $client->id) {
             return response()->json([
                 'success' => false,
                 'message' => 'Unauthorized action.',

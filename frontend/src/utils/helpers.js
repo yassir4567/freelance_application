@@ -14,7 +14,7 @@ export const emptyArray = (array) => {
 };
 
 export function formatDate(date) {
-  return dayjs(date).format('MMM DD , YYYY')
+  return dayjs(date).format("MMM DD , YYYY");
 }
 
 dayjs.extend(relativeTime);
@@ -23,3 +23,4 @@ dayjs.extend(relativeTime);
 export function getRelativeTime(date) {
   return dayjs(date).fromNow();
 }
+

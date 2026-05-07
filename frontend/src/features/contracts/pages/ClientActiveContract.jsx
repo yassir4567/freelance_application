@@ -5,11 +5,19 @@ import { getSetupContractInfo } from "../../../api/contracts/getSetupContractInf
 import ClientActiveContractHeader from "../components/ClientActiveContractHeader";
 import { useAuth } from "../../../context/AuthContext";
 import { FiArrowLeft } from "react-icons/fi";
+import ContractSetUpForm from "../components/ContractSetUpForm";
+import contractImg from "../../../assets/images/contract_img.svg";
 
 function ClientActiveContract() {
   const [setupInfo, setSetupInfo] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [success, setSuccess] = useState(false);
+  const [setUpContractFormData, setSetUpContractFormData] = useState({
+    final_price: "",
+    final_deadline: "",
+    description: "",
+  });
+  const [step, setStep] = useState(0);
   const { user } = useAuth();
   const { contractId } = useParams();
 
@@ -17,7 +25,6 @@ function ClientActiveContract() {
     const loadSetupInfo = async () => {
       setIsLoading(true);
       const result = await getSetupContractInfo(contractId);
-      console.log(result);
       if (result.success) {
         setSetupInfo(result.data ?? null);
         setIsLoading(false);
@@ -50,6 +57,14 @@ function ClientActiveContract() {
     };
   }, [setupInfo]);
 
+  const nextStep = () => {
+    setStep((currentStep) => currentStep + 1);    
+  };
+
+  const previousStep = () => {
+    setStep((currentStep) => currentStep - 1);
+  };
+
   const role = user.role;
 
   if (!success || !setupInfo) {
@@ -77,6 +92,21 @@ function ClientActiveContract() {
         freelancerInfo={freelancerInfo}
         role={role}
       />
+
+      <div className={styles.main}>
+        <div className={styles.wrapper}>
+          <div className={styles.setUpForm}>
+            <ContractSetUpForm
+              nextStep={nextStep}
+              form={setUpContractFormData}
+              setForm={setSetUpContractFormData}
+            />
+          </div>
+          <div className={styles.contractImg}>
+            <img src={contractImg} />
+          </div>
+        </div>
+      </div>
     </div>
   );
 }

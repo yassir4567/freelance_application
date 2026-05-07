@@ -1,0 +1,75 @@
+.formContainer {
+    margin-right: 50px;
+}
+
+.formTitle {
+    font-size: var(--fs-lg);
+    font-weight: 700;
+    color: var(--color-success);
+    margin-bottom: 10px;
+}
+
+.formDescription {
+    font-size: var(--fs-sm);
+    color: var(--color-text-muted);
+}
+
+.form {
+    margin-top: 20px;
+}
+
+.row {
+    display: flex;
+    gap: 25px;
+}
+
+.inputBox {
+    flex: 1;
+}
+
+.inputBox,
+.textareaBox {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 25px;
+}
+
+.textareaLabelBox {
+    display: flex;
+    justify-content: space-between;
+}
+
+.inputBox label,
+.textareaBox label {
+    margin-bottom: 10px;
+    font-size: var(--fs-sm);
+}
+
+.inputBox input {
+    height: 43px;
+    border-radius: 12px;
+    padding-inline: 14px;
+}
+
+.textareaBox textarea {
+    height: 120px;
+    border-radius: 12px;
+    padding: 14px;
+}
+
+.next {
+    width: 100px;
+    background-color: var(--color-success);
+    color: var(--color-white);
+    height: 32px;
+    border-radius: 12px;
+    font-size: var(--fs-base);
+    float: right;
+}
+
+.error {
+    color: var(--color-danger);
+    font-size: var(--fs-sm);
+    margin-top: 5px;
+    margin-left: 5px;
+}

@@ -7,7 +7,7 @@
     margin: 40px auto;
     border: 1px solid var(--color-border);
     border-radius: 24px;
-    background: var(--color-white);
+    background: var(--color-light);
     box-shadow: var(--bx-shadow-2);
     padding: 34px;
     text-align: center;
@@ -27,16 +27,45 @@
 }
 
 .backLink {
-  color: var(--color-success);
-  font-size: var(--fs-sm);
-  font-weight: 650;
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  transition: 0.2s;
+    color: var(--color-success);
+    font-size: var(--fs-sm);
+    font-weight: 650;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: 0.2s;
 }
 
 .backLink:hover {
-  color: var(--color-secondary);
-  transform: translateX(-2px);
+    color: var(--color-secondary);
+    transform: translateX(-2px);
+}
+
+
+.main {
+    margin-top: 30px;
+}
+
+.wrapper {
+    border: 1px solid var(--color-border);
+    background-color: var(--color-light);
+    padding: 34px;
+    border-radius: 24px;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.setUpForm {
+    width: 70%;
+}
+
+.contractImg {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 30%;
+}
+
+.contractImg img {
+    width: 250px;
 }
