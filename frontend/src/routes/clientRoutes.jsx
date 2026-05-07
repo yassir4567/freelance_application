@@ -11,6 +11,7 @@ import MessagesPage from "../features/messages/pages/MessagesPage";
 import ProtectedRoutes from "./ProtectedRoutes";
 import ProfilePage from "../features/profile/pages/ProfilePage";
 import ProfileLayout from "../features/profile/layouts/ProfileLayout";
+import ClientActiveContract from "../features/contracts/pages/ClientActiveContract";
 
 export const clientRoutes = [
   {
@@ -33,6 +34,10 @@ export const clientRoutes = [
           },
           { path: "contracts", element: <ClientContractsPage /> },
           { path: "contracts/:contractId", element: <ContractDetail /> },
+          {
+            path: "contracts/:contractId/activate",
+            element: <ClientActiveContract />,
+          },
           { path: "messages", element: <MessagesPage /> },
           {
             path: "profile",

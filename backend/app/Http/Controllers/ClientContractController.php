@@ -180,6 +180,26 @@ class ClientContractController extends Controller
 
     }
 
+    public function setup(Request $request, string $id)
+    {
+        $client = $request->user();
+
+        $contract = Contract::where('id', $id)
+            ->whereHas('proposal.project', function ($q) use ($client) {
+                $q->where('client_id', $client->id);
+            })->with([
+                    'proposal:id,freelancer_id,project_id,cover_letter,delivery_time,price',
+                    'proposal.project:id,client_id,category_id,title',
+                    'proposal.freelancer:id,user_id,title',
+                    'proposal.freelancer.user:id,first_name,last_name,avatar',
+                ])->firstOrFail();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Contract setup info retrieved successfully',
+            'data' => $contract
+        ]);
+    }
 
     public function activateContract(Request $request, string $id)
     {
