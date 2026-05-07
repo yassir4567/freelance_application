@@ -37,7 +37,7 @@ export function getStatusClass(statusMap, status, fallback = "status-warning") {
   return statusMap[status] ?? fallback;
 }
 
-export function formatStatusLabel(status, fallback = "Unknown") {
+export function formatStatusLabel(status, fallback = "") {
   if (!status) return fallback;
 
   return status

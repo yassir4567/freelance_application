@@ -35,7 +35,7 @@ export const clientRoutes = [
           { path: "contracts", element: <ClientContractsPage /> },
           { path: "contracts/:contractId", element: <ContractDetail /> },
           {
-            path: "contracts/:contractId/activate",
+            path: "contracts/:contractId/setup",
             element: <ClientActiveContract />,
           },
           { path: "messages", element: <MessagesPage /> },

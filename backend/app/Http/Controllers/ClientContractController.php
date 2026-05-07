@@ -185,10 +185,12 @@ class ClientContractController extends Controller
         $client = $request->user();
 
         $contract = Contract::where('id', $id)
+            ->where('status', 'pending')
+            ->select('id' , 'proposal_id' , 'status')
             ->whereHas('proposal.project', function ($q) use ($client) {
                 $q->where('client_id', $client->id);
             })->with([
-                    'proposal:id,freelancer_id,project_id,cover_letter,delivery_time,price',
+                    'proposal:id,freelancer_id,project_id',
                     'proposal.project:id,client_id,category_id,title',
                     'proposal.freelancer:id,user_id,title',
                     'proposal.freelancer.user:id,first_name,last_name,avatar',

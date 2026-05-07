@@ -40,8 +40,7 @@ function ContractCard({ contract }) {
                   }`.trim(),
                   "Not assigned",
                 )}{" "}
-                |
-                {otherUserLabel}
+                |{otherUserLabel}
               </p>
             </div>
           </div>
@@ -79,9 +78,7 @@ function ContractCard({ contract }) {
               <div className={styles.contractInfos}>
                 <div className={styles.contractInfoItem}>
                   <p>Current deliverable</p>
-                  <p>
-                    {valueOrFallback(contract.current_deliverable?.title)}
-                  </p>
+                  <p>{valueOrFallback(contract.current_deliverable?.title)}</p>
                 </div>
                 <div className={styles.contractInfoItem}>
                   <p>Deliverable deadline</p>
@@ -96,7 +93,7 @@ function ContractCard({ contract }) {
       </div>
 
       <div className={styles.contractCardRight}>
-        {contract.status !== "pending" && (
+        {contract.status !== "pending" ? (
           <>
             <NavLink
               to={`${contract.id}`}
@@ -111,6 +108,10 @@ function ContractCard({ contract }) {
               View deliverables
             </NavLink>
           </>
+        ) : (
+          <NavLink to={`/dashboard/client/contracts/${contract.id}/setup`} className={styles.navlink}>
+            Active contract
+          </NavLink>
         )}
         <NavLink to={messagePath} className={styles.navlink}>
           Message {otherUserLabel}
