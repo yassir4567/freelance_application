@@ -68,3 +68,40 @@
   color: var(--color-black);
   font-size: var(--fs-base);
 }
+
+@media (max-width: 1100px) {
+  .header {
+    padding-inline: 48px;
+  }
+
+  .navbar_list {
+    gap: 18px;
+  }
+}
+
+@media (max-width: 760px) {
+  .header {
+    height: auto;
+    min-height: 70px;
+    padding: 12px 18px;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .navbar {
+    order: 3;
+    width: 100%;
+    overflow-x: auto;
+  }
+
+  .navbar_list {
+    width: max-content;
+    padding-bottom: 4px;
+  }
+
+  .link {
+    font-size: var(--fs-sm);
+    white-space: nowrap;
+  }
+}

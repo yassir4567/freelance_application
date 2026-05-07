@@ -2,7 +2,13 @@ import { Fragment, useEffect, useState } from "react";
 import { IoClose } from "react-icons/io5";
 import styles from "../styles/DeliverableDetailModal.module.css";
 import SubmitDeliverableForm from "./SubmitDeliverableForm";
-import { formatDate } from "../../../utils/helpers";
+import {
+  formatCurrency,
+  formatDisplayDate,
+  formatStatusLabel,
+  getStatusClass,
+  valueOrFallback,
+} from "../utils/contractDisplay";
 
 function DeliverableDetailModal({
   deliverable,
@@ -41,7 +47,7 @@ function DeliverableDetailModal({
     };
   }, [isOpen, onClose]);
 
-  if (!isOpen) return undefined;
+  if (!isOpen) return null;
 
   // * show submit deliverables form
   const showDeliverableForm = () => {
@@ -97,6 +103,9 @@ function DeliverableDetailModal({
     "revision_request",
   ].includes(deliverable.status);
 
+  const statusText =
+    statusLabel[deliverable.status] || formatStatusLabel(deliverable.status);
+
   return (
     <div className={styles.overlay} onClick={onClose}>
       <div
@@ -106,16 +115,21 @@ function DeliverableDetailModal({
         <div className={styles.deliverableHeader}>
           <div className={styles.headerRight}>
             <p className={styles.deliverableNumber}>
-              Deliverable #{deliverable.id}
+              Deliverable #{deliverable.position ?? deliverable.id}
             </p>
-            <h3 className={styles.title}>{deliverable.title}</h3>
+            <h3 className={styles.title}>
+              {valueOrFallback(deliverable.title, "Untitled deliverable")}
+            </h3>
           </div>
 
           <div className={styles.headerLeft}>
             <p
-              className={`${styles.status} ${deliverableStatus[deliverable.status]}`}
+              className={`${styles.status} ${getStatusClass(
+                deliverableStatus,
+                deliverable.status,
+              )}`}
             >
-              {statusLabel[deliverable.status]}
+              {statusText}
             </p>
             <button
               type="button"
@@ -128,33 +142,36 @@ function DeliverableDetailModal({
         </div>
 
         <p className={styles.deliverableDescription}>
-          {deliverable.description}
+          {valueOrFallback(
+            deliverable.description,
+            "No description was provided for this deliverable.",
+          )}
         </p>
 
         <div className={styles.contentGrid}>
           <p className={styles.contentItem}>
             <span>Amount</span>
-            <span>${deliverable.amount.toFixed(3)}</span>
+            <span>{formatCurrency(deliverable.amount)}</span>
           </p>
 
           <p className={styles.contentItem}>
             <span>Deadline</span>
-            <span>{formatDate(deliverable.deadline) || "Not available"}</span>
+            <span>{formatDisplayDate(deliverable.deadline)}</span>
           </p>
 
           <p className={styles.contentItem}>
             <span>Unlocked at</span>
-            <span>{deliverable.unlocked_at || "Not available"}</span>
+            <span>{formatDisplayDate(deliverable.unlocked_at)}</span>
           </p>
 
           <p className={styles.contentItem}>
             <span>Submitted at</span>
-            <span>{deliverable.submitted_at || "Not available"}</span>
+            <span>{formatDisplayDate(deliverable.submitted_at)}</span>
           </p>
 
           <p className={styles.contentItem}>
             <span>Accepted at</span>
-            <span>{deliverable.accepted_at || "Not available"}</span>
+            <span>{formatDisplayDate(deliverable.accepted_at)}</span>
           </p>
         </div>
 

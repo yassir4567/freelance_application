@@ -1,81 +1,144 @@
-
-
-
 .contractStaff {
-  margin-top: 40px;
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.userMinCard {
+  border: 1px solid var(--color-border);
+  border-radius: 22px;
+  background: var(--color-light);
+  box-shadow: var(--bx-shadow-2);
+  padding: 22px;
+}
+
+.sidebarKicker {
+  color: var(--color-success);
+  font-size: var(--fs-xs);
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
 }
 
 .userMinCardBox {
-  margin-bottom: 15px;
+  margin-top: 8px;
 }
 
-.userMinCardBox h5 {
-  font-size: var(--fs-sm);
-  color: var(--color-text-muted);
-  margin-bottom: 10px;
-  margin-left: 3px;
-  font-weight: 500;
+.userMinCardBox h2 {
+  font-size: var(--fs-xl);
+  font-weight: 650;
 }
 
 .userMinCardContent {
   display: flex;
   align-items: center;
   gap: 15px;
+  margin-top: 16px;
 }
 
 .userAvatar {
-  width: 60px;
+  width: 58px;
+  height: 58px;
+  border: 3px solid var(--color-success-bg);
+  border-radius: 50%;
+  object-fit: cover;
+  background: var(--color-light);
 }
 
 .userMinCardContent p {
-  font-size: var(--fs-lg);
+  font-size: var(--fs-base);
+  font-weight: 700;
+  text-transform: capitalize;
+}
+
+.userMinCardContent span {
+  margin-top: 6px;
+  color: var(--color-text-muted);
+  font-size: var(--fs-sm);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.openConv {
+  width: 100%;
+  min-height: 44px;
+  margin-top: 22px;
+  border: 1px solid var(--color-success);
+  border-radius: 14px;
+  color: var(--color-success);
+  font-size: var(--fs-sm);
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: 0.2s;
+}
+
+.openConv:hover {
+  color: var(--color-white);
+  background: var(--color-success);
+  border-radius: 17px;
 }
 
 .contractStaffRight {
   display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.contractStaffRightItem {
+  border: 1px solid var(--color-border);
+  border-radius: 18px;
+  background: var(--color-light);
+  box-shadow: var(--bx-shadow-2);
+  padding: 16px;
+  display: flex;
+  gap: 13px;
+}
+
+.itemIcon {
+  width: 38px;
+  height: 38px;
+  flex: 0 0 38px;
+  border-radius: 13px;
+  color: var(--color-success);
+  background: var(--color-success-bg);
+  display: flex;
   align-items: center;
-  gap: 40px;
+  justify-content: center;
+  font-size: var(--fs-lg);
 }
 
 .contractStaffRightItem h5 {
   margin-bottom: 5px;
-  font-size: var(--fs-base);
   color: var(--color-text-muted);
-  font-weight: 500;
+  font-size: var(--fs-xs);
+  font-weight: 750;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
 }
 
 .contractStaffRightItem p {
-  font-size: var(--fs-md);
-  font-weight: 600;
-}
-
-.openConv {
-  color: var(--color-secondary);
   font-size: var(--fs-base);
-  position: relative;
-  padding-bottom: 5px;
-  transition: .2s;
+  font-weight: 700;
 }
 
-.openConv:hover {
-  color: var(--color-success);
+@media (max-width: 1100px) {
+  .contractStaff {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+
+  .contractStaffRight {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
 }
 
-.openConv::after {
-  content: '';
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  background-color: var(--color-success);
-  width: 15px;
-  height: 2px;
-  transition: .5s;
-}
-
-.openConv:hover::after {
-  width: 100%;
+@media (max-width: 760px) {
+  .contractStaffRight {
+    grid-template-columns: 1fr;
+  }
 }

@@ -2,22 +2,26 @@ import { NavLink } from "react-router-dom";
 import styles from "../styles/ContractCard.module.css";
 import profile from "../../../assets/images/profile.png";
 import { useAuth } from "../../../context/AuthContext";
+import {
+  CONTRACT_STATUS_CLASS,
+  formatCurrency,
+  formatDisplayDate,
+  formatStatusLabel,
+  getStatusClass,
+  valueOrFallback,
+} from "../utils/contractDisplay";
 
 function ContractCard({ contract }) {
   const {
     user: { role },
   } = useAuth();
 
-  const statusClass = {
-    pending: "status-warning",
-    active: "status-success",
-    completed: "status-purple",
-    cancelled: "status-danger",
-  };
+  const other_user = contract.freelancer ?? contract.client ?? {};
 
-  let other_user = contract.freelancer ?? contract.client;
-
-  console.log(contract);
+  const otherUserLabel = role === "client" ? "Freelancer" : "Client";
+  const messagePath = contract.conversation?.id
+    ? `/dashboard/${role}/messages?chat=${contract.conversation.id}`
+    : `/dashboard/${role}/messages`;
 
   return (
     <div className={styles.contractCard}>
@@ -26,17 +30,28 @@ function ContractCard({ contract }) {
           <div className={styles.contractCardHeaderLeft}>
             <img src={profile} className={styles.avatar} alt="User profile" />
             <div className={styles.contractCardHeaderTitleBox}>
-              <h2 className={styles.projectTitle}>{contract.project_title}</h2>
+              <h2 className={styles.projectTitle}>
+                {valueOrFallback(contract.project_title, "Untitled project")}
+              </h2>
               <p className={styles.name}>
-                {other_user.first_name} {other_user.last_name}|
-                {role === "client" ? "Freelancer" : "Client"}
+                {valueOrFallback(
+                  `${other_user.first_name ?? ""} ${
+                    other_user.last_name ?? ""
+                  }`.trim(),
+                  "Not assigned",
+                )}{" "}
+                |
+                {otherUserLabel}
               </p>
             </div>
           </div>
           <div
-            className={`${styles.contractStatus} ${statusClass[contract.status]}`}
+            className={`${styles.contractStatus} ${getStatusClass(
+              CONTRACT_STATUS_CLASS,
+              contract.status,
+            )}`}
           >
-            {contract.status}
+            {formatStatusLabel(contract.status)}
           </div>
         </div>
 
@@ -46,7 +61,7 @@ function ContractCard({ contract }) {
               <div className={styles.contractSubCard}>
                 <h5 className={styles.contractSubCardTitle}>Budget</h5>
                 <div className={styles.contractSubCardContent}>
-                  ${contract.final_price}
+                  {formatCurrency(contract.final_price, "Not set")}
                 </div>
               </div>
               <div className={styles.contractSubCard}>
@@ -63,12 +78,16 @@ function ContractCard({ contract }) {
             {contract.status === "active" && (
               <div className={styles.contractInfos}>
                 <div className={styles.contractInfoItem}>
-                  <p>Current livrable </p>{" "}
-                  <p>{contract.current_deliverable?.title}</p>
+                  <p>Current deliverable</p>
+                  <p>
+                    {valueOrFallback(contract.current_deliverable?.title)}
+                  </p>
                 </div>
                 <div className={styles.contractInfoItem}>
-                  <p>Deliverable Deadline </p>
-                  <p> {contract.current_deliverable?.deadline} </p>
+                  <p>Deliverable deadline</p>
+                  <p>
+                    {formatDisplayDate(contract.current_deliverable?.deadline)}
+                  </p>
                 </div>
               </div>
             )}
@@ -85,14 +104,16 @@ function ContractCard({ contract }) {
             >
               View details
             </NavLink>
-            <NavLink className={styles.navlink}>View delivrables</NavLink>
+            <NavLink
+              to={`${contract.id}?tab=deliverables`}
+              className={styles.navlink}
+            >
+              View deliverables
+            </NavLink>
           </>
         )}
-        <NavLink
-          to={`/dashboard/${role}/messages?chat=${contract.conversation?.id}`}
-          className={styles.navlink}
-        >
-          Message freelancer
+        <NavLink to={messagePath} className={styles.navlink}>
+          Message {otherUserLabel}
         </NavLink>
       </div>
     </div>

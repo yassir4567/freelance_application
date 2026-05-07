@@ -1,62 +1,54 @@
 import SimpleCard from "../../../shared/ui/SimpleCard";
 import styles from "../styles/ContractPayments.module.css";
+import {
+  formatCurrency,
+  formatStatusLabel,
+  getStatusClass,
+  PAYMENT_STATUS_CLASS,
+  valueOrFallback,
+} from "../utils/contractDisplay";
 
-function ContractPayments({ deliverables }) {
-  const paymentStatusClass = {
-    released: "status-success",
-    escrow: "status-info",
-    pending: "status-warning",
-    refunded: "status-danger",
-  };
-
-  deliverables = deliverables ?? [];
-
-  const totalAmount = deliverables.reduce((acc, cur) => acc + +cur.amount, 0);
-
-  const paidAmount = deliverables.reduce(
-    (acc, cur) =>
-      cur.payment?.status === "released" ? acc + +cur.payment?.amount : acc,
-    0,
-  );
-
-  const escrowAmount = deliverables.reduce(
-    (acc, cur) =>
-      cur.payment?.status === "escrow" ? acc + +cur.payment?.amount : acc,
-    0,
-  );
-
-  const pendingAmount = totalAmount - (paidAmount + escrowAmount);
+function ContractPayments({ deliverables, paymentSummary }) {
+  const safeDeliverables = deliverables ?? [];
 
   const paymentsCards = [
     {
       id: 1,
       title: "Total",
-      value: totalAmount.toFixed(2),
+      value: formatCurrency(paymentSummary?.totalAmount),
       className: styles.paymentCard,
     },
     {
       id: 2,
       title: "Paid out",
-      value: paidAmount.toFixed(2),
+      value: formatCurrency(paymentSummary?.paidAmount),
       className: `${styles.paymentCard} ${styles.paidOutCard}`,
     },
     {
       id: 3,
       title: "Escrow",
-      value: escrowAmount.toFixed(2),
+      value: formatCurrency(paymentSummary?.escrowAmount),
       className: `${styles.paymentCard} ${styles.escrowCard}`,
     },
     {
       id: 4,
       title: "Pending",
-      value: pendingAmount.toFixed(2),
+      value: formatCurrency(paymentSummary?.pendingAmount),
       className: `${styles.paymentCard} ${styles.remainingCard}`,
     },
   ];
 
   return (
     <div className={styles.paymentsSection}>
-      <h2 className={styles.subTitle}>Payments</h2>
+      <div className={styles.sectionHeader}>
+        <p className={styles.kicker}>Escrow</p>
+        <h2 className={styles.subTitle}>Payment status</h2>
+        <p>
+          See what is funded, what has been released, and which deliverables are
+          still waiting on escrow.
+        </p>
+      </div>
+
       <div className={styles.paymentsGrid}>
         <div className={styles.paymentsSubCards}>
           {paymentsCards.map((card) => (
@@ -68,28 +60,49 @@ function ContractPayments({ deliverables }) {
             />
           ))}
         </div>
-        <div className={styles.paymentsList}>
-          {deliverables?.map((deliverable) => (
-            <div key={deliverable.id} className={styles.paymentItem}>
-              <div className={styles.paymentItemLeft}>
-                <h5 className={styles.paymentItemSubTitle}>
-                  Deliverable Number #{deliverable.position}
-                </h5>
-                <h1 className={styles.paymentItemTitle}>{deliverable.title}</h1>
-              </div>
 
-              <div className={styles.paymentItemright}>
-                <div
-                  className={`${styles.paymentStatus} ${paymentStatusClass[deliverable.payment?.status ?? "pending"]}`}
-                >
-                  {deliverable.payment?.status ?? "pending"}
+        <div className={styles.paymentsList}>
+          {safeDeliverables.length ? (
+            safeDeliverables.map((deliverable) => {
+              const paymentStatus = deliverable.payment?.status ?? "pending";
+
+              return (
+                <div key={deliverable.id} className={styles.paymentItem}>
+                  <div className={styles.paymentItemLeft}>
+                    <h5 className={styles.paymentItemSubTitle}>
+                      Deliverable #{deliverable.position ?? deliverable.id}
+                    </h5>
+                    <h1 className={styles.paymentItemTitle}>
+                      {valueOrFallback(
+                        deliverable.title,
+                        "Untitled deliverable",
+                      )}
+                    </h1>
+                  </div>
+
+                  <div className={styles.paymentItemRight}>
+                    <div
+                      className={`${styles.paymentStatus} ${getStatusClass(
+                        PAYMENT_STATUS_CLASS,
+                        paymentStatus,
+                      )}`}
+                    >
+                      {formatStatusLabel(paymentStatus)}
+                    </div>
+                    <div className={styles.amount}>
+                      {formatCurrency(
+                        deliverable.payment?.amount ?? deliverable.amount,
+                      )}
+                    </div>
+                  </div>
                 </div>
-                <div className={styles.amount}>
-                  ${deliverable.amount.toFixed(2)}
-                </div>
-              </div>
+              );
+            })
+          ) : (
+            <div className={styles.emptyState}>
+              No payment records are available for this contract yet.
             </div>
-          ))}
+          )}
         </div>
       </div>
     </div>

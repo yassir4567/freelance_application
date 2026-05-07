@@ -1,4 +1,79 @@
 .contractDetailPage {
-  margin-bottom: 100px;
+  margin-bottom: 120px;
 }
 
+.contractWorkspace {
+  display: grid;
+  grid-template-columns: 300px minmax(0, 1fr);
+  gap: 24px;
+  margin-top: 24px;
+  align-items: start;
+}
+
+.sidebar {
+  position: sticky;
+  top: 100px;
+}
+
+.mainPanel {
+  min-width: 0;
+}
+
+.tabPanel {
+  margin-top: 18px;
+}
+
+.stateCard {
+  max-width: 720px;
+  margin: 40px auto;
+  border: 1px solid var(--color-border);
+  border-radius: 24px;
+  background: var(--color-white);
+  box-shadow: var(--bx-shadow-2);
+  padding: 34px;
+  text-align: center;
+}
+
+.stateKicker {
+  color: var(--color-success);
+  font-size: var(--fs-xs);
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.stateCard h1 {
+  margin-top: 8px;
+  color: #17211b;
+  font-size: var(--fs-2xl);
+  font-weight: 750;
+}
+
+.stateCard p:not(.stateKicker) {
+  margin-top: 10px;
+  color: var(--color-text-muted);
+}
+
+.errorState .stateKicker {
+  color: var(--color-danger);
+}
+
+@media (max-width: 1100px) {
+  .contractWorkspace {
+    grid-template-columns: 1fr;
+  }
+
+  .sidebar {
+    position: static;
+  }
+}
+
+@media (max-width: 760px) {
+  .contractDetailPage {
+    margin-bottom: 80px;
+  }
+
+  .contractWorkspace {
+    gap: 18px;
+  }
+}

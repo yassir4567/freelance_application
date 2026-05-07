@@ -1,89 +1,200 @@
 .contractSummary {
-  margin-top: 70px;
+  border: 1px solid var(--color-border);
+  border-radius: 22px;
+  background: var(--color-light);
+  box-shadow: var(--bx-shadow-2);
+  padding: 26px;
+}
+
+.sectionHeader {
+  margin-bottom: 22px;
+}
+
+.kicker,
+.cardKicker {
+  color: var(--color-success);
+  font-size: var(--fs-xs);
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
 }
 
 .subTitle {
+  margin-top: 5px;
+  font-size: var(--fs-xl);
+  font-weight: 650;
+}
+
+.summaryGrid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.45fr) minmax(280px, 0.55fr);
+  gap: 18px;
+}
+
+.descriptionCard,
+.progressCard,
+.metricCard,
+.documentCard {
+  border: 1px solid var(--color-border);
+  border-radius: 20px;
+  background: var(--color-light);
+}
+
+.descriptionCard,
+.progressCard {
+  padding: 22px;
+}
+
+.cardHeader {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.cardHeader h3,
+.documentCard h3 {
+  margin-top: 4px;
   font-size: var(--fs-lg);
-  font-weight: 500;
+  font-weight: 650;
+}
+
+.cardIcon,
+.metricIcon {
+  width: 42px;
+  height: 42px;
+  border-radius: 15px;
   color: var(--color-success);
-  margin-bottom: 20px;
-}
-
-.summaryCard {
-  margin-inline: 10px;
-}
-
-.summaryItemMinTitle {
-  margin-bottom: 20px;
-  font-size: var(--fs-base);
-  color: var(--color-text-muted);
-  font-weight: 500;
+  background: var(--color-success-bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--fs-lg);
 }
 
 .summaryItemContent {
-  font-size: var(--fs-md);
-  line-height: 25px;
+  color: #233128;
+  line-height: 1.75;
 }
 
-.summaryRowGrid {
-  display: grid;
-  grid-template-columns: 800px 1fr;
-  gap: 20px;
-}
-
-.summaryCardGrid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 25px;
-  margin-top: 40px;
-}
-
-.quickInfoItems {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-.quickInfoItem {
-  font-size: var(--fs-base);
-  display: flex;
-  gap: 10px;
-}
-
-.quickInfoItem span:nth-child(1),
-.quickProgress {
-  color: var(--color-success);
-  font-weight: 500;
-}
-
-.progress_container {
-  display: flex;
-  gap: 20px;
-  align-items: center;
+.progressValue {
+  margin-top: 12px;
+  color: var(--color-success-dark);
+  font-size: var(--fs-4xl);
+  line-height: 1;
+  font-weight: 800;
 }
 
 .progress_bar_container {
   width: 100%;
-  height: 15px;
+  height: 11px;
+  margin-top: 16px;
   background-color: var(--color-success-bg);
   border-radius: 30px;
   overflow: hidden;
-  flex: 1;
 }
 
 .progress_bar {
-  background-color: var(--color-secondary);
-  width: 100px;
   height: 100%;
+  background: linear-gradient(90deg, var(--color-success), var(--color-secondary));
   border-radius: 30px;
 }
 
-.progress_container .cmp {
+.progressCaption {
+  margin-top: 13px;
+  color: var(--color-text-muted);
   font-size: var(--fs-sm);
+  line-height: 1.55;
 }
 
-.agreedTerms ul {
+.metricsGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+  margin-top: 18px;
+}
+
+.metricCard {
+  min-height: 134px;
+  padding: 18px;
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 9px;
+}
+
+.metricCard span {
+  color: var(--color-text-muted);
+  font-size: var(--fs-sm);
+  font-weight: 650;
+}
+
+.metricCard strong {
+  color: #17211b;
+  font-size: var(--fs-lg);
+  font-weight: 750;
+}
+
+.documentCard {
+  margin-top: 18px;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.documentCard p:not(.cardKicker) {
+  margin-top: 8px;
+  color: var(--color-text-muted);
+  line-height: 1.55;
+}
+
+.documentCard a,
+.documentUnavailable {
+  min-width: 132px;
+  min-height: 42px;
+  border-radius: 14px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--fs-sm);
+  font-weight: 700;
+}
+
+.documentCard a {
+  color: var(--color-white);
+  background: var(--color-success);
+}
+
+.documentUnavailable {
+  color: var(--color-text-muted);
+  background: var(--color-gray-light);
+}
+
+@media (max-width: 900px) {
+  .summaryGrid,
+  .metricsGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 640px) {
+  .contractSummary {
+    padding: 20px;
+  }
+
+  .descriptionCard,
+  .progressCard {
+    padding: 18px;
+  }
+
+  .documentCard {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .documentCard a,
+  .documentUnavailable {
+    width: 100%;
+  }
 }

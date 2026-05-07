@@ -1,11 +1,63 @@
+.contractDetailHeader {
+  position: relative;
+  overflow: hidden;
+  padding: 30px;
+  border: 1px solid var(--color-border);
+  border-radius: 28px;
+  background: var(--color-light) ;
+  box-shadow: var(--bx-shadow-2);
+}
+
+.heroGlow {
+  position: absolute;
+  right: -90px;
+  top: -120px;
+  width: 260px;
+  height: 260px;
+  border-radius: 50%;
+  background: rgba(37, 185, 119, 0.18);
+  filter: blur(6px);
+}
+
+.headerTop,
+.headerContent {
+  position: relative;
+  z-index: 1;
+}
+
+.headerTop {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 30px;
+}
+
+.backLink {
+  color: var(--color-success);
+  font-size: var(--fs-sm);
+  font-weight: 650;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: 0.2s;
+}
+
+.backLink:hover {
+  color: var(--color-secondary);
+  transform: translateX(-2px);
+}
+
 .status {
   height: fit-content;
-  padding: 5px 13px 5px 27px;
+  padding: 7px 14px 7px 28px;
   border-radius: 20px;
   position: relative;
   text-transform: capitalize;
   font-size: var(--fs-xs);
-  display: inline;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
 }
 
 .status::before {
@@ -19,26 +71,126 @@
   border-radius: 50%;
   display: inline-block;
 }
-.contractDetailHeader {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
+
+.headerContent {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 360px;
+  gap: 34px;
+  align-items: end;
+}
+
+.eyebrow {
+  color: var(--color-success);
+  font-size: var(--fs-xs);
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
 }
 
 .headerTitle {
-  margin-top: 30px;
-  font-size: var(--fs-2xl);
-  font-weight: 500;
+  max-width: 780px;
+  margin-top: 12px;
+  color: #17211b;
+  font-size: clamp(var(--fs-2xl), 4vw, var(--fs-4xl));
+  line-height: 1.1;
+  font-weight: 750;
 }
 
-.totalBudget {
-  font-size: var(--fs-4xl);
-  font-weight: 500;
+.headerSubtitle {
+  max-width: 660px;
+  margin-top: 14px;
+  color: var(--color-text-muted);
+  line-height: 1.7;
 }
 
-.headerRight p {
-  text-align: end;
-  color: var(--color-success);
-  font-weight: 500;
+.headerRight {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 14px;
+}
+
+.budgetCard,
+.progressCard {
+  border: 1px solid rgba(28, 143, 28, 0.16);
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.78);
+  box-shadow: 0 16px 36px rgba(28, 143, 28, 0.08);
+  padding: 18px;
+  backdrop-filter: blur(8px);
+}
+
+.budgetCard span,
+.progressTop span,
+.progressCard p {
+  color: var(--color-text-muted);
   font-size: var(--fs-sm);
+  font-weight: 600;
+}
+
+.budgetCard strong {
+  display: block;
+  margin-top: 8px;
+  color: var(--color-success-dark);
+  font-size: var(--fs-3xl);
+  font-weight: 750;
+}
+
+.progressTop {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.progressTop strong {
+  color: var(--color-success);
+}
+
+.progressTrack {
+  height: 10px;
+  margin-top: 13px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: var(--color-success-bg);
+}
+
+.progressBar {
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, var(--color-success), var(--color-secondary));
+}
+
+.progressCard p {
+  margin-top: 9px;
+  text-align: right;
+}
+
+@media (max-width: 980px) {
+  .contractDetailHeader {
+    padding: 24px;
+  }
+
+  .headerContent {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 640px) {
+  .contractDetailHeader {
+    padding: 20px;
+    border-radius: 22px;
+  }
+
+  .headerTop {
+    align-items: flex-start;
+    flex-direction: column;
+    margin-bottom: 24px;
+  }
+
+  .headerRight {
+    gap: 10px;
+  }
+
+  .budgetCard strong {
+    font-size: var(--fs-2xl);
+  }
 }

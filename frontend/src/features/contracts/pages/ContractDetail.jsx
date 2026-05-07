@@ -4,115 +4,264 @@ import ContractParty from "../components/ContractParty";
 import ContractSummary from "../components/ContractSummary";
 import ContractDeliverables from "../components/ContractDeliverables";
 import ContractPayments from "../components/ContractPayments";
+import ContractTabs from "../components/ContractTabs";
 import { useEffect, useMemo, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useSearchParams } from "react-router-dom";
 import { getClientContractDetail } from "../../../api/contracts/getClientContractDetail";
 import { useAuth } from "../../../context/AuthContext";
-import { formatDate, getRelativeTime } from "../../../utils/helpers";
 import { getFreelancerContractDetail } from "../../../api/contracts/getFreelancerContractDetail";
+import {
+  calculatePercent,
+  CONTRACT_STATUS_CLASS,
+  formatDisplayDate,
+} from "../utils/contractDisplay";
+import profile from '../../../assets/images/profile.png'
+
+const VALID_TABS = ["overview", "deliverables", "payments"];
 
 function ContractDetail() {
   const { contractId } = useParams();
-  const [contract, setContract] = useState();
-  const [isNotFound, setIsNotFound] = useState(false);
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [contract, setContract] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
+  const [errorMessage, setErrorMessage] = useState("");
   const { user } = useAuth();
 
-  let role = user.role;
+  const role = user?.role;
 
   useEffect(() => {
+    let ignore = false;
+
     const loadContract = async () => {
-      if (!user || !contractId) {
+      if (!user || !contractId || !role) {
         return;
       }
+
+      setIsLoading(true);
+      setErrorMessage("");
+
       const result =
         role === "client"
           ? await getClientContractDetail(contractId)
           : await getFreelancerContractDetail(contractId);
+
+      if (ignore) return;
+
       if (result.success) {
-        setContract(result.data);
+        setContract(result.data ?? null);
+        setIsLoading(false);
         return;
       }
-      setIsNotFound(true);
-    };
-    loadContract();
-  }, [user, contractId]);
 
-  const deliverableStatusClass = {
-    active: "status-success",
-    completed: "status-purple",
-    rejected: "status-danger",
-    cancelled: "status-danger",
+      setContract(null);
+      setErrorMessage(result.message || "Unable to load this contract.");
+      setIsLoading(false);
+    };
+
+    loadContract();
+
+    return () => {
+      ignore = true;
+    };
+  }, [user, contractId, role]);
+
+  const deliverables = useMemo(() => contract?.deliverables ?? [], [contract]);
+
+  const completedDeliverables = useMemo(
+    () => deliverables.filter((del) => del.status === "accepted").length,
+    [deliverables],
+  );
+
+  const currentDeliverable = useMemo(
+    () =>
+      deliverables.find((del) =>
+        ["unlocked", "revision_request", "submitted"].includes(del.status),
+      ),
+    [deliverables],
+  );
+
+  const paymentSummary = useMemo(() => {
+    const payments = deliverables
+      .map((deliverable) => deliverable.payment)
+      .filter(Boolean);
+
+    const totalAmount = deliverables.reduce(
+      (acc, deliverable) => acc + Number(deliverable.amount || 0),
+      0,
+    );
+
+    const paidAmount = payments.reduce(
+      (acc, payment) =>
+        payment.status === "released" ? acc + Number(payment.amount || 0) : acc,
+      0,
+    );
+
+    const escrowAmount = payments.reduce(
+      (acc, payment) =>
+        payment.status === "escrow" ? acc + Number(payment.amount || 0) : acc,
+      0,
+    );
+
+    return {
+      payments,
+      totalAmount,
+      paidAmount,
+      escrowAmount,
+      pendingAmount: Math.max(totalAmount - (paidAmount + escrowAmount), 0),
+      paymentProgress: calculatePercent(paidAmount, totalAmount),
+    };
+  }, [deliverables]);
+
+
+
+  const activeTabParam = searchParams.get("tab");
+  const activeTab = VALID_TABS.includes(activeTabParam)
+    ? activeTabParam
+    : "overview";
+
+  const tabs = useMemo(
+    () => [
+      { id: "overview", label: "Overview" },
+      {
+        id: "deliverables",
+        label: "Deliverables",
+        count: deliverables.length,
+      },
+      {
+        id: "payments",
+        label: "Payments",
+        count: paymentSummary.payments.length,
+      },
+    ],
+    [deliverables.length, paymentSummary.payments.length],
+  );
+
+  const handleTabChange = (tabId) => {
+    setSearchParams((prev) => {
+      const nextParams = new URLSearchParams(prev);
+
+      if (tabId === "overview") {
+        nextParams.delete("tab");
+      } else {
+        nextParams.set("tab", tabId);
+      }
+
+      return nextParams;
+    });
   };
 
   const headerContent = useMemo(() => {
     return {
       status: contract?.status,
-      project_title: contract?.project?.title,
+      projectTitle: contract?.project?.title,
       budget: contract?.final_price,
+      completedDeliverables,
+      totalDeliverables: deliverables.length,
+      progress: calculatePercent(completedDeliverables, deliverables.length),
     };
-  }, [contract]);
+  }, [contract, completedDeliverables, deliverables.length]);
+
 
   const other_user =
     role === "client" ? contract?.freelancer : contract?.client;
 
   const userInfo = useMemo(() => {
     return {
-      fullname: `${other_user?.first_name} ${other_user?.last_name}`,
-      avatar: other_user?.avatar,
+      fullname:
+        other_user?.first_name || other_user?.last_name
+          ? `${other_user?.first_name ?? ""} ${other_user?.last_name ?? ""}`.trim()
+          : "Not assigned yet",
+      // avatar: other_user?.avatar,
+      avatar: profile,
       id: other_user?.user_id,
     };
-  }, [contract]);
+  }, [other_user]);
 
   const headerInfo = useMemo(() => {
     return {
       status: contract?.status,
-      created_at: formatDate(contract?.created_at),
-      ...(contract?.status === "active" && {
-        cur_deliverable_deadline: formatDate(
-          contract?.deliverables?.find((del) =>
-            ["unlocked", "revision_request", "submitted"].includes(del.status),
-          )?.created_at,
-        ),
-      }),
+      created_at: formatDisplayDate(contract?.created_at),
+      final_deadline: formatDisplayDate(contract?.final_deadline),
+      cur_deliverable_deadline: formatDisplayDate(currentDeliverable?.deadline),
     };
-  }, [contract]);
+  }, [contract, currentDeliverable]);
 
   const summary = useMemo(() => {
-    const completed_deliverables = contract?.deliverables?.filter(
-      (del) => del.status === "accepted",
-    ).length;
-
-    const payments = contract?.deliverables
-      ?.map((del) => del.payment)
-      .filter((payment) => payment !== null);
-
     return {
+      id: contract?.id,
       description: contract?.description,
       budget: contract?.final_price,
       deadline: contract?.final_deadline,
-      total_deliverables: contract?.deliverables?.length,
-      completed_deliverables: completed_deliverables,
-      payments: payments,
+      created_at: contract?.created_at,
+      total_deliverables: deliverables.length,
+      completed_deliverables: completedDeliverables,
       contract_pdf: contract?.fichier_pdf,
+      paymentProgress: paymentSummary.paymentProgress,
+      paidAmount: paymentSummary.paidAmount,
     };
-  }, [contract]);
+  }, [contract, completedDeliverables, deliverables.length, paymentSummary]);
 
-  const deliverables = useMemo(() => contract?.deliverables, [contract]);
+  if (isLoading) {
+    return (
+      <div className={styles.contractDetailPage}>
+        <div className={styles.stateCard}>
+          <p className={styles.stateKicker}>Loading</p>
+          <h1>Getting contract details ready...</h1>
+          <p>
+            We are fetching the agreement, deliverables, and payment status.
+          </p>
+        </div>
+      </div>
+    );
+  }
 
-  if (isNotFound) {
-    return <div>Not found</div>;
+  if (errorMessage || !contract) {
+    return (
+      <div className={styles.contractDetailPage}>
+        <div className={`${styles.stateCard} ${styles.errorState}`}>
+          <p className={styles.stateKicker}>Contract unavailable</p>
+          <h1>We could not load this contract.</h1>
+        </div>
+      </div>
+    );
   }
 
   return (
     <div className={styles.contractDetailPage}>
       <ContractHeader
-        deliverableStatusClass={deliverableStatusClass}
+        statusClass={CONTRACT_STATUS_CLASS}
         headerContent={headerContent}
+        role={role}
       />
-      <ContractParty role={role} user={userInfo} headerInfo={headerInfo} />
-      <ContractSummary summary={summary} />
-      <ContractDeliverables deliverables={deliverables} />
-      <ContractPayments deliverables={deliverables} />
+
+      <div className={styles.contractWorkspace}>
+        <aside className={styles.sidebar}>
+          <ContractParty role={role} user={userInfo} headerInfo={headerInfo} />
+        </aside>
+
+        <main className={styles.mainPanel}>
+          <ContractTabs
+            tabs={tabs}
+            activeTab={activeTab}
+            onTabChange={handleTabChange}
+          />
+
+          <div className={styles.tabPanel}>
+            {activeTab === "overview" && <ContractSummary summary={summary} />}
+
+            {activeTab === "deliverables" && (
+              <ContractDeliverables deliverables={deliverables} />
+            )}
+
+            {activeTab === "payments" && (
+              <ContractPayments
+                deliverables={deliverables}
+                paymentSummary={paymentSummary}
+              />
+            )}
+          </div>
+        </main>
+      </div>
     </div>
   );
 }

@@ -27,14 +27,13 @@ function SubmitDeliverableForm() {
   };
 
   const handleSubmit = (e) => {
-    e.preventDefatult();
+    e.preventDefault();
   };
 
   return (
     <form action="" onSubmit={handleSubmit} className={styles.form}>
       <h1 className={styles.formTitle}>Submit Deliverable Form</h1>
       <p className={styles.clarificationInfo}>
-        <span>⚠️</span>
         <span>All old links will be replaced</span>
       </p>
 

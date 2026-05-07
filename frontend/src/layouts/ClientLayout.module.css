@@ -6,3 +6,15 @@
 .client_content {
   margin-top: 120px;
 }
+
+@media (max-width: 1100px) {
+  .container {
+    margin-inline: 48px;
+  }
+}
+
+@media (max-width: 700px) {
+  .container {
+    margin-inline: 18px;
+  }
+}
