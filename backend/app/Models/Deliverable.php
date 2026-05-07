@@ -12,7 +12,20 @@ class Deliverable extends Model
     //
     use HasFactory;
 
-    protected $fillable = ['contract_id', 'title', 'description', 'amount', 'deadline', 'deliverable_links', 'unlocked_at', 'submitted_at', 'accepted_at', 'status', 'submission_note'];
+    protected $fillable = [
+        'contract_id',
+        'title',
+        'description',
+        'amount',
+        'deadline',
+        'deliverable_links',
+        'unlocked_at',
+        'submitted_at',
+        'accepted_at',
+        'status',
+        'position',
+        'submission_note'
+    ];
 
     protected $casts = [
         'deliverable_links' => 'array'

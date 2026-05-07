@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Contract;
 use App\Models\Payment;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use function PHPUnit\Framework\returnArgument;
 
 class ClientContractController extends Controller
 {
@@ -177,4 +179,82 @@ class ClientContractController extends Controller
         ]);
 
     }
+
+
+    public function activateContract(Request $request, string $id)
+    {
+        $client = $request->user();
+
+        $contract = Contract::where('id', $id)->firstOrFail();
+
+        $contract->load('proposal.project');
+
+        if ($contract->proposal->project->client_id !== (int) $client->id) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Unauthorized action.',
+            ], 403);
+        }
+
+        if ($contract->status !== 'pending') {
+            return response()->json([
+                'success' => false,
+                'message' => 'Only pending contracts can be confirmed.',
+            ], 409);
+        }
+
+        $validated = $request->validate([
+            'description' => 'required|string|min:100|max:2000',
+            'final_price' => 'required|numeric|min:5',
+            'final_deadline' => 'required|date|after:today',
+            'deliverables' => 'required|array|min:1',
+            'deliverables.*.title' => 'required|string',
+            'deliverables.*.description' => 'required|string|min:10|max:1000',
+            'deliverables.*.amount' => 'required|numeric',
+            'deliverables.*.deadline' => 'required|after_or_equal:today',
+            'deliverables.*.position' => 'required|numeric|min:1'
+        ]);
+
+
+        $updatedContract = DB::transaction(function () use ($contract, $validated) {
+            $project = $contract->proposal->project;
+
+            $contract->update([
+                'description' => $validated['description'],
+                'final_price' => $validated['final_price'],
+                'final_deadline' => $validated['final_deadline'],
+                'status' => 'active'
+            ]);
+
+            foreach ($validated['deliverables'] as $deliverable) {
+                $contract->deliverables()->create([
+                    'title' => $deliverable['title'],
+                    'description' => $deliverable['description'],
+                    'amount' => $deliverable['amount'],
+                    'status' => 'pending',
+                    'created_at' => now(),
+                    'position' => $deliverable['position'],
+                ]);
+            }
+
+            $project->proposals()->where('id', '!=', $contract->proposal_id)
+                ->whereIn('status', ['accepted', 'pending'])
+                ->update(['status' => 'rejected']);
+
+            return $contract->fresh([
+                'proposal.freelancer:id,user_id',
+                'proposal.freelancer.user:id,first_name,last_name,avatar',
+                'proposal.project:id,title,status',
+                'deliverables'
+            ]);
+        });
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Contract activated successfully',
+            'data' => $updatedContract
+        ]);
+
+    }
+
 }

@@ -42,6 +42,7 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::get('/client/contracts', [ClientContractController::class, 'index']);
         Route::get('/client/contracts/stats', [ClientContractController::class, 'stats']);
         Route::get('/client/contracts/{id}', [ClientContractController::class, 'show']);
+        Route::put('/client/contracts/{id}/activate', [ClientContractController::class, 'activateContract']);
 
         // ? profile 
         Route::put('/client/update-profile', [ClientProfileController::class, 'update']);
