@@ -233,7 +233,6 @@ class ClientContractController extends Controller
             'deliverables.*.title' => 'required|string',
             'deliverables.*.description' => 'required|string|min:10|max:1000',
             'deliverables.*.amount' => 'required|numeric',
-            'deliverables.*.deadline' => 'required|after_or_equal:today',
             'deliverables.*.position' => 'required|numeric|min:1'
         ]);
 

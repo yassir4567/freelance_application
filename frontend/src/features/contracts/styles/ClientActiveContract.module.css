@@ -47,10 +47,14 @@
 }
 
 .wrapper {
-    border: 1px solid var(--color-border);
+    border: 2px solid var(--color-border);
     background-color: var(--color-light);
     padding: 34px;
     border-radius: 24px;
+    /* box-shadow: 0 5px 16px #e0dede; */
+}
+
+.setUpFormBox {
     display: flex;
     flex-wrap: wrap;
 }
@@ -68,4 +72,38 @@
 
 .contractImg img {
     width: 250px;
+}
+
+.deliverablesContainer {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 40px;
+}
+
+.deliverablesWrapper {
+    width: calc(70% - 40px);
+}
+
+.deliverablesFormBox {
+    margin-bottom: 30px;
+}
+
+.paymentSummary {
+    flex: 1;
+}
+
+.deliverablesFormsHeader {
+    margin-bottom: 10px;
+}
+
+.deliverablesFormsTitle {
+    font-size: var(--fs-lg);
+    font-weight: 700;
+    color: var(--color-success);
+    margin-bottom: 10px;
+}
+
+.deliverablesFormsDescription {
+    font-size: var(--fs-sm);
+    color: var(--color-text-muted);
 }

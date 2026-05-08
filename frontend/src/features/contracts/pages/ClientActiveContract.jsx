@@ -7,6 +7,8 @@ import { useAuth } from "../../../context/AuthContext";
 import { FiArrowLeft } from "react-icons/fi";
 import ContractSetUpForm from "../components/ContractSetUpForm";
 import contractImg from "../../../assets/images/contract_img.svg";
+import ClientSetUpDeliverableForm from "../components/ClientSetUpDeliverableForm";
+import SetUpContractPaymentSummary from "../components/SetUpContractPaymentSummary";
 
 function ClientActiveContract() {
   const [setupInfo, setSetupInfo] = useState(null);
@@ -17,6 +19,15 @@ function ClientActiveContract() {
     final_deadline: "",
     description: "",
   });
+
+  const [deliverables, setDeliverables] = useState([]);
+
+  const [deliverableForm, setDeliverableForm] = useState({
+    title: "",
+    description: "",
+    amount: "",
+  });
+
   const [step, setStep] = useState(0);
   const { user } = useAuth();
   const { contractId } = useParams();
@@ -58,11 +69,18 @@ function ClientActiveContract() {
   }, [setupInfo]);
 
   const nextStep = () => {
-    setStep((currentStep) => currentStep + 1);    
+    setStep((currentStep) => currentStep + 1);
   };
 
   const previousStep = () => {
     setStep((currentStep) => currentStep - 1);
+  };
+
+  // * add deliverable to deliverables list
+  const handleAddDeliverable = (form) => {
+    console.log(form);
+
+    setDeliverables((prev) => [...prev, form]);
   };
 
   const role = user.role;
@@ -85,6 +103,8 @@ function ClientActiveContract() {
     );
   }
 
+  const deliverableNumber = deliverables.length + 1;
+
   return (
     <div className={styles.contractSetUpPage}>
       <ClientActiveContractHeader
@@ -95,16 +115,56 @@ function ClientActiveContract() {
 
       <div className={styles.main}>
         <div className={styles.wrapper}>
-          <div className={styles.setUpForm}>
-            <ContractSetUpForm
-              nextStep={nextStep}
-              form={setUpContractFormData}
-              setForm={setSetUpContractFormData}
-            />
-          </div>
-          <div className={styles.contractImg}>
-            <img src={contractImg} />
-          </div>
+          {step === 1 && (
+            <div className={styles.setUpFormBox}>
+              <div className={styles.setUpForm}>
+                <ContractSetUpForm
+                  nextStep={nextStep}
+                  form={setUpContractFormData}
+                  setForm={setSetUpContractFormData}
+                />
+              </div>
+              <div className={styles.contractImg}>
+                <img src={contractImg} />
+              </div>
+            </div>
+          )}
+
+          {step === 0 && (
+            <div className={styles.deliverablesContainer}>
+              <div className={styles.deliverablesWrapper}>
+                <div className={styles.deliverablesFormsHeader}>
+                  <h1 className={styles.deliverablesFormsTitle}>
+                    Set up contract deliverables
+                  </h1>
+                  <p className={styles.deliverablesFormsDescription}>
+                    Break the contract into clear deliverables with deadlines
+                    and payment amounts. Enter them in order
+                  </p>
+                </div>
+
+                <div className={styles.deliverablesFormBox}>
+                  <ClientSetUpDeliverableForm
+                    nextStep={nextStep}
+                    previousStep={previousStep}
+                    form={deliverableForm}
+                    setForm={setDeliverableForm}
+                    handleAddDeliverable={handleAddDeliverable}
+                    deliverableNumber={deliverableNumber}
+                  />
+                </div>
+
+                <div>
+                  // * here the deliverables created
+                </div>
+              </div>
+              <div className={styles.paymentSummary}>
+                <SetUpContractPaymentSummary
+                  final_price={setUpContractFormData.final_price}
+                />
+              </div>
+            </div>
+          )}
         </div>
       </div>
     </div>

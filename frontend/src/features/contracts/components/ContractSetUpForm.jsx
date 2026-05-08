@@ -18,32 +18,55 @@ function ContractSetUpForm({ nextStep, form, setForm }) {
     setForm((prev) => ({ ...prev, [name]: value }));
   };
 
+  // * validate price function
+  const validatePrice = (value) => {
+    if (!value) {
+      return "Price required";
+    }
+
+    const numberPrice = Number(value);
+    if (!Number.isFinite(numberPrice)) {
+      return "Price must be a valid number";
+    } else if (numberPrice <= 5) {
+      return "Price must be greater than 5$";
+    }
+
+    return "";
+  };
+
+  // * validate deadline function
+  const validateDeadline = (value) => {
+    if (!value) return "Deadline required";
+
+    const deadline = new Date(value);
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+
+    if (Number.isNaN(deadline.getTime())) {
+      return "Deadline must be valid date";
+    } else if (deadline < today) {
+      return "Deadline cannot be in the past";
+    }
+
+    return "";
+  };
+
   const handleNextStep = (e) => {
     e.preventDefault();
     setErrors({});
     let newErrors = {};
 
     // * validate price
-    const numberPrice = Number(form.final_price);
-    if (!form.final_price.trim()) {
-      newErrors.final_price = "Price required";
-    } else if (!Number.isFinite(numberPrice)) {
-      newErrors.final_price = "Price must be a valid number";
-    } else if (numberPrice <= 5) {
-      newErrors.final_price = "Price must be greater than 5$";
+
+    const priceValidation = validatePrice(form.final_price);
+    if (priceValidation) {
+      newErrors.final_price = priceValidation;
     }
 
-    // * validate deadline
-    const deadline = new Date(form.final_deadline);
-    const today = new Date();
-    today.setHours(0, 0, 0, 0);
+    const deadlinValidation = validateDeadline(form.final_deadline);
 
-    if (!form.final_deadline.trim()) {
-      newErrors.final_deadline = "Deadline required";
-    } else if (Number.isNaN(deadline.getTime())) {
-      newErrors.final_deadline = "Deadline must be valid date";
-    } else if (deadline < today) {
-      newErrors.final_deadline = "Deadline cannot be in the past";
+    if (deadlinValidation) {
+      newErrors.final_deadline = deadlinValidation;
     }
 
     // * validate description
@@ -59,6 +82,7 @@ function ContractSetUpForm({ nextStep, form, setForm }) {
         final_deadline: newErrors.final_deadline ?? "",
         description: newErrors.description ?? "",
       });
+      return;
     }
     setErrors({});
     nextStep();
