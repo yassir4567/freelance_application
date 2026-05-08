@@ -11,7 +11,7 @@ function FinalStepDeliverableCard({ deliverable , index }) {
         </div>
         <div className={styles.subCard}>
           <h5 className={styles.cardTitle}>Amount</h5>
-          <p>{deliverable.amount}</p>
+          <p>${deliverable.amount}</p>
         </div>
       </div>
       <div className={styles.subCard}>

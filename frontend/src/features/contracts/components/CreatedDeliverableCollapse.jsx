@@ -7,7 +7,7 @@ function CreatedDeliverableCollapse({
   index,
   handleRemoveDeliverable,
 }) {
-  const [open, setOpen] = useState(true);
+  const [open, setOpen] = useState(false);
 
   const handleToggleDetail = () => {
     setOpen(!open);

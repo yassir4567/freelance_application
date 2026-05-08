@@ -7,6 +7,7 @@ function SetUpContractFinalStep({
   setUpContractFormData,
   deliverables,
 }) {
+  
   return (
     <div className={styles.finalStepCmp}>
       <div className={styles.header}>

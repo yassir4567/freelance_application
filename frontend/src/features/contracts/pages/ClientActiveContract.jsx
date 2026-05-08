@@ -22,18 +22,7 @@ function ClientActiveContract() {
     description: "",
   });
 
-  const [deliverables, setDeliverables] = useState([
-    {
-      title: "",
-      description: "",
-      amount: "",
-    },
-    {
-      title: "",
-      description: "",
-      amount: "",
-    },
-  ]);
+  const [deliverables, setDeliverables] = useState([]);
 
   const [deliverableForm, setDeliverableForm] = useState({
     title: "",

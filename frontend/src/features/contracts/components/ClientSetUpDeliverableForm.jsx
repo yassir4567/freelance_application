@@ -143,15 +143,27 @@ function ClientSetUpDeliverableForm({
       </div>
       <div className={styles.actions}>
         {!isAmountCompleted && (
-          <button onClick={handleAddDeliverableForm} className={styles.add}>
+          <button
+            type="button"
+            onClick={handleAddDeliverableForm}
+            className={styles.add}
+          >
             <FiPlus /> <span>Add deliverable</span>
           </button>
         )}
-        <button onClick={() => previousStep()} className={styles.step}>
+        <button
+          type="button"
+          onClick={() => previousStep()}
+          className={styles.step}
+        >
           previous
         </button>
         {isAmountCompleted && (
-          <button onClick={handleNextStep} className={styles.step}>
+          <button
+            type="button"
+            onClick={handleNextStep}
+            className={styles.step}
+          >
             Next
           </button>
         )}
