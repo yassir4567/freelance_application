@@ -8,7 +8,7 @@ function ContractSetUpForm({ nextStep, form, setForm }) {
   });
 
   // * handle set up form inputs change
-  const handleInputsChage = (e) => {
+  const handleInputsChange = (e) => {
     const { name, value } = e.target;
 
     if (name === "description" && value.length > 2000) {
@@ -103,7 +103,7 @@ function ContractSetUpForm({ nextStep, form, setForm }) {
               type="number"
               name="final_price"
               value={form.final_price}
-              onChange={handleInputsChage}
+              onChange={handleInputsChange}
               placeholder="Enter the agreed final price"
             />
             {errors.final_price && (
@@ -117,7 +117,7 @@ function ContractSetUpForm({ nextStep, form, setForm }) {
               type="date"
               name="final_deadline"
               value={form.final_deadline}
-              onChange={handleInputsChage}
+              onChange={handleInputsChange}
             />{" "}
             {errors.final_deadline && (
               <div className={styles.error}>{errors.final_deadline}</div>
@@ -128,11 +128,11 @@ function ContractSetUpForm({ nextStep, form, setForm }) {
         <div className={styles.textareaBox}>
           <div className={styles.textareaLabelBox}>
             <label>Contract description</label>
-            <p>{form.description.length} / 1500</p>
+            <p>{form.description.length} / 2000</p>
           </div>
           <textarea
             value={form.description}
-            onChange={handleInputsChage}
+            onChange={handleInputsChange}
             name="description"
             placeholder="Describe the work scope, expectations, and important details..."
           />

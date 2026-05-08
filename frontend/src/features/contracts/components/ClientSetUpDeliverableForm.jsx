@@ -128,7 +128,7 @@ function ClientSetUpDeliverableForm({
 
       <div className={styles.textareaBox}>
         <div className={styles.textareaLabelBox}>
-          <label>Deliverbale description</label>
+          <label>Deliverable description</label>
           <p>{form.description.length} / 1000</p>
         </div>
         <textarea
