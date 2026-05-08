@@ -9,6 +9,7 @@ import ContractSetUpForm from "../components/ContractSetUpForm";
 import contractImg from "../../../assets/images/contract_img.svg";
 import ClientSetUpDeliverableForm from "../components/ClientSetUpDeliverableForm";
 import SetUpContractPaymentSummary from "../components/SetUpContractPaymentSummary";
+import CreatedDeliverableCollapse from "../components/CreatedDeliverableCollapse";
 
 function ClientActiveContract() {
   const [setupInfo, setSetupInfo] = useState(null);
@@ -51,7 +52,6 @@ function ClientActiveContract() {
 
   const freelancerInfo = useMemo(() => {
     const freelancer = setupInfo?.proposal?.freelancer;
-
     return {
       id: freelancer?.id,
       user_id: freelancer?.user_id,
@@ -78,12 +78,17 @@ function ClientActiveContract() {
 
   // * add deliverable to deliverables list
   const handleAddDeliverable = (form) => {
-    console.log(form);
-
     setDeliverables((prev) => [...prev, form]);
   };
 
+  // * remove deliverable
+  const handleRemoveDeliverable = (index) => {
+    const filtredDeliverables = deliverables.filter((_, i) => i !== index);
+    setDeliverables(filtredDeliverables);
+  };
+
   const role = user.role;
+  const totalDeliverables = deliverables.length;
 
   if (!success || !setupInfo) {
     return (
@@ -103,8 +108,6 @@ function ClientActiveContract() {
     );
   }
 
-  const deliverableNumber = deliverables.length + 1;
-
   return (
     <div className={styles.contractSetUpPage}>
       <ClientActiveContractHeader
@@ -115,7 +118,7 @@ function ClientActiveContract() {
 
       <div className={styles.main}>
         <div className={styles.wrapper}>
-          {step === 1 && (
+          {step === 0 && (
             <div className={styles.setUpFormBox}>
               <div className={styles.setUpForm}>
                 <ContractSetUpForm
@@ -130,7 +133,7 @@ function ClientActiveContract() {
             </div>
           )}
 
-          {step === 0 && (
+          {step === 1 && (
             <div className={styles.deliverablesContainer}>
               <div className={styles.deliverablesWrapper}>
                 <div className={styles.deliverablesFormsHeader}>
@@ -150,12 +153,20 @@ function ClientActiveContract() {
                     form={deliverableForm}
                     setForm={setDeliverableForm}
                     handleAddDeliverable={handleAddDeliverable}
-                    deliverableNumber={deliverableNumber}
+                    totalDeliverables={totalDeliverables}
                   />
                 </div>
 
-                <div>
-                  // * here the deliverables created
+                <div className={styles.createdDeliverablesBox}>
+                  {deliverables.map((deliverable, index) => (
+                    <CreatedDeliverableCollapse
+                      key={index}
+                      deliverable={deliverable}
+                      index={index}
+                      setDeliverables={setDeliverables}
+                      handleRemoveDeliverable={handleRemoveDeliverable}
+                    />
+                  ))}
                 </div>
               </div>
               <div className={styles.paymentSummary}>

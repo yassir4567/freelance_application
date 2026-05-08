@@ -107,3 +107,9 @@
     font-size: var(--fs-sm);
     color: var(--color-text-muted);
 }
+
+.createdDeliverablesBox {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}

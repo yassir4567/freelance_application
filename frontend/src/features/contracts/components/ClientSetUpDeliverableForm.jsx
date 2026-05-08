@@ -8,7 +8,7 @@ function ClientSetUpDeliverableForm({
   form,
   setForm,
   handleAddDeliverable,
-  deliverableNumber,
+  totalDeliverables,
 }) {
   const [errors, setErrors] = useState({
     title: "",
@@ -77,6 +77,12 @@ function ClientSetUpDeliverableForm({
 
   const handleNextStep = (e) => {
     e.preventDefault();
+
+    if (totalDeliverables >= 1) {
+      nextStep();
+      return;
+    }
+
     const isValid = validateForm();
     if (!isValid) {
       return;
@@ -92,12 +98,12 @@ function ClientSetUpDeliverableForm({
     }
 
     handleAddDeliverable(form);
-    setForm({ title: "", amount: "", description: "" });
+    setForm({ title: "", amount: "", descrdeliverableNumbeription: "" });
   };
 
   return (
     <form className={styles.form}>
-      <h5 className={styles.title}>Deliverable #{deliverableNumber}</h5>
+      <h5 className={styles.title}>Deliverable #{totalDeliverables + 1}</h5>
       <div className={styles.row}>
         <div className={styles.inputBox}>
           <label>Deliverable Title</label>
