@@ -6,8 +6,8 @@ function SetUpContractFinalStep({
   previousStep,
   setUpContractFormData,
   deliverables,
+  onShowSendModal,
 }) {
-  
   return (
     <div className={styles.finalStepCmp}>
       <div className={styles.header}>
@@ -52,8 +52,20 @@ function SetUpContractFinalStep({
         </div>
 
         <div className={styles.actions}>
-          <button onClick={previousStep} className={styles.previous}>Previous</button>
-          <button className={styles.send}>Send</button>
+          <button
+            type="button"
+            onClick={previousStep}
+            className={styles.previous}
+          >
+            Previous
+          </button>
+          <button
+            type="button"
+            className={styles.send}
+            onClick={onShowSendModal}
+          >
+            Send
+          </button>
         </div>
       </div>
     </div>

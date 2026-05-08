@@ -1,0 +1,78 @@
+.container {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    background: rgba(226, 229, 227, 0.628);
+}
+
+.wrapper {
+    background-color: var(--color-white);
+    width: min(100%, 550px);
+    border: 2px solid var(--color-border);
+    padding: 22px;
+    border-radius: 22px;
+}
+
+.iconBox {
+    width: 52px;
+    height: 52px;
+    display: grid;
+    place-items: center;
+    border-radius: 18px;
+    background: #fff7ed;
+    color: #f97316;
+    font-size: 26px;
+    margin-bottom: 18px;
+}
+
+.kicker {
+    margin: 0 0 6px;
+    color: var(--color-danger);
+    font-size: var(--fs-base);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.title {
+    margin: 0;
+    color: #0f172a;
+    font-size: 1.6rem;
+    font-weight: 800;
+}
+
+.description {
+    margin: 12px 0 20px;
+    color: #475569;
+    line-height: 1.6;
+}
+
+.actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    margin-top: 24px;
+}
+
+.cancel,
+.confirm {
+    border: none;
+    border-radius: 14px;
+    padding: 11px 18px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.cancel {
+    background: var(--color-danger);
+    color: var(--color-white);
+}
+
+.confirm {
+    background: var(--color-success);
+    color: var(--color-white);
+}

@@ -186,7 +186,7 @@ class ClientContractController extends Controller
 
         $contract = Contract::where('id', $id)
             ->where('status', 'pending')
-            ->select('id' , 'proposal_id' , 'status')
+            ->select('id', 'proposal_id', 'status')
             ->whereHas('proposal.project', function ($q) use ($client) {
                 $q->where('client_id', $client->id);
             })->with([
@@ -245,6 +245,10 @@ class ClientContractController extends Controller
                 'final_price' => $validated['final_price'],
                 'final_deadline' => $validated['final_deadline'],
                 'status' => 'active'
+            ]);
+
+            $project->update([
+                'status' => 'in_progress'
             ]);
 
             foreach ($validated['deliverables'] as $deliverable) {

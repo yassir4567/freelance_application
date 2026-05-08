@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import styles from "../styles/ClientActiveContract.module.css";
-import { NavLink, useParams } from "react-router-dom";
+import { NavLink, useNavigate, useParams } from "react-router-dom";
 import { getSetupContractInfo } from "../../../api/contracts/getSetupContractInfo";
 import ClientActiveContractHeader from "../components/ClientActiveContractHeader";
 import { useAuth } from "../../../context/AuthContext";
@@ -11,11 +11,16 @@ import ClientSetUpDeliverableForm from "../components/ClientSetUpDeliverableForm
 import SetUpContractPaymentSummary from "../components/SetUpContractPaymentSummary";
 import CreatedDeliverableCollapse from "../components/CreatedDeliverableCollapse";
 import SetUpContractFinalStep from "../components/SetUpContractFinalStep";
+import SubmitSetupModal from "../components/modals/SubmitSetupModal";
+import { setUpContract } from "../../../api/contracts/setUpContract";
 
 function ClientActiveContract() {
+  const navigate = useNavigate();
   const [setupInfo, setSetupInfo] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [success, setSuccess] = useState(false);
+  const [showModal, setShowModal] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [setUpContractFormData, setSetUpContractFormData] = useState({
     final_price: "",
     final_deadline: "",
@@ -99,6 +104,37 @@ function ClientActiveContract() {
     (acc, cur) => acc + +cur.amount,
     0,
   );
+
+  // * show and close send modal functions
+  const onShowSendModal = () => setShowModal(true);
+  const onCloseSendModal = () => setShowModal(false);
+
+  // * handle send activate contract data to backend
+  const handleSubmitContractSetUp = async () => {
+    if (isSubmitting) return;
+    setIsSubmitting(true);
+
+    const payload = {
+      final_price: setUpContractFormData.final_price,
+      final_deadline: setUpContractFormData.final_deadline,
+      description: setUpContractFormData.description,
+      deliverables: deliverables.map((deliverable, index) => ({
+        title: deliverable.title,
+        amount: Number(deliverable.amount),
+        description: deliverable.description,
+        position: index + 1,
+      })),
+    };
+    const result = await setUpContract(contractId, payload);
+    setIsSubmitting(false);
+
+    if (!result.success) {
+      console.log(result);
+      return;
+    }
+    navigate(`/dashboard/client/contracts/${contractId}`);
+    return;
+  };
 
   if (isLoading) return <div>Loading...</div>;
 
@@ -198,10 +234,19 @@ function ClientActiveContract() {
               previousStep={previousStep}
               setUpContractFormData={setUpContractFormData}
               deliverables={deliverables}
+              onShowSendModal={onShowSendModal}
             />
           )}
         </div>
       </div>
+
+      {showModal && (
+        <SubmitSetupModal
+          onClose={onCloseSendModal}
+          isSubmitting={isSubmitting}
+          onConfirm={handleSubmitContractSetUp}
+        />
+      )}
     </div>
   );
 }
