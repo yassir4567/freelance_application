@@ -10,6 +10,7 @@ import contractImg from "../../../assets/images/contract_img.svg";
 import ClientSetUpDeliverableForm from "../components/ClientSetUpDeliverableForm";
 import SetUpContractPaymentSummary from "../components/SetUpContractPaymentSummary";
 import CreatedDeliverableCollapse from "../components/CreatedDeliverableCollapse";
+import SetUpContractFinalStep from "../components/SetUpContractFinalStep";
 
 function ClientActiveContract() {
   const [setupInfo, setSetupInfo] = useState(null);
@@ -21,7 +22,18 @@ function ClientActiveContract() {
     description: "",
   });
 
-  const [deliverables, setDeliverables] = useState([]);
+  const [deliverables, setDeliverables] = useState([
+    {
+      title: "",
+      description: "",
+      amount: "",
+    },
+    {
+      title: "",
+      description: "",
+      amount: "",
+    },
+  ]);
 
   const [deliverableForm, setDeliverableForm] = useState({
     title: "",
@@ -99,7 +111,7 @@ function ClientActiveContract() {
     0,
   );
 
-  if(isLoading) return <div>Loading...</div>
+  if (isLoading) return <div>Loading...</div>;
 
   if (!success || !setupInfo) {
     return (
@@ -189,6 +201,15 @@ function ClientActiveContract() {
                 />
               </div>
             </div>
+          )}
+
+          {step === 2 && (
+            <SetUpContractFinalStep
+              nextStep={nextStep}
+              previousStep={previousStep}
+              setUpContractFormData={setUpContractFormData}
+              deliverables={deliverables}
+            />
           )}
         </div>
       </div>

@@ -1,0 +1,95 @@
+.header {
+    margin-bottom: 20px;
+}
+
+.headerTitle {
+    font-size: var(--fs-lg);
+    font-weight: 700;
+    color: var(--color-success);
+    margin-bottom: 10px;
+}
+
+.headerDescription {
+    font-size: var(--fs-sm);
+    color: var(--color-text-muted);
+}
+
+.minTitle {
+    font-size: var(--fs-md);
+    color: var(--color-success-dark);
+}
+
+
+.row {
+    display: flex;
+    gap: 20px;
+    margin-block: 10px;
+}
+
+.row .contractInfoCard {
+    flex: 1;
+}
+
+.contractDescriptionCard {
+    width: 100%;
+}
+
+.contractInfoCard,
+.contractDescriptionCard {
+    border: 1px solid var(--color-border);
+    padding: 18px;
+    background-color: var(--color-white);
+    border-radius: 10px;
+}
+
+.cardTitle {
+    color: var(--color-success);
+    margin-bottom: 10px;
+}
+
+.contractDescriptionCard p {
+    font-size: var(--fs-sm);
+}
+
+.deliverablesContainer {
+    margin-top: 50px;
+}
+
+.deliverablesWrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 35px;
+    margin-top: 20px;
+}
+
+.actions {
+    margin-top: 20px;
+    display: flex;
+    justify-content: end;
+    gap: 20px;
+}
+
+.send ,
+.previous {
+    min-width: 120px;
+    height: 40px;
+    border-radius: 10px;
+    padding: 0 22px;
+    font-size: var(--fs-base);
+    transition: .1s;
+}
+
+.send:hover ,
+.previous:hover {
+    transform: translateY(2px);
+}
+
+.send {
+    background-color: var(--color-success);
+    color: var(--color-white);
+}
+
+.previous {
+    color: var(--color-success);
+    border: 1px solid var(--color-success);
+}
