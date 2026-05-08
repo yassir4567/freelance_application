@@ -48,7 +48,7 @@ function ClientActiveContract() {
       setSuccess(result.success);
     };
     loadSetupInfo();
-  }, []);
+  }, [contractId]);
 
   const freelancerInfo = useMemo(() => {
     const freelancer = setupInfo?.proposal?.freelancer;
@@ -79,6 +79,11 @@ function ClientActiveContract() {
   // * add deliverable to deliverables list
   const handleAddDeliverable = (form) => {
     setDeliverables((prev) => [...prev, form]);
+    setDeliverableForm({
+      title: "",
+      description: "",
+      amount: "",
+    });
   };
 
   // * remove deliverable
@@ -87,8 +92,14 @@ function ClientActiveContract() {
     setDeliverables(filtredDeliverables);
   };
 
-  const role = user.role;
+  const role = user?.role;
   const totalDeliverables = deliverables.length;
+  const totalDeliverablesAmount = deliverables.reduce(
+    (acc, cur) => acc + +cur.amount,
+    0,
+  );
+
+  if(isLoading) return <div>Loading...</div>
 
   if (!success || !setupInfo) {
     return (
@@ -154,6 +165,8 @@ function ClientActiveContract() {
                     setForm={setDeliverableForm}
                     handleAddDeliverable={handleAddDeliverable}
                     totalDeliverables={totalDeliverables}
+                    totalDeliverablesAmount={totalDeliverablesAmount}
+                    contractPrice={setUpContractFormData.final_price}
                   />
                 </div>
 
@@ -172,6 +185,7 @@ function ClientActiveContract() {
               <div className={styles.paymentSummary}>
                 <SetUpContractPaymentSummary
                   final_price={setUpContractFormData.final_price}
+                  totalDeliverablesAmount={totalDeliverablesAmount}
                 />
               </div>
             </div>

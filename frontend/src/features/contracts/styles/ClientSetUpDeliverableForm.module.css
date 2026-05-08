@@ -54,18 +54,18 @@
     gap: 20px;
 }
 
-.next {
-    width: 100px;
+.step {
+    /* min-width: 120px; */
     background-color: var(--color-success);
     color: var(--color-white);
     height: 32px;
     border-radius: 12px;
     font-size: var(--fs-base);
     transition: .1s;
-
+    padding: 0px 25px;
 }
 
-.next:hover {
+.step:hover {
     transform: translateY(2px);
 
 }

@@ -9,6 +9,8 @@ function ClientSetUpDeliverableForm({
   setForm,
   handleAddDeliverable,
   totalDeliverables,
+  contractPrice,
+  totalDeliverablesAmount,
 }) {
   const [errors, setErrors] = useState({
     title: "",
@@ -59,8 +61,8 @@ function ClientSetUpDeliverableForm({
     // * validate description
     if (!form.description.trim()) {
       newErrors.description = "Description is required";
-    } else if (form.description.length < 100) {
-      newErrors.description = "Description must be at least 100 character";
+    } else if (form.description.length < 30) {
+      newErrors.description = "Description must be at least 30 character";
     }
 
     if (Object.keys(newErrors).length > 0) {
@@ -78,15 +80,7 @@ function ClientSetUpDeliverableForm({
   const handleNextStep = (e) => {
     e.preventDefault();
 
-    if (totalDeliverables >= 1) {
-      nextStep();
-      return;
-    }
-
-    const isValid = validateForm();
-    if (!isValid) {
-      return;
-    }
+    nextStep();
   };
 
   const handleAddDeliverableForm = (e) => {
@@ -98,8 +92,10 @@ function ClientSetUpDeliverableForm({
     }
 
     handleAddDeliverable(form);
-    setForm({ title: "", amount: "", descrdeliverableNumbeription: "" });
   };
+
+  const isAmountCompleted =
+    Number(contractPrice) === Number(totalDeliverablesAmount);
 
   return (
     <form className={styles.form}>
@@ -146,12 +142,19 @@ function ClientSetUpDeliverableForm({
         )}
       </div>
       <div className={styles.actions}>
-        <button onClick={handleAddDeliverableForm} className={styles.add}>
-          <FiPlus /> <span>Add deliverable</span>
+        {!isAmountCompleted && (
+          <button onClick={handleAddDeliverableForm} className={styles.add}>
+            <FiPlus /> <span>Add deliverable</span>
+          </button>
+        )}
+        <button onClick={() => previousStep()} className={styles.step}>
+          previous
         </button>
-        <button onClick={handleNextStep} className={styles.next}>
-          Next
-        </button>
+        {isAmountCompleted && (
+          <button onClick={handleNextStep} className={styles.step}>
+            Next
+          </button>
+        )}
       </div>
     </form>
   );
