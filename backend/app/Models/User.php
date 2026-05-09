@@ -13,7 +13,19 @@ class User extends Authenticatable
     //
     use HasApiTokens, HasFactory;
 
-    protected $fillable = ['username', 'email', 'password', 'role', 'first_name', 'last_name', 'age', 'phone', 'country', 'avatar', 'address', 'city'];
+    protected $fillable = [
+        'username',
+        'email',
+        'password',
+        'role',
+        'first_name',
+        'last_name',
+        'phone',
+        'country',
+        'avatar',
+        'address',
+        'city'
+    ];
 
     protected $hidden = ['password'];
 
@@ -26,11 +38,6 @@ class User extends Authenticatable
     public function projects(): HasMany
     {
         return $this->hasMany(Project::class, 'client_id');
-    }
-
-    public function wallet(): HasOne
-    {
-        return $this->hasOne(Wallet::class);
     }
 
     public function notifications(): HasMany
