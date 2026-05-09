@@ -8,6 +8,7 @@ use App\Http\Controllers\ClientProfileController;
 use App\Http\Controllers\ClientProjectController;
 use App\Http\Controllers\ClientProposalController;
 use App\Http\Controllers\ConversationController;
+use App\Http\Controllers\DeliverablePaymentController;
 use App\Http\Controllers\FreelancerContractController;
 use App\Http\Controllers\FreelancerDashboardController;
 use App\Http\Controllers\FreelancerProfileController;
@@ -47,6 +48,9 @@ Route::middleware('auth:sanctum')->group(function () {
 
         // ? profile 
         Route::put('/client/update-profile', [ClientProfileController::class, 'update']);
+
+        // ? Payments
+        Route::post('/deliverables/{deliverableId}/payments/fund', [DeliverablePaymentController::class, 'fund']);
     });
 
     Route::middleware('role:freelancer')->group(function () {

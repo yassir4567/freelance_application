@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Laravel\Sanctum\HasApiTokens;
+use function PHPUnit\Framework\returnArgument;
 
 class User extends Authenticatable
 {
@@ -50,6 +51,9 @@ class User extends Authenticatable
         return $this->hasMany(Message::class, 'sender_id');
     }
 
+    public function payments() : HasMany {
+        return $this->hasMany(Payment::class) ;
+    }
 
     // * profile completion methods 
 

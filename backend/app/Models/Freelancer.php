@@ -45,4 +45,9 @@ class Freelancer extends Model
     {
         return $this->hasOne(Wallet::class);
     }
+
+    public function payments(): HasMany
+    {
+        return $this->hasMany(Payment::class);
+    }
 }
