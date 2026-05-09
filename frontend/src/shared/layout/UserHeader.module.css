@@ -36,14 +36,44 @@
   justify-content: center;
 }
 
-.header_right span {
-  font-size: var(--fs-xl);
-  margin-top: 5px;
-  cursor: pointer;
+.wallet {
+  border: 1px solid var(--color-success);
+  min-width: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 5px 10px;
+  border-radius: 5px; 
+}
+
+.wallet span {
+  font-size: var(--fs-sm);
+  color: var(--color-success-dark);
+  font-weight: 600;
+}
+
+.walletIcon {
+  color: var(--color-success);
+  font-size: var(--fs-md);
 }
 
 .profile_icon {
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  background-color: var(--color-light);
+  border: 1px solid var(--color-success);
+  padding: 5px 20px;
+  border-radius: 25px;
+  box-shadow: 2px 4px 8px #dadada;
+}
+
+.fullName {
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  color: var(--color-success);
 }
 
 .profile_icon img {

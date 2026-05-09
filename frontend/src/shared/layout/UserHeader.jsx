@@ -5,6 +5,7 @@ import { useEffect, useRef, useState } from "react";
 import ProfileMenu from "../common/ProfileMenu";
 import { NavLink } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
+import { SlWallet } from "react-icons/sl";
 
 function UserHeader({ links }) {
   const [showProfileMenu, setShowProfileMenu] = useState(false);
@@ -29,6 +30,8 @@ function UserHeader({ links }) {
     };
   }, []);
 
+  const fullName = user.first_name + " " + user.last_name;
+
   return (
     <header className={styles.header} ref={ref}>
       <div className={styles.logo}>Freelancy</div>
@@ -52,13 +55,15 @@ function UserHeader({ links }) {
         </ul>
       </nav>
       <div className={styles.header_right}>
-        <span className={styles.notification_icon}>
-          <IoMdNotificationsOutline />
-        </span>
+        <div className={styles.wallet}>
+          <span>$ 199</span>
+          <SlWallet className={styles.walletIcon} />
+        </div>
         <div
           onClick={() => setShowProfileMenu(!showProfileMenu)}
           className={styles.profile_icon}
         >
+          <p className={styles.fullName}>{fullName}</p>
           <img src={profile} className={styles.profile} alt="profile icon" />
         </div>
       </div>
