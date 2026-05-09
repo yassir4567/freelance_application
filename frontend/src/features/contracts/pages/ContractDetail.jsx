@@ -15,7 +15,7 @@ import {
   CONTRACT_STATUS_CLASS,
   formatDisplayDate,
 } from "../utils/contractDisplay";
-import profile from '../../../assets/images/profile.png'
+import profile from "../../../assets/images/profile.png";
 
 const VALID_TABS = ["overview", "deliverables", "payments"];
 
@@ -112,8 +112,6 @@ function ContractDetail() {
     };
   }, [deliverables]);
 
-
-
   const activeTabParam = searchParams.get("tab");
   const activeTab = VALID_TABS.includes(activeTabParam)
     ? activeTabParam
@@ -160,7 +158,6 @@ function ContractDetail() {
       progress: calculatePercent(completedDeliverables, deliverables.length),
     };
   }, [contract, completedDeliverables, deliverables.length]);
-
 
   const other_user =
     role === "client" ? contract?.freelancer : contract?.client;
@@ -215,7 +212,7 @@ function ContractDetail() {
     );
   }
 
-  if (errorMessage || !contract) {
+  if (errorMessage || !contract || contract.status === "pending") {
     return (
       <div className={styles.contractDetailPage}>
         <div className={`${styles.stateCard} ${styles.errorState}`}>
