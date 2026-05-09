@@ -24,7 +24,7 @@ class FreelancerProjectController extends Controller
             'created_at'
         )->with(['category:id,name', 'skills:id,name'])
             ->withCount('proposals')
-            ->whereIn('status', ['open', 'in review']);
+            ->whereIn('status', ['open', 'in_review']);
 
         if ($request->filled('category_id')) {
             $query->where('category_id', $request->category_id);
