@@ -1,14 +1,14 @@
 import { Fragment, useEffect, useState } from "react";
 import { IoClose } from "react-icons/io5";
-import styles from "../styles/DeliverableDetailModal.module.css";
-import SubmitDeliverableForm from "./SubmitDeliverableForm";
+import styles from "../../styles/DeliverableDetailModal.module.css";
+import SubmitDeliverableForm from "../SubmitDeliverableForm";
 import {
   formatCurrency,
   formatDisplayDate,
   formatStatusLabel,
   getStatusClass,
   valueOrFallback,
-} from "../utils/contractDisplay";
+} from "../../utils/contractDisplay";
 
 function DeliverableDetailModal({
   deliverable,

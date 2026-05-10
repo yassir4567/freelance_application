@@ -53,8 +53,13 @@ function ContractDeliverables({ deliverables }) {
 
       <div className={styles.deliverablesList}>
         {safeDeliverables.length ? (
-          safeDeliverables.map((deliverable) => (
-            <DeliverableCard key={deliverable.id} deliverable={deliverable} />
+          safeDeliverables.map((deliverable , index) => (
+            <DeliverableCard
+              key={deliverable.id}
+              index={index}
+              deliverable={deliverable}
+              deliverables={safeDeliverables}
+            />
           ))
         ) : (
           <div className={styles.emptyState}>

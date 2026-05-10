@@ -1,6 +1,6 @@
 import { Fragment, useState } from "react";
 import styles from "../styles/DeliverableCard.module.css";
-import DeliverableDetailModal from "./DeliverableDetailModal";
+import DeliverableDetailModal from "./modals/DeliverableDetailModal";
 import { useAuth } from "../../../context/AuthContext";
 import {
   DELIVERABLE_STATUS_CLASS,
@@ -11,17 +11,31 @@ import {
   getStatusClass,
   valueOrFallback,
 } from "../utils/contractDisplay";
+import FundDeliverableModal from "./modals/FundDeliverableModal";
 
-function DeliverableCard({ deliverable }) {
+function DeliverableCard({ deliverable, deliverables, index }) {
   const [isDetailModalOpen, setIsDetailModalOpen] = useState(false);
+  const [isFundModalOpen, setIsFundModalOpen] = useState(false);
   const { user } = useAuth();
 
-  
+  // console.log(deliverable);
+
   const role = user?.role;
   const statusLabel =
     DELIVERABLE_STATUS_LABEL[deliverable.status] ||
     formatStatusLabel(deliverable.status);
 
+  const getCanFund = (status, deliverableIndex) => {
+    if (role !== "client") return false;
+    if (status !== "pending") return false;
+    if (deliverableIndex === 0) return true;
+
+    const prevDeliverable = deliverables[deliverableIndex - 1];
+
+    if (prevDeliverable.status !== "accepted") return false;
+
+    return true;
+  };
   return (
     <Fragment>
       <div className={styles.deliverableCard}>
@@ -59,6 +73,15 @@ function DeliverableCard({ deliverable }) {
           </div>
 
           <div className={styles.deliverableAside}>
+            {getCanFund(deliverable.status, index) && (
+              <button
+                type="button"
+                className={styles.fundBtn}
+                onClick={() => setIsFundModalOpen(true)}
+              >
+                Fund
+              </button>
+            )}
             <button
               type="button"
               className={styles.viewDetail}
@@ -70,14 +93,24 @@ function DeliverableCard({ deliverable }) {
         </div>
       </div>
 
-      <DeliverableDetailModal
-        deliverable={deliverable}
-        isOpen={isDetailModalOpen}
-        onClose={() => setIsDetailModalOpen(false)}
-        statusLabel={DELIVERABLE_STATUS_LABEL}
-        deliverableStatus={DELIVERABLE_STATUS_CLASS}
-        userType={role}
-      />
+      {isFundModalOpen && (
+        <FundDeliverableModal
+          isOpen={isFundModalOpen}
+          onClose={() => setIsFundModalOpen(false)}
+          amount={deliverable.amount}
+        />
+      )}
+
+      {isDetailModalOpen && (
+        <DeliverableDetailModal
+          deliverable={deliverable}
+          isOpen={isDetailModalOpen}
+          onClose={() => setIsDetailModalOpen(false)}
+          statusLabel={DELIVERABLE_STATUS_LABEL}
+          deliverableStatus={DELIVERABLE_STATUS_CLASS}
+          userType={role}
+        />
+      )}
     </Fragment>
   );
 }

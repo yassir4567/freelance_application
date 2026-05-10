@@ -69,8 +69,8 @@
 
 .deliverableAside {
   display: flex;
-  flex-direction: column;
-  align-items: flex-end;
+  /* flex-direction: column; */
+  align-items: center;
   flex-wrap: wrap;
   gap: 16px;
 }
@@ -108,16 +108,20 @@
   text-transform: capitalize;
 }
 
-.viewDetail {
+.viewDetail,
+.fundBtn {
   min-width: 132px;
   height: 42px;
-  border: 1px solid var(--color-success);
   border-radius: 14px;
-  color: var(--color-success);
   font-size: var(--fs-sm);
   font-weight: 700;
   text-transform: capitalize;
   transition: 0.2s;
+}
+
+.viewDetail {
+  border: 1px solid var(--color-success);
+  color: var(--color-success);
 }
 
 .viewDetail:hover {
@@ -125,6 +129,18 @@
   color: var(--color-white);
   border-radius: 17px;
 }
+
+.fundBtn {
+  border: 1px solid var(--color-info);
+  color: var(--color-azure);
+}
+
+.fundBtn:hover {
+  background-color: var(--color-info);
+  color: var(--color-white);
+  border-radius: 17px;
+}
+
 
 @media (max-width: 760px) {
 
