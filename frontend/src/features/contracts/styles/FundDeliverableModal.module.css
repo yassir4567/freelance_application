@@ -108,3 +108,10 @@
   color: var(--color-white);
   border-radius: 17px;
 }
+
+.error {
+  color: var(--color-danger);
+  font-size: var(--fs-sm);
+  margin-left: 5px;
+  text-transform: capitalize;
+}

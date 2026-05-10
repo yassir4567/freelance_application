@@ -2,8 +2,8 @@ import DeliverableCard from "./DeliverableCard";
 import styles from "../styles/ContractDeliverables.module.css";
 import SimpleCard from "../../../shared/ui/SimpleCard";
 
-function ContractDeliverables({ deliverables }) {
-  const safeDeliverables = deliverables ?? [];
+function ContractDeliverables({ contract, setContract }) {
+  const safeDeliverables = contract.deliverables ?? [];
 
   const deliverable_stats_cards = [
     {
@@ -53,12 +53,14 @@ function ContractDeliverables({ deliverables }) {
 
       <div className={styles.deliverablesList}>
         {safeDeliverables.length ? (
-          safeDeliverables.map((deliverable , index) => (
+          safeDeliverables.map((deliverable, index) => (
             <DeliverableCard
               key={deliverable.id}
               index={index}
               deliverable={deliverable}
               deliverables={safeDeliverables}
+              contract={contract}
+              setContract={setContract}
             />
           ))
         ) : (

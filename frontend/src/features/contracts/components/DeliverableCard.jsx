@@ -13,7 +13,13 @@ import {
 } from "../utils/contractDisplay";
 import FundDeliverableModal from "./modals/FundDeliverableModal";
 
-function DeliverableCard({ deliverable, deliverables, index }) {
+function DeliverableCard({
+  deliverable,
+  deliverables,
+  index,
+  contract,
+  setContract,
+}) {
   const [isDetailModalOpen, setIsDetailModalOpen] = useState(false);
   const [isFundModalOpen, setIsFundModalOpen] = useState(false);
   const { user } = useAuth();
@@ -97,7 +103,9 @@ function DeliverableCard({ deliverable, deliverables, index }) {
         <FundDeliverableModal
           isOpen={isFundModalOpen}
           onClose={() => setIsFundModalOpen(false)}
-          amount={deliverable.amount}
+          deliverable={deliverable}
+          contract={contract}
+          setContract={setContract}
         />
       )}
 

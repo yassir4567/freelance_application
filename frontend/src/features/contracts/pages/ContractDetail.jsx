@@ -198,6 +198,8 @@ function ContractDetail() {
     };
   }, [contract, completedDeliverables, deliverables.length, paymentSummary]);
 
+
+
   if (isLoading) {
     return (
       <div className={styles.contractDetailPage}>
@@ -247,7 +249,11 @@ function ContractDetail() {
             {activeTab === "overview" && <ContractSummary summary={summary} />}
 
             {activeTab === "deliverables" && (
-              <ContractDeliverables deliverables={deliverables} />
+              <ContractDeliverables
+                contract={contract}
+                setContract={setContract}
+                // deliverables={deliverables}
+              />
             )}
 
             {activeTab === "payments" && (
