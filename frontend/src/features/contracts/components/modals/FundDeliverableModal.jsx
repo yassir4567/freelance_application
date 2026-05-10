@@ -13,6 +13,7 @@ function FundDeliverableModal({
 }) {
   const [deadline, setDeadline] = useState("");
   const [deadlineError, setDeadlineError] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
   // * stop the scrolling when modal is open
   useEffect(() => {
     if (!isOpen) return undefined;
@@ -62,6 +63,8 @@ function FundDeliverableModal({
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    if (isSubmitting) return;
+
     if (!deadline.trim()) {
       setDeadlineError("Deadline required");
       return;
@@ -73,12 +76,16 @@ function FundDeliverableModal({
       setDeadlineError(deadlineValidation);
       return;
     }
+    setDeadlineError("");
 
     const payload = {
       deadline: deadline,
     };
+
+    setIsSubmitting(true);
     const result = await fundDeliverable(payload, deliverable.id);
 
+    setIsSubmitting(false);
     if (!result.success) {
       console.log(result);
       return;
@@ -122,8 +129,12 @@ function FundDeliverableModal({
             <button type="reset" onClick={onClose} className={styles.cancelBtn}>
               cancel
             </button>
-            <button type="submit" className={styles.fundBtn}>
-              Fund
+            <button
+              type="submit"
+              className={styles.fundBtn}
+              disabled={isSubmitting}
+            >
+              {isSubmitting ? "Funding..." : "Fund Deliverable"}
             </button>
           </div>
         </form>
