@@ -1,0 +1,185 @@
+.content {
+  min-height: 100vh;
+  padding: 24px 30px;
+  background: #f6f7fb;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.subtitle {
+  margin: 0 0 6px;
+  color: #667085;
+  font-size: 14px;
+}
+
+.header h1 {
+  margin: 0;
+  color: #101828;
+  font-size: 30px;
+}
+
+.addBtn,
+.saveBtn {
+  height: 42px;
+  padding: 0 16px;
+  border: none;
+  border-radius: 8px;
+  background: #1570ef;
+  color: #ffffff;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.addBtn:hover,
+.saveBtn:hover {
+  background: #175cd3;
+}
+
+.saveBtn:disabled {
+  background: #98a2b3;
+  cursor: not-allowed;
+}
+
+.summary,
+.form,
+.tableBox,
+.state,
+.error,
+.success {
+  border: 1px solid #e4e7ec;
+  border-radius: 8px;
+  background: #ffffff;
+}
+
+.summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 18px;
+  padding: 18px;
+}
+
+.summary span {
+  color: #667085;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.summary strong {
+  color: #101828;
+  font-size: 28px;
+}
+
+.form {
+  display: grid;
+  grid-template-columns: minmax(240px, 1fr) auto;
+  align-items: end;
+  gap: 16px;
+  margin-bottom: 16px;
+  padding: 18px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.field label {
+  color: #344054;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.field input {
+  height: 42px;
+  padding: 0 12px;
+  border: 1px solid #d0d5dd;
+  border-radius: 8px;
+  background: #ffffff;
+  color: #101828;
+  font-size: 14px;
+  outline: none;
+}
+
+.field input:focus {
+  border-color: #1570ef;
+  box-shadow: 0 0 0 3px rgba(21, 112, 239, 0.12);
+}
+
+.tableBox {
+  overflow-x: auto;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table th {
+  padding: 14px 16px;
+  background: #f9fafb;
+  color: #475467;
+  font-size: 13px;
+  font-weight: 700;
+  text-align: left;
+}
+
+.table td {
+  padding: 16px;
+  border-top: 1px solid #e4e7ec;
+  color: #344054;
+  font-size: 14px;
+}
+
+.table tbody tr:hover {
+  background: #f9fafb;
+}
+
+.state,
+.error,
+.success {
+  margin: 16px 0;
+  padding: 14px 16px;
+  color: #475467;
+}
+
+.error {
+  border-color: #fecdca;
+  background: #fffbfa;
+  color: #b42318;
+}
+
+.success {
+  border-color: #abefc6;
+  background: #f6fef9;
+  color: #027a48;
+}
+
+@media (max-width: 720px) {
+  .content {
+    padding: 18px;
+  }
+
+  .header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .form {
+    grid-template-columns: 1fr;
+  }
+
+  .addBtn,
+  .saveBtn {
+    width: 100%;
+  }
+}
