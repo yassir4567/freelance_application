@@ -8,6 +8,7 @@ use App\Http\Controllers\ClientProfileController;
 use App\Http\Controllers\ClientProjectController;
 use App\Http\Controllers\ClientProposalController;
 use App\Http\Controllers\ConversationController;
+use App\Http\Controllers\DeliverableController;
 use App\Http\Controllers\DeliverablePaymentController;
 use App\Http\Controllers\FreelancerContractController;
 use App\Http\Controllers\FreelancerDashboardController;
@@ -69,6 +70,9 @@ Route::middleware('auth:sanctum')->group(function () {
 
         // ? profile 
         Route::put('/freelancer/update-profile', [FreelancerProfileController::class, 'update']);
+
+        // ? Submit Deliverables 
+        Route::put('/deliverables/{id}/submit', [DeliverableController::class, 'submit']);
     });
 
     // ? categories & skills
