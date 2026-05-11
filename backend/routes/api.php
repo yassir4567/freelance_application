@@ -85,6 +85,8 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::get('/admin/users/{id}', [AdminController::class, 'show']);
         Route::get('/admin/categories', [CategoryController::class, 'index']);
         Route::post('/admin/categories', [CategoryController::class, 'store']);
+        Route::get('/admin/skills', [SkillController::class, 'adminIndex']);
+        Route::post('/admin/skills', [SkillController::class, 'store']);
     });
 
     // ? categories & skills

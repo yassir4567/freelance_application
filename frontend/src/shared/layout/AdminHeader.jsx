@@ -1,24 +1,45 @@
+import { FiShield } from "react-icons/fi";
+import { useAuth } from "../../context/AuthContext";
 import styles from "./AdminHeader.module.css";
 
 function AdminHeader() {
-  return (
-    <div className={styles.main}>
-      <div className={styles.header}>
-        <div>
-          <h2>Welcome, Belkassmi Mohamed</h2>
-        </div>
+  const { user } = useAuth();
+  const fullName = getFullName(user);
+  const initial = fullName.charAt(0).toUpperCase();
 
-        <div className={styles.profile}>
-          <img
-            src="https://m.media-amazon.com/images/I/81PGwdUf0OL._AC_UF894,1000_QL80_.jpg"
-            alt="admin"
-            className={styles.avatar}
-          />
-          <span>belkassmi</span>
+  return (
+    <header className={styles.header}>
+      <div>
+        <p className={styles.eyebrow}>Admin panel</p>
+        <h2>Welcome back, {fullName}</h2>
+      </div>
+
+      <div className={styles.profile}>
+        <span className={styles.role}>
+          <FiShield />
+          Admin
+        </span>
+
+        <div className={styles.user}>
+          <div className={styles.avatar}>{initial}</div>
+          <div>
+            <strong>{fullName}</strong>
+            <span>{user?.email || "admin account"}</span>
+          </div>
         </div>
       </div>
-    </div>
+    </header>
   );
+}
+
+function getFullName(user) {
+  if (!user) {
+    return "Admin";
+  }
+
+  const name = [user.first_name, user.last_name].filter(Boolean).join(" ");
+
+  return name || user.name || "Admin";
 }
 
 export default AdminHeader;
