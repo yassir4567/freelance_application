@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ClientContractController;
 use App\Http\Controllers\ClientDashboardController;
@@ -77,6 +78,11 @@ Route::middleware('auth:sanctum')->group(function () {
 
         // ? Deliverables 
         Route::put('/deliverables/{id}/submit', [DeliverableController::class, 'submit']);
+    });
+
+    Route::middleware('role:admin')->group(function () {
+        Route::get('/admin/users', [AdminController::class, 'index']);
+        Route::get('/admin/users/{id}', [AdminController::class, 'show']);
     });
 
     // ? categories & skills

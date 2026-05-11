@@ -1,109 +1,155 @@
-import React from "react";
-import { NavLink } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { NavLink, useParams } from "react-router-dom";
+import { getUserDetails } from "../../../api/admin/getUserDetails";
 import styles from "../styles/UserDetails.module.css";
 
-export default function ViewDetailUser({ user }) {
-  const data = user || {
-    id: 1,
-    fullName: "Mohamed Ali",
-    email: "mohamed@gmail.com",
-    phone: "+212600000000",
-    role: "freelancer", // client or freelancer
-    address: "Rabat, Morocco",
+function UserDetails() {
+  const { id } = useParams();
+  const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
 
-    // خاص غير بالـ freelancer
-    experiences: [
-  {
-    id: 1,
-    title: "Frontend Developer",
-    company: "Tech Company",
-    startDate: "2022",
-    endDate: "2023",
-    description: "Worked on React projects and UI design",
-  },
-  {
-    id: 2,
-    title: "Fullstack Developer",
-    company: "Startup",
-    startDate: "2023",
-    endDate: "Present",
-    description: "Built web apps using MERN stack",
-  },
-  {
-      id: 2,
-    title: "Fullstack Developer",
-    company: "Startup",
-    startDate: "2023",
-    endDate: "Present",
-    description: "Built web apps using MERN stack",
-  },
-],
-skills: ["React", "Node.js", "MongoDB"],
+  useEffect(() => {
+    const loadUser = async () => {
+      setLoading(true);
+      setError("");
 
+      const result = await getUserDetails(id);
 
-    projects: [
-      { id: 1, title: "Website Design", status: "active" },
-      { id: 2, title: "E-commerce App", status: "completed" },
-      { id: 3, title: "E-commerce App", status: "completed" },
-      { id: 4, title: "E-commerce App", status: "completed" },
-    ],
-  };
+      if (result.success) {
+        setUser(result.data);
+      } else {
+        setUser(null);
+        setError(result.message);
+      }
+
+      setLoading(false);
+    };
+
+    loadUser();
+  }, [id]);
+
+  if (loading) {
+    return (
+      <div className={styles.container}>
+        <p className={styles.state}>Loading user details...</p>
+      </div>
+    );
+  }
+
+  if (error || !user) {
+    return (
+      <div className={styles.container}>
+        <p className={styles.error}>{error || "User not found"}</p>
+        <NavLink to="/dashboard/admin/users" className={styles.backBtn}>
+          Back to users
+        </NavLink>
+      </div>
+    );
+  }
+
+  const location = [user.city, user.country].filter(Boolean).join(", ");
+  const isFreelancer = user.role === "freelancer";
+  const freelancer = user.freelancer;
 
   return (
     <div className={styles.container}>
-      <h2 className={styles.title}>User Details</h2>
-
-      {/* USER INFO */}
-      <div className={styles.card}>
-        <p><strong>ID:</strong> {data.id}</p>
-        <p><strong>Full Name:</strong> {data.fullName}</p>
-        <p><strong>Email:</strong> {data.email}</p>
-        <p><strong>Phone:</strong> {data.phone}</p>
-        <p><strong>Role:</strong> {data.role}</p>
-        <p><strong>Address:</strong> {data.address}</p>
-
-       
+      <div className={styles.header}>
+        <NavLink to="/dashboard/admin/users" className={styles.backBtn}>
+          Back
+        </NavLink>
+        <span className={styles.role}>{user.role}</span>
       </div>
-      {data.role === "freelancer" && (
-  <>
-    <h3 className={styles.sectionTitle}>Experience</h3>
 
-    <div className={styles.grid}>
-      {data.experiences.map((exp) => (
-        <div key={exp.id} className={styles.expCard}>
-          <h4>{exp.title}</h4>
-          <p className={styles.company}>{exp.company}</p>
-
-          <p className={styles.date}>
-            {exp.startDate} - {exp.endDate}
-          </p>
-
-          <p className={styles.desc}>{exp.description}</p>
+      <section className={styles.profile}>
+        <div className={styles.avatar}>{user.name.charAt(0).toUpperCase()}</div>
+        <div>
+          <h1>{user.name}</h1>
+          <p>{user.email}</p>
         </div>
-      ))}
-    </div>
-  </>
-)}
+      </section>
 
-      {/* PROJECTS */}
-      <h3 className={styles.sectionTitle}>
-        {data.role === "client"
-          ? "Client Projects"
-          : "Freelancer Projects"}
-      </h3>
+      <section className={styles.grid}>
+        <div className={styles.card}>
+          <h2>Contact information</h2>
+          <Info label="Phone" value={user.phone} />
+          <Info label="Location" value={location} />
+          <Info label="Address" value={user.address} />
+          <Info label="Joined" value={formatDate(user.created_at)} />
+        </div>
 
-      <div className={styles.grid}>
-        {data.projects.map((p) => (
-          <div key={p.id} className={styles.projectCard}>
-            <h4>{p.title}</h4>
-            <span className={styles.badge}>{p.status}</span>
+        {isFreelancer && (
+          <div className={styles.card}>
+            <h2>Freelancer profile</h2>
+            <Info label="Title" value={freelancer?.title} />
+            <Info label="Category" value={freelancer?.category} />
+            <Info label="Portfolio" value={freelancer?.portfolio_url} isLink />
+            <Info label="Resume" value={freelancer?.resume_url} isLink />
+            <Info label="Total projects" value={user.total_projects} />
           </div>
-        ))}
-      </div>
+        )}
 
-      <NavLink to="/dashboard/admin/users" className={styles.backBtn}>
-        ⬅ Back
-      </NavLink>
+        {!isFreelancer && (
+          <div className={styles.card}>
+            <h2>Client activity</h2>
+            <Info label="Total projects" value={user.total_projects} />
+          </div>
+        )}
+      </section>
+
+      {isFreelancer && freelancer?.bio && (
+        <section className={styles.card}>
+          <h2>Bio</h2>
+          <p className={styles.text}>{freelancer.bio}</p>
+        </section>
+      )}
+
+      {isFreelancer && (
+        <section className={styles.card}>
+          <h2>Skills</h2>
+          {freelancer?.skills?.length > 0 ? (
+            <div className={styles.skills}>
+              {freelancer.skills.map((skill) => (
+                <span key={skill.id}>{skill.name}</span>
+              ))}
+            </div>
+          ) : (
+            <p className={styles.empty}>No skills added.</p>
+          )}
+        </section>
+      )}
+
+      <section className={styles.totalCard}>
+        <span>{isFreelancer ? "Related projects" : "Client projects"}</span>
+        <strong>{user.total_projects || 0}</strong>
+      </section>
     </div>
   );
 }
+
+function Info({ label, value, isLink = false }) {
+  const finalValue = value === null || value === undefined || value === "" ? "Not added" : value;
+
+  return (
+    <div className={styles.info}>
+      <span>{label}</span>
+      {isLink && value ? (
+        <a href={value} target="_blank" rel="noreferrer">
+          {value}
+        </a>
+      ) : (
+        <strong>{finalValue}</strong>
+      )}
+    </div>
+  );
+}
+
+function formatDate(date) {
+  if (!date) {
+    return "Not added";
+  }
+
+  return new Date(date).toLocaleDateString();
+}
+
+export default UserDetails;

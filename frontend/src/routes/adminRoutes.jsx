@@ -17,7 +17,7 @@ export const adminRoutes = [
         children: [
           { index: true, element: <AdminDashboard /> },
           { path: "users", element: <AdminUsersPage /> },
-          { path: "userdetails", element: <UserDetails /> },
+          { path: "users/:id", element: <UserDetails /> },
           { path: "projects", element: <AdminProjectsPage /> },
           { path: "categories", element: <AdminCategoriePage /> },
           { path: "skills", element: <AdminSkillsPage /> },

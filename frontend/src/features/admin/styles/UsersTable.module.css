@@ -1,37 +1,69 @@
+.tableBox {
+  overflow-x: auto;
+  border: 1px solid #e4e7ec;
+  border-radius: 8px;
+  background: #ffffff;
+}
+
 .table {
   width: 100%;
   border-collapse: collapse;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  border: 1px;
-  margin-top: 25px;
+  min-width: 860px;
 }
 
 .table th {
-  background: #fcf8f8;
-  color: black;
-  padding: 12px;
+  padding: 14px 16px;
+  background: #f9fafb;
+  color: #475467;
+  font-size: 13px;
+  font-weight: 700;
+  text-align: left;
 }
 
 .table td {
-  padding: 10px;
-  width: 100px;
+  padding: 16px;
+  border-top: 1px solid #e4e7ec;
+  color: #344054;
+  font-size: 14px;
 }
 
-.table tr:nth-child(even) td {
-  background: fff;
+.table tbody tr:hover {
+  background: #f9fafb;
 }
+
+.role {
+  display: inline-block;
+  padding: 5px 10px;
+  border-radius: 8px;
+  background: #eef4ff;
+  color: #3538cd;
+  font-size: 13px;
+  font-weight: 600;
+}
+
 .viewBtn {
-  background: #068637;
-  color: white;
-  padding: 5px 12px;
-  font-size: 12px;
+  height: 34px;
+  padding: 0 14px;
   border: none;
-  border-radius: 6px;
+  border-radius: 8px;
+  background: #1570ef;
+  color: #ffffff;
   cursor: pointer;
+  font-size: 13px;
+  font-weight: 600;
   transition: 0.2s;
-  width: 100%;
-  height: 30px;
 }
+
 .viewBtn:hover {
-  background: #1a9e23;
+  background: #175cd3;
+}
+
+.empty {
+  margin: 0;
+  padding: 28px;
+  border: 1px solid #e4e7ec;
+  border-radius: 8px;
+  background: #ffffff;
+  color: #667085;
+  text-align: center;
 }
