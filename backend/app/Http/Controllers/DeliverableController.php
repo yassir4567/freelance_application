@@ -12,13 +12,27 @@ class DeliverableController extends Controller
 
     public function submit(Request $request, string $id)
     {
-        $deliverable = Deliverable::findOrFail($id);
+        $freelancer = $request->user()->freelancer;
+
+        $deliverable = Deliverable::with('contract.proposal')
+            ->where('id', $id)
+            ->whereHas('contract.proposal', function ($q) use ($freelancer) {
+                $q->where('freelancer_id', $freelancer->id);
+            })
+            ->firstOrFail();
 
         $validated = $request->validate([
             'submission_note' => 'required|min:3|max:500',
             'links' => 'required|array|min:1',
             'links.*' => 'required|url',
         ]);
+
+        if (! in_array($deliverable->status, ['unlocked', 'revision_request'])) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Only unlocked deliverables or revision requests can be submitted',
+            ], 409);
+        }
 
         $deliverable->update([
             'submission_note' => $validated['submission_note'],
