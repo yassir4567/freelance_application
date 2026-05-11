@@ -81,6 +81,7 @@ Route::middleware('auth:sanctum')->group(function () {
     });
 
     Route::middleware('role:admin')->group(function () {
+        Route::get('/admin/dashboard', [AdminController::class, 'dashboard']);
         Route::get('/admin/users', [AdminController::class, 'index']);
         Route::get('/admin/users/{id}', [AdminController::class, 'show']);
         Route::get('/admin/categories', [CategoryController::class, 'index']);

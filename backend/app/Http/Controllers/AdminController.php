@@ -2,12 +2,46 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
+use App\Models\Payment;
+use App\Models\Project;
+use App\Models\Skill;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 
 class AdminController extends Controller
 {
+    public function dashboard()
+    {
+        $stats = [
+            'total_users' => User::whereIn('role', ['client', 'freelancer'])->count(),
+            'total_clients' => User::where('role', 'client')->count(),
+            'total_freelancers' => User::where('role', 'freelancer')->count(),
+            'total_projects' => Project::count(),
+            'total_categories' => Category::count(),
+            'total_skills' => Skill::count(),
+            'projects_in_progress' => Project::where('status', 'in_progress')->count(),
+            'escrow_amount' => Payment::where('status', 'escrow')->sum('amount'),
+        ];
+
+        $project_statuses = [
+            'open' => Project::where('status', 'open')->count(),
+            'in_review' => Project::where('status', 'in_review')->count(),
+            'in_progress' => Project::where('status', 'in_progress')->count(),
+            'completed' => Project::where('status', 'completed')->count(),
+        ];
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Admin dashboard stats retrieved successfully',
+            'data' => [
+                'stats' => $stats,
+                'project_statuses' => $project_statuses,
+            ],
+        ]);
+    }
+
     public function index(Request $request)
     {
         $request->validate([
