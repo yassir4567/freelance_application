@@ -2,6 +2,8 @@ import { Fragment, useEffect, useState } from "react";
 import { IoClose } from "react-icons/io5";
 import styles from "../../styles/DeliverableDetailModal.module.css";
 import SubmitDeliverableForm from "../SubmitDeliverableForm";
+import { acceptDeliverable } from "../../../../api/deliverables/acceptDeliverable";
+import { getClientContractDetail } from "../../../../api/contracts/getClientContractDetail";
 import {
   formatCurrency,
   formatDisplayDate,
@@ -21,6 +23,8 @@ function DeliverableDetailModal({
   setContract,
 }) {
   const [openSubmitForm, setOpenSubmitForm] = useState(false);
+  const [isAccepting, setIsAccepting] = useState(false);
+  const [acceptError, setAcceptError] = useState("");
 
   // * stop the scrolling when modal is open
   useEffect(() => {
@@ -56,14 +60,44 @@ function DeliverableDetailModal({
     setOpenSubmitForm(!openSubmitForm);
   };
 
+  const handleAccept = async () => {
+    setAcceptError("");
+    setIsAccepting(true);
+
+    const result = await acceptDeliverable(deliverable.id);
+
+    if (!result.success) {
+      setAcceptError(result.message || "Accept deliverable failed");
+      setIsAccepting(false);
+      return;
+    }
+
+    const contractResult = await getClientContractDetail(contract.id);
+
+    if (!contractResult.success) {
+      setAcceptError(contractResult.message || "Contract refresh failed");
+      setIsAccepting(false);
+      return;
+    }
+
+    setContract(contractResult.data);
+    setIsAccepting(false);
+    onClose();
+  };
+
   // * show buttons based on deliverable status and the user type
   let content;
   if (userType === "client") {
     if (deliverable.status === "submitted") {
       content = (
         <Fragment>
-          <button className={`${styles.deliverableBtn} ${styles.accept}`}>
-            Accept
+          <button
+            type="button"
+            onClick={handleAccept}
+            disabled={isAccepting}
+            className={`${styles.deliverableBtn} ${styles.accept}`}
+          >
+            {isAccepting ? "Accepting..." : "Accept"}
           </button>
           <button
             className={`${styles.deliverableBtn} ${styles.request_revision}`}
@@ -207,6 +241,7 @@ function DeliverableDetailModal({
         )}
 
         {content && <div className={styles.actions}>{content}</div>}
+        {acceptError && <p className={styles.emptyState}>{acceptError}</p>}
 
         {openSubmitForm && (
           <SubmitDeliverableForm

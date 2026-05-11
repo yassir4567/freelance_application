@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Deliverable;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class DeliverableController extends Controller
 {
@@ -11,26 +12,89 @@ class DeliverableController extends Controller
 
     public function submit(Request $request, string $id)
     {
-
         $deliverable = Deliverable::findOrFail($id);
 
         $validated = $request->validate([
             'submission_note' => 'required|min:3|max:500',
             'links' => 'required|array|min:1',
-            'links.*' => 'required|url'
+            'links.*' => 'required|url',
         ]);
 
         $deliverable->update([
             'submission_note' => $validated['submission_note'],
             'deliverable_links' => $validated['links'],
             'submitted_at' => now(),
-            'status' => 'submitted'
+            'status' => 'submitted',
         ]);
 
         return response()->json([
             'success' => true,
             'message' => 'Deliverable Accepted successfully',
-            'data' => $deliverable->fresh()
+            'data' => $deliverable->fresh(),
+        ]);
+    }
+
+    public function accept(Request $request, string $id)
+    {
+        $client = $request->user();
+        $deliverable = Deliverable::with([
+            'contract.proposal.project',
+            'payment',
+        ])->findOrFail($id);
+
+        if ($deliverable->contract->proposal->project->client_id !== $client->id) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Unauthorized action',
+            ], 403);
+        }
+
+        if ($deliverable->status !== 'submitted') {
+            return response()->json([
+                'success' => false,
+                'message' => 'Only submitted deliverables can be accepted',
+            ], 409);
+        }
+
+        if (! $deliverable->payment || $deliverable->payment->status !== 'escrow') {
+            return response()->json([
+                'success' => false,
+                'message' => 'This deliverable must be funded before it can be accepted',
+            ], 409);
+        }
+
+        $result = DB::transaction(function () use ($deliverable) {
+            $deliverable->update([
+                'status' => 'accepted',
+                'accepted_at' => now(),
+            ]);
+
+            $deliverable->payment->update([
+                'status' => 'released',
+            ]);
+
+            $contract = $deliverable->contract;
+
+            $hasUnacceptedDeliverables = $contract->deliverables()
+                ->where('status', '!=', 'accepted')
+                ->exists();
+
+            if (! $hasUnacceptedDeliverables) {
+                $contract->update([
+                    'status' => 'completed',
+                ]);
+            }
+
+            return $deliverable->fresh([
+                'payment',
+                'contract',
+            ]);
+        });
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Deliverable accepted successfully',
+            'data' => $result,
         ]);
     }
 }

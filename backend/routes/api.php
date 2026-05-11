@@ -52,6 +52,9 @@ Route::middleware('auth:sanctum')->group(function () {
 
         // ? Payments
         Route::post('/deliverables/{deliverableId}/payments/fund', [DeliverablePaymentController::class, 'fund']);
+
+         // ? Deliverables 
+        Route::put('/deliverables/{id}/accept', [DeliverableController::class, 'accept']);
     });
 
     Route::middleware('role:freelancer')->group(function () {
@@ -71,7 +74,7 @@ Route::middleware('auth:sanctum')->group(function () {
         // ? profile 
         Route::put('/freelancer/update-profile', [FreelancerProfileController::class, 'update']);
 
-        // ? Submit Deliverables 
+        // ? Deliverables 
         Route::put('/deliverables/{id}/submit', [DeliverableController::class, 'submit']);
     });
 
