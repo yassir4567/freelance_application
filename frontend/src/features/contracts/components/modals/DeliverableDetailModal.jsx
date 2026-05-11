@@ -17,6 +17,8 @@ function DeliverableDetailModal({
   statusLabel,
   deliverableStatus,
   userType,
+  contract,
+  setContract,
 }) {
   const [openSubmitForm, setOpenSubmitForm] = useState(false);
 
@@ -206,7 +208,14 @@ function DeliverableDetailModal({
 
         {content && <div className={styles.actions}>{content}</div>}
 
-        {openSubmitForm && <SubmitDeliverableForm />}
+        {openSubmitForm && (
+          <SubmitDeliverableForm
+            setContract={setContract}
+            deliverableId={deliverable.id}
+            contractId={contract.id}
+            onClose={onClose}
+          />
+        )}
       </div>
     </div>
   );

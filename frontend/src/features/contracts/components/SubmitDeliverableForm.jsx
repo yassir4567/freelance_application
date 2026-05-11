@@ -1,8 +1,15 @@
 import { useState } from "react";
 import styles from "../styles/SubmitDeliverableForm.module.css";
 import { FaPlus } from "react-icons/fa6";
+import { submitDeliverable } from "../../../api/deliverables/submitDeliverable";
+import { getClientContractDetail } from "../../../api/contracts/getClientContractDetail";
 
-function SubmitDeliverableForm() {
+function SubmitDeliverableForm({
+  setContract,
+  deliverableId,
+  contractId,
+  onClose,
+}) {
   const [note, setNote] = useState("");
   const [links, setLinks] = useState([""]);
   const [errors, setErrors] = useState({
@@ -26,8 +33,44 @@ function SubmitDeliverableForm() {
     setLinks(newLinks);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+
+    setErrors({});
+    let newErrors = {};
+
+    if (!note.trim()) {
+      newErrors.note = "Note required";
+    }
+    const safeLinks = links.filter((link) => link.trim() !== "");
+
+    if (safeLinks.length === 0) {
+      newErrors.links = "Enter at least one link";
+    }
+
+    if (Object.keys(newErrors).length > 0) {
+      setErrors({
+        note: newErrors.note || "",
+        links: newErrors.links || "",
+      });
+      return;
+    }
+
+    const payload = {
+      submission_note: note.trim(),
+      links: safeLinks,
+    };
+
+    const result = await submitDeliverable(payload, deliverableId);
+
+    if (!result.success) {
+      console.log(result);
+      return;
+    }
+
+    const contractResult = await getClientContractDetail(contractId);
+    setContract(contractResult.data);
+    onClose();
   };
 
   return (
@@ -43,9 +86,9 @@ function SubmitDeliverableForm() {
           value={note}
           onChange={(e) => setNote(e.target.value)}
           placeholder="Enter Submission note"
-          required
           minLength={10}
         ></textarea>
+        {errors.note && <p className={styles.error}>{errors.note}</p>}
       </div>
       <div className={styles.inputBox}>
         <label className={styles.label}>Links </label>
@@ -56,7 +99,6 @@ function SubmitDeliverableForm() {
             value={link}
             onChange={(e) => handleChange(e.target.value, index)}
             placeholder="https://..."
-            required
           />
         ))}
       </div>

@@ -117,6 +117,8 @@ function DeliverableCard({
           statusLabel={DELIVERABLE_STATUS_LABEL}
           deliverableStatus={DELIVERABLE_STATUS_CLASS}
           userType={role}
+          contract={contract}
+          setContract={setContract}
         />
       )}
     </Fragment>
