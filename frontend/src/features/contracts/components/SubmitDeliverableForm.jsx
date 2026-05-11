@@ -2,7 +2,7 @@ import { useState } from "react";
 import styles from "../styles/SubmitDeliverableForm.module.css";
 import { FaPlus } from "react-icons/fa6";
 import { submitDeliverable } from "../../../api/deliverables/submitDeliverable";
-import { getClientContractDetail } from "../../../api/contracts/getClientContractDetail";
+import { getFreelancerContractDetail } from "../../../api/contracts/getFreelancerContractDetail";
 
 function SubmitDeliverableForm({
   setContract,
@@ -68,7 +68,7 @@ function SubmitDeliverableForm({
       return;
     }
 
-    const contractResult = await getClientContractDetail(contractId);
+    const contractResult = await getFreelancerContractDetail(contractId);
     setContract(contractResult.data);
     onClose();
   };

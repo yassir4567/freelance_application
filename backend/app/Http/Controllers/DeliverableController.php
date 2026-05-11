@@ -97,4 +97,47 @@ class DeliverableController extends Controller
             'data' => $result,
         ]);
     }
+
+    public function requestRevision(Request $request, string $id)
+    {
+        $client = $request->user();
+        $deliverable = Deliverable::with([
+            'contract.proposal.project',
+            'payment',
+        ])->findOrFail($id);
+
+        if ($deliverable->contract->proposal->project->client_id !== $client->id) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Unauthorized action',
+            ], 403);
+        }
+
+        if ($deliverable->status !== 'submitted') {
+            return response()->json([
+                'success' => false,
+                'message' => 'Only submitted deliverables can be sent back for revision',
+            ], 409);
+        }
+
+        if (! $deliverable->payment || $deliverable->payment->status !== 'escrow') {
+            return response()->json([
+                'success' => false,
+                'message' => 'This deliverable must stay funded while a revision is requested',
+            ], 409);
+        }
+
+        $deliverable->update([
+            'status' => 'revision_request',
+        ]);
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Revision requested successfully',
+            'data' => $deliverable->fresh([
+                'payment',
+                'contract',
+            ]),
+        ]);
+    }
 }

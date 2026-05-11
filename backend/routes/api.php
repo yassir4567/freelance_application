@@ -55,6 +55,7 @@ Route::middleware('auth:sanctum')->group(function () {
 
          // ? Deliverables 
         Route::put('/deliverables/{id}/accept', [DeliverableController::class, 'accept']);
+        Route::put('/deliverables/{id}/request-revision', [DeliverableController::class, 'requestRevision']);
     });
 
     Route::middleware('role:freelancer')->group(function () {

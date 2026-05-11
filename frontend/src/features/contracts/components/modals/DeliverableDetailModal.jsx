@@ -4,6 +4,7 @@ import styles from "../../styles/DeliverableDetailModal.module.css";
 import SubmitDeliverableForm from "../SubmitDeliverableForm";
 import { acceptDeliverable } from "../../../../api/deliverables/acceptDeliverable";
 import { getClientContractDetail } from "../../../../api/contracts/getClientContractDetail";
+import { requestDeliverableRevision } from "../../../../api/deliverables/requestDeliverableRevision";
 import {
   formatCurrency,
   formatDisplayDate,
@@ -25,6 +26,8 @@ function DeliverableDetailModal({
   const [openSubmitForm, setOpenSubmitForm] = useState(false);
   const [isAccepting, setIsAccepting] = useState(false);
   const [acceptError, setAcceptError] = useState("");
+  const [isRequestingRevision, setIsRequestingRevision] = useState(false);
+  const [revisionError, setRevisionError] = useState("");
 
   // * stop the scrolling when modal is open
   useEffect(() => {
@@ -84,6 +87,31 @@ function DeliverableDetailModal({
     setIsAccepting(false);
     onClose();
   };
+  
+  const handleRequestRevision = async () => {
+    setRevisionError("");
+    setIsRequestingRevision(true);
+
+    const result = await requestDeliverableRevision(deliverable.id);
+
+    if (!result.success) {
+      setRevisionError(result.message || "Request revision failed");
+      setIsRequestingRevision(false);
+      return;
+    }
+
+    const contractResult = await getClientContractDetail(contract.id);
+
+    if (!contractResult.success) {
+      setRevisionError(contractResult.message || "Contract refresh failed");
+      setIsRequestingRevision(false);
+      return;
+    }
+
+    setContract(contractResult.data);
+    setIsRequestingRevision(false);
+    onClose();
+  };
 
   // * show buttons based on deliverable status and the user type
   let content;
@@ -100,9 +128,12 @@ function DeliverableDetailModal({
             {isAccepting ? "Accepting..." : "Accept"}
           </button>
           <button
+            type="button"
+            onClick={handleRequestRevision}
+            disabled={isAccepting || isRequestingRevision}
             className={`${styles.deliverableBtn} ${styles.request_revision}`}
           >
-            Request Revision
+            {isRequestingRevision ? "Sending..." : "Request Revision"}
           </button>
         </Fragment>
       );
@@ -242,6 +273,7 @@ function DeliverableDetailModal({
 
         {content && <div className={styles.actions}>{content}</div>}
         {acceptError && <p className={styles.emptyState}>{acceptError}</p>}
+        {revisionError && <p className={styles.emptyState}>{revisionError}</p>}
 
         {openSubmitForm && (
           <SubmitDeliverableForm
