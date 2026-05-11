@@ -6,7 +6,6 @@ use App\Models\Contract;
 use App\Models\Payment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use function PHPUnit\Framework\returnArgument;
 
 class ClientContractController extends Controller
 {
@@ -18,13 +17,13 @@ class ClientContractController extends Controller
             ->whereHas('proposal.project', function ($q) use ($client) {
                 $q->where('client_id', $client->id);
             })->with([
-                    'proposal:id,project_id,freelancer_id',
-                    'proposal.project:id,title',
-                    'proposal.freelancer:id,user_id,title',
-                    'proposal.freelancer.user:id,first_name,last_name,avatar',
-                    'deliverables:id,contract_id,title,deadline,status,created_at',
-                    'conversation:id,contract_id'
-                ]);
+                'proposal:id,project_id,freelancer_id',
+                'proposal.project:id,title',
+                'proposal.freelancer:id,user_id,title',
+                'proposal.freelancer.user:id,first_name,last_name,avatar',
+                'deliverables:id,contract_id,title,deadline,status,created_at',
+                'conversation:id,contract_id',
+            ]);
 
         if ($request->filled('search')) {
             $search = $request->search;
@@ -35,13 +34,15 @@ class ClientContractController extends Controller
 
         if ($request->filled('status') && $request->status !== 'all') {
             $query->where('status', $request->status);
+        } else {
+            $query->where('status', '!=', 'pending');
         }
 
         if ($request->filled('sort')) {
             $sort = $request->sort;
             if ($sort === 'newest') {
                 $query->latest();
-            } else if ($sort === 'oldest') {
+            } elseif ($sort === 'oldest') {
                 $query->oldest();
             }
         }
@@ -53,7 +54,7 @@ class ClientContractController extends Controller
                 $current_deliverable = $contract->deliverables->whereIn('status', [
                     'unlocked',
                     'submitted',
-                    'revision_request'
+                    'revision_request',
                 ])->first();
 
                 return [
@@ -70,11 +71,10 @@ class ClientContractController extends Controller
                     'current_deliverable' => $current_deliverable,
                     'total_deliverables' => $total_deliverables,
                     'completed_deliverables' => $completed_deliverables,
-                    'conversation' => $contract->conversation
+                    'conversation' => $contract->conversation,
                 ];
 
             });
-
 
         return response()->json([
             'success' => true,
@@ -132,7 +132,7 @@ class ClientContractController extends Controller
                 'deliverables' => $contract->deliverables,
                 'project' => [
                     'id' => $contract->proposal->project->id,
-                    'title' => $contract->proposal->project->title
+                    'title' => $contract->proposal->project->title,
                 ],
                 'freelancer' => [
                     'id' => $contract->proposal->freelancer->id,
@@ -141,8 +141,8 @@ class ClientContractController extends Controller
                     'first_name' => $contract->proposal->freelancer->user->first_name,
                     'last_name' => $contract->proposal->freelancer->user->last_name,
                     'avatar' => $contract->proposal->freelancer->user->avatar,
-                ]
-            ]
+                ],
+            ],
         ]);
 
     }
@@ -189,16 +189,16 @@ class ClientContractController extends Controller
             ->whereHas('proposal.project', function ($q) use ($client) {
                 $q->where('client_id', $client->id);
             })->with([
-                    'proposal:id,freelancer_id,project_id',
-                    'proposal.project:id,client_id,category_id,title',
-                    'proposal.freelancer:id,user_id,title',
-                    'proposal.freelancer.user:id,first_name,last_name,avatar',
-                ])->firstOrFail();
+                'proposal:id,freelancer_id,project_id',
+                'proposal.project:id,client_id,category_id,title',
+                'proposal.freelancer:id,user_id,title',
+                'proposal.freelancer.user:id,first_name,last_name,avatar',
+            ])->firstOrFail();
 
         return response()->json([
             'success' => true,
             'message' => 'Contract setup info retrieved successfully',
-            'data' => $contract
+            'data' => $contract,
         ]);
     }
 
@@ -232,9 +232,8 @@ class ClientContractController extends Controller
             'deliverables.*.title' => 'required|string',
             'deliverables.*.description' => 'required|string|min:10|max:1000',
             'deliverables.*.amount' => 'required|numeric',
-            'deliverables.*.position' => 'required|numeric|min:1'
+            'deliverables.*.position' => 'required|numeric|min:1',
         ]);
-
 
         $updatedContract = DB::transaction(function () use ($contract, $validated) {
             $project = $contract->proposal->project;
@@ -243,11 +242,11 @@ class ClientContractController extends Controller
                 'description' => $validated['description'],
                 'final_price' => $validated['final_price'],
                 'final_deadline' => $validated['final_deadline'],
-                'status' => 'active'
+                'status' => 'active',
             ]);
 
             $project->update([
-                'status' => 'in_progress'
+                'status' => 'in_progress',
             ]);
 
             foreach ($validated['deliverables'] as $deliverable) {
@@ -269,16 +268,15 @@ class ClientContractController extends Controller
                 'proposal.freelancer:id,user_id',
                 'proposal.freelancer.user:id,first_name,last_name,avatar',
                 'proposal.project:id,title,status',
-                'deliverables'
+                'deliverables',
             ]);
         });
 
         return response()->json([
             'success' => true,
             'message' => 'Contract activated successfully',
-            'data' => $updatedContract
+            'data' => $updatedContract,
         ]);
 
     }
-
 }
