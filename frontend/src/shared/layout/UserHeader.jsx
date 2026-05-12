@@ -55,12 +55,6 @@ function UserHeader({ links }) {
         </ul>
       </nav>
       <div className={styles.header_right}>
-        {user.role === "freelancer" && (
-          <div className={styles.wallet}>
-            <span>$ 199</span>
-            <SlWallet className={styles.walletIcon} />
-          </div>
-        )}
         <div
           onClick={() => setShowProfileMenu(!showProfileMenu)}
           className={styles.profile_icon}
