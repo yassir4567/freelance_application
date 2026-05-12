@@ -92,7 +92,6 @@ class ClientContractController extends Controller
                 $q->where('client_id', $client->id);
             })
             ->with([
-                // 'contractsTimelines:id,contract_id,event_type,title,description,created_at',
                 'deliverables' => function ($q) {
                     $q->select(
                         'id',

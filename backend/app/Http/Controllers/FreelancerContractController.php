@@ -88,7 +88,6 @@ class FreelancerContractController extends Controller
             ->whereHas('proposal', function ($q) use ($freelancer) {
                 $q->where('freelancer_id', $freelancer->id);
             })->with([
-                    'contractsTimelines:id,contract_id,event_type,title,description,created_at',
                     'deliverables' => function ($q) {
                         $q->select(
                             'id',
@@ -124,7 +123,6 @@ class FreelancerContractController extends Controller
                 'final_price' => $contract->final_price,
                 'final_deadline' => $contract->final_deadline,
                 'created_at' => $contract->created_at,
-                'contract_timelines' => $contract->contractsTimelines,
                 'deliverables' => $contract->deliverables,
                 'project' => [
                     'id' => $contract->proposal->project->id,
