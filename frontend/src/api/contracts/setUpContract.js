@@ -9,10 +9,9 @@ const setUpContract = async (contractId, payload) => {
         method: "PUT",
         headers: {
           Accept: "application/json",
-          "Content-Type": "application/json",
           ...(token && { Authorization: `Bearer ${token}` }),
         },
-        body: JSON.stringify(payload),
+        body: payload,
       },
     );
 

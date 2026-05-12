@@ -17,13 +17,13 @@ class ClientContractController extends Controller
             ->whereHas('proposal.project', function ($q) use ($client) {
                 $q->where('client_id', $client->id);
             })->with([
-                'proposal:id,project_id,freelancer_id',
-                'proposal.project:id,title',
-                'proposal.freelancer:id,user_id,title',
-                'proposal.freelancer.user:id,first_name,last_name,avatar',
-                'deliverables:id,contract_id,title,deadline,status,created_at',
-                'conversation:id,contract_id',
-            ]);
+                    'proposal:id,project_id,freelancer_id',
+                    'proposal.project:id,title',
+                    'proposal.freelancer:id,user_id,title',
+                    'proposal.freelancer.user:id,first_name,last_name,avatar',
+                    'deliverables:id,contract_id,title,deadline,status,created_at',
+                    'conversation:id,contract_id',
+                ]);
 
         if ($request->filled('search')) {
             $search = $request->search;
@@ -188,11 +188,11 @@ class ClientContractController extends Controller
             ->whereHas('proposal.project', function ($q) use ($client) {
                 $q->where('client_id', $client->id);
             })->with([
-                'proposal:id,freelancer_id,project_id',
-                'proposal.project:id,client_id,category_id,title',
-                'proposal.freelancer:id,user_id,title',
-                'proposal.freelancer.user:id,first_name,last_name,avatar',
-            ])->firstOrFail();
+                    'proposal:id,freelancer_id,project_id',
+                    'proposal.project:id,client_id,category_id,title',
+                    'proposal.freelancer:id,user_id,title',
+                    'proposal.freelancer.user:id,first_name,last_name,avatar',
+                ])->firstOrFail();
 
         return response()->json([
             'success' => true,
@@ -227,28 +227,38 @@ class ClientContractController extends Controller
             'description' => 'required|string|min:100|max:2000',
             'final_price' => 'required|numeric|min:5',
             'final_deadline' => 'required|date|after:today',
-            'deliverables' => 'required|array|min:1',
-            'deliverables.*.title' => 'required|string',
-            'deliverables.*.description' => 'required|string|min:10|max:1000',
-            'deliverables.*.amount' => 'required|numeric',
-            'deliverables.*.position' => 'required|numeric|min:1',
+            'deliverables' => 'required|string',
+            'contract_pdf' => 'required|file|mimes:pdf|max:5120',
         ]);
 
-        $updatedContract = DB::transaction(function () use ($contract, $validated) {
+        $deliverables = json_decode($validated['deliverables'], true);
+
+        if (!is_array($deliverables)) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Invalid deliverables format',
+            ], 422);
+        }
+
+
+        $updatedContract = DB::transaction(function () use ($request, $contract, $deliverables , $validated) {
             $project = $contract->proposal->project;
+
+            $pdfPath = $request->file('contract_pdf')->store('contracts', 'public');
 
             $contract->update([
                 'description' => $validated['description'],
                 'final_price' => $validated['final_price'],
                 'final_deadline' => $validated['final_deadline'],
                 'status' => 'active',
+                'fichier_pdf' => $pdfPath
             ]);
 
             $project->update([
                 'status' => 'in_progress',
             ]);
 
-            foreach ($validated['deliverables'] as $deliverable) {
+            foreach ($deliverables as $deliverable) {
                 $contract->deliverables()->create([
                     'title' => $deliverable['title'],
                     'description' => $deliverable['description'],

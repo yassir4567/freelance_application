@@ -25,6 +25,7 @@ function ClientActiveContract() {
     final_price: "",
     final_deadline: "",
     description: "",
+    contract_pdf: null,
   });
 
   const [deliverables, setDeliverables] = useState([]);
@@ -75,6 +76,8 @@ function ClientActiveContract() {
   }, [setupInfo]);
 
   const nextStep = () => {
+    console.log(setUpContractFormData);
+    
     setStep((currentStep) => currentStep + 1);
   };
 
@@ -114,17 +117,27 @@ function ClientActiveContract() {
     if (isSubmitting) return;
     setIsSubmitting(true);
 
-    const payload = {
-      final_price: setUpContractFormData.final_price,
-      final_deadline: setUpContractFormData.final_deadline,
-      description: setUpContractFormData.description,
-      deliverables: deliverables.map((deliverable, index) => ({
-        title: deliverable.title,
-        amount: Number(deliverable.amount),
-        description: deliverable.description,
-        position: index + 1,
-      })),
-    };
+    const payload = new FormData();
+
+    payload.append("final_price", setUpContractFormData.final_price);
+    payload.append("final_deadline", setUpContractFormData.final_deadline);
+    payload.append("description", setUpContractFormData.description);
+    payload.append("contract_pdf", setUpContractFormData.contract_pdf);
+    payload.append(
+      "deliverables",
+      JSON.stringify(
+        deliverables.map((deliverable, index) => ({
+          title: deliverable.title,
+          amount: Number(deliverable.amount),
+          description: deliverable.description,
+          position: index + 1,
+        })),
+      ),
+    );
+
+    console.log(payload);
+    
+
     const result = await setUpContract(contractId, payload);
     setIsSubmitting(false);
 

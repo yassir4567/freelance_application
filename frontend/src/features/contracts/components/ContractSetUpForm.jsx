@@ -5,17 +5,21 @@ function ContractSetUpForm({ nextStep, form, setForm }) {
     final_price: "",
     final_deadline: "",
     description: "",
+    upload: "",
   });
 
   // * handle set up form inputs change
   const handleInputsChange = (e) => {
-    const { name, value } = e.target;
+    const { name, value, type, files } = e.target;
 
     if (name === "description" && value.length > 2000) {
       return;
     }
 
-    setForm((prev) => ({ ...prev, [name]: value }));
+    setForm((prev) => ({
+      ...prev,
+      [name]: type === "file" ? files[0] : value,
+    }));
   };
 
   // * validate price function
@@ -76,11 +80,16 @@ function ContractSetUpForm({ nextStep, form, setForm }) {
       newErrors.description = "Description must be at least 100 character";
     }
 
+    if (form.contract_pdf === null) {
+      newErrors.upload = "Contract file is required";
+    }
+
     if (Object.keys(newErrors).length > 0) {
       setErrors({
         final_price: newErrors.final_price ?? "",
         final_deadline: newErrors.final_deadline ?? "",
         description: newErrors.description ?? "",
+        upload: newErrors.upload ?? "",
       });
       return;
     }
@@ -123,6 +132,37 @@ function ContractSetUpForm({ nextStep, form, setForm }) {
               <div className={styles.error}>{errors.final_deadline}</div>
             )}
           </div>
+        </div>
+
+        <div className={styles.uploadWrapper}>
+          <label htmlFor="contractFile" className={styles.uploadBox}>
+            <div className={styles.icon}>📄</div>
+
+            <h3>Upload Contract PDF</h3>
+            <p>Click to choose a PDF file</p>
+
+            <span className={styles.uploadBtn}>Choose File</span>
+          </label>
+
+          <input
+            id="contractFile"
+            type="file"
+            accept="application/pdf"
+            name="contract_pdf"
+            onChange={handleInputsChange}
+            className={styles.fileInput}
+          />
+
+          {errors.upload && <p className={styles.error}>{errors.upload}</p>}
+
+          {form.contract_pdf && (
+            <div className={styles.filePreview}>
+              <span>{form.contract_pdf.name}</span>
+              <small>
+                {(form.contract_pdf.size / 1024 / 1024).toFixed(2)} MB
+              </small>
+            </div>
+          )}
         </div>
 
         <div className={styles.textareaBox}>
