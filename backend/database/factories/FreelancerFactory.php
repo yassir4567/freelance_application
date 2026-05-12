@@ -23,7 +23,6 @@ class FreelancerFactory extends Factory
             'title' => fake()->sentence(),
             'bio' => fake()->paragraph(),
             'portfolio_url' => fake()->url(),
-            'resume_url' => fake()->url(),
         ];
     }
 }

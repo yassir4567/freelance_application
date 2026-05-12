@@ -14,12 +14,7 @@ class Freelancer extends Model
     //
     use HasFactory;
 
-    protected $fillable = ['user_id', 'category_id', 'title', 'bio', 'portfolio_url', 'resume_url'];
-
-    public function experiences(): HasMany
-    {
-        return $this->hasMany(Experience::class);
-    }
+    protected $fillable = ['user_id', 'category_id', 'title', 'bio', 'portfolio_url'];
 
     public function category(): BelongsTo
     {

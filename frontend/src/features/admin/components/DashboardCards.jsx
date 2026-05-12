@@ -3,7 +3,7 @@ import { GiSkills } from "react-icons/gi";
 import { MdOutlineCategory } from "react-icons/md";
 import styles from "../styles/DashboardCards.module.css";
 
-function AdminCards({ dashboardData }) {
+function DashboardCards({ dashboardData }) {
   const stats = dashboardData?.stats || {};
   const projectStatuses = dashboardData?.project_statuses || {};
 
@@ -103,4 +103,4 @@ function formatMoney(amount) {
   return `$${value.toFixed(2)}`;
 }
 
-export default AdminCards;
+export default DashboardCards;

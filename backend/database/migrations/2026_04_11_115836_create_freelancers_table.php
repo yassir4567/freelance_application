@@ -18,7 +18,6 @@ return new class extends Migration
             $table->string('title')->nullable();
             $table->text('bio')->nullable();
             $table->string('portfolio_url')->nullable();
-            $table->string('resume_url')->nullable();
             $table->timestamps();
         });
     }

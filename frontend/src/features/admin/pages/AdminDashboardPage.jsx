@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { getDashboardStats } from "../../../api/admin/getDashboardStats";
-import AdminCards from "../components/DashboardCards";
+import DashboardCards from "../components/DashboardCards";
 import styles from "../styles/AdminDashboardPage.module.css";
 
 function AdminDashboard() {
@@ -40,7 +40,7 @@ function AdminDashboard() {
       {loading ? (
         <p className={styles.state}>Loading dashboard stats...</p>
       ) : (
-        <AdminCards dashboardData={dashboardData} />
+        <DashboardCards dashboardData={dashboardData} />
       )}
     </div>
   );

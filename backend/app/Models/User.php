@@ -41,11 +41,6 @@ class User extends Authenticatable
         return $this->hasMany(Project::class, 'client_id');
     }
 
-    public function notifications(): HasMany
-    {
-        return $this->hasMany(Notification::class);
-    }
-
     public function messages(): HasMany
     {
         return $this->hasMany(Message::class, 'sender_id');
@@ -100,7 +95,6 @@ class User extends Authenticatable
             'title' => $freelancer->title,
             'bio' => $freelancer->bio,
             'portfolio_url' => $freelancer->portfolio_url,
-            // 'resume_url' => $freelancer->resume_url,
 
         ];
 

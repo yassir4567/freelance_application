@@ -17,9 +17,6 @@ function ProfileMenu({ onClose }) {
         <NavLink to="profile" className={styles.btn} onClick={onClose}>
           <FaRegUser /> <span>Profile</span>
         </NavLink>
-        {/* <NavLink className={styles.btn}>
-          <IoSettingsOutline /> <span>Settings</span>
-        </NavLink> */}
         <hr />
         <button onClick={handleLogout} className={styles.btn}>
           <RiLogoutCircleRLine color="red" /> <span>Logout</span>

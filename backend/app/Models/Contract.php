@@ -20,11 +20,6 @@ class Contract extends Model
         return $this->belongsTo(Proposal::class);
     }
 
-    public function feedback(): HasOne
-    {
-        return $this->hasOne(Feedback::class);
-    }
-
     public function deliverables(): HasMany
     {
         return $this->hasMany(Deliverable::class);
@@ -33,10 +28,5 @@ class Contract extends Model
     public function conversation(): HasOne
     {
         return $this->hasOne(Conversation::class);
-    }
-
-    public function contractsTimelines(): HasMany
-    {
-        return $this->hasMany(ContractTimeline::class);
     }
 }

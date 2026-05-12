@@ -19,7 +19,6 @@ return new class extends Migration {
             $table->date('deadline')->nullable();
             $table->json('deliverable_links')->nullable();
             $table->dateTime('created_at')->nullable();
-            $table->dateTime('updated_at')->nullable();
             $table->dateTime('unlocked_at')->nullable();
             $table->dateTime('submitted_at')->nullable();
             $table->dateTime('accepted_at')->nullable();
@@ -33,6 +32,7 @@ return new class extends Migration {
             ]);
             $table->unsignedInteger('position');
             $table->text('submission_note')->nullable();
+            $table->dateTime('updated_at')->nullable();
 
         });
     }
