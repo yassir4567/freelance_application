@@ -193,6 +193,7 @@ function ContractDetail() {
       total_deliverables: deliverables.length,
       completed_deliverables: completedDeliverables,
       contract_pdf: contract?.fichier_pdf,
+      contract_pdf_url: contract?.fichier_pdf_url,
       paymentProgress: paymentSummary.paymentProgress,
       paidAmount: paymentSummary.paidAmount,
     };
@@ -252,7 +253,6 @@ function ContractDetail() {
               <ContractDeliverables
                 contract={contract}
                 setContract={setContract}
-                // deliverables={deliverables}
               />
             )}
 

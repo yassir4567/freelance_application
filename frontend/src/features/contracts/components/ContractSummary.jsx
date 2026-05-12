@@ -28,6 +28,8 @@ function ContractSummary({ summary }) {
     },
   ];
 
+  
+
   return (
     <div className={styles.contractSummary}>
       <div className={styles.sectionHeader}>
@@ -94,7 +96,7 @@ function ContractSummary({ summary }) {
         </div>
 
         {summary?.contract_pdf ? (
-          <a href={summary.contract_pdf} target="_blank" rel="noreferrer">
+          <a href={summary.contract_pdf_url} target="_blank" rel="noreferrer">
             View document
           </a>
         ) : (

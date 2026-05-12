@@ -123,6 +123,9 @@ class ClientContractController extends Controller
             'data' => [
                 'id' => $contract->id,
                 'fichier_pdf' => $contract->fichier_pdf,
+                'fichier_pdf_url' => $contract->fichier_pdf
+                    ? asset('storage/' . $contract->fichier_pdf)
+                    : null,
                 'description' => $contract->description,
                 'status' => $contract->status,
                 'final_price' => $contract->final_price,
@@ -241,7 +244,7 @@ class ClientContractController extends Controller
         }
 
 
-        $updatedContract = DB::transaction(function () use ($request, $contract, $deliverables , $validated) {
+        $updatedContract = DB::transaction(function () use ($request, $contract, $deliverables, $validated) {
             $project = $contract->proposal->project;
 
             $pdfPath = $request->file('contract_pdf')->store('contracts', 'public');

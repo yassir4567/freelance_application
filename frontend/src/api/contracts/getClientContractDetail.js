@@ -17,6 +17,8 @@ const getClientContractDetail = async (id) => {
         message: data.message,
       };
     }
+
+    
     return {
       success: true,
       message: data.message,
