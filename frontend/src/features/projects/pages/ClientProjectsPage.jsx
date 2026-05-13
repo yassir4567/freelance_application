@@ -5,8 +5,10 @@ import { useSearchParams } from "react-router-dom";
 import ClientProjectCard from "../components/ClientProjectCard";
 import FilterBox from "../../../shared/common/filters/FilterBox";
 import { getClientProjects } from "../../../api/projects/getClientProjects";
+import { useTranslation } from "react-i18next";
 
 function ClientProjectsPage() {
+  const { t } = useTranslation();
   const [projects, setProjects] = useState([]);
   const [filterParams, setFilterParams] = useSearchParams();
 
@@ -58,7 +60,7 @@ function ClientProjectsPage() {
 
   return (
     <div className={styles.projectsPage}>
-      <h1 className="pageTitle">All Projects Posts</h1>
+      <h1 className="pageTitle">{t("clientProjects.title")}</h1>
       <div className={styles.projectsPageMain}>
         <div className={styles.projectsFilterSection}>
           <FilterBox

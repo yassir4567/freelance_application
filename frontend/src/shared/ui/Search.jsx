@@ -1,7 +1,9 @@
 import { CiSearch } from "react-icons/ci";
 import styles from "./Search.module.css";
+import { useTranslation } from "react-i18next";
 
 function Search({value , onChange}) {
+  const {t} = useTranslation()
   return (
     <div className={styles.searchBox}>
       <CiSearch className={styles.searchIcon} size={30} />
@@ -11,7 +13,7 @@ function Search({value , onChange}) {
         value={value}
         onChange={onChange}
         className={styles.searchInput}
-        placeholder="Search ..."
+        placeholder={t("clientProjects.filters.search")}
       />
     </div>
   );

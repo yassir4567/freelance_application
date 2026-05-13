@@ -147,5 +147,38 @@
       "budgetRequired": "Le budget est obligatoire",
       "budgetLessThanFive": "Le budget doit être supérieur à 5"
     }
+  },
+
+  "clientProjects": {
+    "title": "Mes projets",
+    "filters": {
+      "search": "Rechercher par titre du projet",
+      "status": {
+        "placeholder": "Filtrer par statut",
+        "options": {
+          "open": "Ouvert",
+          "inProgress": "En cours",
+          "inReview": "En révision",
+          "completed": "Terminé"
+        }
+      },
+      "sort": {
+        "placeholder": "Trier par",
+        "options": {
+          "latest": "Projets les plus récents",
+          "oldest": "Projets les plus anciens"
+        }
+      },
+      "clear": "Tout effacer"
+    },
+    "card": {
+      "budget": "Budget",
+      "createdAt": "Créé le",
+      "numberOfProposals": "Nombre de propositions",
+      "actions": {
+        "viewDetails": "Voir les détails",
+        "viewProposals": "Voir les propositions"
+      }
+    }
   }
 }

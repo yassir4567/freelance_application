@@ -147,5 +147,38 @@
       "budgetRequired": "Budget is required",
       "budgetLessThanFive": "Budget must be greater than 5"
     }
+  },
+
+  "clientProjects": {
+    "title": "My Projects",
+    "filters": {
+      "search": "Search by project title",
+      "status": {
+        "placeholder": "Filter by status",
+        "options": {
+          "open": "Open",
+          "inProgress": "In Progress",
+          "inReview": "In Review",
+          "completed": "Completed"
+        }
+      },
+      "sort": {
+        "placeholder": "Sort by",
+        "options": {
+          "latest": "Latest projects",
+          "oldest": "Oldest projects"
+        }
+      },
+      "clear": "Clear all"
+    },
+    "card": {
+      "budget": "Budget",
+      "createdAt": "Created at",
+      "numberOfProposals": "Number of proposals",
+      "actions" : {
+        "viewDetails" : "View Details", 
+        "viewProposals" : "View Proposals" 
+      }
+    }
   }
 }

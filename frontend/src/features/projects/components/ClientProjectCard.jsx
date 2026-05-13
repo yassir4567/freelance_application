@@ -1,8 +1,10 @@
 import { NavLink } from "react-router-dom";
 import styles from "../styles/ClientProjectCard.module.css";
 import { formatDate } from "../../../utils/helpers";
+import { useTranslation } from "react-i18next";
 
 function ClientProjectCard({ project }) {
+  const { t } = useTranslation();
   const projectStatus = {
     open: styles.open,
     in_review: styles.in_review,
@@ -17,12 +19,14 @@ function ClientProjectCard({ project }) {
           {project.title[0].toUpperCase()}
           {project.title.slice(1)}
         </h3>
-        <p className={styles.projectCardBudget}>Budget {project.budget}$ </p>
+        <p className={styles.projectCardBudget}>
+          {t("clientProjects.card.budget")} {project.budget}
+        </p>
         <p className={styles.projectCardDate}>
-          Created at {formatDate(project.created_at)}
+          {t("clientProjects.card.createdAt")} {formatDate(project.created_at)}
         </p>
         <p className={styles.projectCardCountProposals}>
-          Number of proposals : {project.proposals_count}
+          {t("clientProjects.card.numberOfProposals")} {project.proposals_count}
         </p>
       </div>
       <div className={styles.rightProject}>
@@ -34,13 +38,13 @@ function ClientProjectCard({ project }) {
         </p>
         <div className={styles.projectCardActions}>
           <NavLink to={`${project.id}`} className={`${styles.projectCardBtn}`}>
-            View details
+            {t("clientProjects.card.actions.viewDetails")} 
           </NavLink>
           <NavLink
             to={`${project.id}/proposals`}
             className={`${styles.projectCardBtn}`}
           >
-            View proposals
+            {t("clientProjects.card.actions.viewProposals")} 
           </NavLink>
         </div>
       </div>

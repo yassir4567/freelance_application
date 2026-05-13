@@ -1,5 +1,6 @@
 import styles from "./FilterBox.module.css";
 import Search from "../../ui/Search";
+import { useTranslation } from "react-i18next";
 
 function FilterBox({
   inputValues,
@@ -7,6 +8,7 @@ function FilterBox({
   handleInputsChange,
   handleClearFilters,
 }) {
+  const { t } = useTranslation();
   return (
     <div className={styles.FilterSection}>
       <Search value={inputValues.search} onChange={handleInputsChange} />
@@ -18,7 +20,7 @@ function FilterBox({
           onChange={handleInputsChange}
         >
           <option value="" disabled>
-            Filter by status
+            {t("clientProjects.filters.status.placeholder")}
           </option>
           {statusValues.map((status) => {
             return (
@@ -37,10 +39,10 @@ function FilterBox({
           onChange={handleInputsChange}
         >
           <option value="" disabled>
-            Sort by
+            {t("clientProjects.filters.sort.placeholder")}
           </option>
-          <option value="newest">Latest contracts</option>
-          <option value="oldest">Oldest contracts</option>
+          <option value="newest">{t("clientProjects.filters.sort.options.latest")}</option>
+          <option value="oldest">{t("clientProjects.filters.sort.options.oldest")}</option>
         </select>
       </div>
       <div className={styles.clearAllFilters}>
