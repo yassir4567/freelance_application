@@ -70,7 +70,7 @@
           "deadline": "Date limite",
           "actions": "Actions"
         },
-        "action" : "Voir tous les contrats"
+        "action": "Voir tous les contrats"
       },
       "actions": {
         "title": "Actions rapides",
@@ -78,6 +78,74 @@
         "viewProposals": "Voir mes propositions",
         "messages": "Consulter les messages"
       }
+    }
+  },
+
+  "postjob": {
+    "title": "Publier un projet",
+    "form": {
+      "title": {
+        "label": "Titre",
+        "placeholder": "Saisissez le titre de votre projet"
+      },
+      "category": {
+        "label": "Catégorie",
+        "placeholder": "Sélectionner la catégorie du projet"
+      },
+      "skills": {
+        "label": "Compétences",
+        "placeholders": {
+          "main": "Sélectionnez les compétences requises",
+          "noSkillsAvailable": "Aucune compétence disponible pour cette catégorie",
+          "categoryNotSelected": "Sélectionnez d'abord une catégorie"
+        }
+      },
+      "experienceLevel": {
+        "label": "Niveau d'expérience",
+        "options": {
+          "junior": "Junior",
+          "midLevel": "Intermédiaire",
+          "senior": "Senior"
+        }
+      },
+      "projectSize": {
+        "label": "Taille du projet",
+        "options": {
+          "small": "Petit",
+          "medium": "Moyen",
+          "large": "Grand"
+        }
+      },
+      "duration": {
+        "label": "Combien de temps prendra votre travail ?",
+        "options": {
+          "lessThanOneMonth": "Moins d'un mois",
+          "oneToThreeMonths": "1 à 3 mois",
+          "threeToSixMonths": "3 à 6 mois",
+          "moreThanSixMonths": "Plus de 6 mois"
+        }
+      },
+      "description": {
+        "label": "Description (entre 30 et 1000 caractères)",
+        "placeholder": "Saisissez la description de votre projet"
+      },
+      "budget": {
+        "label": "Budget fixe",
+        "placeholder": "Saisissez le budget de votre projet"
+      },
+      "submit": "Publier"
+    },
+    "errors": {
+      "titleRequired": "Le titre est obligatoire",
+      "categoryRequired": "Le category est obligatoire",
+      "skillsRequired": "Veuillez sélectionner au moins une compétence",
+      "experienceLevelRequired": "Veuillez sélectionner un niveau d'expérience",
+      "projectSizeRequired": "Veuillez sélectionner la taille du projet",
+      "durationRequired": "Veuillez sélectionner la durée du projet",
+      "descriptionRequired": "La description est obligatoire",
+      "descriptionLessThanThirty": "La description doit contenir au moins 30 caractères",
+      "budgetRequired": "Le budget est obligatoire",
+      "budgetLessThanFive": "Le budget doit être supérieur à 5"
     }
   }
 }

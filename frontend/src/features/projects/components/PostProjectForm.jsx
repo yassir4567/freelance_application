@@ -6,8 +6,10 @@ import { getSkills } from "../../../api/skills/getSkills";
 import { getCategories } from "../../../api/categories/getCategories";
 import { postProject } from "../../../api/projects/postProject";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 function PostProjectForm({ is_profile_complete }) {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const [skills, setSkills] = useState([]);
   const [categories, setCategories] = useState([]);
@@ -113,40 +115,39 @@ function PostProjectForm({ is_profile_complete }) {
 
     // * Validate inputs
     if (project.title.trim() === "") {
-      newErrors.title = "Title is required";
+      newErrors.title = t("postjob.errors.titleRequired");
     }
 
     if (project.category_id.trim() === "") {
-      newErrors.category_id = "Category is required";
-      newErrors.skills = "Please select category first";
+      newErrors.category_id = t("postjob.errors.categoryRequired");
     }
 
     if (project.category_id && project.skills.length === 0) {
-      newErrors.skills = "Please select at least one skill";
+      newErrors.skills =t("postjob.errors.skillsRequired");
     }
 
     if (project.experience_level.trim() === "") {
-      newErrors.experience_level = "Please select an experience level";
+      newErrors.experience_level = t("postjob.errors.experienceLevelRequired");
     }
 
     if (project.size.trim() === "") {
-      newErrors.size = "Please select the project size";
+      newErrors.size = t("postjob.errors.projectSizeRequired");
     }
 
     if (project.duration.trim() === "") {
-      newErrors.duration = "Please select the project duration";
+      newErrors.duration = t("postjob.errors.durationRequired");
     }
 
     if (project.description.trim() === "") {
-      newErrors.description = "Description is required";
+      newErrors.description = t("postjob.errors.descriptionRequired");
     } else if (project.description.length < 30) {
-      newErrors.description = "Description must be at least 30 characters";
+      newErrors.description = t("postjob.errors.descriptionLessThanThirty");
     }
 
     if (project.budget.trim() === "") {
-      newErrors.budget = "Budget is required";
+      newErrors.budget = t("postjob.errors.budgetRequired");
     } else if (+project.budget < 5) {
-      newErrors.budget = "Budget must be greater than 5";
+      newErrors.budget =  t("postjob.errors.budgetLessThanFive");
     }
 
     if (Object.keys(newErrors).length > 0) {
@@ -181,20 +182,20 @@ function PostProjectForm({ is_profile_complete }) {
     <form onSubmit={handleSubmit} className={styles.form}>
       <div className={styles.row}>
         <div className={styles.inputBox}>
-          <label>Title</label>
+          <label>{t("postjob.form.title.label")}</label>
           <input
             className={styles.select}
             type="text"
             value={project.title}
             onChange={handleInputChange}
             name="title"
-            placeholder="Enter your project title"
+            placeholder={t("postjob.form.title.placeholder")}
             disabled={!is_profile_complete}
           />
           {errors.title && <div className={styles.error}>{errors.title}</div>}
         </div>
         <div className={styles.inputBox}>
-          <label>Category</label>
+          <label>{t("postjob.form.category.label")}</label>
           <select
             className={styles.select}
             value={project.category_id}
@@ -203,7 +204,7 @@ function PostProjectForm({ is_profile_complete }) {
             disabled={!is_profile_complete}
           >
             <option value="" disabled>
-              Select project category
+              {t("postjob.form.category.placeholder")}
             </option>
             {categories.map((category) => (
               <option key={category.id} value={category.id}>
@@ -232,10 +233,10 @@ function PostProjectForm({ is_profile_complete }) {
           >
             <option value="" disabled>
               {!project.category_id
-                ? "Select category first"
+                ? t("postjob.form.skills.placeholders.categoryNotSelected")
                 : skillsOptions.length === 0
-                  ? "No skills available for this category"
-                  : "Select required skills"}
+                  ? t("postjob.form.skills.placeholders.noSkillsAvailable")
+                  : t("postjob.form.skills.placeholders.main")}
             </option>
             {skillsOptions.map((skill) => (
               <option key={skill.id} value={skill.id}>
@@ -259,7 +260,9 @@ function PostProjectForm({ is_profile_complete }) {
 
       <div className={styles.tripleRow}>
         <div className={styles.radioInput}>
-          <p className={styles.radioBoxTitle}>experience_level Level</p>
+          <p className={styles.radioBoxTitle}>
+            {t("postjob.form.experienceLevel.label")}
+          </p>
           <div className={styles.radioBox}>
             <input
               className={styles.select}
@@ -271,7 +274,9 @@ function PostProjectForm({ is_profile_complete }) {
               checked={project.experience_level === "junior"}
               disabled={!is_profile_complete}
             />
-            <label htmlFor="junior">Junior</label>
+            <label htmlFor="junior">
+              {t("postjob.form.experienceLevel.options.junior")}
+            </label>
           </div>
           <div className={styles.radioBox}>
             <input
@@ -284,7 +289,9 @@ function PostProjectForm({ is_profile_complete }) {
               checked={project.experience_level === "mid-level"}
               disabled={!is_profile_complete}
             />
-            <label htmlFor="midlevel">Mid-Level</label>
+            <label htmlFor="midlevel">
+              {t("postjob.form.experienceLevel.options.midLevel")}
+            </label>
           </div>
           <div className={styles.radioBox}>
             <input
@@ -297,7 +304,9 @@ function PostProjectForm({ is_profile_complete }) {
               checked={project.experience_level === "senior"}
               disabled={!is_profile_complete}
             />
-            <label htmlFor="senior">Senior</label>
+            <label htmlFor="senior">
+              {t("postjob.form.experienceLevel.options.senior")}
+            </label>
           </div>
           {errors.experience_level && (
             <div className={styles.error}>{errors.experience_level}</div>
@@ -305,7 +314,9 @@ function PostProjectForm({ is_profile_complete }) {
         </div>
 
         <div className={styles.radioInput}>
-          <p className={styles.radioBoxTitle}>Project Size</p>
+          <p className={styles.radioBoxTitle}>
+            {t("postjob.form.projectSize.label")}
+          </p>
           <div className={styles.radioBox}>
             <input
               className={styles.select}
@@ -317,7 +328,9 @@ function PostProjectForm({ is_profile_complete }) {
               checked={project.size === "small"}
               disabled={!is_profile_complete}
             />
-            <label htmlFor="small">Small</label>
+            <label htmlFor="small">
+              {t("postjob.form.projectSize.options.small")}
+            </label>
           </div>
           <div className={styles.radioBox}>
             <input
@@ -330,7 +343,9 @@ function PostProjectForm({ is_profile_complete }) {
               checked={project.size === "medium"}
               disabled={!is_profile_complete}
             />
-            <label htmlFor="medium">Medium</label>
+            <label htmlFor="medium">
+              {t("postjob.form.projectSize.options.medium")}
+            </label>
           </div>
           <div className={styles.radioBox}>
             <input
@@ -343,13 +358,17 @@ function PostProjectForm({ is_profile_complete }) {
               checked={project.size === "large"}
               disabled={!is_profile_complete}
             />
-            <label htmlFor="large">Large</label>
+            <label htmlFor="large">
+              {t("postjob.form.projectSize.options.large")}
+            </label>
           </div>
           {errors.size && <div className={styles.error}>{errors.size}</div>}
         </div>
 
         <div className={styles.radioInput}>
-          <p className={styles.radioBoxTitle}>How long will your work take ?</p>
+          <p className={styles.radioBoxTitle}>
+            {t("postjob.form.duration.label")}
+          </p>
           <div className={styles.radioBox}>
             <input
               className={styles.select}
@@ -361,7 +380,9 @@ function PostProjectForm({ is_profile_complete }) {
               checked={project.duration === "less_than_1_month"}
               disabled={!is_profile_complete}
             />
-            <label htmlFor="less1">Less than 1 Months</label>
+            <label htmlFor="less1">
+              {t("postjob.form.duration.options.lessThanOneMonth")}
+            </label>
           </div>
           <div className={styles.radioBox}>
             <input
@@ -374,7 +395,9 @@ function PostProjectForm({ is_profile_complete }) {
               checked={project.duration === "1_to_3_month"}
               disabled={!is_profile_complete}
             />
-            <label htmlFor="between_1_3">1 to 3 Months</label>
+            <label htmlFor="between_1_3">
+              {t("postjob.form.duration.options.oneToThreeMonths")}
+            </label>
           </div>
           <div className={styles.radioBox}>
             <input
@@ -387,7 +410,9 @@ function PostProjectForm({ is_profile_complete }) {
               checked={project.duration === "3_to_6_month"}
               disabled={!is_profile_complete}
             />
-            <label htmlFor="between_3_6">3 to 6 Months</label>
+            <label htmlFor="between_3_6">
+              {t("postjob.form.duration.options.threeToSixMonths")}
+            </label>
           </div>
           <div className={styles.radioBox}>
             <input
@@ -400,7 +425,9 @@ function PostProjectForm({ is_profile_complete }) {
               checked={project.duration === "more_than_6_month"}
               disabled={!is_profile_complete}
             />
-            <label htmlFor="more6">More than 6 Months</label>
+            <label htmlFor="more6">
+              {t("postjob.form.duration.options.moreThanSixMonths")}
+            </label>
           </div>
           {errors.duration && (
             <div className={styles.error}>{errors.duration}</div>
@@ -411,7 +438,7 @@ function PostProjectForm({ is_profile_complete }) {
       <div className={styles.row}>
         <div className={styles.inputBox}>
           <label htmlFor="description">
-            Description (between 30 & 1000 character)
+            {t("postjob.form.description.label")}
           </label>
           <textarea
             name="description"
@@ -419,7 +446,7 @@ function PostProjectForm({ is_profile_complete }) {
             id="description"
             value={project.description}
             onChange={handleInputChange}
-            placeholder="Enter your project description"
+            placeholder={t("postjob.form.description.placeholder")}
             disabled={!is_profile_complete}
           />
           {errors.description && (
@@ -427,7 +454,7 @@ function PostProjectForm({ is_profile_complete }) {
           )}
         </div>
         <div className={styles.inputBox}>
-          <label htmlFor="budget">Fixed Budget</label>
+          <label htmlFor="budget">{t("postjob.form.budget.label")}</label>
           <input
             className={styles.select}
             type="number"
@@ -435,14 +462,14 @@ function PostProjectForm({ is_profile_complete }) {
             name="budget"
             value={project.budget}
             onChange={handleInputChange}
-            placeholder="Enter your project budget"
+            placeholder={t("postjob.form.budget.placeholder")}
             disabled={!is_profile_complete}
           />
           {errors.budget && <div className={styles.error}>{errors.budget}</div>}
         </div>
       </div>
       <button type="submit" className={styles.post_job_btn}>
-        Post
+        {t("postjob.form.submit")}
       </button>
     </form>
   );
