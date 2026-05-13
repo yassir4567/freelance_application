@@ -100,7 +100,7 @@ function ClientDashboardPage() {
       </div>
 
       <div className={styles.recentProjects}>
-        <h1 className={styles.recentTitle}>Recent Projects</h1>
+        <h1 className={styles.recentTitle}>{t("dashboard.client.table.title")}</h1>
         <RecentProjectsTable projects={data?.recent_projects} />
       </div>
     </div>

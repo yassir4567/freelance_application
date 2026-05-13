@@ -33,6 +33,16 @@
           "title": "Contrats en cours",
           "subTitle": "Projets en cours de réalisation"
         }
+      },
+      "table": {
+        "title": "Projets récents",
+        "thead": {
+          "title": "Titre",
+          "status": "Statut",
+          "nbrProposals": "Nombre de propositions",
+          "time": "Temps",
+          "actions": "Actions"
+        }
       }
     },
     "freelancer": {
@@ -50,6 +60,23 @@
           "title": "Contrats terminés",
           "subTitle": "Projets que vous avez livrés avec succès"
         }
+      },
+      "table": {
+        "title": "Contrats actifs",
+        "thead": {
+          "name": "Projet",
+          "client": "Client",
+          "budget": "Budget",
+          "deadline": "Date limite",
+          "actions": "Actions"
+        },
+        "action" : "Voir tous les contrats"
+      },
+      "actions": {
+        "title": "Actions rapides",
+        "browseProjects": "Parcourir les projets",
+        "viewProposals": "Voir mes propositions",
+        "messages": "Consulter les messages"
       }
     }
   }

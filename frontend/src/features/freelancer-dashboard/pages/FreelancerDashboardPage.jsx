@@ -79,22 +79,30 @@ function FreelancerDashboardPage() {
 
       <div className={styles.main}>
         <div className={styles.activeContracts}>
-          <h3 className={styles.title}>Active contracts</h3>
+          <h3 className={styles.title}>
+            {t("dashboard.freelancer.table.title")}
+          </h3>
           <FreelancerActiveContracts contracts={data?.active_contracts} />
           <div className={styles.allContractsLink}>
-            <NavLink className={styles.link}>View active contracts</NavLink>
+            <NavLink className={styles.link}>
+              {t("dashboard.freelancer.table.action")}
+            </NavLink>
           </div>
         </div>
         <div className={styles.quickAction}>
-          <h3 className={styles.title}>Quick action</h3>
+          <h3 className={styles.title}>
+            {t("dashboard.freelancer.actions.title")}
+          </h3>
           <div className={styles.actions}>
             <NavLink to="find-project" className={styles.actionLink}>
-              Browse Projects
+              {t("dashboard.freelancer.actions.browseProjects")}
             </NavLink>
             <NavLink to="my-proposals" className={styles.actionLink}>
-              View my proposals{" "}
+              {t("dashboard.freelancer.actions.viewProposals")}
             </NavLink>
-            <NavLink className={styles.actionLink}>Check Messages</NavLink>
+            <NavLink className={styles.actionLink}>
+              {t("dashboard.freelancer.actions.messages")}
+            </NavLink>
           </div>
         </div>
       </div>

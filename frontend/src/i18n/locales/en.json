@@ -32,6 +32,16 @@
           "title": "Ongoing Contracts",
           "subTitle": "Projects in progress"
         }
+      },
+      "table": {
+        "title": "Recent projects",
+        "thead": {
+          "title": "Title",
+          "status": "Status",
+          "nbrProposals": "Number of proposals",
+          "time": "Time",
+          "actions": "Actions"
+        }
       }
     },
     "freelancer": {
@@ -49,6 +59,23 @@
           "title": "Completed Contracts",
           "subTitle": "Projects you've successfully delivered"
         }
+      },
+      "table": {
+        "title" : "Active Contracts" ,
+        "thead" : {
+            "name" : "Project",
+            "client" : "Client",
+            "budget" : "Budget",
+            "deadline" : "Deadline",
+            "actions" : "Actions"
+        },
+        "action" : "View all contracts"
+      },
+      "actions" : {
+        "title" : "Quick actions" ,
+        "browseProjects" : "Browse Projects" ,
+        "viewProposals" : "View My Proposals", 
+        "messages" : "Check Messages" 
       }
     }
   }
