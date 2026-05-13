@@ -1,26 +1,28 @@
 import { Outlet } from "react-router-dom";
 import UserHeader from "../shared/layout/UserHeader";
 import styles from "./FreelancerLayout.module.css";
+import { useTranslation } from "react-i18next";
 function FreelancerLayout() {
+  const { t } = useTranslation();
   const links = [
     {
-      label: "Home",
+      label: t("navbar.home"),
       to: "/dashboard/freelancer",
     },
     {
-      label: "Find projects",
+      label: t("navbar.findProject"),
       to: "/dashboard/freelancer/find-project",
     },
     {
-      label: "My Proposals",
+      label: t("navbar.proposals"),
       to: "/dashboard/freelancer/my-proposals",
     },
     {
-      label: "Contracts",
+      label: t("navbar.contracts"),
       to: "/dashboard/freelancer/contracts",
     },
     {
-      label: "Messages",
+      label: t("navbar.messages"),
       to: "/dashboard/freelancer/messages",
     },
   ];

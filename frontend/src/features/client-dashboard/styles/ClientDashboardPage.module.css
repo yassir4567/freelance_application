@@ -11,12 +11,13 @@
   gap: 7px;
   background-color: var(--color-secondary);
   color: var(--color-white);
-  width: 130px;
+  min-width: 130px;
   height: 40px;
   font-size: var(--fs-md);
   border-radius: 5px;
   text-decoration: none;
   transition: .2s;
+  padding-inline: 15px;
 }
 
 .post_job_btn:hover {

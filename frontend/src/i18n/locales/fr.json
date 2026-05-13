@@ -1,9 +1,56 @@
 {
-    "navbar" : {
-        "home" : "Accueil",
-        "postproject" : "Publier projet",
-        "projects&proposals" : "Projets et propositions" ,
-        "contracts" : "Contrats" ,
-        "messages" : "Messages"
+  "navbar": {
+    "home": "Accueil",
+    "postproject": "Publier projet",
+    "projects&proposals": "Projets et propositions",
+    "contracts": "Contrats",
+    "messages": "Messages",
+    "findProject": "Trouver un projet",
+    "proposals": "Propositions"
+  },
+
+  "dashboard": {
+    "common": {
+      "overview": "Vue d'ensemble",
+      "welcome": "Bienvenue"
+    },
+    "client": {
+      "welcomeSubTitle": "Voici ce qui se passe aujourd'hui avec vos projets",
+      "cards": {
+        "projects": {
+          "title": "Total des projets",
+          "subTitle": "Tous les projets publiés"
+        },
+        "proposals": {
+          "title": "Propositions reçues",
+          "subTitle": "Toutes les propositions reçues"
+        },
+        "freelancerHired": {
+          "title": "Freelances recrutés",
+          "subTitle": "Les personnes avec lesquelles vous avez travaillé"
+        },
+        "activeContracts": {
+          "title": "Contrats en cours",
+          "subTitle": "Projets en cours de réalisation"
+        }
+      }
+    },
+    "freelancer": {
+      "welcomeSubTitle": "Découvrez les projets qui correspondent à vos compétences",
+      "cards": {
+        "activeProjects": {
+          "title": "Projets actifs",
+          "subTitle": "Suivez tous vos projets"
+        },
+        "acceptedProposals": {
+          "title": "Propositions acceptées",
+          "subTitle": "Propositions passées en phase de négociation"
+        },
+        "completedContracts": {
+          "title": "Contrats terminés",
+          "subTitle": "Projets que vous avez livrés avec succès"
+        }
+      }
     }
+  }
 }

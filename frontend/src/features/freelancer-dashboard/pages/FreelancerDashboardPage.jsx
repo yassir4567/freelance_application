@@ -10,11 +10,12 @@ import { useEffect, useState } from "react";
 import { getDashboardData } from "../../../api/dashboard/getDashboardData";
 import { useAuth } from "../../../context/AuthContext";
 import CompleteProfileAlert from "../../../shared/common/CompleteProfileAlert";
+import { useTranslation } from "react-i18next";
 
 function FreelancerDashboardPage() {
   const [data, setData] = useState([]);
   const { user, isLoading, profileCompletionState } = useAuth();
-
+  const { t } = useTranslation();
   useEffect(() => {
     const loadStats = async () => {
       const result = await getDashboardData("freelancer");
@@ -26,34 +27,37 @@ function FreelancerDashboardPage() {
   const overview_cards = [
     {
       id: 0,
-      title: "Active Projects",
-      description: "Track all your projects",
+      title: t(`dashboard.${user.role}.cards.activeProjects.title`),
+      description: t(`dashboard.${user.role}.cards.activeProjects.subTitle`),
       total: data?.stats?.active_projects || 0,
       icon: <AiOutlineProject />,
     },
     {
       id: 1,
-      title: "Accepted proposals",
-      description: "Proposals that turned into negotiation",
+      title: t(`dashboard.${user.role}.cards.acceptedProposals.title`),
+      description: t(`dashboard.${user.role}.cards.acceptedProposals.subTitle`),
       total: data?.stats?.accepted_proposals || 0,
       icon: <VscGitPullRequestDone />,
     },
     {
       id: 3,
-      title: "Completed Contracts",
-      description: "Projects you've successfully delivered",
+      title: t(`dashboard.${user.role}.cards.completedContracts.title`),
+      description: t(
+        `dashboard.${user.role}.cards.completedContracts.subTitle`,
+      ),
       total: data?.stats?.completed_contracts || 0,
       icon: <AiOutlineDeliveredProcedure />,
     },
   ];
 
+  const welcome = `${t("dashboard.common.welcome")} ${user.first_name} ${user.last_name}`;
 
   return (
     <div className={styles.dashboard}>
       <div className={styles.dashboardHeader}>
         <Welcome
-          username={`${user.first_name} ${user.last_name}`}
-          min_description={"Discover projects that match your skills"}
+          welcome={welcome}
+          min_description={t(`dashboard.${user.role}.welcomeSubTitle`)}
         />
         {!profileCompletionState.is_profile_completed && (
           <CompleteProfileAlert role="freelancer" />

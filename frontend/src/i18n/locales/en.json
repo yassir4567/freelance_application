@@ -1,9 +1,55 @@
 {
-    "navbar" : {
-        "home" : "Home",
-        "postproject" : "Post Job",
-        "projects&proposals" : "Projects and proposals" ,
-        "contracts" : "Contracts" ,
-        "messages" : "Messages"
+  "navbar": {
+    "home": "Home",
+    "postproject": "Post Job",
+    "projects&proposals": "Projects and proposals",
+    "contracts": "Contracts",
+    "messages": "Messages",
+    "findProject": "Find project",
+    "proposals": "My Proposals"
+  },
+  "dashboard": {
+    "common": {
+      "overview": "Overview",
+      "welcome": "Welcome"
+    },
+    "client": {
+      "welcomeSubTitle": "Here's what's happening with your projects today",
+      "cards": {
+        "projects": {
+          "title": "Total Projects",
+          "subTitle": "All projects posted"
+        },
+        "proposals": {
+          "title": "Received Proposals",
+          "subTitle": "All proposals received"
+        },
+        "freelancerHired": {
+          "title": "Freelancers Hired",
+          "subTitle": "People you've worked with"
+        },
+        "activeContracts": {
+          "title": "Ongoing Contracts",
+          "subTitle": "Projects in progress"
+        }
+      }
+    },
+    "freelancer": {
+      "welcomeSubTitle": "Discover projects that match your skills",
+      "cards": {
+        "activeProjects": {
+          "title": "Active Projects",
+          "subTitle": "Track all your projects"
+        },
+        "acceptedProposals": {
+          "title": "Accepted Proposals",
+          "subTitle": "Proposals that turned into negotiation"
+        },
+        "completedContracts": {
+          "title": "Completed Contracts",
+          "subTitle": "Projects you've successfully delivered"
+        }
+      }
     }
+  }
 }

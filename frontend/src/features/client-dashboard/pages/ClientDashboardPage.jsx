@@ -12,8 +12,10 @@ import { useEffect, useState } from "react";
 import { getDashboardData } from "../../../api/dashboard/getDashboardData";
 import { useAuth } from "../../../context/AuthContext";
 import CompleteProfileAlert from "../../../shared/common/CompleteProfileAlert";
+import { useTranslation } from "react-i18next";
 
 function ClientDashboardPage() {
+  const {t} = useTranslation()
   const [data, setData] = useState([]);
   const { user, profileCompletionState } = useAuth();
 
@@ -29,48 +31,50 @@ function ClientDashboardPage() {
   const stats_cards = [
     {
       id: 0,
-      title: "Total Projects",
-      description: "All projects posted",
+      title: t(`dashboard.${user.role}.cards.projects.title`),
+      description: t(`dashboard.${user.role}.cards.projects.subTitle`),
       total: data.stats?.total_projects || 0,
       icon: <IoBagSharp />,
     },
     {
       id: 1,
-      title: "Received Proposals",
-      description: "Offers from freelancers",
+      title: t(`dashboard.${user.role}.cards.proposals.title`),
+      description: t(`dashboard.${user.role}.cards.proposals.subTitle`),
       total: data.stats?.received_proposals || 0,
       icon: <RiFolderReceivedFill />,
     },
     {
       id: 2,
-      title: "Freelancers Hired",
-      description: "People you've worked with",
+      title: t(`dashboard.${user.role}.cards.freelancerHired.title`),
+      description: t(`dashboard.${user.role}.cards.freelancerHired.subTitle`),
       total: data.stats?.freelancer_hired || 0,
       icon: <HiRectangleStack />,
     },
     {
       id: 3,
-      title: "Ongoing Contracts",
-      description: "Projects in progress",
+      title: t(`dashboard.${user.role}.cards.activeContracts.title`),
+      description: t(`dashboard.${user.role}.cards.activeContracts.subTitle`),
       total: data.stats?.ongoing_contracts || 0,
       icon: <RiContractFill />,
     },
   ];
+
+  const welcome = `${t("dashboard.common.welcome")} ${user.first_name} ${user.last_name}`;
 
   return (
     <div className={styles.dashboard}>
       <div>
         <div className={styles.dashboardHeader}>
           <Welcome
-            username={`${user.first_name} ${user.last_name}`}
-            min_description="Here's what happening with your projects today"
+            welcome={welcome}
+            min_description={t(`dashboard.${user.role}.welcomeSubTitle`)}
           />
           <div className={styles.post_project}>
             <NavLink
               to="/dashboard/client/postjob"
               className={styles.post_job_btn}
             >
-              <span>Post Job</span> <IoMdAdd />
+              <span>{t('navbar.postproject')}</span> <IoMdAdd />
             </NavLink>
           </div>
         </div>
@@ -79,7 +83,7 @@ function ClientDashboardPage() {
         )}
       </div>
       <div className={styles.overview}>
-        <h3 className={styles.overviewTitle}>Overview</h3>
+        <h3 className={styles.overviewTitle}>{t(`dashboard.common.overview`)}</h3>
         <div className={styles.statsCards}>
           {stats_cards.map((state) => (
             <SimpleCard
