@@ -6,8 +6,10 @@ import ProfileMenu from "../common/ProfileMenu";
 import { NavLink } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 import { SlWallet } from "react-icons/sl";
+import { useTranslation } from "react-i18next";
 
 function UserHeader({ links }) {
+  const { i18n } = useTranslation();
   const [showProfileMenu, setShowProfileMenu] = useState(false);
   const ref = useRef(null);
   const { user } = useAuth();
@@ -29,6 +31,14 @@ function UserHeader({ links }) {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
+
+  const handleChangeLang = (e) => {
+    const lang = e.target.value;
+    i18n.changeLanguage(lang);
+    localStorage.setItem("lang", lang);
+  };
+
+  const lang = localStorage.getItem('lang') || 'fr'
 
   const fullName = user.first_name + " " + user.last_name;
 
@@ -55,6 +65,17 @@ function UserHeader({ links }) {
         </ul>
       </nav>
       <div className={styles.header_right}>
+        <div className={styles.langBox}>
+          <select
+            className={styles.langSelect}
+            defaultValue={lang}
+            onChange={handleChangeLang}
+          >
+            <option value="en">EN</option>
+            <option value="fr">FR</option>
+          </select>
+        </div>
+
         <div
           onClick={() => setShowProfileMenu(!showProfileMenu)}
           className={styles.profile_icon}

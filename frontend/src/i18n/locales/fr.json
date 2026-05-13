@@ -1,0 +1,9 @@
+{
+    "navbar" : {
+        "home" : "Accueil",
+        "postproject" : "Publier projet",
+        "projects&proposals" : "Projets et propositions" ,
+        "contracts" : "Contrats" ,
+        "messages" : "Messages"
+    }
+}

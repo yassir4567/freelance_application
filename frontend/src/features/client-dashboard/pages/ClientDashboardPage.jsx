@@ -17,7 +17,6 @@ function ClientDashboardPage() {
   const [data, setData] = useState([]);
   const { user, profileCompletionState } = useAuth();
 
-  console.log(profileCompletionState);
 
   useEffect(() => {
     const loadStats = async () => {

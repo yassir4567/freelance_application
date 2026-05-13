@@ -58,6 +58,51 @@
   font-size: var(--fs-md);
 }
 
+.langBox {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.langBox::after {
+  content: "";
+  position: absolute;
+  right: 12px;
+  width: 7px;
+  height: 7px;
+  border-right: 2px solid var(--color-success);
+  border-bottom: 2px solid var(--color-success);
+  pointer-events: none;
+  transform: rotate(45deg) translateY(-2px);
+}
+
+.langSelect {
+  min-width: 76px;
+  height: 42px;
+  appearance: none;
+  cursor: pointer;
+  border: 1px solid rgba(46, 125, 50, 0.28);
+  border-radius: 22px;
+  background-color: var(--color-light);
+  color: var(--color-success-dark);
+  font-size: var(--fs-sm);
+  font-weight: 700;
+  padding: 0 34px 0 16px;
+  box-shadow: 2px 4px 8px #dadada;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s, background-color 0.2s;
+}
+
+.langSelect:hover {
+  border-color: var(--color-success);
+  background-color: #fff;
+}
+
+.langSelect:focus {
+  border-color: var(--color-success);
+  box-shadow: 0 0 0 3px rgba(46, 125, 50, 0.14), 2px 4px 8px #dadada;
+}
+
 .profile_icon {
   cursor: pointer;
   display: flex;
