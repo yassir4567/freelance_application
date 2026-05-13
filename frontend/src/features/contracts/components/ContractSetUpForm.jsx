@@ -80,7 +80,7 @@ function ContractSetUpForm({ nextStep, form, setForm }) {
       newErrors.description = "Description must be at least 100 character";
     }
 
-    if (form.contract_pdf === null) {
+    if (!form.contract_pdf) {
       newErrors.upload = "Contract file is required";
     }
 
