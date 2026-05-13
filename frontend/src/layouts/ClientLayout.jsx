@@ -1,33 +1,36 @@
 import UserHeader from "../shared/layout/UserHeader";
 import { Outlet } from "react-router-dom";
 import styles from "./ClientLayout.module.css";
+import { useTranslation } from "react-i18next";
 
 function ClientLayout() {
+  const { t } = useTranslation();
+
   const links = [
     {
-      label: "Home",
+      label: t("navbar.home"),
       to: "/dashboard/client",
     },
     {
-      label: "Post Job",
+      label: t("navbar.postproject"),
       to: "/dashboard/client/postjob",
     },
     {
-      label: "Projects and Proposals",
+      label: t("navbar.projects&proposals"),
       to: "/dashboard/client/projects",
     },
     {
-      label: "Contracts",
+      label: t("navbar.contracts"),
       to: "/dashboard/client/contracts",
     },
     {
-      label: "Messages",
+      label: t("navbar.messages"),
       to: "/dashboard/client/messages",
     },
   ];
   return (
     <div className={styles.container}>
-      <UserHeader links={links}/>
+      <UserHeader links={links} />
       <div className={styles.client_content}>
         <Outlet />
       </div>
