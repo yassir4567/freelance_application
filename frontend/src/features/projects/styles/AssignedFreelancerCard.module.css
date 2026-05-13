@@ -1,95 +1,208 @@
 .freelancerCard {
-  border: 2px solid var(--color-border);
-  padding: 25px 30px;
-  border-radius: 10px;
+  background-color: var(--color-light);
+  border: 1px solid var(--color-border);
+  box-shadow: var(--bx-shadow-2);
+  padding: 28px;
+  border-radius: 8px;
   display: flex;
   flex-direction: column;
+  gap: 24px;
 }
 
 .avatar {
-  width: 80px;
-  height: 80px;
+  width: 82px;
+  height: 82px;
+  display: block;
+  object-fit: cover;
+}
+
+.avatarWrap {
+  background-color: var(--color-success-bg);
+  border: 1px solid var(--color-border);
+  border-radius: 50%;
+  flex-shrink: 0;
+  overflow: hidden;
+  padding: 4px;
 }
 
 .freelancerCardHeader {
   display: flex;
   align-items: center;
-  gap: 30px;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.profileBlock {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+  min-width: 0;
 }
 
 .freelancerInfo {
   display: flex;
   flex-direction: column;
-  gap: 10px;
-  margin-top: 5px;
+  gap: 8px;
+  min-width: 0;
+}
+
+.assignedBadge {
+  align-items: center;
+  background-color: var(--color-success-bg);
+  border-radius: 20px;
+  color: var(--color-success);
+  display: flex;
+  font-size: var(--fs-xs);
+  font-weight: 700;
+  gap: 6px;
+  line-height: 1;
+  padding: 7px 12px;
+  text-transform: uppercase;
+  width: fit-content;
 }
 
 .freelancerFullName {
   font-size: var(--fs-xl);
-  font-weight: 400;
+  font-weight: 600;
+  color: var(--color-black);
+  line-height: 1.25;
 }
+
 .freelancerTitle {
-  font-size: var(--fs-xl);
-  font-weight: 450;
+  color: var(--color-text-muted);
+  font-size: var(--fs-base);
+  font-weight: 500;
 }
 
 .freelancerCardMain {
-  margin-top: 25px;
-  margin-left: 30px;
-  margin-bottom: 25px;
+  background-color: var(--color-bg-main);
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  padding: 20px;
 }
 
 .freelancerCategory {
-  font-size: var(--fs-lg);
-  margin-bottom: 15px;
+  align-items: center;
+  color: var(--color-black);
+  display: flex;
+  font-size: var(--fs-md);
+  font-weight: 600;
+  gap: 10px;
+  margin-bottom: 16px;
+  text-transform: capitalize;
+}
+
+.categoryIcon {
+  align-items: center;
+  background-color: var(--color-accent-bg);
+  border-radius: 8px;
+  color: var(--color-accent-x);
+  display: flex;
+  flex-shrink: 0;
+  font-size: var(--fs-md);
+  height: 34px;
+  justify-content: center;
+  width: 34px;
 }
 
 .freelancerSkills {
   display: flex;
+  flex-wrap: wrap;
   gap: 10px;
 }
 
 .freelancerSkill {
-  border: 1px solid var(--color-black);
-  min-width: 80px;
-  height: 30px;
-  padding-inline: 10px;
+  background-color: var(--color-white);
+  border: 1px solid var(--color-border);
+  color: var(--color-text-muted);
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: 0.2s ease-in-out;
+  border-radius: 20px;
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  min-height: 34px;
+  padding: 7px 14px;
+  text-transform: capitalize;
+  transition: 0.2s;
 }
 
 .freelancerSkill:hover {
-  background-color: var(--color-primary);
-  border-color: var(--color-danger);
-  color: white;
-  border-radius: 10px;
+  background-color: var(--color-secondary-light);
+  border-color: var(--color-secondary);
+  color: var(--color-success-dark);
+}
+
+.emptySkills {
+  color: var(--color-text-muted);
+  font-size: var(--fs-sm);
+  font-style: italic;
 }
 
 .freelancerCardActions {
   display: flex;
   gap: 10px;
-  align-self: flex-end;
-  margin-right: 20px;
+  flex-shrink: 0;
 }
 
 .freelancerCardActions button {
+  align-items: center;
   border: 1px solid var(--color-success);
+  border-radius: 8px;
   color: var(--color-success);
-  min-width: 150px;
-  height: 40px;
-  padding-inline: 15px;
-  font-size: var(--fs-base);
-  border-radius: 5px;
-  text-decoration: none;
-  transition: 0.3s;
+  display: flex;
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  gap: 8px;
+  justify-content: center;
+  min-height: 42px;
+  min-width: 142px;
+  padding: 0 15px;
+  text-transform: capitalize;
+  transition: 0.2s;
 }
 
-.freelancerCardActions button:hover {
-  color: var(--color-white);
+.freelancerCardActions button:first-child {
   background-color: var(--color-success);
-  border-radius: 10px;
+  color: var(--color-white);
+}
+
+.freelancerCardActions button:first-child:hover {
+  background-color: var(--color-success-dark);
+  border-color: var(--color-success-dark);
+}
+
+.freelancerCardActions button:last-child:hover {
+  background-color: var(--color-success);
+  color: var(--color-white);
+}
+
+@media (max-width: 860px) {
+  .freelancerCardHeader {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .freelancerCardActions {
+    width: 100%;
+  }
+
+  .freelancerCardActions button {
+    flex: 1;
+  }
+}
+
+@media (max-width: 560px) {
+  .freelancerCard {
+    padding: 20px;
+  }
+
+  .profileBlock {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .freelancerCardActions {
+    flex-direction: column;
+  }
 }
