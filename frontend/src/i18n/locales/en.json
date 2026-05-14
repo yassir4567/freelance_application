@@ -175,10 +175,26 @@
       "budget": "Budget",
       "createdAt": "Created at",
       "numberOfProposals": "Number of proposals",
-      "actions" : {
-        "viewDetails" : "View Details", 
-        "viewProposals" : "View Proposals" 
+      "actions": {
+        "viewDetails": "View Details",
+        "viewProposals": "View Proposals"
       }
     }
+  },
+
+  "clientProjectDetail": {
+    "actions": {
+      "viewDetails": "View Details",
+      "viewProposals": "View Proposals"
+    },
+    "overview": "Project overview",
+    "title": "Project Detail",
+    "budget": "Budget",
+    "published": "Published",
+    "proposals": "Proposals",
+    "description": "Description",
+    "experience": "Experience level",
+    "size": "Project size",
+    "duration": "Estimated duration"
   }
 }

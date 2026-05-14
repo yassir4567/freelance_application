@@ -180,5 +180,21 @@
         "viewProposals": "Voir les propositions"
       }
     }
+  },
+
+  "clientProjectDetail": {
+    "actions": {
+      "viewDetails": "Voir les détails",
+      "viewProposals": "Voir les propositions"
+    },
+    "overview": "Aperçu du projet",
+    "title": "Détails du projet",
+    "budget": "Budget",
+    "published": "Publié",
+    "proposals": "Propositions",
+    "description": "Description",
+    "experience": "Niveau d'expérience",
+    "size": "Taille du projet",
+    "duration": "Durée estimée"
   }
 }

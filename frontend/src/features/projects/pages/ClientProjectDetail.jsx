@@ -11,8 +11,10 @@ import {
   FiTrendingUp,
   FiUsers,
 } from "react-icons/fi";
+import { useTranslation } from "react-i18next";
 
 function ClientProjectDetail() {
+  const { t } = useTranslation();
   const { project } = useOutletContext();
   const status = project?.status?.toLowerCase() || "open";
   const formattedStatus = status.split("_").join(" ");
@@ -27,17 +29,17 @@ function ClientProjectDetail() {
 
   const projectStats = [
     {
-      label: "Budget",
+      label: t("clientProjectDetail.budget"),
       value: project?.budget != null ? `$${project.budget}` : "Not set",
       icon: <FiDollarSign />,
     },
     {
-      label: "Published",
+      label: t("clientProjectDetail.published"),
       value: publishedDate,
       icon: <FiCalendar />,
     },
     {
-      label: "Proposals",
+      label: t("clientProjectDetail.proposals"),
       value: project?.proposals_count ?? 0,
       icon: <FiUsers />,
     },
@@ -45,17 +47,17 @@ function ClientProjectDetail() {
 
   const projectDetails = [
     {
-      label: "Experience level",
+      label: t("clientProjectDetail.experience"),
       value: project?.experience_level || "Not specified",
       icon: <FiTrendingUp />,
     },
     {
-      label: "Project size",
+      label: t("clientProjectDetail.size"),
       value: project?.size || "Not specified",
       icon: <FiLayers />,
     },
     {
-      label: "Estimated duration",
+      label: t("clientProjectDetail.duration"),
       value: duration,
       icon: <FiClock />,
     },
@@ -66,8 +68,12 @@ function ClientProjectDetail() {
       <section className={styles.projectDetail}>
         <div className={styles.detailHeader}>
           <div>
-            <p className={styles.eyebrow}>Project overview</p>
-            <h2 className={styles.detailTitle}>Client project details</h2>
+            <p className={styles.eyebrow}>
+              {t("clientProjectDetail.overview")}
+            </p>
+            <h2 className={styles.detailTitle}>
+              {t("clientProjectDetail.title")}
+            </h2>
           </div>
           <span className={`${styles.statusBadge} ${styles[status] || ""}`}>
             {formattedStatus}
@@ -91,7 +97,9 @@ function ClientProjectDetail() {
             <span className={styles.sectionIcon}>
               <FiFileText />
             </span>
-            <h3>Description</h3>
+            <h3>
+              {t("clientProjectDetail.description")}
+            </h3>
           </div>
           <p className={styles.descriptionText}>
             {project?.description || "No description available yet."}
@@ -103,9 +111,7 @@ function ClientProjectDetail() {
             <div key={item.label} className={styles.projectDetailItem}>
               <span className={styles.detailIcon}>{item.icon}</span>
               <div>
-                <h4 className={styles.projectDetailItemTitle}>
-                  {item.label}
-                </h4>
+                <h4 className={styles.projectDetailItemTitle}>{item.label}</h4>
                 <p className={styles.projectDetailItemSubText}>{item.value}</p>
               </div>
             </div>

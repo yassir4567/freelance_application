@@ -44,7 +44,7 @@
   justify-content: space-between;
   gap: 8px;
   padding: 5px 10px;
-  border-radius: 5px; 
+  border-radius: 5px;
 }
 
 .wallet span {
@@ -70,7 +70,7 @@
   right: 12px;
   width: 7px;
   height: 7px;
-  border-right: 2px solid var(--color-success);
+  border-right:2px solid var(--color-success);
   border-bottom: 2px solid var(--color-success);
   pointer-events: none;
   transform: rotate(45deg) translateY(-2px);
@@ -88,19 +88,17 @@
   font-size: var(--fs-sm);
   font-weight: 700;
   padding: 0 34px 0 16px;
-  box-shadow: 2px 4px 8px #dadada;
   outline: none;
   transition: border-color 0.2s, box-shadow 0.2s, background-color 0.2s;
 }
 
 .langSelect:hover {
   border-color: var(--color-success);
-  background-color: #fff;
+  background-color: #f3f2f2;
 }
 
 .langSelect:focus {
   border-color: var(--color-success);
-  box-shadow: 0 0 0 3px rgba(46, 125, 50, 0.14), 2px 4px 8px #dadada;
 }
 
 .profile_icon {
@@ -131,8 +129,6 @@
   top: 60px;
   transition: .2s;
 }
-
-
 
 .active_link {
   color: var(--color-secondary) !important;
