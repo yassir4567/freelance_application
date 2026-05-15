@@ -209,5 +209,65 @@
         "reject": "Rejeter"
       }
     }
+  },
+
+  "browseProjects": {
+    "title": "Parcourir tous les projets",
+    "filters": {
+      "search": "Rechercher par titre de projet",
+      "actions": {
+        "applyFilters": "Appliquer les filtres",
+        "clearAll": "Tout effacer"
+      },
+      "category": "Sélectionner une catégorie",
+      "sort": {
+        "placeholder": "Trier par",
+        "recent": "Les plus récents",
+        "match": "Meilleures correspondances"
+      },
+      "price": {
+        "title": "Prix",
+        "options": {
+          "lessThan50": "Moins de 50 $",
+          "50to100": "50 $ à 100 $",
+          "100to200": "100 $ à 200 $",
+          "plus200": "Plus de 200 $"
+        }
+      },
+      "experience": {
+        "title": "Niveau d’expérience",
+        "options": {
+          "junior": "Junior",
+          "midLevel": "Intermédiaire",
+          "senior": "Senior"
+        }
+      },
+      "size": {
+        "title": "Taille du projet",
+        "options": {
+          "small": "Petit",
+          "medium": "Moyen",
+          "large": "Grand"
+        }
+      },
+      "proposals": {
+        "title": "Nombre de propositions",
+        "options": {
+          "lessThan5": "Moins de 5",
+          "5to15": "5 à 15",
+          "15to25": "15 à 25",
+          "25to50": "25 à 50",
+          "plus50": "Plus de 50"
+        }
+      }
+    },
+    "card": {
+      "posted": "Publié",
+      "viewDetail": "Voir le détail",
+      "price": "Prix",
+      "experience": "Niveau d’expérience",
+      "size": "Taille du projet",
+      "proposals": "Propositions"
+    }
   }
 }

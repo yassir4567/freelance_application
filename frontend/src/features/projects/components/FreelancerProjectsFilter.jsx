@@ -1,10 +1,15 @@
+import { useTranslation } from "react-i18next";
 import styles from "../styles/FreelancerProjectsFilter.module.css";
 
 function FreelancerProjectsFilter({ filters, onChange }) {
+  const { t } = useTranslation();
+
   return (
     <div className={styles.SideBarFilters}>
       <div className={styles.filterBox}>
-        <label className={styles.label}>Price</label>
+        <label className={styles.label}>
+          {t("browseProjects.filters.price.title")}
+        </label>
         <div className={styles.filterItems}>
           <div className={styles.filterItem}>
             <input
@@ -15,7 +20,9 @@ function FreelancerProjectsFilter({ filters, onChange }) {
               checked={filters.price === "0-50"}
               onChange={onChange}
             />
-            <label htmlFor="0-50">Less than $50</label>
+            <label htmlFor="0-50">
+              {t("browseProjects.filters.price.options.lessThan50")}
+            </label>
           </div>
           <div className={styles.filterItem}>
             <input
@@ -26,7 +33,9 @@ function FreelancerProjectsFilter({ filters, onChange }) {
               checked={filters.price === "50-100"}
               onChange={onChange}
             />
-            <label htmlFor="50-100">$50 to $100</label>
+            <label htmlFor="50-100">
+              {t("browseProjects.filters.price.options.50to100")}
+            </label>
           </div>
           <div className={styles.filterItem}>
             <input
@@ -37,7 +46,9 @@ function FreelancerProjectsFilter({ filters, onChange }) {
               checked={filters.price === "100-200"}
               onChange={onChange}
             />
-            <label htmlFor="100-200">$100 to $200</label>
+            <label htmlFor="100-200">
+              {t("browseProjects.filters.price.options.100to200")}
+            </label>
           </div>
           <div className={styles.filterItem}>
             <input
@@ -48,13 +59,17 @@ function FreelancerProjectsFilter({ filters, onChange }) {
               checked={filters.price === "200+"}
               onChange={onChange}
             />
-            <label htmlFor="200+">$200+</label>
+            <label htmlFor="200+">
+              {t("browseProjects.filters.price.options.plus200")}
+            </label>
           </div>
         </div>
       </div>
 
       <div className={styles.filterBox}>
-        <label className={styles.label}>Experience Level</label>
+        <label className={styles.label}>
+          {t("browseProjects.filters.experience.title")}
+        </label>
         <div className={styles.filterItems}>
           <div className={styles.filterItem}>
             <input
@@ -65,7 +80,9 @@ function FreelancerProjectsFilter({ filters, onChange }) {
               checked={filters.experience === "junior"}
               onChange={onChange}
             />
-            <label htmlFor="junior">Junior</label>
+            <label htmlFor="junior">
+              {t("browseProjects.filters.experience.options.junior")}
+            </label>
           </div>
           <div className={styles.filterItem}>
             <input
@@ -76,7 +93,9 @@ function FreelancerProjectsFilter({ filters, onChange }) {
               checked={filters.experience === "mid-level"}
               onChange={onChange}
             />
-            <label htmlFor="mid-level">Mid Level</label>
+            <label htmlFor="mid-level">
+              {t("browseProjects.filters.experience.options.midLevel")}
+            </label>
           </div>
           <div className={styles.filterItem}>
             <input
@@ -87,13 +106,17 @@ function FreelancerProjectsFilter({ filters, onChange }) {
               checked={filters.experience === "senior"}
               onChange={onChange}
             />
-            <label htmlFor="senior">Senior</label>
+            <label htmlFor="senior">
+              {t("browseProjects.filters.experience.options.senior")}
+            </label>
           </div>
         </div>
       </div>
 
       <div className={styles.filterBox}>
-        <label className={styles.label}>Project size</label>
+        <label className={styles.label}>
+          {t("browseProjects.filters.size.title")}
+        </label>
         <div className={styles.filterItems}>
           <div className={styles.filterItem}>
             <input
@@ -104,7 +127,9 @@ function FreelancerProjectsFilter({ filters, onChange }) {
               checked={filters.size === "small"}
               onChange={onChange}
             />
-            <label htmlFor="small">Small</label>
+            <label htmlFor="small">
+              {t("browseProjects.filters.size.options.small")}
+            </label>
           </div>
           <div className={styles.filterItem}>
             <input
@@ -115,7 +140,9 @@ function FreelancerProjectsFilter({ filters, onChange }) {
               checked={filters.size === "medium"}
               onChange={onChange}
             />
-            <label htmlFor="medium">Medium</label>
+            <label htmlFor="medium">
+              {t("browseProjects.filters.size.options.medium")}
+            </label>
           </div>
           <div className={styles.filterItem}>
             <input
@@ -126,13 +153,17 @@ function FreelancerProjectsFilter({ filters, onChange }) {
               checked={filters.size === "large"}
               onChange={onChange}
             />
-            <label htmlFor="large">Large</label>
+            <label htmlFor="large">
+              {t("browseProjects.filters.size.options.large")}
+            </label>
           </div>
         </div>
       </div>
 
       <div className={styles.filterBox}>
-        <label className={styles.label}>Number of proposals</label>
+        <label className={styles.label}>
+          {t("browseProjects.filters.proposals.title")}
+        </label>
         <div className={styles.filterItems}>
           <div className={styles.filterItem}>
             <input
@@ -143,7 +174,9 @@ function FreelancerProjectsFilter({ filters, onChange }) {
               checked={filters.nbr_proposals === "0-5"}
               onChange={onChange}
             />
-            <label htmlFor="0-5">Less than 5</label>
+            <label htmlFor="0-5">
+              {t("browseProjects.filters.proposals.options.lessThan5")}
+            </label>
           </div>
           <div className={styles.filterItem}>
             <input
@@ -154,7 +187,9 @@ function FreelancerProjectsFilter({ filters, onChange }) {
               checked={filters.nbr_proposals === "5-15"}
               onChange={onChange}
             />
-            <label htmlFor="5-15">5 to 15</label>
+            <label htmlFor="5-15">
+              {t("browseProjects.filters.proposals.options.5to15")}
+            </label>
           </div>
           <div className={styles.filterItem}>
             <input
@@ -165,7 +200,9 @@ function FreelancerProjectsFilter({ filters, onChange }) {
               checked={filters.nbr_proposals === "15-25"}
               onChange={onChange}
             />
-            <label htmlFor="15-25">15 to 25</label>
+            <label htmlFor="15-25">
+              {t("browseProjects.filters.proposals.options.15to25")}
+            </label>
           </div>
           <div className={styles.filterItem}>
             <input
@@ -176,7 +213,9 @@ function FreelancerProjectsFilter({ filters, onChange }) {
               checked={filters.nbr_proposals === "25-50"}
               onChange={onChange}
             />
-            <label htmlFor="25-50">25 to 50</label>
+            <label htmlFor="25-50">
+               {t("browseProjects.filters.proposals.options.25to50")}
+            </label>
           </div>
           <div className={styles.filterItem}>
             <input
@@ -187,7 +226,9 @@ function FreelancerProjectsFilter({ filters, onChange }) {
               checked={filters.nbr_proposals === "50+"}
               onChange={onChange}
             />
-            <label htmlFor="+50">+50</label>
+            <label htmlFor="+50">
+              {t("browseProjects.filters.proposals.options.plus50")}
+            </label>
           </div>
         </div>
       </div>

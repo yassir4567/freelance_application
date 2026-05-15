@@ -209,5 +209,65 @@
         "reject": "Rejected"
       }
     }
+  },
+
+  "browseProjects": {
+    "title": "Browse all projects",
+    "filters": {
+      "search": "Search by project title",
+      "actions": {
+        "applyFilters": "Apply filters",
+        "clearAll": "Clear All"
+      },
+      "category": "Select category",
+      "sort": {
+        "placeholder": "Sort by",
+        "recent": "Most Recent",
+        "match": "Best matches"
+      },
+      "price": {
+        "title": "Price",
+        "options": {
+          "lessThan50": "Less than $50",
+          "50to100": "$50 To $100",
+          "100to200": "$100 To $200",
+          "plus200": "Plus $200"
+        }
+      },
+      "experience": {
+        "title": "Experience Level",
+        "options": {
+          "junior": "Junior",
+          "midLevel": "Mid-Level",
+          "senior": "Senior"
+        }
+      },
+      "size": {
+        "title": "Project Size",
+        "options": {
+          "small": "Small",
+          "medium": "Medium",
+          "large": "Large"
+        }
+      },
+      "proposals": {
+        "title": "Number of proposals",
+        "options": {
+          "lessThan5": "Less than 5",
+          "5to15": "5 To 15",
+          "15to25": "15 To 25",
+          "25to50": "25 To 50",
+          "plus50": "Plus 50"
+        }
+      }
+    },
+    "card": {
+      "posted": "Posted",
+      "viewDetail": "View detail",
+      "price": "Price",
+      "experience": "Experience level",
+      "size": "Project size",
+      "proposals": "Proposals"
+    }
   }
 }

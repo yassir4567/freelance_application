@@ -8,8 +8,10 @@ import { getCategories } from "../../../api/categories/getCategories";
 import { getBrowseProjects } from "../../../api/projects/getBrowseProjects";
 import { emptyText } from "../../../utils/helpers";
 import { useSearchParams } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 function BrowseProjectsPage() {
+  const { t } = useTranslation();
   const [categories, setCategories] = useState([]);
   const [projects, setProjects] = useState([]);
   const [searchParams, setSearchParams] = useSearchParams();
@@ -138,16 +140,18 @@ function BrowseProjectsPage() {
 
   return (
     <div className={styles.findProjectPage}>
-      <h1 className="pageTitle">Browse all projects</h1>
+      <h1 className="pageTitle">
+        {t("browseProjects.title")}
+      </h1>
       <div className={styles.searchBox}>
         <div className={styles.search}>
           <Search value={filters.search} onChange={handleInputsChange} />
         </div>
         <button className={styles.clearAll} onClick={handleApplyFilters}>
-          Apply filters
+          {t("browseProjects.filters.actions.applyFilters")}
         </button>
         <button className={styles.clearAll} onClick={handleClearAllFilters}>
-          Clear all
+          {t("browseProjects.filters.actions.clearAll")}
         </button>
       </div>
 
