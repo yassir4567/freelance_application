@@ -269,5 +269,16 @@
       "size": "Project size",
       "proposals": "Proposals"
     }
+  },
+
+  "freelancerProposals" : {
+    "title" : "My Proposals" , 
+    "subTitle" : "Track and manage your proposals" ,
+    "total" : "Total Proposals",
+    "card" : {
+      "price" : "Price" , 
+      "delivery" : "Delivery" , 
+      "sent" : "Sent"
+    }
   }
 }

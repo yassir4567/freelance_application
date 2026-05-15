@@ -269,5 +269,15 @@
       "size": "Taille du projet",
       "proposals": "Propositions"
     }
+  },
+  "freelancerProposals": {
+    "title": "Mes propositions",
+    "subTitle": "Suivez et gérez vos propositions",
+    "total": "Total des propositions",
+    "card": {
+      "price": "Prix",
+      "delivery": "Livraison",
+      "sent": "Envoyée"
+    }
   }
 }

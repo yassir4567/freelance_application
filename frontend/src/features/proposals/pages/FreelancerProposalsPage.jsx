@@ -3,7 +3,9 @@ import styles from "../styles/FreelancerProposalsPage.module.css";
 import { getFreelancerProposals } from "../../../api/proposals/getFreelancerProposals";
 import { useSearchParams } from "react-router-dom";
 import FreelancerProposalCard from "../components/FreelancerProposalCard";
+import { useTranslation } from "react-i18next";
 function FreelancerProposalsPage() {
+  const { t } = useTranslation();
   const [proposals, setProposals] = useState([]);
   const [searchParams, setSearchParams] = useSearchParams("");
   const [isLoading, setIsLoading] = useState(false);
@@ -34,16 +36,16 @@ function FreelancerProposalsPage() {
   return (
     <div className={styles.proposalsPage}>
       <div>
-        <h1 className="pageTitle">My proposals</h1>
+        <h1 className="pageTitle">{t("freelancerProposals.title")}</h1>
         <p className={styles.pageDescription}>
-          Track and manage your proposals
+          {t("freelancerProposals.subTitle")}
         </p>
       </div>
 
       <div className={styles.filterBtnsContainer}>
         <p className={styles.totalProposals}>
           <span>
-            Total {selectedStatus !== "all" && selectedStatus} proposals :
+            {t("freelancerProposals.total")} : 
           </span>
           {!isLoading && <span>{proposals.length}</span>}
         </p>

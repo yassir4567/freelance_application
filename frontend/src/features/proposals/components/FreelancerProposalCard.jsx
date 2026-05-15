@@ -1,8 +1,11 @@
+import { useTranslation } from "react-i18next";
 import { formatDate, getRelativeTime } from "../../../utils/helpers";
 import styles from "../styles/FreelancerProposalCard.module.css";
 import { NavLink } from "react-router-dom";
 
 function FreelancerProposalCard({ proposal }) {
+  const { t } = useTranslation();
+
   const proposalStatus = {
     pending: "status-accent",
     accepted: "status-success",
@@ -39,17 +42,23 @@ function FreelancerProposalCard({ proposal }) {
         <div className={styles.infosBox}>
           <div className={styles.infosBoxWrapper}>
             <div className={styles.infoItem}>
-              <p className={styles.label}>Price</p>
+              <p className={styles.label}>
+                {t("freelancerProposals.card.price")}
+              </p>
               <p className={styles.value}>${proposal.price}</p>
             </div>
 
             <div className={styles.infoItem}>
-              <p className={styles.label}>Delivery</p>
+              <p className={styles.label}>
+                {t("freelancerProposals.card.delivery")}
+              </p>
               <p className={styles.value}>{proposal.delivery_time}</p>
             </div>
 
             <div className={styles.infoItem}>
-              <p className={styles.label}>Sent</p>
+              <p className={styles.label}>
+                {t("freelancerProposals.card.sent")}
+              </p>
               <p className={styles.value}>
                 {getRelativeTime(proposal.created_at)}
               </p>
