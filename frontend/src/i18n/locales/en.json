@@ -196,5 +196,18 @@
     "experience": "Experience level",
     "size": "Project size",
     "duration": "Estimated duration"
+  },
+
+  "clientProposals": {
+    "allprojects": "All projects",
+    "card": {
+      "bid": "Bid",
+      "delivery": "Delivery",
+      "status": "Status",
+      "actions": {
+        "accept": "Accept",
+        "reject": "Rejected"
+      }
+    }
   }
 }

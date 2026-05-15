@@ -3,11 +3,13 @@ import styles from "../styles/ClientProposalCard.module.css";
 import { IoStarSharp } from "react-icons/io5";
 import profile from "../../../assets/images/profile.png";
 import { formatDate } from "../../../utils/helpers";
+import { useTranslation } from "react-i18next";
 function ClientProposalCard({
   proposal,
   acceptFreelancerProposal,
   rejectFreelancerProposal,
 }) {
+  const { t } = useTranslation();
   const freelancer = proposal?.freelancer;
 
   const statusClass = {
@@ -15,8 +17,6 @@ function ClientProposalCard({
     accepted: styles.accepted,
     rejected: styles.rejected,
   };
-
-  
 
   return (
     <div className={styles.proposalCard}>
@@ -43,18 +43,18 @@ function ClientProposalCard({
         <p className={styles.proposalCoverLetter}>"{proposal.cover_letter}"</p>
         <div className={styles.proposalSubCardsContainer}>
           <div className={`${styles.proposalBid} ${styles.proposalSubCard}`}>
-            <span>Bid</span> <span>${proposal.price}</span>
+            <span>{t("clientProposals.card.bid")}</span> <span>${proposal.price}</span>
           </div>
           <div
             className={`${styles.proposalDelivery} ${styles.proposalSubCard}`}
           >
-            <span>Delivery </span>
+            <span>{t("clientProposals.card.delivery")} </span>
             <span>{proposal.delivery_time}</span>
           </div>
           <div
             className={`${styles.proposalStatus} ${styles.proposalSubCard} `}
           >
-            <span>Status</span>
+            <span>{t("clientProposals.card.status")}</span>
             <span
               className={`${styles.status} ${statusClass[proposal.status]}`}
             >
@@ -72,20 +72,23 @@ function ClientProposalCard({
                 className={`${styles.actionBtn} ${styles.accept}`}
                 onClick={() => acceptFreelancerProposal(proposal.id)}
               >
-                accept
+                {t("clientProposals.card.actions.accept")}
               </button>
               <button
                 className={`${styles.actionBtn} ${styles.reject}`}
                 onClick={() => rejectFreelancerProposal(proposal.id)}
               >
-                reject
+                {t("clientProposals.card.actions.reject")}
               </button>
             </>
           )}
         </div>
         <div className={styles.secondaryActions}>
           {proposal.status === "accepted" && (
-            <NavLink to={`/dashboard/client/messages?chat=${proposal.contract?.conversation.id}`} className={`${styles.link} ${styles.message}`}>
+            <NavLink
+              to={`/dashboard/client/messages?chat=${proposal.contract?.conversation.id}`}
+              className={`${styles.link} ${styles.message}`}
+            >
               message
             </NavLink>
           )}

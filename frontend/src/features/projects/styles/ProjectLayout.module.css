@@ -31,7 +31,8 @@
   text-decoration: none;
   color: var(--color-black);
   border: 1px solid var(--color-success);
-  width: 180px;
+  min-width: 180px;
+  padding-inline: 20px;
   height: 40px;
   display: flex;
   align-items: center;

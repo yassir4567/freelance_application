@@ -8,8 +8,10 @@ import {
 import styles from "../styles/ProjectLayout.module.css";
 import { getClientProjectDetail } from "../../../api/projects/getClientProjectDetail";
 import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 
 function ProjectLayout() {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const { projectId } = useParams();
   const [project, setProject] = useState();
@@ -40,7 +42,7 @@ function ProjectLayout() {
             }
             end
           >
-            View project detail
+            {t("clientProjectDetail.actions.viewDetails")}
           </NavLink>
           <NavLink
             to={`proposals`}
@@ -49,7 +51,7 @@ function ProjectLayout() {
             }
             end
           >
-            view proposals
+            {t("clientProjectDetail.actions.viewProposals")}
           </NavLink>
           <NavLink
             to={`/dashboard/client/projects`}
