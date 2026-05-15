@@ -271,6 +271,34 @@
     }
   },
 
+  "browseProjectDetail": {
+    "description": "Description",
+    "price": "Prix",
+    "experience": "Expérience",
+    "duration": "Durée",
+    "size": "Taille du projet",
+    "lessThanOneMonth": "Moins d’un mois",
+    "oneToThreeMonths": "1 à 3 mois",
+    "threeToSixMonths": "3 à 6 mois",
+    "moreThanSixMonths": "Plus de 6 mois",
+    "junior": "Junior",
+    "midLevel": "Niveau intermédiaire",
+    "senior": "Senior",
+    "small": "Petit",
+    "medium": "Moyen",
+    "large": "Grand",
+    "requiredSkills": "Compétences requises",
+    "aboutClient": "À propos du client",
+    "fullName": "Nom complet",
+    "postedProjects": "Projets publiés",
+    "memberSince": "Membre depuis",
+    "alreadySent": "Proposition déjà envoyée",
+    "actions": {
+      "sendProposal": "Envoyer une proposition",
+      "viewProposals": "Voir les propositions"
+    }
+  },
+
   "freelancerProposals": {
     "title": "Mes propositions",
     "subTitle": "Suivez et gérez vos propositions",

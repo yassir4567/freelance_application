@@ -10,8 +10,10 @@ import { useEffect, useState } from "react";
 import { getBrowseProjectDetail } from "../../../api/projects/getBrowseProjectDetail";
 import { formatDate } from "../../../utils/helpers";
 import SendProposalModal from "../../proposals/components/SendProposalModal";
+import { useTranslation } from "react-i18next";
 
 function BrowseProjectDetail() {
+  const { t } = useTranslation();
   const { projectId } = useParams();
   const [project, setData] = useState({});
   const [showSendProposalModal, setShowSendProposalModal] = useState(false);
@@ -53,7 +55,9 @@ function BrowseProjectDetail() {
         <div className={styles.devider}></div>
 
         <div className={styles.summary}>
-          <h5 className={styles.sectionTitle}>Description</h5>
+          <h5 className={styles.sectionTitle}>
+            {t("browseProjectDetail.description")}
+          </h5>
           <p className={styles.description}>{project.project?.description}</p>
 
           <div className={styles.devider}></div>
@@ -62,7 +66,7 @@ function BrowseProjectDetail() {
             <div className={styles.info}>
               <h5 className={styles.infoTitle}>
                 <IoPricetagsOutline className={styles.icon} />
-                <span>Price</span>
+                <span>{t("browseProjectDetail.price")}</span>
               </h5>
               <p className={styles.infoP}>{project.project?.budget}$</p>
             </div>
@@ -70,7 +74,7 @@ function BrowseProjectDetail() {
             <div className={styles.info}>
               <h5 className={styles.infoTitle}>
                 <IoMdTime className={styles.icon} />
-                <span>Duration</span>
+                <span>{t("browseProjectDetail.duration")}</span>
               </h5>
               <p className={styles.infoP}>
                 {project.project?.duration.split("_").join(" ")}
@@ -80,15 +84,17 @@ function BrowseProjectDetail() {
             <div className={styles.info}>
               <h5 className={styles.infoTitle}>
                 <SiLevelsdotfyi className={styles.icon} />
-                <span>Experience</span>
+                <span>{t("browseProjectDetail.experience")}</span>
               </h5>
-              <p className={styles.infoP}>{project.project?.experience_level}</p>
+              <p className={styles.infoP}>
+                {project.project?.experience_level}
+              </p>
             </div>
 
             <div className={styles.info}>
               <h5 className={styles.infoTitle}>
                 <SlSizeFullscreen className={styles.icon} />
-                <span>Project size</span>
+                <span>{t("browseProjectDetail.size")}</span>
               </h5>
               <p className={styles.infoP}>{project.project?.size}</p>
             </div>
@@ -97,7 +103,9 @@ function BrowseProjectDetail() {
           <div className={styles.devider}></div>
 
           <div>
-            <h5 className={styles.sectionTitle}>Required skills</h5>
+            <h5 className={styles.sectionTitle}>
+              {t("browseProjectDetail.requiredSkills")}
+            </h5>
             <div className={styles.skills}>
               {project.project?.skills.map((skill) => (
                 <div key={skill.id} className={styles.skill}>
@@ -113,27 +121,41 @@ function BrowseProjectDetail() {
         <div className={styles.actions}>
           {project.isProposalSent ? (
             <div className={styles.proposalAlreadySent}>
-              <p>Proposal already sent </p>
-              <NavLink className={styles.viewProposalsLink} to="/dashboard/freelancer/my-proposals">view proposals</NavLink>
+              <p>{t("browseProjectDetail.alreadySent")} </p>
+              <NavLink
+                className={styles.viewProposalsLink}
+                to="/dashboard/freelancer/my-proposals"
+              >
+                {t("browseProjectDetail.actions.viewProposals")}
+              </NavLink>
             </div>
           ) : (
             <NavLink
               className={styles.actionLink}
               onClick={() => setShowSendProposalModal(true)}
             >
-              Send proposal
+              {t("browseProjectDetail.actions.sendProposal")}
             </NavLink>
           )}
         </div>
 
         <div className={styles.clientInfos}>
-          <h4 className={styles.clientInfosTitle}>About the client</h4>
+          <h4 className={styles.clientInfosTitle}>
+            {t("browseProjectDetail.aboutClient")}
+          </h4>
           <div className={styles.infos}>
             <p>
-              Full name : {client?.first_name} {client?.last_name}
+              {t("browseProjectDetail.fullName")} : {client?.first_name}{" "}
+              {client?.last_name}
             </p>
-            <p>{project.client_projects_count} posted projects</p>
-            <p>Member since {formatDate(client?.created_at)}</p>
+            <p>
+              {project.client_projects_count}{" "}
+              {t("browseProjectDetail.postedProjects")}
+            </p>
+            <p>
+              {t("browseProjectDetail.memberSince")}{" "}
+              {formatDate(client?.created_at)}
+            </p>
           </div>
         </div>
       </div>

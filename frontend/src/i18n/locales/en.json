@@ -271,6 +271,34 @@
     }
   },
 
+  "browseProjectDetail": {
+    "description": "Description",
+    "price": "Price",
+    "experience": "Experience",
+    "duration": "Duration",
+    "size": "Project size",
+    "lessThanOneMonth": "Less than 1 Month",
+    "oneToThreeMonths": "1 to 3 Months",
+    "threeToSixMonths": "3 to 6 Months",
+    "moreThanSixMonths": "More than 6 Months",
+    "junior": "Junior",
+    "midLevel": "Mid Level",
+    "senior": "Senior",
+    "small": "Small",
+    "medium": "Medium",
+    "large": "Large",
+    "requiredSkills": "Required Skills",
+    "aboutClient": "About the client",
+    "fullName": "Full Name",
+    "postedProjects": "Posted Projects",
+    "memberSince": "Member since",
+    "alreadySent": "Proposal Already Sent",
+    "actions": {
+      "sendProposal": "Send proposal",
+      "viewProposals": "View Proposals"
+    }
+  },
+
   "freelancerProposals": {
     "title": "My Proposals",
     "subTitle": "Track and manage your proposals",
