@@ -6,8 +6,10 @@ import { useSearchParams } from "react-router-dom";
 import FilterBox from "../../../shared/common/filters/FilterBox";
 import { getClientContractStats } from "../../../api/contracts/getClientContractStats";
 import { getClientContracts } from "../../../api/contracts/getClientContracts";
+import { useTranslation } from "react-i18next";
 
 function ClientContractsPage() {
+  const { t } = useTranslation();
   const [contracts, setContracts] = useState([]);
   const [contractStats, setContractStats] = useState([]);
   const [filterParams, setFilterParams] = useSearchParams();
@@ -56,27 +58,27 @@ function ClientContractsPage() {
   const overviewCards = [
     {
       id: 0,
-      title: "Completed Contracts",
+      title: t("clientContracts.stats.completed.title"),
       total: contractStats?.completed_contracts_count || "__",
-      subTitle: "all time",
+      subTitle: t("clientContracts.stats.completed.subTitle"),
     },
     {
       id: 2,
-      title: "Active Contracts",
+      title: t("clientContracts.stats.active.title"),
       total: contractStats?.active_contracts_count || "__",
-      subTitle: "Currently running",
+      subTitle: t("clientContracts.stats.active.subTitle"),
     },
     {
       id: 1,
-      title: "Total Spending",
+      title: t("clientContracts.stats.spending.title"),
       total: `$${contractStats?.total_spent?.toFixed(3)}` || "__",
-      subTitle: "across all contracts",
+      subTitle: t("clientContracts.stats.spending.subTitle"),
     },
     {
       id: 3,
-      title: "In Escrow",
+      title: t("clientContracts.stats.escrow.title"),
       total: `$${contractStats?.total_in_escrow?.toFixed(3)}` || "__",
-      subTitle: "Funds awaiting release",
+      subTitle: t("clientContracts.stats.escrow.subTitle"),
     },
   ];
 
@@ -93,15 +95,16 @@ function ClientContractsPage() {
   return (
     <div className={styles.contractsPage}>
       <div className={styles.pageHeader}>
-        <h1 className="pageTitle">My Contracts</h1>
+        <h1 className="pageTitle">{t("clientContracts.title")}</h1>
         <p className={styles.contractsPageSubTitle}>
-          Track negotiations, active work, and completed agreements in one
-          place.
+          {t("clientContracts.subTitle")}
         </p>
       </div>
 
       <div className={styles.overviewSection}>
-        <h2 className={styles.overviewTitle}>Overview</h2>
+        <h2 className={styles.overviewTitle}>
+          {t("clientContracts.overview")}
+        </h2>
         <div className={styles.contractsOverview}>
           {overviewCards.map((ov) => (
             <SimpleCard
@@ -124,7 +127,9 @@ function ClientContractsPage() {
 
       <div className={styles.contractsListSection}>
         <div className={styles.contractsListHeader}>
-          <h3 className={styles.contractsListTitle}>Contracts List</h3>
+          <h3 className={styles.contractsListTitle}>
+            {t("clientContracts.cardsTitle")}
+          </h3>
         </div>
 
         <div className={styles.contractsList}>

@@ -270,6 +270,7 @@
       "proposals": "Propositions"
     }
   },
+
   "freelancerProposals": {
     "title": "Mes propositions",
     "subTitle": "Suivez et gérez vos propositions",
@@ -278,6 +279,43 @@
       "price": "Prix",
       "delivery": "Livraison",
       "sent": "Envoyée"
+    }
+  },
+
+  "clientContracts": {
+    "title": "Mes contrats",
+    "subTitle": "Suivez les négociations, les travaux en cours et les accords terminés en un seul endroit.",
+    "overview": "Aperçu",
+    "stats": {
+      "completed": {
+        "title": "Contrats terminés",
+        "subTitle": "Depuis le début"
+      },
+      "active": {
+        "title": "Contrats actifs",
+        "subTitle": "En cours actuellement"
+      },
+      "spending": {
+        "title": "Dépenses totales",
+        "subTitle": "Sur tous les contrats"
+      },
+      "escrow": {
+        "title": "En séquestre",
+        "subTitle": "Fonds en attente de libération"
+      }
+    },
+    "cardsTitle": "Liste des contrats",
+    "card": {
+      "actions": {
+        "viewDetails": "Voir les détails",
+        "viewDeliverables": "Voir les livrables"
+      },
+      "budget": "Budget",
+      "progress": "Progression",
+      "deliverable": {
+        "current": "Livrable actuel",
+        "deadline": "Date limite du livrable"
+      }
     }
   }
 }

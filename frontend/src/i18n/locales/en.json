@@ -271,14 +271,51 @@
     }
   },
 
-  "freelancerProposals" : {
-    "title" : "My Proposals" , 
-    "subTitle" : "Track and manage your proposals" ,
-    "total" : "Total Proposals",
-    "card" : {
-      "price" : "Price" , 
-      "delivery" : "Delivery" , 
-      "sent" : "Sent"
+  "freelancerProposals": {
+    "title": "My Proposals",
+    "subTitle": "Track and manage your proposals",
+    "total": "Total Proposals",
+    "card": {
+      "price": "Price",
+      "delivery": "Delivery",
+      "sent": "Sent"
+    }
+  },
+
+  "clientContracts": {
+    "title": "My Contracts",
+    "subTitle": "Track negotiations, active work, and completed agreements in one place.",
+    "overview": "Overview",
+    "stats": {
+      "completed": {
+        "title": "Completed Contracts",
+        "subTitle": "All time"
+      },
+      "active": {
+        "title": "Active Contracts",
+        "subTitle": "Currently running"
+      },
+      "spending": {
+        "title": "Total Spending",
+        "subTitle": "Across all contracts"
+      },
+      "escrow": {
+        "title": "In escrow",
+        "subTitle": "Funds awaiting release"
+      }
+    },
+    "cardsTitle": "Contracts List",
+    "card": {
+      "actions": {
+        "viewDetails": "View Details",
+        "viewDeliverables": "View Deliverables"
+      },
+      "budget": "Budget",
+      "progress": "Progress",
+      "deliverable": {
+        "current": "Current Deliverable",
+        "deadline": "Deliverable deadline"
+      }
     }
   }
 }

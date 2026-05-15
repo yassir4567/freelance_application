@@ -10,8 +10,10 @@ import {
   getStatusClass,
   valueOrFallback,
 } from "../utils/contractDisplay";
+import { useTranslation } from "react-i18next";
 
 function ContractCard({ contract }) {
+  const { t } = useTranslation();
   const {
     user: { role },
   } = useAuth();
@@ -58,13 +60,17 @@ function ContractCard({ contract }) {
           <div className={styles.contractMainContent}>
             <div className={styles.contractSubCardContainer}>
               <div className={styles.contractSubCard}>
-                <h5 className={styles.contractSubCardTitle}>Budget</h5>
+                <h5 className={styles.contractSubCardTitle}>
+                  {t("clientContracts.card.budget")}
+                </h5>
                 <div className={styles.contractSubCardContent}>
                   {formatCurrency(contract.final_price, "Not set")}
                 </div>
               </div>
               <div className={styles.contractSubCard}>
-                <h5 className={styles.contractSubCardTitle}>Progress</h5>
+                <h5 className={styles.contractSubCardTitle}>
+                  {t("clientContracts.card.progress")}
+                </h5>
                 <div
                   className={`${styles.contractSubCardContent} ${styles.progress}`}
                 >
@@ -77,11 +83,11 @@ function ContractCard({ contract }) {
             {contract.status === "active" && (
               <div className={styles.contractInfos}>
                 <div className={styles.contractInfoItem}>
-                  <p>Current deliverable</p>
+                  <p>{t("clientContracts.card.deliverable.current")}</p>
                   <p>{valueOrFallback(contract.current_deliverable?.title)}</p>
                 </div>
                 <div className={styles.contractInfoItem}>
-                  <p>Deliverable deadline</p>
+                  <p> {t("clientContracts.card.deliverable.deadline")}</p>
                   <p>
                     {formatDisplayDate(contract.current_deliverable?.deadline)}
                   </p>
@@ -99,17 +105,20 @@ function ContractCard({ contract }) {
               to={`${contract.id}`}
               className={`${styles.primaryBtn} ${styles.navlink}`}
             >
-              View details
+              {t("clientContracts.card.actions.viewDetails")}
             </NavLink>
             <NavLink
               to={`${contract.id}?tab=deliverables`}
               className={styles.navlink}
             >
-              View deliverables
+              {t("clientContracts.card.actions.viewDeliverables")}
             </NavLink>
           </>
         ) : (
-          <NavLink to={`/dashboard/client/contracts/${contract.id}/setup`} className={styles.navlink}>
+          <NavLink
+            to={`/dashboard/client/contracts/${contract.id}/setup`}
+            className={styles.navlink}
+          >
             Active contract
           </NavLink>
         )}
