@@ -16,10 +16,12 @@ import {
   formatDisplayDate,
 } from "../utils/contractDisplay";
 import profile from "../../../assets/images/profile.png";
+import { useTranslation } from "react-i18next";
 
 const VALID_TABS = ["overview", "deliverables", "payments"];
 
 function ContractDetail() {
+  const { t } = useTranslation();
   const { contractId } = useParams();
   const [searchParams, setSearchParams] = useSearchParams();
   const [contract, setContract] = useState(null);
@@ -119,15 +121,15 @@ function ContractDetail() {
 
   const tabs = useMemo(
     () => [
-      { id: "overview", label: "Overview" },
+      { id: "overview", label: t("contractDetail.tabs.overview") },
       {
         id: "deliverables",
-        label: "Deliverables",
+        label: t("contractDetail.tabs.deliverables"),
         count: deliverables.length,
       },
       {
         id: "payments",
-        label: "Payments",
+        label: t("contractDetail.tabs.payments"),
         count: paymentSummary.payments.length,
       },
     ],
@@ -198,8 +200,6 @@ function ContractDetail() {
       paidAmount: paymentSummary.paidAmount,
     };
   }, [contract, completedDeliverables, deliverables.length, paymentSummary]);
-
-
 
   if (isLoading) {
     return (

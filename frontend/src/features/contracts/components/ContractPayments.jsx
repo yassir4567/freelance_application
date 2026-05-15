@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import SimpleCard from "../../../shared/ui/SimpleCard";
 import styles from "../styles/ContractPayments.module.css";
 import {
@@ -9,30 +10,31 @@ import {
 } from "../utils/contractDisplay";
 
 function ContractPayments({ deliverables, paymentSummary }) {
+  const { t } = useTranslation();
   const safeDeliverables = deliverables ?? [];
 
   const paymentsCards = [
     {
       id: 1,
-      title: "Total",
+      title: t("contractDetail.payments.stats.total"),
       value: formatCurrency(paymentSummary?.totalAmount),
       className: styles.paymentCard,
     },
     {
       id: 2,
-      title: "Paid out",
+      title: t("contractDetail.payments.stats.out"),
       value: formatCurrency(paymentSummary?.paidAmount),
       className: `${styles.paymentCard} ${styles.paidOutCard}`,
     },
     {
       id: 3,
-      title: "Escrow",
+      title: t("contractDetail.payments.stats.escrow"),
       value: formatCurrency(paymentSummary?.escrowAmount),
       className: `${styles.paymentCard} ${styles.escrowCard}`,
     },
     {
       id: 4,
-      title: "Pending",
+      title: t("contractDetail.payments.stats.pending"),
       value: formatCurrency(paymentSummary?.pendingAmount),
       className: `${styles.paymentCard} ${styles.remainingCard}`,
     },
@@ -41,12 +43,12 @@ function ContractPayments({ deliverables, paymentSummary }) {
   return (
     <div className={styles.paymentsSection}>
       <div className={styles.sectionHeader}>
-        <p className={styles.kicker}>Escrow</p>
-        <h2 className={styles.subTitle}>Payment status</h2>
-        <p>
-          See what is funded, what has been released, and which deliverables are
-          still waiting on escrow.
-        </p>
+        <p className={styles.kicker}>{t("contractDetail.payments.subTitle")}</p>
+        <h2 className={styles.subTitle}>
+          {t("contractDetail.payments.title")}
+        </h2>
+
+        <p>{t("contractDetail.payments.description")}</p>
       </div>
 
       <div className={styles.paymentsGrid}>
@@ -70,7 +72,8 @@ function ContractPayments({ deliverables, paymentSummary }) {
                 <div key={deliverable.id} className={styles.paymentItem}>
                   <div className={styles.paymentItemLeft}>
                     <h5 className={styles.paymentItemSubTitle}>
-                      Deliverable #{deliverable.position ?? deliverable.id}
+                      {t("contractDetail.payments.card.subTitle")} #
+                      {deliverable.position ?? deliverable.id}
                     </h5>
                     <h1 className={styles.paymentItemTitle}>
                       {valueOrFallback(

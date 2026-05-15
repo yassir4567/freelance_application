@@ -12,6 +12,7 @@ import {
   valueOrFallback,
 } from "../utils/contractDisplay";
 import FundDeliverableModal from "./modals/FundDeliverableModal";
+import { useTranslation } from "react-i18next";
 
 function DeliverableCard({
   deliverable,
@@ -20,6 +21,7 @@ function DeliverableCard({
   contract,
   setContract,
 }) {
+  const { t } = useTranslation();
   const [isDetailModalOpen, setIsDetailModalOpen] = useState(false);
   const [isFundModalOpen, setIsFundModalOpen] = useState(false);
   const { user } = useAuth();
@@ -47,7 +49,7 @@ function DeliverableCard({
       <div className={styles.deliverableCard}>
         <div className={styles.deliverableHeader}>
           <h5 className={styles.deliverableNumber}>
-            Deliverable <span>#{deliverable.position ?? deliverable.id}</span>
+            {t("contractDetail.deliverables.card.subTitle")} <span>#{deliverable.position ?? deliverable.id}</span>
           </h5>
           <p
             className={`${styles.deliverableStatus} ${getStatusClass(
@@ -85,7 +87,7 @@ function DeliverableCard({
                 className={styles.fundBtn}
                 onClick={() => setIsFundModalOpen(true)}
               >
-                Fund
+                {t("contractDetail.deliverables.card.fund")}
               </button>
             )}
             <button
@@ -93,7 +95,7 @@ function DeliverableCard({
               className={styles.viewDetail}
               onClick={() => setIsDetailModalOpen(true)}
             >
-              View Details
+              {t("contractDetail.deliverables.card.viewDetail")}
             </button>
           </div>
         </div>

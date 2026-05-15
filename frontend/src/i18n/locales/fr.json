@@ -321,5 +321,124 @@
         "deadline": "Date limite du livrable"
       }
     }
+  },
+
+  "contractDetail": {
+    "header": {
+      "back": "Retour aux contrats",
+      "subTitle": "Espace de travail du contrat",
+      "description": "Consultez l’accord, suivez les livrables et gardez le statut du séquestre visible sans avoir à chercher dans la page.",
+      "total": "Budget total",
+      "progress": {
+        "deliverables": "Livrables",
+        "complete": "Terminés"
+      }
+    },
+    "party": {
+      "desc": "sur ce contrat"
+    },
+    "infos": {
+      "created": "Créé",
+      "deadline": "Date limite finale",
+      "currentDeliverableDeadline": "Date limite du livrable actuel"
+    },
+    "tabs": {
+      "overview": "Aperçu",
+      "deliverables": "Livrables",
+      "payments": "Paiements"
+    },
+    "overview": {
+      "subTitle": "Aperçu",
+      "title": "Résumé du contrat",
+      "description": {
+        "subTitle": "Accord",
+        "title": "Description"
+      },
+      "progress": {
+        "subTitle": "Progression du paiement"
+      },
+      "cards": {
+        "budget": "Budget",
+        "deadline": "Date limite finale",
+        "deliverablesApproved": "Livrables approuvés"
+      },
+      "contractFile": {
+        "subTitle": "Document",
+        "title": "Fichier du contrat",
+        "description": "Le document du contrat signé est disponible.",
+        "view": "Voir le document"
+      }
+    },
+
+    "deliverables": {
+      "subTitle": "Livrables",
+      "title": "Livrables du projet",
+      "description": "Suivez chaque étape, de l’état d’attente jusqu’à la soumission, la révision et l’approbation.",
+      "stats": {
+        "total": "Total des livrables",
+        "completed": "Terminés",
+        "inReview": "En révision",
+        "waiting": "En attente"
+      },
+      "card": {
+        "subTitle": "Livrable",
+        "viewDetail": "Voir les détails",
+        "fund": "Fonds"
+      }
+    },
+
+    "payments": {
+      "subTitle": "Paiements",
+      "title": "Paiements",
+      "description": "Consultez ce qui est financé, ce qui a été libéré et les livrables qui sont encore en attente de séquestre.",
+      "stats": {
+        "total": "Total",
+        "out": "Versé",
+        "escrow": "Séquestre",
+        "pending": "En attente"
+      },
+      "card": {
+        "subTitle": "Livrable"
+      }
+    },
+
+    "deliverableDetail": {
+      "cards": {
+        "amount": "Montant",
+        "deadline": "Date limite",
+        "unlockedAt": "Débloqué le",
+        "submittedAt": "Soumis le",
+        "acceptedAt": "Accepté le"
+      },
+      "submission": {
+        "title": "Liens de soumission",
+        "link": "Lien",
+        "note": "Note de soumission"
+      },
+      "actions": {
+        "submit": "Soumettre le livrable",
+        "reSubmit": "Soumettre à nouveau le livrable",
+        "accept": "Accepter",
+        "revision": "Demande de révision"
+      },
+      "form": {
+        "title": "Formulaire de soumission",
+        "description": "Tous les anciens liens seront remplacés",
+        "note": {
+          "label": "Note de soumission",
+          "placeholder": "Saisissez une note de soumission",
+          "error": "Note requise"
+        },
+        "links": {
+          "label": "Lien",
+          "requiredError": "Saisissez au moins un lien",
+          "addLinkError": "Remplissez d’abord le lien précédent"
+        },
+        "actions": {
+          "submit": "Soumettre",
+          "addLink": "Ajouter un lien"
+        }
+      }
+    }
   }
 }

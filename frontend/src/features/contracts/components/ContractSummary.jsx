@@ -1,40 +1,47 @@
+import { useTranslation } from "react-i18next";
 import styles from "../styles/ContractSummary.module.css";
 import {
   formatCurrency,
   formatDisplayDate,
   valueOrFallback,
 } from "../utils/contractDisplay";
-import { FiCalendar, FiCheckCircle, FiDollarSign, FiFileText } from "react-icons/fi";
+import {
+  FiCalendar,
+  FiCheckCircle,
+  FiDollarSign,
+  FiFileText,
+} from "react-icons/fi";
 
 function ContractSummary({ summary }) {
+  const { t } = useTranslation();
   const cards = [
     {
       id: "budget",
-      label: "Budget",
+      label: t("contractDetail.overview.cards.budget"),
       value: formatCurrency(summary?.budget, "Not set"),
       icon: <FiDollarSign />,
     },
     {
       id: "deadline",
-      label: "Final deadline",
+      label: t("contractDetail.overview.cards.deadline"),
       value: formatDisplayDate(summary?.deadline),
       icon: <FiCalendar />,
     },
     {
       id: "deliverables",
-      label: "Deliverables approved",
+      label: t("contractDetail.overview.cards.deliverablesApproved"),
       value: `${summary?.completed_deliverables ?? 0}/${summary?.total_deliverables ?? 0}`,
       icon: <FiCheckCircle />,
     },
   ];
 
-  
-
   return (
     <div className={styles.contractSummary}>
       <div className={styles.sectionHeader}>
-        <p className={styles.kicker}>Overview</p>
-        <h2 className={styles.subTitle}>Contract summary</h2>
+        <p className={styles.kicker}>{t("contractDetail.overview.subTitle")}</p>
+        <h2 className={styles.subTitle}>
+          {t("contractDetail.overview.title")}
+        </h2>
       </div>
 
       <div className={styles.summaryGrid}>
@@ -44,8 +51,10 @@ function ContractSummary({ summary }) {
               <FiFileText />
             </div>
             <div>
-              <p className={styles.cardKicker}>Agreement</p>
-              <h3>Description</h3>
+              <p className={styles.cardKicker}>
+                {t("contractDetail.overview.description.subTitle")}
+              </p>
+              <h3>{t("contractDetail.overview.description.title")}</h3>
             </div>
           </div>
           <p className={styles.summaryItemContent}>
@@ -57,7 +66,9 @@ function ContractSummary({ summary }) {
         </section>
 
         <section className={styles.progressCard}>
-          <p className={styles.cardKicker}>Payment progress</p>
+          <p className={styles.cardKicker}>
+            {t("contractDetail.overview.progress.subTitle")}
+          </p>
           <div className={styles.progressValue}>
             {summary?.paymentProgress ?? 0}%
           </div>
@@ -86,18 +97,20 @@ function ContractSummary({ summary }) {
 
       <div className={styles.documentCard}>
         <div>
-          <p className={styles.cardKicker}>Document</p>
-          <h3>Contract file</h3>
+          <p className={styles.cardKicker}>
+            {t("contractDetail.overview.contractFile.subTitle")}
+          </p>
+          <h3>{t("contractDetail.overview.contractFile.title")}</h3>
           <p>
             {summary?.contract_pdf
-              ? "The signed contract document is available."
+              ? t("contractDetail.overview.contractFile.description")
               : "No contract file has been attached yet."}
           </p>
         </div>
 
         {summary?.contract_pdf ? (
           <a href={summary.contract_pdf_url} target="_blank" rel="noreferrer">
-            View document
+            {t("contractDetail.overview.contractFile.view")}
           </a>
         ) : (
           <span className={styles.documentUnavailable}>Unavailable</span>

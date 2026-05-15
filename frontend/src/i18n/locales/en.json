@@ -321,5 +321,124 @@
         "deadline": "Deliverable deadline"
       }
     }
+  },
+
+  "contractDetail": {
+    "header": {
+      "back": "Back to contracts",
+      "subTitle": "contract workspace",
+      "description": "Review the agreement, track deliverables, and keep escrow status visible without hunting through the page.",
+      "total": "Total Budget",
+      "progress": {
+        "deliverables": "Deliverables",
+        "complete": "Complete"
+      }
+    },
+    "party": {
+      "desc": "on this contract"
+    },
+    "infos": {
+      "created": "Created",
+      "deadline": "final deadline",
+      "currentDeliverableDeadline": "Current deliverable deadline"
+    },
+    "tabs": {
+      "overview": "Overview",
+      "deliverables": "Deliverables",
+      "payments": "Payments"
+    },
+    "overview": {
+      "subTitle": "Overview",
+      "title": "Contract summary",
+      "description": {
+        "subTitle": "Agreement",
+        "title": "Description"
+      },
+      "progress": {
+        "subTitle": "Payment progress"
+      },
+      "cards": {
+        "budget": "Budget",
+        "deadline": "Final deadline",
+        "deliverablesApproved": "Deliverables approved"
+      },
+      "contractFile": {
+        "subTitle": "document",
+        "title": "Contract file",
+        "description": "The signed contract document is available.",
+        "view": "view document"
+      }
+    },
+
+    "deliverables": {
+      "subTitle": "deliverables",
+      "title": "Project deliverables",
+      "description": "Follow each milestone from waiting state through submission, review, and approval.",
+      "stats": {
+        "total": "Total Deliverables",
+        "completed": "Completed",
+        "inReview": "In Review",
+        "waiting": "Waiting"
+      },
+      "card": {
+        "subTitle": "Deliverable",
+        "viewDetail": "View detail",
+        "fund": "Fund"
+      }
+    },
+
+    "payments": {
+      "subTitle": "payments",
+      "title": "Payments",
+      "description": "See what is funded, what has been released, and which deliverables are still waiting on escrow.",
+      "stats": {
+        "total": "Total",
+        "out": "Paid out",
+        "escrow": "Escrow",
+        "pending": "Pending"
+      },
+      "card": {
+        "subTitle": "Deliverable"
+      }
+    },
+
+    "deliverableDetail": {
+      "cards": {
+        "amount": "Amount",
+        "deadline": "Deadline",
+        "unlockedAt": "Unlocked At",
+        "submittedAt": "Submitted At",
+        "acceptedAt": "Accepted At"
+      },
+      "submission": {
+        "title": "Submission links",
+        "link": "Link",
+        "note": "Submission Note"
+      },
+      "actions": {
+        "submit": "Submit deliverable",
+        "reSubmit": "Resubmit deliverable",
+        "accept": "Accept",
+        "revision": "Revision Request"
+      },
+      "form": {
+        "title": "Submission Form",
+        "description": "All old links will be replaced",
+        "note": {
+          "label": "Submission Note",
+          "placeholder": "Enter submission note",
+          "error": "Note Required"
+        },
+        "links": {
+          "label": "Link",
+          "requiredError": "Enter at least one link",
+          "addLinkError": "Fill the previous one first"
+        },
+        "actions": {
+          "submit": "Submit",
+          "addLink": "Add Link"
+        }
+      }
+    }
   }
 }

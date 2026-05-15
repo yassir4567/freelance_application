@@ -152,6 +152,7 @@
 .documentCard a,
 .documentUnavailable {
   min-width: 132px;
+  padding-inline: 25px;
   min-height: 42px;
   border-radius: 14px;
   display: inline-flex;
@@ -159,6 +160,7 @@
   justify-content: center;
   font-size: var(--fs-sm);
   font-weight: 700;
+  text-transform: capitalize;
 }
 
 .documentCard a {

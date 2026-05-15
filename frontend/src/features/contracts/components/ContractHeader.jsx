@@ -6,8 +6,10 @@ import {
   formatStatusLabel,
   getStatusClass,
 } from "../utils/contractDisplay";
+import { useTranslation } from "react-i18next";
 
 function ContractHeader({ statusClass, headerContent, role }) {
+  const { t } = useTranslation();
   const title = headerContent.projectTitle || "Untitled contract";
   const totalDeliverables = headerContent.totalDeliverables || 0;
   const completedDeliverables = headerContent.completedDeliverables || 0;
@@ -16,9 +18,12 @@ function ContractHeader({ statusClass, headerContent, role }) {
     <div className={styles.contractDetailHeader}>
       <div className={styles.heroGlow}></div>
       <div className={styles.headerTop}>
-        <NavLink to={`/dashboard/${role}/contracts`} className={styles.backLink}>
+        <NavLink
+          to={`/dashboard/${role}/contracts`}
+          className={styles.backLink}
+        >
           <FiArrowLeft />
-          <span>Back to contracts</span>
+          <span>{t("contractDetail.header.back")}</span>
         </NavLink>
 
         <div
@@ -30,11 +35,12 @@ function ContractHeader({ statusClass, headerContent, role }) {
 
       <div className={styles.headerContent}>
         <div className={styles.headerLeft}>
-          <p className={styles.eyebrow}>Contract workspace</p>
+          <p className={styles.eyebrow}>
+            {t("contractDetail.header.subTitle")}
+          </p>
           <h1 className={styles.headerTitle}>{title}</h1>
           <p className={styles.headerSubtitle}>
-            Review the agreement, track deliverables, and keep escrow status
-            visible without hunting through the page.
+            {t("contractDetail.header.description")}
           </p>
         </div>
 
@@ -46,7 +52,7 @@ function ContractHeader({ statusClass, headerContent, role }) {
 
           <div className={styles.progressCard}>
             <div className={styles.progressTop}>
-              <span>Deliverables</span>
+              <span>{t("contractDetail.header.progress.deliverables")}</span>
               <strong>
                 {completedDeliverables}/{totalDeliverables}
               </strong>
@@ -57,7 +63,10 @@ function ContractHeader({ statusClass, headerContent, role }) {
                 style={{ width: `${headerContent.progress || 0}%` }}
               ></div>
             </div>
-            <p>{headerContent.progress || 0}% complete</p>
+            <p>
+              {headerContent.progress || 0}%{" "}
+              {t("contractDetail.header.progress.complete")}
+            </p>
           </div>
         </div>
       </div>

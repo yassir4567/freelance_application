@@ -3,6 +3,7 @@ import styles from "../styles/SubmitDeliverableForm.module.css";
 import { FaPlus } from "react-icons/fa6";
 import { submitDeliverable } from "../../../api/deliverables/submitDeliverable";
 import { getFreelancerContractDetail } from "../../../api/contracts/getFreelancerContractDetail";
+import { useTranslation } from "react-i18next";
 
 function SubmitDeliverableForm({
   setContract,
@@ -10,6 +11,7 @@ function SubmitDeliverableForm({
   contractId,
   onClose,
 }) {
+  const { t } = useTranslation();
   const [note, setNote] = useState("");
   const [links, setLinks] = useState([""]);
   const [errors, setErrors] = useState({
@@ -20,7 +22,10 @@ function SubmitDeliverableForm({
   const handleAddLink = () => {
     const hasEmpty = links.some((link) => link.trim() === "");
     if (hasEmpty) {
-      setErrors((prev) => ({ ...prev, links: "Fill the previous one first" }));
+      setErrors((prev) => ({
+        ...prev,
+        links: t("contractDetail.deliverableDetail.form.links.addLinkError"),
+      }));
     } else {
       setLinks([...links, ""]);
       setErrors((prev) => ({ ...prev, links: "" }));
@@ -40,12 +45,14 @@ function SubmitDeliverableForm({
     let newErrors = {};
 
     if (!note.trim()) {
-      newErrors.note = "Note required";
+      newErrors.note = t("contractDetail.deliverableDetail.form.note.error");
     }
     const safeLinks = links.filter((link) => link.trim() !== "");
 
     if (safeLinks.length === 0) {
-      newErrors.links = "Enter at least one link";
+      newErrors.links = t(
+        "contractDetail.deliverableDetail.form.links.requiredError",
+      );
     }
 
     if (Object.keys(newErrors).length > 0) {
@@ -75,23 +82,31 @@ function SubmitDeliverableForm({
 
   return (
     <form action="" onSubmit={handleSubmit} className={styles.form}>
-      <h1 className={styles.formTitle}>Submit Deliverable Form</h1>
+      <h1 className={styles.formTitle}>
+        {t("contractDetail.deliverableDetail.form.title")}
+      </h1>
       <p className={styles.clarificationInfo}>
-        <span>All old links will be replaced</span>
+        <span>{t("contractDetail.deliverableDetail.form.description")}</span>
       </p>
 
       <div className={styles.submissionNoteBox}>
-        <label className={styles.label}>Submission note </label>
+        <label className={styles.label}>
+          {t("contractDetail.deliverableDetail.form.note.label")}
+        </label>
         <textarea
           value={note}
           onChange={(e) => setNote(e.target.value)}
-          placeholder="Enter Submission note"
+          placeholder={t(
+            "contractDetail.deliverableDetail.form.note.placeholder",
+          )}
           minLength={10}
         ></textarea>
         {errors.note && <p className={styles.error}>{errors.note}</p>}
       </div>
       <div className={styles.inputBox}>
-        <label className={styles.label}>Links </label>
+        <label className={styles.label}>
+          {t("contractDetail.deliverableDetail.form.links.label")}
+        </label>
         {links.map((link, index) => (
           <input
             key={index}
@@ -108,12 +123,14 @@ function SubmitDeliverableForm({
       <div className={styles.actions}>
         <div>
           <button type="submit" className={styles.submitBtn}>
-            Submit
+            {t("contractDetail.deliverableDetail.form.actions.submit")}
           </button>
         </div>
         <div className={styles.addLinkBtn} onClick={handleAddLink}>
           <FaPlus />
-          <span>Add link</span>
+          <span>
+             {t("contractDetail.deliverableDetail.form.actions.addLink")}
+          </span>
         </div>
       </div>
     </form>

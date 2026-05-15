@@ -111,6 +111,7 @@
 .viewDetail,
 .fundBtn {
   min-width: 132px;
+  padding-inline: 15px;
   height: 42px;
   border-radius: 14px;
   font-size: var(--fs-sm);

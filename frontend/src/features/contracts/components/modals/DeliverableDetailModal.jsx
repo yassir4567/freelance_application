@@ -12,6 +12,7 @@ import {
   getStatusClass,
   valueOrFallback,
 } from "../../utils/contractDisplay";
+import { useTranslation } from "react-i18next";
 
 function DeliverableDetailModal({
   deliverable,
@@ -23,6 +24,7 @@ function DeliverableDetailModal({
   contract,
   setContract,
 }) {
+  const { t } = useTranslation();
   const [openSubmitForm, setOpenSubmitForm] = useState(false);
   const [isAccepting, setIsAccepting] = useState(false);
   const [acceptError, setAcceptError] = useState("");
@@ -87,7 +89,7 @@ function DeliverableDetailModal({
     setIsAccepting(false);
     onClose();
   };
-  
+
   const handleRequestRevision = async () => {
     setRevisionError("");
     setIsRequestingRevision(true);
@@ -125,7 +127,9 @@ function DeliverableDetailModal({
             disabled={isAccepting}
             className={`${styles.deliverableBtn} ${styles.accept}`}
           >
-            {isAccepting ? "Accepting..." : "Accept"}
+            {isAccepting
+              ? "Accepting..."
+              : t("contractDetail.deliverableDetail.actions.accept")}
           </button>
           <button
             type="button"
@@ -133,7 +137,9 @@ function DeliverableDetailModal({
             disabled={isAccepting || isRequestingRevision}
             className={`${styles.deliverableBtn} ${styles.request_revision}`}
           >
-            {isRequestingRevision ? "Sending..." : "Request Revision"}
+            {isRequestingRevision
+              ? "Sending..."
+              : t("contractDetail.deliverableDetail.actions.revision")}
           </button>
         </Fragment>
       );
@@ -146,7 +152,7 @@ function DeliverableDetailModal({
             onClick={showDeliverableForm}
             className={`${styles.deliverableBtn} ${styles.submit}`}
           >
-            Submit deliverable
+            {t("contractDetail.deliverableDetail.actions.submit")}
           </button>
         </Fragment>
       );
@@ -157,7 +163,7 @@ function DeliverableDetailModal({
             onClick={showDeliverableForm}
             className={`${styles.deliverableBtn} ${styles.submit}`}
           >
-            Resubmit deliverable
+            {t("contractDetail.deliverableDetail.actions.reSubmit")}
           </button>
         </Fragment>
       );
@@ -182,7 +188,8 @@ function DeliverableDetailModal({
         <div className={styles.deliverableHeader}>
           <div className={styles.headerRight}>
             <p className={styles.deliverableNumber}>
-              Deliverable #{deliverable.position ?? deliverable.id}
+              {t("contractDetail.deliverables.subTitle")} #
+              {deliverable.position ?? deliverable.id}
             </p>
             <h3 className={styles.title}>
               {valueOrFallback(deliverable.title, "Untitled deliverable")}
@@ -217,39 +224,50 @@ function DeliverableDetailModal({
 
         <div className={styles.contentGrid}>
           <p className={styles.contentItem}>
-            <span>Amount</span>
+            <span>{t("contractDetail.deliverableDetail.cards.amount")}</span>
             <span>{formatCurrency(deliverable.amount)}</span>
           </p>
 
           <p className={styles.contentItem}>
-            <span>Deadline</span>
+            <span>{t("contractDetail.deliverableDetail.cards.deadline")}</span>
             <span>{formatDisplayDate(deliverable.deadline)}</span>
           </p>
 
           <p className={styles.contentItem}>
-            <span>Unlocked at</span>
+            <span>
+              {t("contractDetail.deliverableDetail.cards.unlockedAt")}
+            </span>
             <span>{formatDisplayDate(deliverable.unlocked_at)}</span>
           </p>
 
           <p className={styles.contentItem}>
-            <span>Submitted at</span>
+            <span>
+              {t("contractDetail.deliverableDetail.cards.submittedAt")}
+            </span>
             <span>{formatDisplayDate(deliverable.submitted_at)}</span>
           </p>
 
           <p className={styles.contentItem}>
-            <span>Accepted at</span>
+            <span>
+              {t("contractDetail.deliverableDetail.cards.acceptedAt")}
+            </span>
             <span>{formatDisplayDate(deliverable.accepted_at)}</span>
           </p>
         </div>
 
         {hasSubmissionContent && (
           <div className={styles.submissionContentSection}>
-            <h4 className={styles.submissionContentTitle}>Submission Links</h4>
+            <h4 className={styles.submissionContentTitle}>
+              {t("contractDetail.deliverableDetail.submission.title")}
+            </h4>
             {deliverable.deliverable_links?.length ? (
               <div className={styles.links}>
                 {deliverable.deliverable_links.map((link, index) => (
                   <div key={index} className={styles.linkItem}>
-                    <span>Link {index + 1}:</span>
+                    <span>
+                      {t("contractDetail.deliverableDetail.submission.link")}{" "}
+                      {index + 1}:
+                    </span>
                     <a href={link} target="_blank" rel="noreferrer">
                       {link}
                     </a>
@@ -264,7 +282,9 @@ function DeliverableDetailModal({
 
         {hasSubmissionContent && (
           <div className={styles.submissionContentSection}>
-            <h4 className={styles.submissionContentTitle}>Submission Note</h4>
+            <h4 className={styles.submissionContentTitle}>
+              {t("contractDetail.deliverableDetail.submission.note")}
+            </h4>
             <p className={styles.submissionNote}>
               {deliverable.submission_note || "No submission note provided."}
             </p>
