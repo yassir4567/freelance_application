@@ -8,7 +8,7 @@ function FreelancerProjectsFilter({ filters, onChange }) {
     <div className={styles.SideBarFilters}>
       <div className={styles.filterBox}>
         <label className={styles.label}>
-          {t("browseProjects.filters.price.title")}
+          {t("common.labels.price")}
         </label>
         <div className={styles.filterItems}>
           <div className={styles.filterItem}>
@@ -68,7 +68,7 @@ function FreelancerProjectsFilter({ filters, onChange }) {
 
       <div className={styles.filterBox}>
         <label className={styles.label}>
-          {t("browseProjects.filters.experience.title")}
+          {t("common.labels.experienceLevel")}
         </label>
         <div className={styles.filterItems}>
           <div className={styles.filterItem}>
@@ -81,7 +81,7 @@ function FreelancerProjectsFilter({ filters, onChange }) {
               onChange={onChange}
             />
             <label htmlFor="junior">
-              {t("browseProjects.filters.experience.options.junior")}
+              {t("common.options.experience.junior")}
             </label>
           </div>
           <div className={styles.filterItem}>
@@ -94,7 +94,7 @@ function FreelancerProjectsFilter({ filters, onChange }) {
               onChange={onChange}
             />
             <label htmlFor="mid-level">
-              {t("browseProjects.filters.experience.options.midLevel")}
+              {t("common.options.experience.midLevel")}
             </label>
           </div>
           <div className={styles.filterItem}>
@@ -107,7 +107,7 @@ function FreelancerProjectsFilter({ filters, onChange }) {
               onChange={onChange}
             />
             <label htmlFor="senior">
-              {t("browseProjects.filters.experience.options.senior")}
+              {t("common.options.experience.senior")}
             </label>
           </div>
         </div>
@@ -115,7 +115,7 @@ function FreelancerProjectsFilter({ filters, onChange }) {
 
       <div className={styles.filterBox}>
         <label className={styles.label}>
-          {t("browseProjects.filters.size.title")}
+          {t("common.labels.projectSize")}
         </label>
         <div className={styles.filterItems}>
           <div className={styles.filterItem}>
@@ -128,7 +128,7 @@ function FreelancerProjectsFilter({ filters, onChange }) {
               onChange={onChange}
             />
             <label htmlFor="small">
-              {t("browseProjects.filters.size.options.small")}
+              {t("common.options.size.small")}
             </label>
           </div>
           <div className={styles.filterItem}>
@@ -141,7 +141,7 @@ function FreelancerProjectsFilter({ filters, onChange }) {
               onChange={onChange}
             />
             <label htmlFor="medium">
-              {t("browseProjects.filters.size.options.medium")}
+              {t("common.options.size.medium")}
             </label>
           </div>
           <div className={styles.filterItem}>
@@ -154,7 +154,7 @@ function FreelancerProjectsFilter({ filters, onChange }) {
               onChange={onChange}
             />
             <label htmlFor="large">
-              {t("browseProjects.filters.size.options.large")}
+              {t("common.options.size.large")}
             </label>
           </div>
         </div>
@@ -162,7 +162,7 @@ function FreelancerProjectsFilter({ filters, onChange }) {
 
       <div className={styles.filterBox}>
         <label className={styles.label}>
-          {t("browseProjects.filters.proposals.title")}
+          {t("common.labels.numberOfProposals")}
         </label>
         <div className={styles.filterItems}>
           <div className={styles.filterItem}>

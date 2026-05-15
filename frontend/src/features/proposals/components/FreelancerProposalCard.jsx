@@ -43,21 +43,21 @@ function FreelancerProposalCard({ proposal }) {
           <div className={styles.infosBoxWrapper}>
             <div className={styles.infoItem}>
               <p className={styles.label}>
-                {t("freelancerProposals.card.price")}
+                {t("common.labels.price")}
               </p>
               <p className={styles.value}>${proposal.price}</p>
             </div>
 
             <div className={styles.infoItem}>
               <p className={styles.label}>
-                {t("freelancerProposals.card.delivery")}
+                {t("common.labels.delivery")}
               </p>
               <p className={styles.value}>{proposal.delivery_time}</p>
             </div>
 
             <div className={styles.infoItem}>
               <p className={styles.label}>
-                {t("freelancerProposals.card.sent")}
+                {t("common.labels.sent")}
               </p>
               <p className={styles.value}>
                 {getRelativeTime(proposal.created_at)}

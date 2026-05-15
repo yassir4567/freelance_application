@@ -17,13 +17,13 @@ function ContractSummary({ summary }) {
   const cards = [
     {
       id: "budget",
-      label: t("contractDetail.overview.cards.budget"),
+      label: t("common.labels.budget"),
       value: formatCurrency(summary?.budget, "Not set"),
       icon: <FiDollarSign />,
     },
     {
       id: "deadline",
-      label: t("contractDetail.overview.cards.deadline"),
+      label: t("common.labels.finalDeadline"),
       value: formatDisplayDate(summary?.deadline),
       icon: <FiCalendar />,
     },
@@ -38,7 +38,7 @@ function ContractSummary({ summary }) {
   return (
     <div className={styles.contractSummary}>
       <div className={styles.sectionHeader}>
-        <p className={styles.kicker}>{t("contractDetail.overview.subTitle")}</p>
+        <p className={styles.kicker}>{t("common.labels.overview")}</p>
         <h2 className={styles.subTitle}>
           {t("contractDetail.overview.title")}
         </h2>
@@ -54,7 +54,7 @@ function ContractSummary({ summary }) {
               <p className={styles.cardKicker}>
                 {t("contractDetail.overview.description.subTitle")}
               </p>
-              <h3>{t("contractDetail.overview.description.title")}</h3>
+              <h3>{t("common.labels.description")}</h3>
             </div>
           </div>
           <p className={styles.summaryItemContent}>
@@ -67,7 +67,7 @@ function ContractSummary({ summary }) {
 
         <section className={styles.progressCard}>
           <p className={styles.cardKicker}>
-            {t("contractDetail.overview.progress.subTitle")}
+            {t("common.labels.paymentProgress")}
           </p>
           <div className={styles.progressValue}>
             {summary?.paymentProgress ?? 0}%
@@ -98,9 +98,9 @@ function ContractSummary({ summary }) {
       <div className={styles.documentCard}>
         <div>
           <p className={styles.cardKicker}>
-            {t("contractDetail.overview.contractFile.subTitle")}
+            {t("common.labels.document")}
           </p>
-          <h3>{t("contractDetail.overview.contractFile.title")}</h3>
+          <h3>{t("common.labels.contractFile")}</h3>
           <p>
             {summary?.contract_pdf
               ? t("contractDetail.overview.contractFile.description")
@@ -110,7 +110,7 @@ function ContractSummary({ summary }) {
 
         {summary?.contract_pdf ? (
           <a href={summary.contract_pdf_url} target="_blank" rel="noreferrer">
-            {t("contractDetail.overview.contractFile.view")}
+            {t("common.actions.viewDocument")}
           </a>
         ) : (
           <span className={styles.documentUnavailable}>Unavailable</span>

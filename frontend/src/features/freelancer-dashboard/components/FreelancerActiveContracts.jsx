@@ -11,11 +11,11 @@ function FreelancerActiveContracts({ contracts }) {
     <table className={styles.table}>
       <thead>
         <tr className={styles.headerRow}>
-          <th>{t("dashboard.freelancer.table.thead.name")}</th>
-          <th>{t("dashboard.freelancer.table.thead.client")}</th>
-          <th>{t("dashboard.freelancer.table.thead.budget")}</th>
-          <th>{t("dashboard.freelancer.table.thead.deadline")}</th>
-          <th>{t("dashboard.freelancer.table.thead.actions")}</th>
+          <th>{t("common.labels.project")}</th>
+          <th>{t("common.labels.client")}</th>
+          <th>{t("common.labels.budget")}</th>
+          <th>{t("common.labels.deadline")}</th>
+          <th>{t("common.labels.actions")}</th>
         </tr>
       </thead>
       <tbody>

@@ -121,15 +121,15 @@ function ContractDetail() {
 
   const tabs = useMemo(
     () => [
-      { id: "overview", label: t("contractDetail.tabs.overview") },
+      { id: "overview", label: t("common.labels.overview") },
       {
         id: "deliverables",
-        label: t("contractDetail.tabs.deliverables"),
+        label: t("common.labels.deliverables"),
         count: deliverables.length,
       },
       {
         id: "payments",
-        label: t("contractDetail.tabs.payments"),
+        label: t("common.labels.payments"),
         count: paymentSummary.payments.length,
       },
     ],

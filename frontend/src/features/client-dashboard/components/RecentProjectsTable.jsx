@@ -18,13 +18,13 @@ function RecentProjectsTable({ projects }) {
     <table className={styles.table}>
       <thead>
         <tr>
-          <th>{t("dashboard.client.table.thead.title")}</th>
-          <th>{t("dashboard.client.table.thead.status")}</th>
+          <th>{t("common.labels.title")}</th>
+          <th>{t("common.labels.status")}</th>
           <th className={styles.numberProposalTr}>
-            {t("dashboard.client.table.thead.nbrProposals")}
+            {t("common.labels.numberOfProposals")}
           </th>
           <th>{t("dashboard.client.table.thead.time")}</th>
-          <th>{t("dashboard.client.table.thead.actions")}</th>
+          <th>{t("common.labels.actions")}</th>
         </tr>
       </thead>
       <tbody>

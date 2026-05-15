@@ -59,7 +59,7 @@ function ClientDashboardPage() {
     },
   ];
 
-  const welcome = `${t("dashboard.common.welcome")} ${user.first_name} ${user.last_name}`;
+  const welcome = `${t("common.labels.welcome")} ${user.first_name} ${user.last_name}`;
 
   return (
     <div className={styles.dashboard}>
@@ -74,7 +74,7 @@ function ClientDashboardPage() {
               to="/dashboard/client/postjob"
               className={styles.post_job_btn}
             >
-              <span>{t('navbar.postproject')}</span> <IoMdAdd />
+              <span>{t("common.nav.postProject")}</span> <IoMdAdd />
             </NavLink>
           </div>
         </div>
@@ -83,7 +83,7 @@ function ClientDashboardPage() {
         )}
       </div>
       <div className={styles.overview}>
-        <h3 className={styles.overviewTitle}>{t(`dashboard.common.overview`)}</h3>
+        <h3 className={styles.overviewTitle}>{t("common.labels.overview")}</h3>
         <div className={styles.statsCards}>
           {stats_cards.map((state) => (
             <SimpleCard

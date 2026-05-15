@@ -26,13 +26,13 @@ function FreelancerProjectsHeaderFilter({ filters, onChange, categories }) {
       <div className={styles.filterItem}>
         <select name="sort" value={filters.sort} onChange={onChange}>
           <option value="" disabled>
-            {t("browseProjects.filters.sort.placeholder")}
+            {t("common.filters.sortBy")}
           </option>
           <option value="most_recent">
-            {t("browseProjects.filters.sort.recent")}
+            {t("common.options.sort.recent")}
           </option>
           <option value="best_match">
-            {t("browseProjects.filters.sort.match")}
+            {t("common.options.sort.match")}
           </option>
         </select>
       </div>

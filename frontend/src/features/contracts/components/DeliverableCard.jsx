@@ -49,7 +49,7 @@ function DeliverableCard({
       <div className={styles.deliverableCard}>
         <div className={styles.deliverableHeader}>
           <h5 className={styles.deliverableNumber}>
-            {t("contractDetail.deliverables.card.subTitle")} <span>#{deliverable.position ?? deliverable.id}</span>
+            {t("common.labels.deliverable")} <span>#{deliverable.position ?? deliverable.id}</span>
           </h5>
           <p
             className={`${styles.deliverableStatus} ${getStatusClass(
@@ -87,7 +87,7 @@ function DeliverableCard({
                 className={styles.fundBtn}
                 onClick={() => setIsFundModalOpen(true)}
               >
-                {t("contractDetail.deliverables.card.fund")}
+                {t("common.actions.fund")}
               </button>
             )}
             <button
@@ -95,7 +95,7 @@ function DeliverableCard({
               className={styles.viewDetail}
               onClick={() => setIsDetailModalOpen(true)}
             >
-              {t("contractDetail.deliverables.card.viewDetail")}
+              {t("common.actions.viewDetail")}
             </button>
           </div>
         </div>

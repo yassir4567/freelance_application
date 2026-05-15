@@ -58,13 +58,13 @@ function ClientContractsPage() {
   const overviewCards = [
     {
       id: 0,
-      title: t("contractsList.stats.completed.title"),
+      title: t("common.labels.completedContracts"),
       total: contractStats?.completed_contracts_count || "__",
       subTitle: t("contractsList.stats.completed.subTitle"),
     },
     {
       id: 2,
-      title: t("contractsList.stats.active.title"),
+      title: t("common.labels.activeContracts"),
       total: contractStats?.active_contracts_count || "__",
       subTitle: t("contractsList.stats.active.subTitle"),
     },
@@ -103,7 +103,7 @@ function ClientContractsPage() {
 
       <div className={styles.overviewSection}>
         <h2 className={styles.overviewTitle}>
-          {t("contractsList.overview")}
+          {t("common.labels.overview")}
         </h2>
         <div className={styles.contractsOverview}>
           {overviewCards.map((ov) => (

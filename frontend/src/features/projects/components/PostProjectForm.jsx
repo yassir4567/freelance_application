@@ -115,37 +115,37 @@ function PostProjectForm({ is_profile_complete }) {
 
     // * Validate inputs
     if (project.title.trim() === "") {
-      newErrors.title = t("postjob.errors.titleRequired");
+      newErrors.title = t("common.validation.titleRequired");
     }
 
     if (project.category_id.trim() === "") {
-      newErrors.category_id = t("postjob.errors.categoryRequired");
+      newErrors.category_id = t("common.validation.categoryRequired");
     }
 
     if (project.category_id && project.skills.length === 0) {
-      newErrors.skills =t("postjob.errors.skillsRequired");
+      newErrors.skills =t("common.validation.skillsRequired");
     }
 
     if (project.experience_level.trim() === "") {
-      newErrors.experience_level = t("postjob.errors.experienceLevelRequired");
+      newErrors.experience_level = t("common.validation.experienceLevelRequired");
     }
 
     if (project.size.trim() === "") {
-      newErrors.size = t("postjob.errors.projectSizeRequired");
+      newErrors.size = t("common.validation.projectSizeRequired");
     }
 
     if (project.duration.trim() === "") {
-      newErrors.duration = t("postjob.errors.durationRequired");
+      newErrors.duration = t("common.validation.durationRequired");
     }
 
     if (project.description.trim() === "") {
-      newErrors.description = t("postjob.errors.descriptionRequired");
+      newErrors.description = t("common.validation.descriptionRequired");
     } else if (project.description.length < 30) {
       newErrors.description = t("postjob.errors.descriptionLessThanThirty");
     }
 
     if (project.budget.trim() === "") {
-      newErrors.budget = t("postjob.errors.budgetRequired");
+      newErrors.budget = t("common.validation.budgetRequired");
     } else if (+project.budget < 5) {
       newErrors.budget =  t("postjob.errors.budgetLessThanFive");
     }
@@ -182,7 +182,7 @@ function PostProjectForm({ is_profile_complete }) {
     <form onSubmit={handleSubmit} className={styles.form}>
       <div className={styles.row}>
         <div className={styles.inputBox}>
-          <label>{t("postjob.form.title.label")}</label>
+          <label>{t("common.labels.title")}</label>
           <input
             className={styles.select}
             type="text"
@@ -195,7 +195,7 @@ function PostProjectForm({ is_profile_complete }) {
           {errors.title && <div className={styles.error}>{errors.title}</div>}
         </div>
         <div className={styles.inputBox}>
-          <label>{t("postjob.form.category.label")}</label>
+          <label>{t("common.labels.category")}</label>
           <select
             className={styles.select}
             value={project.category_id}
@@ -275,7 +275,7 @@ function PostProjectForm({ is_profile_complete }) {
               disabled={!is_profile_complete}
             />
             <label htmlFor="junior">
-              {t("postjob.form.experienceLevel.options.junior")}
+              {t("common.options.experience.junior")}
             </label>
           </div>
           <div className={styles.radioBox}>
@@ -290,7 +290,7 @@ function PostProjectForm({ is_profile_complete }) {
               disabled={!is_profile_complete}
             />
             <label htmlFor="midlevel">
-              {t("postjob.form.experienceLevel.options.midLevel")}
+              {t("common.options.experience.midLevel")}
             </label>
           </div>
           <div className={styles.radioBox}>
@@ -305,7 +305,7 @@ function PostProjectForm({ is_profile_complete }) {
               disabled={!is_profile_complete}
             />
             <label htmlFor="senior">
-              {t("postjob.form.experienceLevel.options.senior")}
+              {t("common.options.experience.senior")}
             </label>
           </div>
           {errors.experience_level && (
@@ -329,7 +329,7 @@ function PostProjectForm({ is_profile_complete }) {
               disabled={!is_profile_complete}
             />
             <label htmlFor="small">
-              {t("postjob.form.projectSize.options.small")}
+              {t("common.options.size.small")}
             </label>
           </div>
           <div className={styles.radioBox}>
@@ -344,7 +344,7 @@ function PostProjectForm({ is_profile_complete }) {
               disabled={!is_profile_complete}
             />
             <label htmlFor="medium">
-              {t("postjob.form.projectSize.options.medium")}
+              {t("common.options.size.medium")}
             </label>
           </div>
           <div className={styles.radioBox}>
@@ -359,7 +359,7 @@ function PostProjectForm({ is_profile_complete }) {
               disabled={!is_profile_complete}
             />
             <label htmlFor="large">
-              {t("postjob.form.projectSize.options.large")}
+              {t("common.options.size.large")}
             </label>
           </div>
           {errors.size && <div className={styles.error}>{errors.size}</div>}
@@ -381,7 +381,7 @@ function PostProjectForm({ is_profile_complete }) {
               disabled={!is_profile_complete}
             />
             <label htmlFor="less1">
-              {t("postjob.form.duration.options.lessThanOneMonth")}
+              {t("common.options.duration.lessThanOneMonth")}
             </label>
           </div>
           <div className={styles.radioBox}>
@@ -396,7 +396,7 @@ function PostProjectForm({ is_profile_complete }) {
               disabled={!is_profile_complete}
             />
             <label htmlFor="between_1_3">
-              {t("postjob.form.duration.options.oneToThreeMonths")}
+              {t("common.options.duration.oneToThreeMonths")}
             </label>
           </div>
           <div className={styles.radioBox}>
@@ -411,7 +411,7 @@ function PostProjectForm({ is_profile_complete }) {
               disabled={!is_profile_complete}
             />
             <label htmlFor="between_3_6">
-              {t("postjob.form.duration.options.threeToSixMonths")}
+              {t("common.options.duration.threeToSixMonths")}
             </label>
           </div>
           <div className={styles.radioBox}>
@@ -426,7 +426,7 @@ function PostProjectForm({ is_profile_complete }) {
               disabled={!is_profile_complete}
             />
             <label htmlFor="more6">
-              {t("postjob.form.duration.options.moreThanSixMonths")}
+              {t("common.options.duration.moreThanSixMonths")}
             </label>
           </div>
           {errors.duration && (
@@ -438,7 +438,7 @@ function PostProjectForm({ is_profile_complete }) {
       <div className={styles.row}>
         <div className={styles.inputBox}>
           <label htmlFor="description">
-            {t("postjob.form.description.label")}
+            {t("common.labels.description")}
           </label>
           <textarea
             name="description"

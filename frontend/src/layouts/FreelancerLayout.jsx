@@ -6,23 +6,23 @@ function FreelancerLayout() {
   const { t } = useTranslation();
   const links = [
     {
-      label: t("navbar.home"),
+      label: t("common.nav.home"),
       to: "/dashboard/freelancer",
     },
     {
-      label: t("navbar.findProject"),
+      label: t("common.nav.findProject"),
       to: "/dashboard/freelancer/find-project",
     },
     {
-      label: t("navbar.proposals"),
+      label: t("common.nav.proposals"),
       to: "/dashboard/freelancer/my-proposals",
     },
     {
-      label: t("navbar.contracts"),
+      label: t("common.nav.contracts"),
       to: "/dashboard/freelancer/contracts",
     },
     {
-      label: t("navbar.messages"),
+      label: t("common.nav.messages"),
       to: "/dashboard/freelancer/messages",
     },
   ];

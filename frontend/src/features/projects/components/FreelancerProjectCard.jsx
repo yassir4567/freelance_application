@@ -29,7 +29,7 @@ function FreelancerProjectCard({ project }) {
         </div>
         <div className={styles.detailBtn}>
           <NavLink to={`../projects/${project.id}`} className={styles.btn}>
-            {t("browseProjects.card.viewDetail")}
+            {t("common.actions.viewDetail")}
           </NavLink>
         </div>
       </div>
@@ -39,15 +39,15 @@ function FreelancerProjectCard({ project }) {
 
         <div className={styles.requirements}>
           <span>
-            {t("browseProjects.card.price")} : ${project.budget}
+            {t("common.labels.price")} : ${project.budget}
           </span>
           <span>|</span>
           <span>
-            {t("browseProjects.card.experience")} : {project.experience_level}
+            {t("common.labels.experienceLevel")} : {project.experience_level}
           </span>
           <span>|</span>
           <span>
-            {t("browseProjects.card.size")} : {project.size}
+            {t("common.labels.projectSize")} : {project.size}
           </span>
         </div>
 
@@ -60,7 +60,7 @@ function FreelancerProjectCard({ project }) {
         </div>
 
         <p className={styles.proposalsCount}>
-          <span>{t("browseProjects.card.proposals")} :</span>
+          <span>{t("common.labels.proposals")} :</span>
           <span>{project.proposals_count}</span>
         </p>
       </div>

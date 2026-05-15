@@ -24,7 +24,7 @@ function SubmitDeliverableForm({
     if (hasEmpty) {
       setErrors((prev) => ({
         ...prev,
-        links: t("contractDetail.deliverableDetail.form.links.addLinkError"),
+        links: t("common.validation.fillPreviousLinkFirst"),
       }));
     } else {
       setLinks([...links, ""]);
@@ -45,14 +45,12 @@ function SubmitDeliverableForm({
     let newErrors = {};
 
     if (!note.trim()) {
-      newErrors.note = t("contractDetail.deliverableDetail.form.note.error");
+      newErrors.note = t("common.validation.noteRequired");
     }
     const safeLinks = links.filter((link) => link.trim() !== "");
 
     if (safeLinks.length === 0) {
-      newErrors.links = t(
-        "contractDetail.deliverableDetail.form.links.requiredError",
-      );
+      newErrors.links = t("common.validation.linkRequired");
     }
 
     if (Object.keys(newErrors).length > 0) {
@@ -91,7 +89,7 @@ function SubmitDeliverableForm({
 
       <div className={styles.submissionNoteBox}>
         <label className={styles.label}>
-          {t("contractDetail.deliverableDetail.form.note.label")}
+          {t("common.labels.submissionNote")}
         </label>
         <textarea
           value={note}
@@ -105,7 +103,7 @@ function SubmitDeliverableForm({
       </div>
       <div className={styles.inputBox}>
         <label className={styles.label}>
-          {t("contractDetail.deliverableDetail.form.links.label")}
+          {t("common.labels.link")}
         </label>
         {links.map((link, index) => (
           <input
@@ -123,13 +121,13 @@ function SubmitDeliverableForm({
       <div className={styles.actions}>
         <div>
           <button type="submit" className={styles.submitBtn}>
-            {t("contractDetail.deliverableDetail.form.actions.submit")}
+            {t("common.actions.submit")}
           </button>
         </div>
         <div className={styles.addLinkBtn} onClick={handleAddLink}>
           <FaPlus />
           <span>
-             {t("contractDetail.deliverableDetail.form.actions.addLink")}
+             {t("common.actions.addLink")}
           </span>
         </div>
       </div>

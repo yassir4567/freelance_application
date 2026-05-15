@@ -1,19 +1,142 @@
 {
-  "navbar": {
-    "home": "Home",
-    "postproject": "Post Job",
-    "projects&proposals": "Projects and proposals",
-    "contracts": "Contracts",
-    "messages": "Messages",
-    "findProject": "Find project",
-    "proposals": "My Proposals"
-  },
-
-  "dashboard": {
-    "common": {
+  "common": {
+    "labels": {
+      "title": "Title",
+      "category": "Category",
+      "skills": "Skills",
+      "status": "Status",
+      "actions": "Actions",
+      "project": "Project",
+      "client": "Client",
+      "budget": "Budget",
+      "price": "Price",
+      "bid": "Bid",
+      "delivery": "Delivery",
+      "deadline": "Deadline",
+      "finalDeadline": "Final deadline",
+      "deliverableDeadline": "Deliverable deadline",
+      "currentDeliverableDeadline": "Current deliverable deadline",
+      "description": "Description",
       "overview": "Overview",
-      "welcome": "Welcome"
+      "proposals": "Proposals",
+      "numberOfProposals": "Number of proposals",
+      "experience": "Experience",
+      "experienceLevel": "Experience level",
+      "projectSize": "Project size",
+      "duration": "Duration",
+      "estimatedDuration": "Estimated duration",
+      "fullName": "Full Name",
+      "memberSince": "Member since",
+      "deliverable": "Deliverable",
+      "deliverables": "Deliverables",
+      "payments": "Payments",
+      "paymentProgress": "Payment progress",
+      "document": "document",
+      "link": "Link",
+      "amount": "Amount",
+      "total": "Total",
+      "sent": "Sent",
+      "created": "Created",
+      "published": "Published",
+      "note": "Note",
+      "submissionNote": "Submission Note",
+      "welcome": "Welcome",
+      "completedContracts": "Completed Contracts",
+      "activeContracts": "Active Contracts",
+      "viewDeliverables": "View Deliverables",
+      "progress": "Progress",
+      "currentDeliverable": "Current Deliverable",
+      "totalBudget": "Total Budget",
+      "totalDeliverables": "Total Deliverables",
+      "complete": "Complete",
+      "contractFile": "Contract file",
+      "contractSetup": "Contract Setup"
     },
+    "actions": {
+      "viewDetails": "View Details",
+      "viewProposals": "View Proposals",
+      "viewDetail": "View detail",
+      "sendProposal": "Send proposal",
+      "accept": "Accept",
+      "reject": "Rejected",
+      "submit": "Submit",
+      "addLink": "Add Link",
+      "clearAll": "Clear all",
+      "applyFilters": "Apply filters",
+      "browseProjects": "Browse Projects",
+      "viewMyProposals": "View My Proposals",
+      "checkMessages": "Check Messages",
+      "fund": "Fund",
+      "submitDeliverable": "Submit deliverable",
+      "resubmitDeliverable": "Resubmit deliverable",
+      "revisionRequest": "Revision Request",
+      "backToContracts": "Back to contracts",
+      "viewDocument": "view document",
+      "viewDeliverables": "View Deliverables"
+    },
+    "options": {
+      "experience": {
+        "junior": "Junior",
+        "midLevel": "Mid-Level",
+        "midLevelSpaced": "Mid Level",
+        "senior": "Senior"
+      },
+      "size": {
+        "small": "Small",
+        "medium": "Medium",
+        "large": "Large"
+      },
+      "duration": {
+        "lessThanOneMonth": "Less than 1 Month",
+        "oneToThreeMonths": "1 to 3 Months",
+        "threeToSixMonths": "3 to 6 Months",
+        "moreThanSixMonths": "More than 6 Months"
+      },
+      "sort": {
+        "latest": "Latest projects",
+        "oldest": "Oldest projects",
+        "recent": "Most Recent",
+        "match": "Best matches"
+      },
+      "status": {
+        "completed": "Completed",
+        "active": "Active",
+        "inReview": "In Review",
+        "waiting": "Waiting",
+        "pending": "Pending"
+      }
+    },
+    "validation": {
+      "titleRequired": "Title is required",
+      "categoryRequired": "Category is required",
+      "skillsRequired": "Please select at least one skill",
+      "experienceLevelRequired": "Please select an experience level",
+      "projectSizeRequired": "Please select the project size",
+      "durationRequired": "Please select the project duration",
+      "descriptionRequired": "Description is required",
+      "budgetRequired": "Budget is required",
+      "noteRequired": "Note Required",
+      "linkRequired": "Enter at least one link",
+      "fillPreviousLinkFirst": "Fill the previous one first",
+      "priceRequired": "Price Required",
+      "invalidPrice": "Price must be a valid number",
+      "priceGreaterThanFive": "Price must be greater than 5$"
+    },
+    "nav": {
+      "home": "Home",
+      "postProject": "Post Job",
+      "projectsAndProposals": "Projects and proposals",
+      "contracts": "Contracts",
+      "messages": "Messages",
+      "findProject": "Find project",
+      "proposals": "My Proposals"
+    },
+    "filters": {
+      "status": "Filter by status",
+      "sortBy": "Sort by"
+    }
+  },
+  "dashboard": {
     "client": {
       "welcomeSubTitle": "Here's what's happening with your projects today",
       "cards": {
@@ -37,11 +160,7 @@
       "table": {
         "title": "Recent projects",
         "thead": {
-          "title": "Title",
-          "status": "Status",
-          "nbrProposals": "Number of proposals",
-          "time": "Time",
-          "actions": "Actions"
+          "time": "Time"
         }
       }
     },
@@ -63,37 +182,23 @@
       },
       "table": {
         "title": "Active Contracts",
-        "thead": {
-          "name": "Project",
-          "client": "Client",
-          "budget": "Budget",
-          "deadline": "Deadline",
-          "actions": "Actions"
-        },
         "action": "View all contracts"
       },
       "actions": {
-        "title": "Quick actions",
-        "browseProjects": "Browse Projects",
-        "viewProposals": "View My Proposals",
-        "messages": "Check Messages"
+        "title": "Quick actions"
       }
     }
   },
-
   "postjob": {
     "title": "Post Job",
     "form": {
       "title": {
-        "label": "Title",
         "placeholder": "Enter your project title"
       },
       "category": {
-        "label": "Category",
         "placeholder": "Select project category"
       },
       "skills": {
-        "label": "Skills",
         "placeholders": {
           "main": "Select required skills",
           "noSkillsAvailable": "No skills available for this category",
@@ -101,32 +206,15 @@
         }
       },
       "experienceLevel": {
-        "label": "Experience Level",
-        "options": {
-          "junior": "Junior",
-          "midLevel": "Mid-Level",
-          "senior": "Senior"
-        }
+        "label": "Experience Level"
       },
       "projectSize": {
-        "label": "Project Size",
-        "options": {
-          "small": "Small",
-          "medium": "Medium",
-          "large": "Large"
-        }
+        "label": "Project Size"
       },
       "duration": {
-        "label": "How long will your work take?",
-        "options": {
-          "lessThanOneMonth": "Less than 1 Month",
-          "oneToThreeMonths": "1 to 3 Months",
-          "threeToSixMonths": "3 to 6 Months",
-          "moreThanSixMonths": "More than 6 Months"
-        }
+        "label": "How long will your work take?"
       },
       "description": {
-        "label": "Description (between 30 & 1000 characters)",
         "placeholder": "Enter your project description"
       },
       "budget": {
@@ -136,97 +224,39 @@
       "submit": "Post"
     },
     "errors": {
-      "titleRequired": "Title is required",
-      "categoryRequired": "Category is required",
-      "skillsRequired": "Please select at least one skill",
-      "experienceLevelRequired": "Please select an experience level",
-      "projectSizeRequired": "Please select the project size",
-      "durationRequired": "Please select the project duration",
-      "descriptionRequired": "Description is required",
       "descriptionLessThanThirty": "Description must be at least 30 characters",
-      "budgetRequired": "Budget is required",
       "budgetLessThanFive": "Budget must be greater than 5"
     }
   },
-
   "clientProjects": {
     "title": "My Projects",
     "filters": {
       "search": "Search by project title",
       "status": {
-        "placeholder": "Filter by status",
         "options": {
           "open": "Open",
           "inProgress": "In Progress",
           "inReview": "In Review",
           "completed": "Completed"
         }
-      },
-      "sort": {
-        "placeholder": "Sort by",
-        "options": {
-          "latest": "Latest projects",
-          "oldest": "Oldest projects"
-        }
-      },
-      "clear": "Clear all"
+      }
     },
     "card": {
-      "budget": "Budget",
-      "createdAt": "Created at",
-      "numberOfProposals": "Number of proposals",
-      "actions": {
-        "viewDetails": "View Details",
-        "viewProposals": "View Proposals"
-      }
+      "createdAt": "Created at"
     }
   },
-
   "clientProjectDetail": {
-    "actions": {
-      "viewDetails": "View Details",
-      "viewProposals": "View Proposals"
-    },
-    "overview": "Project overview",
-    "title": "Project Detail",
-    "budget": "Budget",
-    "published": "Published",
-    "proposals": "Proposals",
-    "description": "Description",
-    "experience": "Experience level",
-    "size": "Project size",
-    "duration": "Estimated duration"
+    "title": "Project Detail"
   },
-
   "clientProposals": {
-    "allprojects": "All projects",
-    "card": {
-      "bid": "Bid",
-      "delivery": "Delivery",
-      "status": "Status",
-      "actions": {
-        "accept": "Accept",
-        "reject": "Rejected"
-      }
-    }
+    "allprojects": "All projects"
   },
-
   "browseProjects": {
     "title": "Browse all projects",
     "filters": {
       "search": "Search by project title",
-      "actions": {
-        "applyFilters": "Apply filters",
-        "clearAll": "Clear All"
-      },
       "category": "Select category",
-      "sort": {
-        "placeholder": "Sort by",
-        "recent": "Most Recent",
-        "match": "Best matches"
-      },
       "price": {
-        "title": "Price",
         "options": {
           "lessThan50": "Less than $50",
           "50to100": "$50 To $100",
@@ -234,24 +264,7 @@
           "plus200": "Plus $200"
         }
       },
-      "experience": {
-        "title": "Experience Level",
-        "options": {
-          "junior": "Junior",
-          "midLevel": "Mid-Level",
-          "senior": "Senior"
-        }
-      },
-      "size": {
-        "title": "Project Size",
-        "options": {
-          "small": "Small",
-          "medium": "Medium",
-          "large": "Large"
-        }
-      },
       "proposals": {
-        "title": "Number of proposals",
         "options": {
           "lessThan5": "Less than 5",
           "5to15": "5 To 15",
@@ -262,65 +275,28 @@
       }
     },
     "card": {
-      "posted": "Posted",
-      "viewDetail": "View detail",
-      "price": "Price",
-      "experience": "Experience level",
-      "size": "Project size",
-      "proposals": "Proposals"
+      "posted": "Posted"
     }
   },
-
   "browseProjectDetail": {
-    "description": "Description",
-    "price": "Price",
-    "experience": "Experience",
-    "duration": "Duration",
-    "size": "Project size",
-    "lessThanOneMonth": "Less than 1 Month",
-    "oneToThreeMonths": "1 to 3 Months",
-    "threeToSixMonths": "3 to 6 Months",
-    "moreThanSixMonths": "More than 6 Months",
-    "junior": "Junior",
-    "midLevel": "Mid Level",
-    "senior": "Senior",
-    "small": "Small",
-    "medium": "Medium",
-    "large": "Large",
     "requiredSkills": "Required Skills",
     "aboutClient": "About the client",
-    "fullName": "Full Name",
     "postedProjects": "Posted Projects",
-    "memberSince": "Member since",
-    "alreadySent": "Proposal Already Sent",
-    "actions": {
-      "sendProposal": "Send proposal",
-      "viewProposals": "View Proposals"
-    }
+    "alreadySent": "Proposal Already Sent"
   },
-
   "freelancerProposals": {
     "title": "My Proposals",
     "subTitle": "Track and manage your proposals",
-    "total": "Total Proposals",
-    "card": {
-      "price": "Price",
-      "delivery": "Delivery",
-      "sent": "Sent"
-    }
+    "total": "Total Proposals"
   },
-
   "contractsList": {
     "title": "My Contracts",
     "subTitle": "Track negotiations, active work, and completed agreements in one place.",
-    "overview": "Overview",
     "stats": {
       "completed": {
-        "title": "Completed Contracts",
         "subTitle": "All time"
       },
       "active": {
-        "title": "Active Contracts",
         "subTitle": "Currently running"
       },
       "spending": {
@@ -336,135 +312,68 @@
         "subTitle": "across all contracts"
       }
     },
-    "cardsTitle": "Contracts List",
-    "card": {
-      "actions": {
-        "viewDetails": "View Details",
-        "viewDeliverables": "View Deliverables"
-      },
-      "budget": "Budget",
-      "progress": "Progress",
-      "deliverable": {
-        "current": "Current Deliverable",
-        "deadline": "Deliverable deadline"
-      }
-    }
+    "cardsTitle": "Contracts List"
   },
-
   "contractDetail": {
     "header": {
-      "back": "Back to contracts",
       "subTitle": "contract workspace",
-      "description": "Review the agreement, track deliverables, and keep escrow status visible without hunting through the page.",
-      "total": "Total Budget",
-      "progress": {
-        "deliverables": "Deliverables",
-        "complete": "Complete"
-      }
+      "description": "Review the agreement, track deliverables, and keep escrow status visible without hunting through the page."
     },
     "party": {
       "desc": "on this contract"
     },
-    "infos": {
-      "created": "Created",
-      "deadline": "final deadline",
-      "currentDeliverableDeadline": "Current deliverable deadline"
-    },
-    "tabs": {
-      "overview": "Overview",
-      "deliverables": "Deliverables",
-      "payments": "Payments"
-    },
     "overview": {
-      "subTitle": "Overview",
       "title": "Contract summary",
       "description": {
-        "subTitle": "Agreement",
-        "title": "Description"
-      },
-      "progress": {
-        "subTitle": "Payment progress"
+        "subTitle": "Agreement"
       },
       "cards": {
-        "budget": "Budget",
-        "deadline": "Final deadline",
         "deliverablesApproved": "Deliverables approved"
       },
       "contractFile": {
-        "subTitle": "document",
-        "title": "Contract file",
-        "description": "The signed contract document is available.",
-        "view": "view document"
+        "description": "The signed contract document is available."
       }
     },
-
     "deliverables": {
-      "subTitle": "deliverables",
       "title": "Project deliverables",
-      "description": "Follow each milestone from waiting state through submission, review, and approval.",
-      "stats": {
-        "total": "Total Deliverables",
-        "completed": "Completed",
-        "inReview": "In Review",
-        "waiting": "Waiting"
-      },
-      "card": {
-        "subTitle": "Deliverable",
-        "viewDetail": "View detail",
-        "fund": "Fund"
-      }
+      "description": "Follow each milestone from waiting state through submission, review, and approval."
     },
-
     "payments": {
-      "subTitle": "payments",
-      "title": "Payments",
       "description": "See what is funded, what has been released, and which deliverables are still waiting on escrow.",
       "stats": {
-        "total": "Total",
         "out": "Paid out",
-        "escrow": "Escrow",
-        "pending": "Pending"
-      },
-      "card": {
-        "subTitle": "Deliverable"
+        "escrow": "Escrow"
       }
     },
-
     "deliverableDetail": {
       "cards": {
-        "amount": "Amount",
-        "deadline": "Deadline",
         "unlockedAt": "Unlocked At",
         "submittedAt": "Submitted At",
         "acceptedAt": "Accepted At"
       },
       "submission": {
-        "title": "Submission links",
-        "link": "Link",
-        "note": "Submission Note"
-      },
-      "actions": {
-        "submit": "Submit deliverable",
-        "reSubmit": "Resubmit deliverable",
-        "accept": "Accept",
-        "revision": "Revision Request"
+        "title": "Submission links"
       },
       "form": {
         "title": "Submission Form",
         "description": "All old links will be replaced",
         "note": {
-          "label": "Submission Note",
-          "placeholder": "Enter submission note",
-          "error": "Note Required"
-        },
-        "links": {
-          "label": "Link",
-          "requiredError": "Enter at least one link",
-          "addLinkError": "Fill the previous one first"
-        },
-        "actions": {
-          "submit": "Submit",
-          "addLink": "Add Link"
+          "placeholder": "Enter submission note"
+        }
+      }
+    }
+  },
+  "setUpContract": {
+    "header": {
+      "description": "Prepare the final contract terms, define deliverables, and send the offer to the freelancer for approval."
+    },
+    "setUpForm": {
+      "title": "Set up the contract terms",
+      "description": "Confirm the final price, deadline, and project description before activating the contract.",
+      "form": {
+        "price": {
+          "label": "Final price",
+          "placeholder": "Enter the agreed final price"
         }
       }
     }

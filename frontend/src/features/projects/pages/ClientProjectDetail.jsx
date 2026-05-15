@@ -29,17 +29,17 @@ function ClientProjectDetail() {
 
   const projectStats = [
     {
-      label: t("clientProjectDetail.budget"),
+      label: t("common.labels.budget"),
       value: project?.budget != null ? `$${project.budget}` : "Not set",
       icon: <FiDollarSign />,
     },
     {
-      label: t("clientProjectDetail.published"),
+      label: t("common.labels.published"),
       value: publishedDate,
       icon: <FiCalendar />,
     },
     {
-      label: t("clientProjectDetail.proposals"),
+      label: t("common.labels.proposals"),
       value: project?.proposals_count ?? 0,
       icon: <FiUsers />,
     },
@@ -47,17 +47,17 @@ function ClientProjectDetail() {
 
   const projectDetails = [
     {
-      label: t("clientProjectDetail.experience"),
+      label: t("common.labels.experienceLevel"),
       value: project?.experience_level || "Not specified",
       icon: <FiTrendingUp />,
     },
     {
-      label: t("clientProjectDetail.size"),
+      label: t("common.labels.projectSize"),
       value: project?.size || "Not specified",
       icon: <FiLayers />,
     },
     {
-      label: t("clientProjectDetail.duration"),
+      label: t("common.labels.estimatedDuration"),
       value: duration,
       icon: <FiClock />,
     },
@@ -69,7 +69,7 @@ function ClientProjectDetail() {
         <div className={styles.detailHeader}>
           <div>
             <p className={styles.eyebrow}>
-              {t("clientProjectDetail.overview")}
+              {t("common.labels.overview")}
             </p>
             <h2 className={styles.detailTitle}>
               {t("clientProjectDetail.title")}
@@ -98,7 +98,7 @@ function ClientProjectDetail() {
               <FiFileText />
             </span>
             <h3>
-              {t("clientProjectDetail.description")}
+              {t("common.labels.description")}
             </h3>
           </div>
           <p className={styles.descriptionText}>

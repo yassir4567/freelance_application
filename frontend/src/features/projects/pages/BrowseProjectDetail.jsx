@@ -56,7 +56,7 @@ function BrowseProjectDetail() {
 
         <div className={styles.summary}>
           <h5 className={styles.sectionTitle}>
-            {t("browseProjectDetail.description")}
+            {t("common.labels.description")}
           </h5>
           <p className={styles.description}>{project.project?.description}</p>
 
@@ -66,7 +66,7 @@ function BrowseProjectDetail() {
             <div className={styles.info}>
               <h5 className={styles.infoTitle}>
                 <IoPricetagsOutline className={styles.icon} />
-                <span>{t("browseProjectDetail.price")}</span>
+                <span>{t("common.labels.price")}</span>
               </h5>
               <p className={styles.infoP}>{project.project?.budget}$</p>
             </div>
@@ -74,7 +74,7 @@ function BrowseProjectDetail() {
             <div className={styles.info}>
               <h5 className={styles.infoTitle}>
                 <IoMdTime className={styles.icon} />
-                <span>{t("browseProjectDetail.duration")}</span>
+                <span>{t("common.labels.duration")}</span>
               </h5>
               <p className={styles.infoP}>
                 {project.project?.duration.split("_").join(" ")}
@@ -84,7 +84,7 @@ function BrowseProjectDetail() {
             <div className={styles.info}>
               <h5 className={styles.infoTitle}>
                 <SiLevelsdotfyi className={styles.icon} />
-                <span>{t("browseProjectDetail.experience")}</span>
+                <span>{t("common.labels.experience")}</span>
               </h5>
               <p className={styles.infoP}>
                 {project.project?.experience_level}
@@ -94,7 +94,7 @@ function BrowseProjectDetail() {
             <div className={styles.info}>
               <h5 className={styles.infoTitle}>
                 <SlSizeFullscreen className={styles.icon} />
-                <span>{t("browseProjectDetail.size")}</span>
+                <span>{t("common.labels.projectSize")}</span>
               </h5>
               <p className={styles.infoP}>{project.project?.size}</p>
             </div>
@@ -126,7 +126,7 @@ function BrowseProjectDetail() {
                 className={styles.viewProposalsLink}
                 to="/dashboard/freelancer/my-proposals"
               >
-                {t("browseProjectDetail.actions.viewProposals")}
+                {t("common.actions.viewProposals")}
               </NavLink>
             </div>
           ) : (
@@ -134,7 +134,7 @@ function BrowseProjectDetail() {
               className={styles.actionLink}
               onClick={() => setShowSendProposalModal(true)}
             >
-              {t("browseProjectDetail.actions.sendProposal")}
+              {t("common.actions.sendProposal")}
             </NavLink>
           )}
         </div>
@@ -145,7 +145,7 @@ function BrowseProjectDetail() {
           </h4>
           <div className={styles.infos}>
             <p>
-              {t("browseProjectDetail.fullName")} : {client?.first_name}{" "}
+              {t("common.labels.fullName")} : {client?.first_name}{" "}
               {client?.last_name}
             </p>
             <p>
@@ -153,7 +153,7 @@ function BrowseProjectDetail() {
               {t("browseProjectDetail.postedProjects")}
             </p>
             <p>
-              {t("browseProjectDetail.memberSince")}{" "}
+              {t("common.labels.memberSince")}{" "}
               {formatDate(client?.created_at)}
             </p>
           </div>

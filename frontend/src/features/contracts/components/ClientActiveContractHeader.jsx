@@ -5,8 +5,10 @@ import { useAuth } from "../../../context/AuthContext";
 import { CONTRACT_STATUS_CLASS } from "../utils/contractDisplay";
 import { FiArrowLeft } from "react-icons/fi";
 import profile from "../../../assets/images/profile.png";
+import { useTranslation } from "react-i18next";
 
 function ClientActiveContractHeader({ role, contractInfo, freelancerInfo }) {
+  const { t } = useTranslation();
   const fullName = freelancerInfo.first_name + " " + freelancerInfo.last_name;
   const freelancerTitle = freelancerInfo.title;
 
@@ -19,7 +21,7 @@ function ClientActiveContractHeader({ role, contractInfo, freelancerInfo }) {
           className={styles.backLink}
         >
           <FiArrowLeft />
-          <span>Back to contracts</span>
+          <span>{t("common.actions.backToContracts")}</span>
         </NavLink>
 
         <div
@@ -31,11 +33,12 @@ function ClientActiveContractHeader({ role, contractInfo, freelancerInfo }) {
 
       <div className={styles.headerContent}>
         <div className={styles.headerLeft}>
-          <p className={styles.eyebrow}>Contract setup</p>
+          <p className={styles.eyebrow}>
+            {t("common.labels.contractSetup")}
+          </p>
           <h1 className={styles.headerTitle}>{contractInfo.projectTitle}</h1>
           <p className={styles.headerSubtitle}>
-            Prepare the final contract terms, define deliverables, and send the
-            offer to the freelancer for approval.
+            {t("setUpContract.header.description")}
           </p>
         </div>
 

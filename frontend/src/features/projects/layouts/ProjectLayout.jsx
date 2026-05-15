@@ -42,7 +42,7 @@ function ProjectLayout() {
             }
             end
           >
-            {t("clientProjectDetail.actions.viewDetails")}
+            {t("common.actions.viewDetails")}
           </NavLink>
           <NavLink
             to={`proposals`}
@@ -51,7 +51,7 @@ function ProjectLayout() {
             }
             end
           >
-            {t("clientProjectDetail.actions.viewProposals")}
+            {t("common.actions.viewProposals")}
           </NavLink>
           <NavLink
             to={`/dashboard/client/projects`}

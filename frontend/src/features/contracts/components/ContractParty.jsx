@@ -42,7 +42,7 @@ function ContractParty({ role, user, headerInfo }) {
             <FiCalendar />
           </div>
           <div>
-            <h5>{t("contractDetail.infos.created")}</h5>
+            <h5>{t("common.labels.created")}</h5>
             <p>{headerInfo.created_at}</p>
           </div>
         </div>
@@ -52,7 +52,7 @@ function ContractParty({ role, user, headerInfo }) {
             <FiClock />
           </div>
           <div>
-            <h5>{t("contractDetail.infos.deadline")}</h5>
+            <h5>{t("common.labels.finalDeadline")}</h5>
             <p>{headerInfo.final_deadline}</p>
           </div>
         </div>
@@ -63,7 +63,7 @@ function ContractParty({ role, user, headerInfo }) {
               <FiClock />
             </div>
             <div>
-              <h5>{t("contractDetail.infos.currentDeliverableDeadline")}</h5>
+              <h5>{t("common.labels.currentDeliverableDeadline")}</h5>
               <p>{headerInfo.cur_deliverable_deadline}</p>
             </div>
           </div>

@@ -20,13 +20,13 @@ function ClientProjectCard({ project }) {
           {project.title.slice(1)}
         </h3>
         <p className={styles.projectCardBudget}>
-          {t("clientProjects.card.budget")} {project.budget}
+          {t("common.labels.budget")} {project.budget}
         </p>
         <p className={styles.projectCardDate}>
           {t("clientProjects.card.createdAt")} {formatDate(project.created_at)}
         </p>
         <p className={styles.projectCardCountProposals}>
-          {t("clientProjects.card.numberOfProposals")} {project.proposals_count}
+          {t("common.labels.numberOfProposals")} {project.proposals_count}
         </p>
       </div>
       <div className={styles.rightProject}>
@@ -38,13 +38,13 @@ function ClientProjectCard({ project }) {
         </p>
         <div className={styles.projectCardActions}>
           <NavLink to={`${project.id}`} className={`${styles.projectCardBtn}`}>
-            {t("clientProjects.card.actions.viewDetails")} 
+            {t("common.actions.viewDetails")}
           </NavLink>
           <NavLink
             to={`${project.id}/proposals`}
             className={`${styles.projectCardBtn}`}
           >
-            {t("clientProjects.card.actions.viewProposals")} 
+            {t("common.actions.viewProposals")}
           </NavLink>
         </div>
       </div>

@@ -20,7 +20,7 @@ function FilterBox({
           onChange={handleInputsChange}
         >
           <option value="" disabled>
-            {t("clientProjects.filters.status.placeholder")}
+            {t("common.filters.status")}
           </option>
           {statusValues.map((status) => {
             return (
@@ -39,10 +39,10 @@ function FilterBox({
           onChange={handleInputsChange}
         >
           <option value="" disabled>
-            {t("clientProjects.filters.sort.placeholder")}
+            {t("common.filters.sortBy")}
           </option>
-          <option value="newest">{t("clientProjects.filters.sort.options.latest")}</option>
-          <option value="oldest">{t("clientProjects.filters.sort.options.oldest")}</option>
+          <option value="newest">{t("common.options.sort.latest")}</option>
+          <option value="oldest">{t("common.options.sort.oldest")}</option>
         </select>
       </div>
       <div className={styles.clearAllFilters}>

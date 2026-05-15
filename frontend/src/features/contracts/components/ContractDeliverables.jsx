@@ -10,23 +10,23 @@ function ContractDeliverables({ contract, setContract }) {
   const deliverable_stats_cards = [
     {
       id: 0,
-      title: t("contractDetail.deliverables.stats.total"),
+      title: t("common.labels.totalDeliverables"),
       value: safeDeliverables.length,
     },
     {
       id: 1,
-      title: t("contractDetail.deliverables.stats.completed"),
+      title: t("common.options.status.completed"),
       value: safeDeliverables.filter((del) => del.status === "accepted").length,
     },
     {
       id: 2,
-      title: t("contractDetail.deliverables.stats.inReview"),
+      title: t("common.options.status.inReview"),
       value: safeDeliverables.filter((del) => del.status === "submitted")
         .length,
     },
     {
       id: 3,
-      title: t("contractDetail.deliverables.stats.waiting"),
+      title: t("common.options.status.waiting"),
       value: safeDeliverables.filter((del) => del.status === "pending").length,
     },
   ];
@@ -35,7 +35,7 @@ function ContractDeliverables({ contract, setContract }) {
     <div className={styles.deliverablesSection}>
       <div className={styles.sectionHeader}>
         <p className={styles.kicker}>
-          {t("contractDetail.deliverables.subTitle")}
+          {t("common.labels.deliverables")}
         </p>
         <h2 className={styles.subTitle}>
           {t("contractDetail.deliverables.title")}

@@ -16,7 +16,7 @@ function ContractPayments({ deliverables, paymentSummary }) {
   const paymentsCards = [
     {
       id: 1,
-      title: t("contractDetail.payments.stats.total"),
+      title: t("common.labels.total"),
       value: formatCurrency(paymentSummary?.totalAmount),
       className: styles.paymentCard,
     },
@@ -34,7 +34,7 @@ function ContractPayments({ deliverables, paymentSummary }) {
     },
     {
       id: 4,
-      title: t("contractDetail.payments.stats.pending"),
+      title: t("common.options.status.pending"),
       value: formatCurrency(paymentSummary?.pendingAmount),
       className: `${styles.paymentCard} ${styles.remainingCard}`,
     },
@@ -43,9 +43,9 @@ function ContractPayments({ deliverables, paymentSummary }) {
   return (
     <div className={styles.paymentsSection}>
       <div className={styles.sectionHeader}>
-        <p className={styles.kicker}>{t("contractDetail.payments.subTitle")}</p>
+        <p className={styles.kicker}>{t("common.labels.payments")}</p>
         <h2 className={styles.subTitle}>
-          {t("contractDetail.payments.title")}
+          {t("common.labels.payments")}
         </h2>
 
         <p>{t("contractDetail.payments.description")}</p>
@@ -72,7 +72,7 @@ function ContractPayments({ deliverables, paymentSummary }) {
                 <div key={deliverable.id} className={styles.paymentItem}>
                   <div className={styles.paymentItemLeft}>
                     <h5 className={styles.paymentItemSubTitle}>
-                      {t("contractDetail.payments.card.subTitle")} #
+                      {t("common.labels.deliverable")} #
                       {deliverable.position ?? deliverable.id}
                     </h5>
                     <h1 className={styles.paymentItemTitle}>

@@ -43,18 +43,18 @@ function ClientProposalCard({
         <p className={styles.proposalCoverLetter}>"{proposal.cover_letter}"</p>
         <div className={styles.proposalSubCardsContainer}>
           <div className={`${styles.proposalBid} ${styles.proposalSubCard}`}>
-            <span>{t("clientProposals.card.bid")}</span> <span>${proposal.price}</span>
+            <span>{t("common.labels.bid")}</span> <span>${proposal.price}</span>
           </div>
           <div
             className={`${styles.proposalDelivery} ${styles.proposalSubCard}`}
           >
-            <span>{t("clientProposals.card.delivery")} </span>
+            <span>{t("common.labels.delivery")} </span>
             <span>{proposal.delivery_time}</span>
           </div>
           <div
             className={`${styles.proposalStatus} ${styles.proposalSubCard} `}
           >
-            <span>{t("clientProposals.card.status")}</span>
+            <span>{t("common.labels.status")}</span>
             <span
               className={`${styles.status} ${statusClass[proposal.status]}`}
             >
@@ -72,13 +72,13 @@ function ClientProposalCard({
                 className={`${styles.actionBtn} ${styles.accept}`}
                 onClick={() => acceptFreelancerProposal(proposal.id)}
               >
-                {t("clientProposals.card.actions.accept")}
+                {t("common.actions.accept")}
               </button>
               <button
                 className={`${styles.actionBtn} ${styles.reject}`}
                 onClick={() => rejectFreelancerProposal(proposal.id)}
               >
-                {t("clientProposals.card.actions.reject")}
+                {t("common.actions.reject")}
               </button>
             </>
           )}

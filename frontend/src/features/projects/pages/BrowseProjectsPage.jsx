@@ -148,10 +148,10 @@ function BrowseProjectsPage() {
           <Search value={filters.search} onChange={handleInputsChange} />
         </div>
         <button className={styles.clearAll} onClick={handleApplyFilters}>
-          {t("browseProjects.filters.actions.applyFilters")}
+          {t("common.actions.applyFilters")}
         </button>
         <button className={styles.clearAll} onClick={handleClearAllFilters}>
-          {t("browseProjects.filters.actions.clearAll")}
+          {t("common.actions.clearAll")}
         </button>
       </div>
 

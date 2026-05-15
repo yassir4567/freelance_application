@@ -50,7 +50,7 @@ function FreelancerDashboardPage() {
     },
   ];
 
-  const welcome = `${t("dashboard.common.welcome")} ${user.first_name} ${user.last_name}`;
+  const welcome = `${t("common.labels.welcome")} ${user.first_name} ${user.last_name}`;
 
   return (
     <div className={styles.dashboard}>
@@ -95,13 +95,13 @@ function FreelancerDashboardPage() {
           </h3>
           <div className={styles.actions}>
             <NavLink to="find-project" className={styles.actionLink}>
-              {t("dashboard.freelancer.actions.browseProjects")}
+              {t("common.actions.browseProjects")}
             </NavLink>
             <NavLink to="my-proposals" className={styles.actionLink}>
-              {t("dashboard.freelancer.actions.viewProposals")}
+              {t("common.actions.viewMyProposals")}
             </NavLink>
             <NavLink className={styles.actionLink}>
-              {t("dashboard.freelancer.actions.messages")}
+              {t("common.actions.checkMessages")}
             </NavLink>
           </div>
         </div>

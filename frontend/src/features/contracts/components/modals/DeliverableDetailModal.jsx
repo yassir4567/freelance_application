@@ -129,7 +129,7 @@ function DeliverableDetailModal({
           >
             {isAccepting
               ? "Accepting..."
-              : t("contractDetail.deliverableDetail.actions.accept")}
+              : t("common.actions.accept")}
           </button>
           <button
             type="button"
@@ -139,7 +139,7 @@ function DeliverableDetailModal({
           >
             {isRequestingRevision
               ? "Sending..."
-              : t("contractDetail.deliverableDetail.actions.revision")}
+              : t("common.actions.revisionRequest")}
           </button>
         </Fragment>
       );
@@ -152,7 +152,7 @@ function DeliverableDetailModal({
             onClick={showDeliverableForm}
             className={`${styles.deliverableBtn} ${styles.submit}`}
           >
-            {t("contractDetail.deliverableDetail.actions.submit")}
+            {t("common.actions.submitDeliverable")}
           </button>
         </Fragment>
       );
@@ -163,7 +163,7 @@ function DeliverableDetailModal({
             onClick={showDeliverableForm}
             className={`${styles.deliverableBtn} ${styles.submit}`}
           >
-            {t("contractDetail.deliverableDetail.actions.reSubmit")}
+            {t("common.actions.resubmitDeliverable")}
           </button>
         </Fragment>
       );
@@ -188,7 +188,7 @@ function DeliverableDetailModal({
         <div className={styles.deliverableHeader}>
           <div className={styles.headerRight}>
             <p className={styles.deliverableNumber}>
-              {t("contractDetail.deliverables.subTitle")} #
+              {t("common.labels.deliverables")} #
               {deliverable.position ?? deliverable.id}
             </p>
             <h3 className={styles.title}>
@@ -224,12 +224,12 @@ function DeliverableDetailModal({
 
         <div className={styles.contentGrid}>
           <p className={styles.contentItem}>
-            <span>{t("contractDetail.deliverableDetail.cards.amount")}</span>
+            <span>{t("common.labels.amount")}</span>
             <span>{formatCurrency(deliverable.amount)}</span>
           </p>
 
           <p className={styles.contentItem}>
-            <span>{t("contractDetail.deliverableDetail.cards.deadline")}</span>
+            <span>{t("common.labels.deadline")}</span>
             <span>{formatDisplayDate(deliverable.deadline)}</span>
           </p>
 
@@ -265,7 +265,7 @@ function DeliverableDetailModal({
                 {deliverable.deliverable_links.map((link, index) => (
                   <div key={index} className={styles.linkItem}>
                     <span>
-                      {t("contractDetail.deliverableDetail.submission.link")}{" "}
+                      {t("common.labels.link")}{" "}
                       {index + 1}:
                     </span>
                     <a href={link} target="_blank" rel="noreferrer">
@@ -283,7 +283,7 @@ function DeliverableDetailModal({
         {hasSubmissionContent && (
           <div className={styles.submissionContentSection}>
             <h4 className={styles.submissionContentTitle}>
-              {t("contractDetail.deliverableDetail.submission.note")}
+              {t("common.labels.submissionNote")}
             </h4>
             <p className={styles.submissionNote}>
               {deliverable.submission_note || "No submission note provided."}

@@ -8,23 +8,23 @@ function ClientLayout() {
 
   const links = [
     {
-      label: t("navbar.home"),
+      label: t("common.nav.home"),
       to: "/dashboard/client",
     },
     {
-      label: t("navbar.postproject"),
+      label: t("common.nav.postProject"),
       to: "/dashboard/client/postjob",
     },
     {
-      label: t("navbar.projects&proposals"),
+      label: t("common.nav.projectsAndProposals"),
       to: "/dashboard/client/projects",
     },
     {
-      label: t("navbar.contracts"),
+      label: t("common.nav.contracts"),
       to: "/dashboard/client/contracts",
     },
     {
-      label: t("navbar.messages"),
+      label: t("common.nav.messages"),
       to: "/dashboard/client/messages",
     },
   ];

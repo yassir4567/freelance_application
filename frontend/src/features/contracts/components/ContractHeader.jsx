@@ -23,7 +23,7 @@ function ContractHeader({ statusClass, headerContent, role }) {
           className={styles.backLink}
         >
           <FiArrowLeft />
-          <span>{t("contractDetail.header.back")}</span>
+          <span>{t("common.actions.backToContracts")}</span>
         </NavLink>
 
         <div
@@ -52,7 +52,7 @@ function ContractHeader({ statusClass, headerContent, role }) {
 
           <div className={styles.progressCard}>
             <div className={styles.progressTop}>
-              <span>{t("contractDetail.header.progress.deliverables")}</span>
+              <span>{t("common.labels.deliverables")}</span>
               <strong>
                 {completedDeliverables}/{totalDeliverables}
               </strong>
@@ -65,7 +65,7 @@ function ContractHeader({ statusClass, headerContent, role }) {
             </div>
             <p>
               {headerContent.progress || 0}%{" "}
-              {t("contractDetail.header.progress.complete")}
+              {t("common.labels.complete")}
             </p>
           </div>
         </div>
