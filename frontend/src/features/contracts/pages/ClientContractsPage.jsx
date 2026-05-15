@@ -58,27 +58,27 @@ function ClientContractsPage() {
   const overviewCards = [
     {
       id: 0,
-      title: t("clientContracts.stats.completed.title"),
+      title: t("contractsList.stats.completed.title"),
       total: contractStats?.completed_contracts_count || "__",
-      subTitle: t("clientContracts.stats.completed.subTitle"),
+      subTitle: t("contractsList.stats.completed.subTitle"),
     },
     {
       id: 2,
-      title: t("clientContracts.stats.active.title"),
+      title: t("contractsList.stats.active.title"),
       total: contractStats?.active_contracts_count || "__",
-      subTitle: t("clientContracts.stats.active.subTitle"),
+      subTitle: t("contractsList.stats.active.subTitle"),
     },
     {
       id: 1,
-      title: t("clientContracts.stats.spending.title"),
+      title: t("contractsList.stats.spending.title"),
       total: `$${contractStats?.total_spent?.toFixed(3)}` || "__",
-      subTitle: t("clientContracts.stats.spending.subTitle"),
+      subTitle: t("contractsList.stats.spending.subTitle"),
     },
     {
       id: 3,
-      title: t("clientContracts.stats.escrow.title"),
+      title: t("contractsList.stats.escrow.title"),
       total: `$${contractStats?.total_in_escrow?.toFixed(3)}` || "__",
-      subTitle: t("clientContracts.stats.escrow.subTitle"),
+      subTitle: t("contractsList.stats.escrow.subTitle"),
     },
   ];
 
@@ -95,15 +95,15 @@ function ClientContractsPage() {
   return (
     <div className={styles.contractsPage}>
       <div className={styles.pageHeader}>
-        <h1 className="pageTitle">{t("clientContracts.title")}</h1>
+        <h1 className="pageTitle">{t("contractsList.title")}</h1>
         <p className={styles.contractsPageSubTitle}>
-          {t("clientContracts.subTitle")}
+          {t("contractsList.subTitle")}
         </p>
       </div>
 
       <div className={styles.overviewSection}>
         <h2 className={styles.overviewTitle}>
-          {t("clientContracts.overview")}
+          {t("contractsList.overview")}
         </h2>
         <div className={styles.contractsOverview}>
           {overviewCards.map((ov) => (
@@ -128,7 +128,7 @@ function ClientContractsPage() {
       <div className={styles.contractsListSection}>
         <div className={styles.contractsListHeader}>
           <h3 className={styles.contractsListTitle}>
-            {t("clientContracts.cardsTitle")}
+            {t("contractsList.cardsTitle")}
           </h3>
         </div>
 

@@ -282,7 +282,7 @@
     }
   },
 
-  "clientContracts": {
+  "contractsList": {
     "title": "Mes contrats",
     "subTitle": "Suivez les négociations, les travaux en cours et les accords terminés en un seul endroit.",
     "overview": "Aperçu",
@@ -302,6 +302,10 @@
       "escrow": {
         "title": "En séquestre",
         "subTitle": "Fonds en attente de libération"
+      },
+      "earning": {
+        "title": "Revenus totaux",
+        "subTitle": "Sur tous les contrats"
       }
     },
     "cardsTitle": "Liste des contrats",

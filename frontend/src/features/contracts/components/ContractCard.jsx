@@ -61,7 +61,7 @@ function ContractCard({ contract }) {
             <div className={styles.contractSubCardContainer}>
               <div className={styles.contractSubCard}>
                 <h5 className={styles.contractSubCardTitle}>
-                  {t("clientContracts.card.budget")}
+                  {t("contractsList.card.budget")}
                 </h5>
                 <div className={styles.contractSubCardContent}>
                   {formatCurrency(contract.final_price, "Not set")}
@@ -69,7 +69,7 @@ function ContractCard({ contract }) {
               </div>
               <div className={styles.contractSubCard}>
                 <h5 className={styles.contractSubCardTitle}>
-                  {t("clientContracts.card.progress")}
+                  {t("contractsList.card.progress")}
                 </h5>
                 <div
                   className={`${styles.contractSubCardContent} ${styles.progress}`}
@@ -83,11 +83,11 @@ function ContractCard({ contract }) {
             {contract.status === "active" && (
               <div className={styles.contractInfos}>
                 <div className={styles.contractInfoItem}>
-                  <p>{t("clientContracts.card.deliverable.current")}</p>
+                  <p>{t("contractsList.card.deliverable.current")}</p>
                   <p>{valueOrFallback(contract.current_deliverable?.title)}</p>
                 </div>
                 <div className={styles.contractInfoItem}>
-                  <p> {t("clientContracts.card.deliverable.deadline")}</p>
+                  <p> {t("contractsList.card.deliverable.deadline")}</p>
                   <p>
                     {formatDisplayDate(contract.current_deliverable?.deadline)}
                   </p>
@@ -105,13 +105,13 @@ function ContractCard({ contract }) {
               to={`${contract.id}`}
               className={`${styles.primaryBtn} ${styles.navlink}`}
             >
-              {t("clientContracts.card.actions.viewDetails")}
+              {t("contractsList.card.actions.viewDetails")}
             </NavLink>
             <NavLink
               to={`${contract.id}?tab=deliverables`}
               className={styles.navlink}
             >
-              {t("clientContracts.card.actions.viewDeliverables")}
+              {t("contractsList.card.actions.viewDeliverables")}
             </NavLink>
           </>
         ) : (

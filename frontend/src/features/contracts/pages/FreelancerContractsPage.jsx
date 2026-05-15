@@ -6,8 +6,10 @@ import FilterBox from "../../../shared/common/filters/FilterBox";
 import { useSearchParams } from "react-router-dom";
 import { getFreelancerContracts } from "../../../api/contracts/getFreelancerContracts";
 import ContractCard from "../components/ContractCard";
+import { useTranslation } from "react-i18next";
 
 function FreelancerContractsPage() {
+  const { t } = useTranslation();
   const [contractStats, setContractStats] = useState([]);
   const [filterParams, setFilterParams] = useSearchParams();
   const [contracts, setContracts] = useState([]);
@@ -54,21 +56,21 @@ function FreelancerContractsPage() {
   const overviewCards = [
     {
       id: 0,
-      title: "Completed Contracts",
+      title: t("contractsList.stats.completed.title"),
       total: contractStats?.completed_contracts || "__",
-      subTitle: "all time",
+      subTitle: t("contractsList.stats.completed.subTitle"),
     },
     {
       id: 2,
-      title: "Active Contracts",
+      title: t("contractsList.stats.active.title"),
       total: contractStats?.active_contracts || "__",
-      subTitle: "Currently running",
+      subTitle: t("contractsList.stats.active.subTitle"),
     },
     {
       id: 1,
-      title: "Total Earnings",
+      title: t("contractsList.stats.earning.title"),
       total: `$${contractStats?.total_earnings?.toFixed(3)}` || "__",
-      subTitle: "across all contracts",
+      subTitle: t("contractsList.stats.earning.subTitle"),
     },
   ];
 
@@ -88,15 +90,14 @@ function FreelancerContractsPage() {
   return (
     <div className={styles.contractsPage}>
       <div className={styles.pageHeader}>
-        <h1 className="pageTitle">My Contracts</h1>
+        <h1 className="pageTitle">{t("contractsList.title")}</h1>
         <p className={styles.contractsPageSubTitle}>
-          Track negotiations, active work, and completed agreements in one
-          place.
+          {t("contractsList.subTitle")}
         </p>
       </div>
 
       <div className={styles.overviewSection}>
-        <h2 className={styles.overviewTitle}>Overview</h2>
+        <h2 className={styles.overviewTitle}>{t("contractsList.overview")}</h2>
         <div className={styles.contractsOverview}>
           {overviewCards.map((ov) => (
             <SimpleCard
@@ -119,7 +120,9 @@ function FreelancerContractsPage() {
 
       <div className={styles.contractsListSection}>
         <div className={styles.contractsListHeader}>
-          <h3 className={styles.contractsListTitle}>Contracts List</h3>
+          <h3 className={styles.contractsListTitle}>
+            {t("contractsList.cardsTitle")}
+          </h3>
         </div>
 
         <div className={styles.contractsList}>

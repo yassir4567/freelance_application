@@ -282,7 +282,7 @@
     }
   },
 
-  "clientContracts": {
+  "contractsList": {
     "title": "My Contracts",
     "subTitle": "Track negotiations, active work, and completed agreements in one place.",
     "overview": "Overview",
@@ -302,6 +302,10 @@
       "escrow": {
         "title": "In escrow",
         "subTitle": "Funds awaiting release"
+      },
+      "earning": {
+        "title": "Total Earning",
+        "subTitle": "across all contracts"
       }
     },
     "cardsTitle": "Contracts List",
