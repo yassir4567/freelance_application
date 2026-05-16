@@ -114,13 +114,17 @@
       "projectSizeRequired": "Please select the project size",
       "durationRequired": "Please select the project duration",
       "descriptionRequired": "Description is required",
+      "descriptionLessThanThirty": "Description must be at least 30 characters",
       "budgetRequired": "Budget is required",
       "noteRequired": "Note Required",
       "linkRequired": "Enter at least one link",
       "fillPreviousLinkFirst": "Fill the previous one first",
       "priceRequired": "Price Required",
       "invalidPrice": "Price must be a valid number",
-      "priceGreaterThanFive": "Price must be greater than 5$"
+      "priceGreaterThanFive": "Price must be greater than 5$",
+      "deadlineRequired": "Deadline Required",
+      "invalidDeadline": "Deadline must be valid date",
+      "pastDeadline": "Deadline cannot be in the past"
     },
     "nav": {
       "home": "Home",
@@ -363,6 +367,7 @@
       }
     }
   },
+
   "setUpContract": {
     "header": {
       "description": "Prepare the final contract terms, define deliverables, and send the offer to the freelancer for approval."
@@ -374,8 +379,50 @@
         "price": {
           "label": "Final price",
           "placeholder": "Enter the agreed final price"
+        },
+        "upload": {
+          "error": "Contract file is required"
+        },
+        "description": {
+          "label": "Contract description",
+          "placeholder": "Describe the work scope, expectations, and important details...",
+          "errors": {
+            "descriptionLessThanHundred": "Description must be at least 100 characters"
+          }
         }
       }
+    },
+    "deliverableForm": {
+      "title": "Set up contract deliverables",
+      "description": "Break the contract into clear deliverables with deadlines and payment amounts. Enter them in order",
+      "form": {
+        "title": {
+          "label": "Deliverable Title",
+          "placeholder": "Enter deliverable title"
+        },
+        "amount": {
+          "placeholder": "Enter the deliverable amount",
+          "errors": {
+            "priceLessThanFive": "Price must be greater than 1$"
+          }
+        },
+        "description": {
+          "label": "Deliverable description",
+          "placeholder" : "Describe the work scope, expectations, and important details..."
+        }
+      }
+    },
+    "finalStep" : {
+      "title" : "Review and confirm contract setup",
+      "description" : "Check the final terms, deliverables, and payment breakdown before activating the contract.",
+      "contractInfo" : "Contract info" ,
+      "contractAmount" : "Contract amount"
+    },
+    "modal": {
+      "subTitle": "Final confirmation",
+      "title": "Activate this contract?",
+      "description": "nce you confirm, the contract will be activated with the terms and deliverables you entered. Make sure everything is correct before continuing.",
+      "confirm" : "Confirm and activate"
     }
   }
 }

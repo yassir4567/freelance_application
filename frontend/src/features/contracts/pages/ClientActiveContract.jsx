@@ -13,8 +13,10 @@ import CreatedDeliverableCollapse from "../components/CreatedDeliverableCollapse
 import SetUpContractFinalStep from "../components/SetUpContractFinalStep";
 import SubmitSetupModal from "../components/modals/SubmitSetupModal";
 import { setUpContract } from "../../../api/contracts/setUpContract";
+import { useTranslation } from "react-i18next";
 
 function ClientActiveContract() {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const [setupInfo, setSetupInfo] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
@@ -77,7 +79,7 @@ function ClientActiveContract() {
 
   const nextStep = () => {
     console.log(setUpContractFormData);
-    
+
     setStep((currentStep) => currentStep + 1);
   };
 
@@ -136,7 +138,6 @@ function ClientActiveContract() {
     );
 
     console.log(payload);
-    
 
     const result = await setUpContract(contractId, payload);
     setIsSubmitting(false);
@@ -199,11 +200,10 @@ function ClientActiveContract() {
               <div className={styles.deliverablesWrapper}>
                 <div className={styles.deliverablesFormsHeader}>
                   <h1 className={styles.deliverablesFormsTitle}>
-                    Set up contract deliverables
+                    {t("setUpContract.deliverableForm.title")}
                   </h1>
                   <p className={styles.deliverablesFormsDescription}>
-                    Break the contract into clear deliverables with deadlines
-                    and payment amounts. Enter them in order
+                    {t("setUpContract.deliverableForm.description")}
                   </p>
                 </div>
 

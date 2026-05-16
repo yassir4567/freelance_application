@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import styles from "../styles/SetUpContractFinalStep.module.css";
 import FinalStepDeliverableCard from "./FinalStepDeliverableCard";
 
@@ -8,39 +9,49 @@ function SetUpContractFinalStep({
   deliverables,
   onShowSendModal,
 }) {
+  const { t } = useTranslation();
   return (
     <div className={styles.finalStepCmp}>
       <div className={styles.header}>
         <h1 className={styles.headerTitle}>
-          Review and confirm contract setup
+          {t("setUpContract.finalStep.title")}
         </h1>
         <p className={styles.headerDescription}>
-          Check the final terms, deliverables, and payment breakdown before
-          activating the contract.
+          {t("setUpContract.finalStep.description")}
         </p>
       </div>
 
       <div className={styles.contractSetUpInfo}>
-        <h5 className={styles.minTitle}>Contract info</h5>
+        <h5 className={styles.minTitle}>
+          {t("setUpContract.finalStep.contractInfo")}
+        </h5>
         <div className={styles.row}>
           <div className={styles.contractInfoCard}>
-            <h5 className={styles.cardTitle}>Contract amount</h5>
+            <h5 className={styles.cardTitle}>
+              {t("setUpContract.finalStep.contractAmount")}
+            </h5>
             <p>${setUpContractFormData.final_price}</p>
           </div>
           <div className={styles.contractInfoCard}>
-            <h5 className={styles.cardTitle}>Deadline</h5>
+            <h5 className={styles.cardTitle}>
+              {t("common.labels.deadline")}
+            </h5>
             <p>{setUpContractFormData.final_deadline}</p>
           </div>
         </div>
 
         <div className={styles.contractDescriptionCard}>
-          <h5 className={styles.cardTitle}>Description</h5>
+          <h5 className={styles.cardTitle}>
+            {t("common.labels.description")}
+          </h5>
           <p>{setUpContractFormData.description}</p>
         </div>
       </div>
 
       <div className={styles.deliverablesContainer}>
-        <h6 className={styles.minTitle}>Deliverables</h6>
+        <h6 className={styles.minTitle}>
+          {t("common.labels.deliverable")}s
+        </h6>
         <div className={styles.deliverablesWrapper}>
           {deliverables.map((deliverable, index) => (
             <FinalStepDeliverableCard

@@ -1,7 +1,9 @@
 import { FiAlertCircle } from "react-icons/fi";
 import styles from "../../styles/SubmitSetupModal.module.css";
+import { useTranslation } from "react-i18next";
 
-function SubmitSetupModal({onClose , isSubmitting , onConfirm}) {
+function SubmitSetupModal({ onClose, isSubmitting, onConfirm }) {
+  const { t } = useTranslation();
   return (
     <div className={styles.container}>
       <div className={styles.wrapper}>
@@ -9,14 +11,16 @@ function SubmitSetupModal({onClose , isSubmitting , onConfirm}) {
           <FiAlertCircle />
         </div>
         <div className={styles.content}>
-          <p className={styles.kicker}>Final confirmation</p>
+          <p className={styles.kicker}>
+            {t("setUpContract.modal.subTitle")}
+          </p>
 
-          <h2 className={styles.title}>Activate this contract?</h2>
+          <h2 className={styles.title}>
+            {t("setUpContract.modal.title")}
+          </h2>
 
           <p className={styles.description}>
-            Once you confirm, the contract will be activated with the terms and
-            deliverables you entered. Make sure everything is correct before
-            continuing.
+            {t("setUpContract.modal.description")}
           </p>
         </div>
 
@@ -36,7 +40,7 @@ function SubmitSetupModal({onClose , isSubmitting , onConfirm}) {
             className={styles.confirm}
             disabled={isSubmitting}
           >
-            {isSubmitting ? "Activating..." : "Confirm and activate"}
+            {isSubmitting ? "Activating..." : t("setUpContract.modal.confirm")}
           </button>
         </div>
       </div>

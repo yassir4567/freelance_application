@@ -114,13 +114,17 @@
       "projectSizeRequired": "Veuillez sélectionner la taille du projet",
       "durationRequired": "Veuillez sélectionner la durée du projet",
       "descriptionRequired": "La description est obligatoire",
+      "descriptionLessThanThirty": "La description doit contenir au moins 30 caractères",
       "budgetRequired": "Le budget est obligatoire",
       "noteRequired": "Note requise",
       "linkRequired": "Saisissez au moins un lien",
       "fillPreviousLinkFirst": "Remplissez d’abord le lien précédent",
       "priceRequired": "Prix obligatoire",
       "invalidPrice": "Le prix doit être un nombre valide",
-      "priceGreaterThanFive": "Le prix doit être supérieur à 5 $"
+      "priceGreaterThanFive": "Le prix doit être supérieur à 5 $",
+      "deadlineRequired": "Date limite requise",
+      "invalidDeadline": "La date limite doit être une date valide",
+      "pastDeadline": "La date limite ne peut pas être dans le passé"
     },
     "nav": {
       "home": "Accueil",
@@ -374,8 +378,50 @@
         "price": {
           "label": "Prix final",
           "placeholder": "Saisissez le prix final convenu"
+        },
+        "upload": {
+          "error": "Le fichier du contrat est requis"
+        },
+        "description": {
+          "label": "Description du contrat",
+          "placeholder": "Décrivez le périmètre du travail, les attentes et les détails importants...",
+          "errors": {
+            "descriptionLessThanHundred": "La description doit contenir au moins 100 caractères"
+          }
         }
       }
+    },
+    "deliverableForm": {
+      "title": "Configurer les livrables du contrat",
+      "description": "Divisez le contrat en livrables clairs avec des délais et des montants de paiement. Saisissez-les dans l’ordre",
+      "form": {
+        "title": {
+          "label": "Titre du livrable",
+          "placeholder": "Saisissez le titre du livrable"
+        },
+        "amount": {
+          "placeholder": "Saisissez le montant du livrable",
+          "errors": {
+            "priceLessThanFive": "Le prix doit être supérieur à 1 $"
+          }
+        },
+        "description": {
+          "label": "Description du livrable",
+          "placeholder": "Décrivez le périmètre du travail, les attentes et les détails importants..."
+        }
+      }
+    },
+    "finalStep": {
+      "title": "Vérifier et confirmer la configuration du contrat",
+      "description": "Vérifiez les conditions finales, les livrables et la répartition des paiements avant d’activer le contrat.",
+      "contractInfo": "Informations du contrat",
+      "contractAmount": "Montant du contrat"
+    },
+    "modal": {
+      "subTitle": "Confirmation finale",
+      "title": "Activer ce contrat ?",
+      "description": "Une fois confirmé, le contrat sera activé avec les conditions et les livrables que vous avez saisis. Assurez-vous que tout est correct avant de continuer.",
+      "confirm": "Confirmer et activer"
     }
   }
 }

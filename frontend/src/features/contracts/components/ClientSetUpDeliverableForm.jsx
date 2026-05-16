@@ -1,6 +1,7 @@
 import { useState } from "react";
 import styles from "../styles/ClientSetUpDeliverableForm.module.css";
 import { FiPlus } from "react-icons/fi";
+import { useTranslation } from "react-i18next";
 
 function ClientSetUpDeliverableForm({
   nextStep,
@@ -12,6 +13,7 @@ function ClientSetUpDeliverableForm({
   contractPrice,
   totalDeliverablesAmount,
 }) {
+  const { t } = useTranslation();
   const [errors, setErrors] = useState({
     title: "",
     amount: "",
@@ -30,14 +32,16 @@ function ClientSetUpDeliverableForm({
   // * validate price function
   const validatePrice = (value) => {
     if (!value) {
-      return "Price required";
+      return t("common.validation.priceRequired");
     }
 
     const numberPrice = Number(value);
     if (!Number.isFinite(numberPrice)) {
-      return "Price must be a valid number";
+      return t("common.validation.invalidPrice");
     } else if (numberPrice <= 1) {
-      return "Price must be greater than 1$";
+      return t(
+        "setUpContract.deliverableForm.form.amount.errors.priceLessThanFive",
+      );
     }
 
     return "";
@@ -55,14 +59,14 @@ function ClientSetUpDeliverableForm({
 
     // * validate title
     if (!form.title.trim()) {
-      newErrors.title = "Title required";
+      newErrors.title = t("common.validation.titleRequired");
     }
 
     // * validate description
     if (!form.description.trim()) {
-      newErrors.description = "Description is required";
+      newErrors.description = t("common.validation.descriptionRequired");
     } else if (form.description.length < 30) {
-      newErrors.description = "Description must be at least 30 character";
+      newErrors.description = t("common.validation.descriptionLessThanThirty");
     }
 
     if (Object.keys(newErrors).length > 0) {
@@ -99,28 +103,34 @@ function ClientSetUpDeliverableForm({
 
   return (
     <form className={styles.form}>
-      <h5 className={styles.title}>Deliverable #{totalDeliverables + 1}</h5>
+      <h5 className={styles.title}>
+        {t("common.labels.deliverable")} #{totalDeliverables + 1}
+      </h5>
       <div className={styles.row}>
         <div className={styles.inputBox}>
-          <label>Deliverable Title</label>
+          <label>{t("setUpContract.deliverableForm.form.title.label")}</label>
           <input
             type="text"
             name="title"
             value={form.title}
             onChange={handleInputChange}
-            placeholder="Enter your deliverable title "
+            placeholder={t(
+              "setUpContract.deliverableForm.form.title.placeholder",
+            )}
           />
           {errors.title && <div className={styles.error}>{errors.title}</div>}
         </div>
 
         <div className={styles.inputBox}>
-          <label>Amount</label>
+          <label>{t("common.labels.amount")}</label>
           <input
             type="number"
             name="amount"
             value={form.amount}
             onChange={handleInputChange}
-            placeholder="Enter the deliverable amount"
+            placeholder={t(
+              "setUpContract.deliverableForm.form.amount.placeholder",
+            )}
           />
           {errors.amount && <div className={styles.error}>{errors.amount}</div>}
         </div>
@@ -128,14 +138,18 @@ function ClientSetUpDeliverableForm({
 
       <div className={styles.textareaBox}>
         <div className={styles.textareaLabelBox}>
-          <label>Deliverable description</label>
+          <label>
+            {t("setUpContract.deliverableForm.form.description.label")}
+          </label>
           <p>{form.description.length} / 1000</p>
         </div>
         <textarea
           name="description"
           value={form.description}
           onChange={handleInputChange}
-          placeholder="Describe the work scope, expectations, and important details..."
+          placeholder={t(
+            "setUpContract.deliverableForm.form.description.placeholder",
+          )}
         />
         {errors.description && (
           <div className={styles.error}>{errors.description}</div>

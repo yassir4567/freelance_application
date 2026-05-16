@@ -1,6 +1,9 @@
 import { useState } from "react";
 import styles from "../styles/ContractSetUpForm.module.css";
+import { useTranslation } from "react-i18next";
 function ContractSetUpForm({ nextStep, form, setForm }) {
+  const { t } = useTranslation();
+
   const [errors, setErrors] = useState({
     final_price: "",
     final_deadline: "",
@@ -25,14 +28,14 @@ function ContractSetUpForm({ nextStep, form, setForm }) {
   // * validate price function
   const validatePrice = (value) => {
     if (!value) {
-      return "Price required";
+      return t("common.validation.priceRequired");
     }
 
     const numberPrice = Number(value);
     if (!Number.isFinite(numberPrice)) {
-      return "Price must be a valid number";
+      return t("common.validation.invalidPrice");
     } else if (numberPrice <= 5) {
-      return "Price must be greater than 5$";
+      return t("common.validation.priceGreaterThanFive");
     }
 
     return "";
@@ -40,16 +43,16 @@ function ContractSetUpForm({ nextStep, form, setForm }) {
 
   // * validate deadline function
   const validateDeadline = (value) => {
-    if (!value) return "Deadline required";
+    if (!value) return t("common.validation.deadlineRequired");
 
     const deadline = new Date(value);
     const today = new Date();
     today.setHours(0, 0, 0, 0);
 
     if (Number.isNaN(deadline.getTime())) {
-      return "Deadline must be valid date";
+      return t("common.validation.invalidDeadline");
     } else if (deadline < today) {
-      return "Deadline cannot be in the past";
+      return t("common.validation.pastDeadline");
     }
 
     return "";
@@ -75,13 +78,15 @@ function ContractSetUpForm({ nextStep, form, setForm }) {
 
     // * validate description
     if (!form.description.trim()) {
-      newErrors.description = "Description is required";
+      newErrors.description = t("common.validation.descriptionRequired");
     } else if (form.description.length < 100) {
-      newErrors.description = "Description must be at least 100 character";
+      newErrors.description = t(
+        "setUpContract.setUpForm.form.description.errors.descriptionLessThanHundred",
+      );
     }
 
     if (!form.contract_pdf) {
-      newErrors.upload = "Contract file is required";
+      newErrors.upload = t("setUpContract.setUpForm.form.upload.error");
     }
 
     if (Object.keys(newErrors).length > 0) {
@@ -99,21 +104,20 @@ function ContractSetUpForm({ nextStep, form, setForm }) {
 
   return (
     <div className={styles.formContainer}>
-      <h1 className={styles.formTitle}>Set up the contract terms</h1>
+      <h1 className={styles.formTitle}>{t("setUpContract.setUpForm.title")}</h1>
       <p className={styles.formDescription}>
-        Confirm the final price, deadline, and project description before
-        activating the contract.
+        {t("setUpContract.setUpForm.description")}
       </p>
       <form className={styles.form}>
         <div className={styles.row}>
           <div className={styles.inputBox}>
-            <label>Final price</label>
+            <label>{t("setUpContract.setUpForm.form.price.label")}</label>
             <input
               type="number"
               name="final_price"
               value={form.final_price}
               onChange={handleInputsChange}
-              placeholder="Enter the agreed final price"
+              placeholder={t("setUpContract.setUpForm.form.price.placeholder")}
             />
             {errors.final_price && (
               <div className={styles.error}>{errors.final_price}</div>
@@ -121,7 +125,7 @@ function ContractSetUpForm({ nextStep, form, setForm }) {
           </div>
 
           <div className={styles.inputBox}>
-            <label>Final deadline</label>
+            <label>{t("common.labels.finalDeadline")}</label>
             <input
               type="date"
               name="final_deadline"
@@ -167,14 +171,16 @@ function ContractSetUpForm({ nextStep, form, setForm }) {
 
         <div className={styles.textareaBox}>
           <div className={styles.textareaLabelBox}>
-            <label>Contract description</label>
+            <label>{t("setUpContract.setUpForm.form.description.label")}</label>
             <p>{form.description.length} / 2000</p>
           </div>
           <textarea
             value={form.description}
             onChange={handleInputsChange}
             name="description"
-            placeholder="Describe the work scope, expectations, and important details..."
+            placeholder={t(
+              "setUpContract.setUpForm.form.description.placeholder",
+            )}
           />
           {errors.description && (
             <div className={styles.error}>{errors.description}</div>
