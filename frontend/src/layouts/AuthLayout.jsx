@@ -1,11 +1,13 @@
 import styles from "./AuthLayout.module.css";
-import { Outlet } from "react-router-dom";
+import { Link, NavLink, Outlet } from "react-router-dom";
 import Logo from "../shared/common/Logo";
 
 function AuthLayout() {
   return (
     <div className={styles.wrapper}>
-      <Logo />
+      <Link to="/" className={styles.logo}>
+        Freelancy
+      </Link>
       <div className={styles.form_card}>
         <Outlet />
       </div>

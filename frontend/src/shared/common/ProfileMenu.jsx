@@ -21,7 +21,8 @@ function ProfileMenu({ onClose }) {
         </NavLink>
         <hr />
         <button onClick={handleLogout} className={styles.btn}>
-          <RiLogoutCircleRLine color="red" /> <span>{t("ui.actions.logout")}</span>
+          <RiLogoutCircleRLine color="red" />{" "}
+          <span>{t("ui.actions.logout")}</span>
         </button>
       </div>
     </div>

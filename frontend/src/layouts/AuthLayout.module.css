@@ -6,14 +6,17 @@
   position: relative;
 }
 
-.auth_logo {
+.logo {
   position: absolute;
-  top: 30px;
-  left: 30px;
+  top: 10px;
+  left: 170px;
   width: 90px;
   height: 90px;
-  color: var(--color-black);
-  font-size: 19px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   text-align: center;
-  font-weight: bold;
+  font-size: var(--fs-2xl);
+  font-weight: 800;
+  color: var(--color-success);
 }
