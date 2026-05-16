@@ -72,7 +72,7 @@ function FreelancerProposalCard({ proposal }) {
               to={`/dashboard/freelancer/messages?chat=${proposal.contract.conversation.id}`}
               className={styles.link}
             >
-              Message client
+              {t("ui.actions.messageClient")}
             </NavLink>
           </div>
         )}

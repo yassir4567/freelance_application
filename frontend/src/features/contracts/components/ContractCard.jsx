@@ -33,14 +33,14 @@ function ContractCard({ contract }) {
             <img src={profile} className={styles.avatar} alt="User profile" />
             <div className={styles.contractCardHeaderTitleBox}>
               <h2 className={styles.projectTitle}>
-                {valueOrFallback(contract.project_title, "Untitled project")}
+                {valueOrFallback(contract.project_title, t("ui.fallbacks.untitledProject"))}
               </h2>
               <p className={styles.name}>
                 {valueOrFallback(
                   `${other_user.first_name ?? ""} ${
                     other_user.last_name ?? ""
                   }`.trim(),
-                  "Not assigned",
+                  t("ui.fallbacks.notAssigned"),
                 )}{" "}
                 |{otherUserLabel}
               </p>
@@ -64,7 +64,7 @@ function ContractCard({ contract }) {
                   {t("common.labels.budget")}
                 </h5>
                 <div className={styles.contractSubCardContent}>
-                  {formatCurrency(contract.final_price, "Not set")}
+                  {formatCurrency(contract.final_price, t("ui.fallbacks.notSet"))}
                 </div>
               </div>
               <div className={styles.contractSubCard}>
@@ -119,11 +119,11 @@ function ContractCard({ contract }) {
             to={`/dashboard/client/contracts/${contract.id}/setup`}
             className={styles.navlink}
           >
-            Active contract
+            {t("ui.actions.activateContract")}
           </NavLink>
         )}
         <NavLink to={messagePath} className={styles.navlink}>
-          Message {otherUserLabel}
+          {t("ui.actions.messageUser", { role: otherUserLabel })}
         </NavLink>
       </div>
     </div>

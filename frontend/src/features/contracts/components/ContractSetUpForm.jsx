@@ -142,10 +142,10 @@ function ContractSetUpForm({ nextStep, form, setForm }) {
           <label htmlFor="contractFile" className={styles.uploadBox}>
             <div className={styles.icon}>📄</div>
 
-            <h3>Upload Contract PDF</h3>
-            <p>Click to choose a PDF file</p>
+            <h3>{t("setUpContract.setUpForm.form.upload.title")}</h3>
+            <p>{t("setUpContract.setUpForm.form.upload.description")}</p>
 
-            <span className={styles.uploadBtn}>Choose File</span>
+            <span className={styles.uploadBtn}>{t("ui.actions.chooseFile")}</span>
           </label>
 
           <input
@@ -188,7 +188,7 @@ function ContractSetUpForm({ nextStep, form, setForm }) {
         </div>
 
         <button onClick={handleNextStep} className={styles.next}>
-          Next
+          {t("ui.actions.next")}
         </button>
       </form>
     </div>

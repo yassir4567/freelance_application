@@ -2,8 +2,10 @@ import { useEffect, useState } from "react";
 import { NavLink, useParams } from "react-router-dom";
 import { getUserDetails } from "../../../api/admin/getUserDetails";
 import styles from "../styles/UserDetails.module.css";
+import { useTranslation } from "react-i18next";
 
 function UserDetails() {
+  const { t } = useTranslation();
   const { id } = useParams();
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -32,7 +34,7 @@ function UserDetails() {
   if (loading) {
     return (
       <div className={styles.container}>
-        <p className={styles.state}>Loading user details...</p>
+        <p className={styles.state}>{t("ui.states.loadingUserDetails")}</p>
       </div>
     );
   }
@@ -40,9 +42,9 @@ function UserDetails() {
   if (error || !user) {
     return (
       <div className={styles.container}>
-        <p className={styles.error}>{error || "User not found"}</p>
+        <p className={styles.error}>{error || t("admin.users.userNotFound")}</p>
         <NavLink to="/dashboard/admin/users" className={styles.backBtn}>
-          Back to users
+          {t("ui.actions.backToUsers")}
         </NavLink>
       </div>
     );
@@ -56,7 +58,7 @@ function UserDetails() {
     <div className={styles.container}>
       <div className={styles.header}>
         <NavLink to="/dashboard/admin/users" className={styles.backBtn}>
-          Back
+          {t("ui.actions.back")}
         </NavLink>
         <span className={styles.role}>{user.role}</span>
       </div>
@@ -71,42 +73,42 @@ function UserDetails() {
 
       <section className={styles.grid}>
         <div className={styles.card}>
-          <h2>Contact information</h2>
-          <Info label="Phone" value={user.phone} />
-          <Info label="Location" value={location} />
-          <Info label="Address" value={user.address} />
-          <Info label="Joined" value={formatDate(user.created_at)} />
+          <h2>{t("ui.labels.contactInformation")}</h2>
+          <Info label={t("ui.labels.phone")} value={user.phone} fallback={t("ui.fallbacks.notAdded")} />
+          <Info label={t("ui.labels.location")} value={location} fallback={t("ui.fallbacks.notAdded")} />
+          <Info label={t("ui.labels.address")} value={user.address} fallback={t("ui.fallbacks.notAdded")} />
+          <Info label={t("ui.labels.joined")} value={formatDate(user.created_at, t("ui.fallbacks.notAdded"))} fallback={t("ui.fallbacks.notAdded")} />
         </div>
 
         {isFreelancer && (
           <div className={styles.card}>
-            <h2>Freelancer profile</h2>
-            <Info label="Title" value={freelancer?.title} />
-            <Info label="Category" value={freelancer?.category} />
-            <Info label="Portfolio" value={freelancer?.portfolio_url} isLink />
-            <Info label="Resume" value={freelancer?.resume_url} isLink />
-            <Info label="Total projects" value={user.total_projects} />
+            <h2>{t("ui.labels.freelancerProfile")}</h2>
+            <Info label={t("common.labels.title")} value={freelancer?.title} fallback={t("ui.fallbacks.notAdded")} />
+            <Info label={t("common.labels.category")} value={freelancer?.category} fallback={t("ui.fallbacks.notAdded")} />
+            <Info label={t("ui.labels.portfolio")} value={freelancer?.portfolio_url} isLink fallback={t("ui.fallbacks.notAdded")} />
+            <Info label={t("ui.labels.resume")} value={freelancer?.resume_url} isLink fallback={t("ui.fallbacks.notAdded")} />
+            <Info label={t("ui.labels.totalProjects")} value={user.total_projects} fallback={t("ui.fallbacks.notAdded")} />
           </div>
         )}
 
         {!isFreelancer && (
           <div className={styles.card}>
-            <h2>Client activity</h2>
-            <Info label="Total projects" value={user.total_projects} />
+            <h2>{t("ui.labels.clientActivity")}</h2>
+            <Info label={t("ui.labels.totalProjects")} value={user.total_projects} fallback={t("ui.fallbacks.notAdded")} />
           </div>
         )}
       </section>
 
       {isFreelancer && freelancer?.bio && (
         <section className={styles.card}>
-          <h2>Bio</h2>
+          <h2>{t("ui.labels.bio")}</h2>
           <p className={styles.text}>{freelancer.bio}</p>
         </section>
       )}
 
       {isFreelancer && (
         <section className={styles.card}>
-          <h2>Skills</h2>
+          <h2>{t("common.labels.skills")}</h2>
           {freelancer?.skills?.length > 0 ? (
             <div className={styles.skills}>
               {freelancer.skills.map((skill) => (
@@ -114,21 +116,22 @@ function UserDetails() {
               ))}
             </div>
           ) : (
-            <p className={styles.empty}>No skills added.</p>
+            <p className={styles.empty}>{t("ui.states.noSkillsAddedShort")}</p>
           )}
         </section>
       )}
 
       <section className={styles.totalCard}>
-        <span>{isFreelancer ? "Related projects" : "Client projects"}</span>
+        <span>{isFreelancer ? t("ui.labels.relatedProjects") : t("ui.labels.clientProjects")}</span>
         <strong>{user.total_projects || 0}</strong>
       </section>
     </div>
   );
 }
 
-function Info({ label, value, isLink = false }) {
-  const finalValue = value === null || value === undefined || value === "" ? "Not added" : value;
+function Info({ label, value, isLink = false, fallback }) {
+  const finalValue =
+    value === null || value === undefined || value === "" ? fallback : value;
 
   return (
     <div className={styles.info}>
@@ -144,9 +147,9 @@ function Info({ label, value, isLink = false }) {
   );
 }
 
-function formatDate(date) {
+function formatDate(date, fallback) {
   if (!date) {
-    return "Not added";
+    return fallback;
   }
 
   return new Date(date).toLocaleDateString();

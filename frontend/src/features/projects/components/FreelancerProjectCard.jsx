@@ -11,7 +11,7 @@ function FreelancerProjectCard({ project }) {
     shortedDescription = (
       <>
         {project.description.split(" ").slice(0, 40).join(" ")}
-        <span className={styles.more}> more...</span>
+        <span className={styles.more}> {t("ui.labels.more")}</span>
       </>
     );
   } else {

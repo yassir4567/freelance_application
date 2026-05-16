@@ -4,8 +4,10 @@ import ChatMessages from "../components/ChatMessages";
 import styles from "../styles/MessagesPage.module.css";
 import { getConversations } from "../../../api/messages/getConversations";
 import { useSearchParams } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 function MessagesPage() {
+  const { t } = useTranslation();
   const [conversations, setConversations] = useState([]);
   const [queryParams, setQueryParams] = useSearchParams();
   const conversationId = queryParams.get("chat") || "";
@@ -58,7 +60,7 @@ function MessagesPage() {
           <ChatMessages conversation={currentConversation} />
         ) : (
           <div className={styles.select_conv}>
-            <p>Select Conversation</p>
+            <p>{t("ui.states.selectConversation")}</p>
           </div>
         )}
       </div>

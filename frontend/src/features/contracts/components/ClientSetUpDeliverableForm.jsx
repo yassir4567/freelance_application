@@ -162,7 +162,7 @@ function ClientSetUpDeliverableForm({
             onClick={handleAddDeliverableForm}
             className={styles.add}
           >
-            <FiPlus /> <span>Add deliverable</span>
+            <FiPlus /> <span>{t("ui.actions.addDeliverable")}</span>
           </button>
         )}
         <button
@@ -170,7 +170,7 @@ function ClientSetUpDeliverableForm({
           onClick={() => previousStep()}
           className={styles.step}
         >
-          previous
+          {t("ui.actions.previous")}
         </button>
         {isAmountCompleted && (
           <button
@@ -178,7 +178,7 @@ function ClientSetUpDeliverableForm({
             onClick={handleNextStep}
             className={styles.step}
           >
-            Next
+            {t("ui.actions.next")}
           </button>
         )}
       </div>

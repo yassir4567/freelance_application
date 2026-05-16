@@ -15,18 +15,18 @@ function ContractDeliverables({ contract, setContract }) {
     },
     {
       id: 1,
-      title: t("common.options.status.completed"),
+      title: "Completed",
       value: safeDeliverables.filter((del) => del.status === "accepted").length,
     },
     {
       id: 2,
-      title: t("common.options.status.inReview"),
+      title: "In Review",
       value: safeDeliverables.filter((del) => del.status === "submitted")
         .length,
     },
     {
       id: 3,
-      title: t("common.options.status.waiting"),
+      title: "Waiting",
       value: safeDeliverables.filter((del) => del.status === "pending").length,
     },
   ];
@@ -68,7 +68,7 @@ function ContractDeliverables({ contract, setContract }) {
           ))
         ) : (
           <div className={styles.emptyState}>
-            No deliverables have been added to this contract yet.
+            {t("ui.states.noDeliverables")}
           </div>
         )}
       </div>

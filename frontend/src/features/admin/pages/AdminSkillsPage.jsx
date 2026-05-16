@@ -2,8 +2,10 @@ import { useEffect, useMemo, useState } from "react";
 import { addSkills } from "../../../api/admin/addSkills";
 import { getCategorySkills } from "../../../api/admin/getCategorySkills";
 import styles from "../styles/AdminSkillsPage.module.css";
+import { useTranslation } from "react-i18next";
 
 function AdminSkillsPage() {
+  const { t } = useTranslation();
   const [categories, setCategories] = useState([]);
   const [categoryId, setCategoryId] = useState("");
   const [skillName, setSkillName] = useState("");
@@ -47,7 +49,7 @@ function AdminSkillsPage() {
     const newSkill = skillName.trim();
 
     if (!newSkill) {
-      setError("Please enter a skill name first");
+      setError(t("ui.validation.skillNameRequired"));
       return;
     }
 
@@ -56,7 +58,7 @@ function AdminSkillsPage() {
     );
 
     if (isAlreadyAdded) {
-      setError("This skill is already in the list");
+      setError(t("ui.validation.skillAlreadyAdded"));
       return;
     }
 
@@ -76,12 +78,12 @@ function AdminSkillsPage() {
     setSuccessMessage("");
 
     if (!categoryId) {
-      setError("Please choose a category");
+      setError(t("ui.validation.chooseCategory"));
       return;
     }
 
     if (pendingSkills.length === 0) {
-      setError("Please add at least one skill");
+      setError(t("ui.validation.addAtLeastOneSkill"));
       return;
     }
 
@@ -102,7 +104,7 @@ function AdminSkillsPage() {
       setSkillName("");
       setPendingSkills([]);
       setShowForm(false);
-      setSuccessMessage("Skills added successfully");
+      setSuccessMessage(t("admin.skills.success"));
     } else {
       const validationMessage =
         result.errors?.category_id?.[0] || result.errors?.skills?.[0];
@@ -116,8 +118,8 @@ function AdminSkillsPage() {
     <div className={styles.content}>
       <div className={styles.header}>
         <div>
-          <p className={styles.subtitle}>Admin dashboard</p>
-          <h1>Skills</h1>
+          <p className={styles.subtitle}>{t("ui.labels.adminDashboard")}</p>
+          <h1>{t("admin.skills.title")}</h1>
         </div>
 
         <button
@@ -125,17 +127,17 @@ function AdminSkillsPage() {
           className={styles.addBtn}
           onClick={() => setShowForm((currentValue) => !currentValue)}
         >
-          {showForm ? "Close" : "Add skills"}
+          {showForm ? t("ui.actions.close") : t("ui.actions.addSkills")}
         </button>
       </div>
 
       <div className={styles.summaryGrid}>
         <div className={styles.summary}>
-          <span>Categories</span>
+          <span>{t("admin.categories.title")}</span>
           <strong>{categories.length}</strong>
         </div>
         <div className={styles.summary}>
-          <span>Total skills</span>
+          <span>{t("ui.labels.totalSkills")}</span>
           <strong>{totalSkills}</strong>
         </div>
       </div>
@@ -144,20 +146,20 @@ function AdminSkillsPage() {
         <form className={styles.form} onSubmit={handleSubmit}>
           <div className={styles.formHeader}>
             <div>
-              <h2>Add Skills</h2>
-              <p>Choose one category, add skills one by one, then save.</p>
+              <h2>{t("admin.skills.formTitle")}</h2>
+              <p>{t("admin.skills.formDescription")}</p>
             </div>
           </div>
 
           <div className={styles.formRow}>
             <div className={styles.field}>
-              <label htmlFor="category">Category</label>
+              <label htmlFor="category">{t("common.labels.category")}</label>
               <select
                 id="category"
                 value={categoryId}
                 onChange={(event) => setCategoryId(event.target.value)}
               >
-                <option value="">Choose category</option>
+                <option value="">{t("admin.skills.chooseCategory")}</option>
                 {categories.map((category) => (
                   <option key={category.id} value={category.id}>
                     {category.name}
@@ -167,11 +169,11 @@ function AdminSkillsPage() {
             </div>
 
             <div className={styles.field}>
-              <label htmlFor="skill">Skill</label>
+              <label htmlFor="skill">{t("common.labels.skills")}</label>
               <input
                 id="skill"
                 type="text"
-                placeholder="Example: React"
+                placeholder={t("admin.skills.skillPlaceholder")}
                 value={skillName}
                 onChange={(event) => setSkillName(event.target.value)}
               />
@@ -183,31 +185,31 @@ function AdminSkillsPage() {
                 className={styles.secondaryBtn}
                 onClick={handleAddSkill}
               >
-                Add skill
+                {t("ui.actions.addSkill")}
               </button>
 
               <button type="submit" className={styles.saveBtn} disabled={saving}>
-                {saving ? "Saving..." : "Save"}
+                {saving ? t("ui.actions.saving") : t("ui.actions.save")}
               </button>
             </div>
           </div>
 
           <div className={styles.pendingPanel}>
             <div className={styles.pendingHeader}>
-              <span>Skills to save</span>
+              <span>{t("admin.skills.pendingTitle")}</span>
               <strong>{pendingSkills.length}</strong>
             </div>
 
             <div className={styles.pendingBox}>
               {pendingSkills.length === 0 ? (
-                <p>No skills added yet.</p>
+                <p>{t("ui.states.noSkillsAdded")}</p>
               ) : (
                 pendingSkills.map((skill) => (
                   <span key={skill}>
                     {skill}
                     <button
                       type="button"
-                      aria-label={`Remove ${skill}`}
+                      aria-label={t("ui.actions.removeItem", { item: skill })}
                       onClick={() => handleRemoveSkill(skill)}
                     >
                       x
@@ -224,16 +226,20 @@ function AdminSkillsPage() {
       {successMessage && <p className={styles.success}>{successMessage}</p>}
 
       {loading ? (
-        <p className={styles.state}>Loading skills...</p>
+        <p className={styles.state}>{t("ui.states.loadingSkills")}</p>
       ) : categories.length === 0 ? (
-        <p className={styles.state}>No categories found.</p>
+        <p className={styles.state}>{t("ui.states.noCategoriesFound")}</p>
       ) : (
         <div className={styles.categoryGrid}>
           {categories.map((category) => (
             <article key={category.id} className={styles.card}>
               <div className={styles.cardHeader}>
                 <h2>{category.name}</h2>
-                <span>{category.skills_count || category.skills?.length || 0} skills</span>
+                <span>
+                  {t("ui.labels.skillsCount", {
+                    count: category.skills_count || category.skills?.length || 0,
+                  })}
+                </span>
               </div>
 
               {category.skills?.length > 0 ? (
@@ -243,7 +249,7 @@ function AdminSkillsPage() {
                   ))}
                 </div>
               ) : (
-                <p className={styles.empty}>No skills added yet.</p>
+                <p className={styles.empty}>{t("ui.states.noSkillsAdded")}</p>
               )}
             </article>
           ))}

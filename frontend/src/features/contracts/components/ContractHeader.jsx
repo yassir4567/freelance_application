@@ -10,7 +10,7 @@ import { useTranslation } from "react-i18next";
 
 function ContractHeader({ statusClass, headerContent, role }) {
   const { t } = useTranslation();
-  const title = headerContent.projectTitle || "Untitled contract";
+  const title = headerContent.projectTitle || t("ui.fallbacks.untitledContract");
   const totalDeliverables = headerContent.totalDeliverables || 0;
   const completedDeliverables = headerContent.completedDeliverables || 0;
 
@@ -46,8 +46,8 @@ function ContractHeader({ statusClass, headerContent, role }) {
 
         <div className={styles.headerRight}>
           <div className={styles.budgetCard}>
-            <span>Total budget</span>
-            <strong>{formatCurrency(headerContent.budget, "Not set")}</strong>
+            <span>{t("common.labels.totalBudget")}</span>
+            <strong>{formatCurrency(headerContent.budget, t("ui.fallbacks.notSet"))}</strong>
           </div>
 
           <div className={styles.progressCard}>

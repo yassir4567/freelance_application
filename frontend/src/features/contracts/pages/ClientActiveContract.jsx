@@ -150,20 +150,20 @@ function ClientActiveContract() {
     return;
   };
 
-  if (isLoading) return <div>Loading...</div>;
+  if (isLoading) return <div>{t("ui.states.loading")}...</div>;
 
   if (!success || !setupInfo) {
     return (
       <div className={styles.contractSetUpPage}>
         <div className={`${styles.stateCard} ${styles.errorState}`}>
-          <p className={styles.stateKicker}>unavailable</p>
-          <h1 className={styles.stateMessage}>We could not load this page.</h1>
+          <p className={styles.stateKicker}>{t("ui.states.pageUnavailable")}</p>
+          <h1 className={styles.stateMessage}>{t("ui.states.pageUnavailableTitle")}</h1>
           <NavLink
             to={`/dashboard/client/contracts`}
             className={styles.backLink}
           >
             <FiArrowLeft />
-            <span>Back to contracts</span>
+            <span>{t("common.actions.backToContracts")}</span>
           </NavLink>
         </div>
       </div>

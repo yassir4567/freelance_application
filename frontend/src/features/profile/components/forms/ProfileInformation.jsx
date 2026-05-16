@@ -1,8 +1,8 @@
-import { useState } from "react";
-import { useAuth } from "../../../../context/AuthContext";
 import styles from "../../styles/ProfileInformation.module.css";
+import { useTranslation } from "react-i18next";
 
 function ProfileInformation({ isEdited, form, setForm }) {
+  const { t } = useTranslation();
   const handleOnChange = (e) => {
     const { name, value } = e.target;
 
@@ -11,39 +11,39 @@ function ProfileInformation({ isEdited, form, setForm }) {
 
   return (
     <div className={styles.container}>
-      <h2 className={styles.title}>Personal information</h2>
+      <h2 className={styles.title}>{t("profile.personalInformation")}</h2>
 
       <div>
         <div className={styles.row}>
           <div className={styles.inputBox}>
-            <label>First name</label>
+            <label>{t("ui.labels.firstName")}</label>
             <input
               type="text"
               name="first_name"
               value={form.first_name}
-              placeholder="Unregistered"
+              placeholder={t("ui.fallbacks.unregistered")}
               onChange={handleOnChange}
               disabled={!isEdited}
             />
           </div>
           <div className={styles.inputBox}>
-            <label>Last name</label>
+            <label>{t("ui.labels.lastName")}</label>
             <input
               type="text"
               name="last_name"
               value={form.last_name}
-              placeholder="Unregistered"
+              placeholder={t("ui.fallbacks.unregistered")}
               onChange={handleOnChange}
               disabled={!isEdited}
             />
           </div>
           <div className={styles.inputBox}>
-            <label>Phone</label>
+            <label>{t("ui.labels.phone")}</label>
             <input
               type="text"
               name="phone"
               value={form.phone}
-              placeholder="Unregistered"
+              placeholder={t("ui.fallbacks.unregistered")}
               onChange={handleOnChange}
               disabled={!isEdited}
             />

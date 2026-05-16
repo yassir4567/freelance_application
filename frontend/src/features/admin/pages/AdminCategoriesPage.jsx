@@ -2,8 +2,10 @@ import { useEffect, useState } from "react";
 import { addCategory } from "../../../api/admin/addCategory";
 import { getAdminCategories } from "../../../api/admin/getCategories";
 import styles from "../styles/AdminCategoriesPage.module.css";
+import { useTranslation } from "react-i18next";
 
 function AdminCategoriePage() {
+  const { t } = useTranslation();
   const [categories, setCategories] = useState([]);
   const [name, setName] = useState("");
   const [showForm, setShowForm] = useState(false);
@@ -38,7 +40,7 @@ function AdminCategoriePage() {
     setSuccessMessage("");
 
     if (!name.trim()) {
-      setError("Category name is required");
+      setError(t("ui.validation.categoryNameRequired"));
       return;
     }
 
@@ -50,7 +52,7 @@ function AdminCategoriePage() {
       setCategories((currentCategories) => [result.data, ...currentCategories]);
       setName("");
       setShowForm(false);
-      setSuccessMessage("Category added successfully");
+      setSuccessMessage(t("admin.categories.success"));
     } else {
       const validationMessage = result.errors?.name?.[0];
       setError(validationMessage || result.message);
@@ -63,8 +65,8 @@ function AdminCategoriePage() {
     <div className={styles.content}>
       <div className={styles.header}>
         <div>
-          <p className={styles.subtitle}>Admin dashboard</p>
-          <h1>Categories</h1>
+          <p className={styles.subtitle}>{t("ui.labels.adminDashboard")}</p>
+          <h1>{t("admin.categories.title")}</h1>
         </div>
 
         <button
@@ -72,30 +74,30 @@ function AdminCategoriePage() {
           className={styles.addBtn}
           onClick={() => setShowForm((currentValue) => !currentValue)}
         >
-          {showForm ? "Close" : "Add category"}
+          {showForm ? t("ui.actions.close") : t("ui.actions.addCategory")}
         </button>
       </div>
 
       <div className={styles.summary}>
-        <span>Total categories</span>
+        <span>{t("ui.labels.totalCategories")}</span>
         <strong>{categories.length}</strong>
       </div>
 
       {showForm && (
         <form className={styles.form} onSubmit={handleSubmit}>
           <div className={styles.field}>
-            <label htmlFor="category-name">Category name</label>
+            <label htmlFor="category-name">{t("admin.categories.label")}</label>
             <input
               id="category-name"
               type="text"
-              placeholder="Example: Web Development"
+              placeholder={t("admin.categories.placeholder")}
               value={name}
               onChange={(event) => setName(event.target.value)}
             />
           </div>
 
           <button type="submit" className={styles.saveBtn} disabled={saving}>
-            {saving ? "Saving..." : "Save category"}
+            {saving ? t("ui.actions.saving") : t("ui.actions.saveCategory")}
           </button>
         </form>
       )}
@@ -104,16 +106,16 @@ function AdminCategoriePage() {
       {successMessage && <p className={styles.success}>{successMessage}</p>}
 
       {loading ? (
-        <p className={styles.state}>Loading categories...</p>
+        <p className={styles.state}>{t("ui.states.loadingCategories")}</p>
       ) : categories.length === 0 ? (
-        <p className={styles.state}>No categories found.</p>
+        <p className={styles.state}>{t("ui.states.noCategoriesFound")}</p>
       ) : (
         <div className={styles.tableBox}>
           <table className={styles.table}>
             <thead>
               <tr>
                 <th>ID</th>
-                <th>Name</th>
+                <th>{t("ui.labels.name")}</th>
               </tr>
             </thead>
 

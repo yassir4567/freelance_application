@@ -66,7 +66,7 @@
       "browseProjects": "Parcourir les projets",
       "viewMyProposals": "Voir mes propositions",
       "checkMessages": "Consulter les messages",
-      "fund": "Fonds",
+      "fund": "Financer",
       "submitDeliverable": "Soumettre le livrable",
       "resubmitDeliverable": "Soumettre à nouveau le livrable",
       "revisionRequest": "Demande de révision",
@@ -108,7 +108,7 @@
     },
     "validation": {
       "titleRequired": "Le titre est obligatoire",
-      "categoryRequired": "Le category est obligatoire",
+      "categoryRequired": "La catégorie est obligatoire",
       "skillsRequired": "Veuillez sélectionner au moins une compétence",
       "experienceLevelRequired": "Veuillez sélectionner un niveau d'expérience",
       "projectSizeRequired": "Veuillez sélectionner la taille du projet",
@@ -139,6 +139,212 @@
       "status": "Filtrer par statut",
       "sortBy": "Trier par"
     }
+  },
+  "ui": {
+    "actions": {
+      "back": "Retour",
+      "backToUsers": "Retour aux utilisateurs",
+      "cancel": "Annuler",
+      "close": "Fermer",
+      "save": "Enregistrer",
+      "saving": "Enregistrement...",
+      "editProfile": "Modifier le profil",
+      "logout": "Déconnexion",
+      "login": "Se connecter",
+      "signup": "S'inscrire",
+      "send": "Envoyer",
+      "completeProfile": "Compléter le profil",
+      "addSkill": "Ajouter une compétence",
+      "addSkills": "Ajouter des compétences",
+      "addDeliverable": "Ajouter un livrable",
+      "addCategory": "Ajouter une catégorie",
+      "saveCategory": "Enregistrer la catégorie",
+      "remove": "Supprimer",
+      "removeItem": "Supprimer {{item}}",
+      "next": "Suivant",
+      "previous": "Précédent",
+      "messageUser": "Contacter {{role}}",
+      "messageClient": "Contacter le client",
+      "viewMessages": "Voir les messages",
+      "chooseFile": "Choisir un fichier",
+      "activateContract": "Activer le contrat",
+      "funding": "Financement...",
+      "accepting": "Acceptation...",
+      "sending": "Envoi...",
+      "activating": "Activation..."
+    },
+    "labels": {
+      "id": "ID",
+      "email": "Email",
+      "role": "Rôle",
+      "phone": "Téléphone",
+      "location": "Localisation",
+      "address": "Adresse",
+      "country": "Pays",
+      "city": "Ville",
+      "joined": "Inscrit le",
+      "firstName": "Prénom",
+      "lastName": "Nom",
+      "password": "Mot de passe",
+      "confirmPassword": "Confirmer le mot de passe",
+      "bio": "Bio",
+      "portfolio": "Portfolio",
+      "profile": "Image de profil",
+      "resume": "CV",
+      "searchByName": "Rechercher par nom",
+      "name": "Nom",
+      "allUsers": "Tous les utilisateurs",
+      "assigned": "Assigné",
+      "freelancerProfile": "Profil freelance",
+      "contactInformation": "Informations de contact",
+      "clientActivity": "Activité du client",
+      "relatedProjects": "Projets liés",
+      "clientProjects": "Projets du client",
+      "adminPanel": "Panneau administrateur",
+      "adminAccount": "Compte administrateur",
+      "adminDashboard": "Tableau de bord admin",
+      "dashboard": "Tableau de bord",
+      "totalUsers": "Total des utilisateurs",
+      "totalProjects": "Total des projets",
+      "totalSkills": "Total des compétences",
+      "totalCategories": "Total des catégories",
+      "projectStatus": "Statut des projets",
+      "projectsByWorkflow": "Projets par étape",
+      "escrowAmount": "Montant en séquestre",
+      "projectGroupsAvailable": "Groupes de projets disponibles",
+      "skillsLinkedToCategories": "Compétences liées aux catégories",
+      "currentlyHeldPayments": "Paiements actuellement retenus",
+      "inProgressCount": "{{count}} en cours",
+      "clientsAndFreelancers": "{{clients}} clients, {{freelancers}} freelances",
+      "totalCount": "{{count}} au total",
+      "usersCount": "{{count}} utilisateurs",
+      "skillsCount": "{{count}} compétences",
+      "collaboration": "Collaboration",
+      "assignedFreelancer": "Freelance assigné",
+      "deliveryTime": "Délai de livraison",
+      "coverLetter": "Lettre de motivation",
+      "more": "plus...",
+      "signupAs": "S'inscrire en tant que :",
+      "paymentSummary": "Résumé du paiement",
+      "allocated": "Alloué",
+      "remaining": "Restant",
+      "uploadContractPdf": "Téléverser le PDF du contrat",
+      "uploadContractPdfHint": "Cliquez pour choisir un fichier PDF",
+      "submissionLinkPlaceholder": "https://..."
+    },
+    "states": {
+      "loading": "Chargement",
+      "loadingDashboardStats": "Chargement des statistiques du tableau de bord...",
+      "loadingSkills": "Chargement des compétences...",
+      "loadingCategories": "Chargement des catégories...",
+      "loadingUsers": "Chargement des utilisateurs...",
+      "loadingUserDetails": "Chargement des détails utilisateur...",
+      "loadingContractDetailsTitle": "Préparation des détails du contrat...",
+      "loadingContractDetailsDescription": "Nous récupérons l'accord, les livrables et le statut du paiement.",
+      "contractUnavailable": "Contrat indisponible",
+      "contractUnavailableTitle": "Impossible de charger ce contrat.",
+      "pageUnavailable": "Indisponible",
+      "pageUnavailableTitle": "Impossible de charger cette page.",
+      "noCategoriesFound": "Aucune catégorie trouvée.",
+      "noSkillsAdded": "Aucune compétence ajoutée pour le moment.",
+      "noSkillsAddedShort": "Aucune compétence ajoutée.",
+      "noUsersFound": "Aucun utilisateur trouvé.",
+      "noProjectsFound": "Aucun projet trouvé",
+      "emptyProjects": "Aucun projet ...",
+      "noProposals": "Aucune proposition",
+      "selectConversation": "Sélectionnez une conversation",
+      "noSkillsListed": "Aucune compétence listée pour le moment",
+      "noSubmissionLinks": "Aucun lien de soumission fourni.",
+      "noSubmissionNote": "Aucune note de soumission fournie.",
+      "noDeliverables": "Aucun livrable n'a encore été ajouté à ce contrat.",
+      "noPaymentRecords": "Aucun paiement n'est encore disponible pour ce contrat."
+    },
+    "fallbacks": {
+      "notAdded": "Non ajouté",
+      "notSet": "Non défini",
+      "notAssigned": "Non assigné",
+      "notAssignedYet": "Pas encore assigné",
+      "notAvailable": "Non disponible",
+      "notSpecified": "Non spécifié",
+      "notPublishedYet": "Pas encore publié",
+      "unregistered": "Non renseigné",
+      "untitledProject": "Projet sans titre",
+      "untitledContract": "Contrat sans titre",
+      "untitledDeliverable": "Livrable sans titre",
+      "assignedFreelancer": "Freelance assigné",
+      "freelancer": "Freelance",
+      "noCategory": "Aucune catégorie",
+      "noDescription": "Aucune description disponible pour le moment.",
+      "noContractDescription": "Aucune description de contrat n'a encore été fournie.",
+      "noContractFile": "Aucun fichier de contrat n'a encore été joint.",
+      "noDeliverableDescription": "Aucune description n'a été fournie pour ce livrable.",
+      "documentUnavailable": "Indisponible"
+    },
+    "units": {
+      "day": "jour",
+      "month": "mois",
+      "year": "année"
+    },
+    "validation": {
+      "skillNameRequired": "Veuillez d'abord saisir une compétence",
+      "skillAlreadyAdded": "Cette compétence est déjà dans la liste",
+      "chooseCategory": "Veuillez choisir une catégorie",
+      "addAtLeastOneSkill": "Veuillez ajouter au moins une compétence",
+      "categoryNameRequired": "Le nom de la catégorie est obligatoire",
+      "budgetRequired": "Le budget est obligatoire",
+      "deliveryTimeRequired": "Le délai de livraison est obligatoire",
+      "coverLetterRequired": "La lettre de motivation est obligatoire",
+      "coverLetterLength": "La lettre de motivation doit contenir au moins 30 caractères",
+      "deadlineRequired": "Date limite requise"
+    }
+  },
+  "profile": {
+    "title": "Informations du profil",
+    "personalInformation": "Informations personnelles",
+    "addressInformation": "Informations d'adresse",
+    "aboutMe": "À propos de moi",
+    "complete": {
+      "title": "Complétez votre profil",
+      "description": "Un profil complet aide les clients à vous faire confiance plus rapidement"
+    }
+  },
+  "admin": {
+    "dashboard": {
+      "subtitle": "Chiffres de la plateforme en temps réel",
+      "title": "Vue d'ensemble du tableau de bord"
+    },
+    "skills": {
+      "title": "Compétences",
+      "formTitle": "Ajouter des compétences",
+      "formDescription": "Choisissez une catégorie, ajoutez les compétences une par une, puis enregistrez.",
+      "chooseCategory": "Choisir une catégorie",
+      "skillPlaceholder": "Exemple : React",
+      "pendingTitle": "Compétences à enregistrer",
+      "success": "Compétences ajoutées avec succès"
+    },
+    "categories": {
+      "title": "Catégories",
+      "label": "Nom de la catégorie",
+      "placeholder": "Exemple : Développement web",
+      "success": "Catégorie ajoutée avec succès"
+    },
+    "users": {
+      "title": "Utilisateurs",
+      "userNotFound": "Utilisateur introuvable"
+    },
+    "projects": {
+      "title": "Page des projets admin"
+    }
+  },
+  "messages": {
+    "title": "Discussions",
+    "inputPlaceholder": "Écrivez un message ..."
+  },
+  "sendProposal": {
+    "title": "Envoyer votre proposition",
+    "pricePlaceholder": "Saisissez votre prix",
+    "deliveryPlaceholder": "Saisissez votre délai de livraison",
+    "coverLetterPlaceholder": "Lettre de motivation ..."
   },
   "dashboard": {
     "client": {
@@ -336,6 +542,9 @@
       },
       "contractFile": {
         "description": "Le document du contrat signé est disponible."
+      },
+      "progressCaption": {
+        "releasedAgainstTotal": "{{paid}} versés sur un total de {{total}}."
       }
     },
     "deliverables": {
@@ -380,7 +589,9 @@
           "placeholder": "Saisissez le prix final convenu"
         },
         "upload": {
-          "error": "Le fichier du contrat est requis"
+          "error": "Le fichier du contrat est requis",
+          "title": "Téléverser le PDF du contrat",
+          "description": "Cliquez pour choisir un fichier PDF"
         },
         "description": {
           "label": "Description du contrat",
@@ -422,6 +633,13 @@
       "title": "Activer ce contrat ?",
       "description": "Une fois confirmé, le contrat sera activé avec les conditions et les livrables que vous avez saisis. Assurez-vous que tout est correct avant de continuer.",
       "confirm": "Confirmer et activer"
+    },
+    "paymentSummary": {
+      "title": "Résumé du paiement"
     }
+  },
+  "fundDeliverable": {
+    "title": "Financer le livrable",
+    "description": "Ajoutez une date limite et confirmez le financement en séquestre de ce livrable. Le freelance pourra commencer à travailler une fois le paiement sécurisé."
   }
 }

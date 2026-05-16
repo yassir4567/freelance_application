@@ -4,9 +4,11 @@ import { RiLogoutCircleRLine } from "react-icons/ri";
 import { NavLink } from "react-router-dom";
 import { IoSettingsOutline } from "react-icons/io5";
 import { useAuth } from "../../context/AuthContext";
+import { useTranslation } from "react-i18next";
 
 function ProfileMenu({ onClose }) {
   const { logout } = useAuth();
+  const { t } = useTranslation();
   const handleLogout = async (e) => {
     await logout();
   };
@@ -15,11 +17,11 @@ function ProfileMenu({ onClose }) {
     <div className={styles.wrapper}>
       <div className={styles.profile_menu}>
         <NavLink to="profile" className={styles.btn} onClick={onClose}>
-          <FaRegUser /> <span>Profile</span>
+          <FaRegUser /> <span>{t("ui.labels.freelancerProfile")}</span>
         </NavLink>
         <hr />
         <button onClick={handleLogout} className={styles.btn}>
-          <RiLogoutCircleRLine color="red" /> <span>Logout</span>
+          <RiLogoutCircleRLine color="red" /> <span>{t("ui.actions.logout")}</span>
         </button>
       </div>
     </div>

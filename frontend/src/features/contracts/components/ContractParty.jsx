@@ -32,7 +32,7 @@ function ContractParty({ role, user, headerInfo }) {
 
         <NavLink to={`/dashboard/${role}/messages`} className={styles.openConv}>
           <FiMessageCircle />
-          <span>Message {partyLabel}</span>
+          <span>{t("ui.actions.messageUser", { role: partyLabel })}</span>
         </NavLink>
       </div>
 

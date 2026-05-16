@@ -1,18 +1,21 @@
 import { NavLink } from "react-router-dom";
 import styles from "./CompleteProfileAlert.module.css";
+import { useTranslation } from "react-i18next";
 
 function CompleteProfileAlert({ role }) {
+  const { t } = useTranslation();
+
   return (
     <div className={styles.alertBox}>
       <div className={styles.completeMsgs}>
-        <h3 className={styles.title}>Complete your profile</h3>
+        <h3 className={styles.title}>{t("profile.complete.title")}</h3>
         <p className={styles.description}>
-          A complete profile helps clients trust you faster
+          {t("profile.complete.description")}
         </p>
       </div>
       <div className={styles.linkBox}>
         <NavLink to={`/dashboard/${role}/profile`} className={styles.link}>
-          Complete profile
+          {t("ui.actions.completeProfile")}
         </NavLink>
       </div>
     </div>

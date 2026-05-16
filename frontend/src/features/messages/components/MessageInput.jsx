@@ -4,8 +4,10 @@ import { ImAttachment } from "react-icons/im";
 import { useState } from "react";
 import { sendMessage } from "../../../api/messages/sendMessage";
 import { useSearchParams } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 function MessageInput({ setMessages }) {
+  const { t } = useTranslation();
   const [message, setMessage] = useState("");
 
   const [params] = useSearchParams();
@@ -34,7 +36,7 @@ function MessageInput({ setMessages }) {
           className={styles.input}
           value={message}
           onChange={(e) => setMessage(e.target.value)}
-          placeholder="Type a message ..."
+          placeholder={t("messages.inputPlaceholder")}
         />
         {/* <ImAttachment className={styles.attachIcon} /> */}
       </div>

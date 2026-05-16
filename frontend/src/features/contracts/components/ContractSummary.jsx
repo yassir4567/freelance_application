@@ -18,7 +18,7 @@ function ContractSummary({ summary }) {
     {
       id: "budget",
       label: t("common.labels.budget"),
-      value: formatCurrency(summary?.budget, "Not set"),
+      value: formatCurrency(summary?.budget, t("ui.fallbacks.notSet")),
       icon: <FiDollarSign />,
     },
     {
@@ -60,7 +60,7 @@ function ContractSummary({ summary }) {
           <p className={styles.summaryItemContent}>
             {valueOrFallback(
               summary?.description,
-              "No contract description has been provided yet.",
+              t("ui.fallbacks.noContractDescription"),
             )}
           </p>
         </section>
@@ -79,8 +79,10 @@ function ContractSummary({ summary }) {
             ></div>
           </div>
           <p className={styles.progressCaption}>
-            {formatCurrency(summary?.paidAmount)} released against{" "}
-            {formatCurrency(summary?.budget, "not set")} total.
+            {t("contractDetail.overview.progressCaption.releasedAgainstTotal", {
+              paid: formatCurrency(summary?.paidAmount),
+              total: formatCurrency(summary?.budget, t("ui.fallbacks.notSet")),
+            })}
           </p>
         </section>
       </div>
@@ -104,7 +106,7 @@ function ContractSummary({ summary }) {
           <p>
             {summary?.contract_pdf
               ? t("contractDetail.overview.contractFile.description")
-              : "No contract file has been attached yet."}
+              : t("ui.fallbacks.noContractFile")}
           </p>
         </div>
 
@@ -113,7 +115,7 @@ function ContractSummary({ summary }) {
             {t("common.actions.viewDocument")}
           </a>
         ) : (
-          <span className={styles.documentUnavailable}>Unavailable</span>
+          <span className={styles.documentUnavailable}>{t("ui.fallbacks.documentUnavailable")}</span>
         )}
       </div>
     </div>

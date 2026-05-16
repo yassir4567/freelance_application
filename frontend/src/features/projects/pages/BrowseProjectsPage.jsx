@@ -177,7 +177,7 @@ function BrowseProjectsPage() {
                 <FreelancerProjectCard key={project.id} project={project} />
               ))
             ) : (
-              <div className={styles.empty}>No projects found</div>
+              <div className={styles.empty}>{t("ui.states.noProjectsFound")}</div>
             )}
           </div>
         </div>

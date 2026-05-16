@@ -6,37 +6,39 @@ import { GiSkills } from "react-icons/gi";
 import { IoLogOutOutline } from "react-icons/io5";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
-
-const links = [
-  {
-    label: "Dashboard",
-    path: "/dashboard/admin",
-    icon: <LuLayoutDashboard />,
-    end: true,
-  },
-  {
-    label: "Users",
-    path: "/dashboard/admin/users",
-    icon: <FiUsers />,
-    end: false,
-  },
-  {
-    label: "Categories",
-    path: "/dashboard/admin/categories",
-    icon: <MdCategory />,
-    end: true,
-  },
-  {
-    label: "Skills",
-    path: "/dashboard/admin/skills",
-    icon: <GiSkills />,
-    end: true,
-  },
-];
+import { useTranslation } from "react-i18next";
 
 function AdminSideBar() {
   const { logout } = useAuth();
   const navigate = useNavigate();
+  const { t } = useTranslation();
+
+  const links = [
+    {
+      label: t("ui.labels.dashboard"),
+      path: "/dashboard/admin",
+      icon: <LuLayoutDashboard />,
+      end: true,
+    },
+    {
+      label: t("admin.users.title"),
+      path: "/dashboard/admin/users",
+      icon: <FiUsers />,
+      end: false,
+    },
+    {
+      label: t("admin.categories.title"),
+      path: "/dashboard/admin/categories",
+      icon: <MdCategory />,
+      end: true,
+    },
+    {
+      label: t("admin.skills.title"),
+      path: "/dashboard/admin/skills",
+      icon: <GiSkills />,
+      end: true,
+    },
+  ];
 
   const handleLogout = async () => {
     await logout();
@@ -50,7 +52,7 @@ function AdminSideBar() {
           <span>FA</span>
           <div>
             <h2>Admin</h2>
-            <p>Dashboard</p>
+            <p>{t("ui.labels.dashboard")}</p>
           </div>
         </div>
 
@@ -76,7 +78,7 @@ function AdminSideBar() {
 
       <button type="button" className={styles.logout} onClick={handleLogout}>
         <IoLogOutOutline />
-        <span>Logout</span>
+        <span>{t("ui.actions.logout")}</span>
       </button>
     </div>
   );

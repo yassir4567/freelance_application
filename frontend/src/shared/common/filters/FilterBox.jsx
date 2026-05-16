@@ -46,7 +46,7 @@ function FilterBox({
         </select>
       </div>
       <div className={styles.clearAllFilters}>
-        <button onClick={handleClearFilters}>Clear all</button>
+        <button onClick={handleClearFilters}>{t("common.actions.clearAll")}</button>
       </div>
     </div>
   );

@@ -5,8 +5,10 @@ import { useEffect, useState } from "react";
 import { getClientProjectProposals } from "../../../api/proposals/getClientProjectProposals";
 import { acceptProposal } from "../../../api/proposals/acceptProposal";
 import { rejectProposal } from "../../../api/proposals/rejectProposal";
+import { useTranslation } from "react-i18next";
 
 function ProposalsList() {
+  const { t } = useTranslation();
   const { projectId } = useParams();
   const [proposals, setProposals] = useState([]);
 
@@ -43,7 +45,7 @@ function ProposalsList() {
   return (
     <div className={styles.proposalsListPage}>
       {proposals?.length === 0 ? (
-        <div className={styles.noPorposals}>No proposals</div>
+        <div className={styles.noPorposals}>{t("ui.states.noProposals")}</div>
       ) : (
         <div className={styles.proposalsList}>
           {proposals?.map((proposal) => (

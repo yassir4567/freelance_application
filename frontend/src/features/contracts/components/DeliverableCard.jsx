@@ -64,12 +64,12 @@ function DeliverableCard({
         <div className={styles.deliverableBody}>
           <div className={styles.deliverableSummary}>
             <h3 className={styles.deliverableTitle}>
-              {valueOrFallback(deliverable.title, "Untitled deliverable")}
+              {valueOrFallback(deliverable.title, t("ui.fallbacks.untitledDeliverable"))}
             </h3>
             <p className={styles.deliverableDescription}>
               {valueOrFallback(
                 deliverable.description,
-                "No description was provided for this deliverable.",
+                t("ui.fallbacks.noDeliverableDescription"),
               )}
             </p>
 

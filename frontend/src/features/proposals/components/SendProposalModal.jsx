@@ -2,8 +2,10 @@ import { useEffect, useState } from "react";
 import styles from "../styles/SendProposalModal.module.css";
 import { sendProposal } from "../../../api/proposals/sendProposal";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 function SendProposalModal({ projectId, isOpen, onClose }) {
+  const { t } = useTranslation();
   const navigate = useNavigate();
 
   const [form, setForm] = useState({
@@ -52,17 +54,17 @@ function SendProposalModal({ projectId, isOpen, onClose }) {
     let newErrors = {};
 
     if (!form.budget.trim()) {
-      newErrors.budget = "Budget is required";
+      newErrors.budget = t("ui.validation.budgetRequired");
     }
 
     if (!form.delivery_time.trim()) {
-      newErrors.delivery_time = "Delivery time is required";
+      newErrors.delivery_time = t("ui.validation.deliveryTimeRequired");
     }
 
     if (!form.cover_letter.trim()) {
-      newErrors.cover_letter = "cover_letter is required";
+      newErrors.cover_letter = t("ui.validation.coverLetterRequired");
     } else if (form.cover_letter.length < 30) {
-      newErrors.cover_letter = "cover_letter must be atleast 30 character";
+      newErrors.cover_letter = t("ui.validation.coverLetterLength");
     }
 
     if (Object.keys(newErrors).length > 0) {
@@ -89,42 +91,42 @@ function SendProposalModal({ projectId, isOpen, onClose }) {
     <div className={styles.overlay} onClick={onClose}>
       <div className={styles.modalWrapper} onClick={(e) => e.stopPropagation()}>
         <div className={styles.modal}>
-          <h1 className={styles.title}>Send Your proposal</h1>
+          <h1 className={styles.title}>{t("sendProposal.title")}</h1>
         </div>
 
         <form onSubmit={handleSubmit} className={styles.form}>
           <div className={styles.row}>
             <div className={styles.inputBox}>
-              <label>Budget</label>
+              <label>{t("common.labels.budget")}</label>
               <input
                 type="number"
                 name="budget"
                 value={form.budget}
                 onChange={handleChangeInput}
                 className={styles.budgetInput}
-                placeholder="Enter your price"
+                placeholder={t("sendProposal.pricePlaceholder")}
               />
               {errors.budget && <p className={styles.error}>{errors.budget}</p>}
             </div>
 
             <div className={styles.inputBox}>
-              <label>Delivery time</label>
+              <label>{t("ui.labels.deliveryTime")}</label>
               <div className={styles.deliveryBox}>
                 <input
                   type="number"
                   name="delivery_time"
                   value={form.delivery_time}
                   onChange={handleChangeInput}
-                  placeholder="Enter your delivery time"
+                  placeholder={t("sendProposal.deliveryPlaceholder")}
                 />
                 <select
                   name="unit"
                   value={form.unit}
                   onChange={handleChangeInput}
                 >
-                  <option value="day">day</option>
-                  <option value="month">month</option>
-                  <option value="year">year</option>
+                  <option value="day">{t("ui.units.day")}</option>
+                  <option value="month">{t("ui.units.month")}</option>
+                  <option value="year">{t("ui.units.year")}</option>
                 </select>
               </div>
               {errors.delivery_time && (
@@ -134,12 +136,12 @@ function SendProposalModal({ projectId, isOpen, onClose }) {
           </div>
 
           <div className={styles.textAreaBox}>
-            <label>Cover letter</label>
+            <label>{t("ui.labels.coverLetter")}</label>
             <textarea
               name="cover_letter"
               value={form.cover_letter}
               onChange={handleChangeInput}
-              placeholder="Cover letter ..."
+              placeholder={t("sendProposal.coverLetterPlaceholder")}
             ></textarea>
             {errors.cover_letter && (
               <p className={styles.error}>{errors.cover_letter}</p>
@@ -148,10 +150,10 @@ function SendProposalModal({ projectId, isOpen, onClose }) {
 
           <div className={styles.actions}>
             <button type="submit" className={styles.sentBtn}>
-              Sent
+              {t("ui.actions.send")}
             </button>
             <button type="reset" onClick={onClose} className={styles.cancelBtn}>
-              Cancel
+              {t("ui.actions.cancel")}
             </button>
           </div>
         </form>

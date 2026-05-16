@@ -56,7 +56,7 @@ function ContractDetail() {
       }
 
       setContract(null);
-      setErrorMessage(result.message || "Unable to load this contract.");
+      setErrorMessage(result.message || t("ui.states.contractUnavailableTitle"));
       setIsLoading(false);
     };
 
@@ -205,10 +205,10 @@ function ContractDetail() {
     return (
       <div className={styles.contractDetailPage}>
         <div className={styles.stateCard}>
-          <p className={styles.stateKicker}>Loading</p>
-          <h1>Getting contract details ready...</h1>
+          <p className={styles.stateKicker}>{t("ui.states.loading")}</p>
+          <h1>{t("ui.states.loadingContractDetailsTitle")}</h1>
           <p>
-            We are fetching the agreement, deliverables, and payment status.
+            {t("ui.states.loadingContractDetailsDescription")}
           </p>
         </div>
       </div>
@@ -219,8 +219,8 @@ function ContractDetail() {
     return (
       <div className={styles.contractDetailPage}>
         <div className={`${styles.stateCard} ${styles.errorState}`}>
-          <p className={styles.stateKicker}>Contract unavailable</p>
-          <h1>We could not load this contract.</h1>
+          <p className={styles.stateKicker}>{t("ui.states.contractUnavailable")}</p>
+          <h1>{t("ui.states.contractUnavailableTitle")}</h1>
         </div>
       </div>
     );

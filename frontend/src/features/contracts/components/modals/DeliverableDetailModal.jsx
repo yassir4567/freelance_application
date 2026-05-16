@@ -72,7 +72,7 @@ function DeliverableDetailModal({
     const result = await acceptDeliverable(deliverable.id);
 
     if (!result.success) {
-      setAcceptError(result.message || "Accept deliverable failed");
+      setAcceptError(result.message || t("ui.states.pageUnavailableTitle"));
       setIsAccepting(false);
       return;
     }
@@ -80,7 +80,7 @@ function DeliverableDetailModal({
     const contractResult = await getClientContractDetail(contract.id);
 
     if (!contractResult.success) {
-      setAcceptError(contractResult.message || "Contract refresh failed");
+      setAcceptError(contractResult.message || t("ui.states.contractUnavailableTitle"));
       setIsAccepting(false);
       return;
     }
@@ -97,7 +97,7 @@ function DeliverableDetailModal({
     const result = await requestDeliverableRevision(deliverable.id);
 
     if (!result.success) {
-      setRevisionError(result.message || "Request revision failed");
+      setRevisionError(result.message || t("ui.states.pageUnavailableTitle"));
       setIsRequestingRevision(false);
       return;
     }
@@ -105,7 +105,7 @@ function DeliverableDetailModal({
     const contractResult = await getClientContractDetail(contract.id);
 
     if (!contractResult.success) {
-      setRevisionError(contractResult.message || "Contract refresh failed");
+      setRevisionError(contractResult.message || t("ui.states.contractUnavailableTitle"));
       setIsRequestingRevision(false);
       return;
     }
@@ -128,7 +128,7 @@ function DeliverableDetailModal({
             className={`${styles.deliverableBtn} ${styles.accept}`}
           >
             {isAccepting
-              ? "Accepting..."
+              ? t("ui.actions.accepting")
               : t("common.actions.accept")}
           </button>
           <button
@@ -138,7 +138,7 @@ function DeliverableDetailModal({
             className={`${styles.deliverableBtn} ${styles.request_revision}`}
           >
             {isRequestingRevision
-              ? "Sending..."
+              ? t("ui.actions.sending")
               : t("common.actions.revisionRequest")}
           </button>
         </Fragment>
@@ -192,7 +192,7 @@ function DeliverableDetailModal({
               {deliverable.position ?? deliverable.id}
             </p>
             <h3 className={styles.title}>
-              {valueOrFallback(deliverable.title, "Untitled deliverable")}
+              {valueOrFallback(deliverable.title, t("ui.fallbacks.untitledDeliverable"))}
             </h3>
           </div>
 
@@ -218,7 +218,7 @@ function DeliverableDetailModal({
         <p className={styles.deliverableDescription}>
           {valueOrFallback(
             deliverable.description,
-            "No description was provided for this deliverable.",
+            t("ui.fallbacks.noDeliverableDescription"),
           )}
         </p>
 
@@ -275,7 +275,7 @@ function DeliverableDetailModal({
                 ))}
               </div>
             ) : (
-              <p className={styles.emptyState}>No submission links provided.</p>
+              <p className={styles.emptyState}>{t("ui.states.noSubmissionLinks")}</p>
             )}
           </div>
         )}
@@ -286,7 +286,7 @@ function DeliverableDetailModal({
               {t("common.labels.submissionNote")}
             </h4>
             <p className={styles.submissionNote}>
-              {deliverable.submission_note || "No submission note provided."}
+              {deliverable.submission_note || t("ui.states.noSubmissionNote")}
             </p>
           </div>
         )}

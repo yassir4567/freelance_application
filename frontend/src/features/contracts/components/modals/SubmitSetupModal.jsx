@@ -31,7 +31,7 @@ function SubmitSetupModal({ onClose, isSubmitting, onConfirm }) {
             className={styles.cancel}
             disabled={isSubmitting}
           >
-            Cancel
+            {t("ui.actions.cancel")}
           </button>
 
           <button
@@ -40,7 +40,7 @@ function SubmitSetupModal({ onClose, isSubmitting, onConfirm }) {
             className={styles.confirm}
             disabled={isSubmitting}
           >
-            {isSubmitting ? "Activating..." : t("setUpContract.modal.confirm")}
+            {isSubmitting ? t("ui.actions.activating") : t("setUpContract.modal.confirm")}
           </button>
         </div>
       </div>

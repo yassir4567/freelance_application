@@ -3,6 +3,7 @@ import styles from "../../styles/FundDeliverableModal.module.css";
 import { RiRefund2Line } from "react-icons/ri";
 import { fundDeliverable } from "../../../../api/payments/fundDeliverable";
 import { getClientContractDetail } from "../../../../api/contracts/getClientContractDetail";
+import { useTranslation } from "react-i18next";
 
 function FundDeliverableModal({
   isOpen,
@@ -11,6 +12,7 @@ function FundDeliverableModal({
   contract,
   setContract,
 }) {
+  const { t } = useTranslation();
   const [deadline, setDeadline] = useState("");
   const [deadlineError, setDeadlineError] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -45,16 +47,16 @@ function FundDeliverableModal({
 
   // * validate deadline function
   const validateDeadline = (value) => {
-    if (!value) return "Deadline required";
+    if (!value) return t("ui.validation.deadlineRequired");
 
     const deadline = new Date(value);
     const today = new Date();
     today.setHours(0, 0, 0, 0);
 
     if (Number.isNaN(deadline.getTime())) {
-      return "Deadline must be valid date";
+      return t("common.validation.invalidDeadline");
     } else if (deadline < today) {
-      return "Deadline cannot be in the past";
+      return t("common.validation.pastDeadline");
     }
 
     return "";
@@ -66,7 +68,7 @@ function FundDeliverableModal({
     if (isSubmitting) return;
 
     if (!deadline.trim()) {
-      setDeadlineError("Deadline required");
+      setDeadlineError(t("ui.validation.deadlineRequired"));
       return;
     }
 
@@ -102,21 +104,19 @@ function FundDeliverableModal({
         <div className={styles.iconBox}>
           <RiRefund2Line className={styles.icon} />
         </div>
-        <h2 className={styles.title}>Fund Deliverable</h2>
+        <h2 className={styles.title}>{t("fundDeliverable.title")}</h2>
         <p className={styles.description}>
-          Add a deadline and confirm the escrow funding for this deliverable.
-          The freelancer will be able to start working once the payment is
-          secured.
+          {t("fundDeliverable.description")}
         </p>
 
         <form onSubmit={handleSubmit} className={styles.form}>
           <div className={styles.inputBox}>
-            <label>Amount</label>
+            <label>{t("common.labels.amount")}</label>
             <input type="text" readOnly value={"$" + deliverable.amount} />
           </div>
 
           <div className={styles.inputBox}>
-            <label>Deadline</label>
+            <label>{t("common.labels.deadline")}</label>
             <input
               type="date"
               value={deadline}
@@ -127,14 +127,14 @@ function FundDeliverableModal({
 
           <div className={styles.actions}>
             <button type="reset" onClick={onClose} className={styles.cancelBtn}>
-              cancel
+              {t("ui.actions.cancel")}
             </button>
             <button
               type="submit"
               className={styles.fundBtn}
               disabled={isSubmitting}
             >
-              {isSubmitting ? "Funding..." : "Fund Deliverable"}
+              {isSubmitting ? t("ui.actions.funding") : t("common.actions.fund")}
             </button>
           </div>
         </form>

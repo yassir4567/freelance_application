@@ -7,8 +7,10 @@ import { useAuth } from "../../../context/AuthContext";
 import updateClientProfile from "../../../api/profiles/updateClientProfile";
 import AboutMe from "../components/forms/AboutMe";
 import updateFreelancerProfile from "../../../api/profiles/updateFreelancerProfile";
+import { useTranslation } from "react-i18next";
 function ProfilePage() {
   const { user, setUser } = useAuth();
+  const { t } = useTranslation();
   const [isEdited, setIsEdited] = useState(false);
 
   const [personalInformationForm, setPersonalInformationForm] = useState({
@@ -64,14 +66,14 @@ function ProfilePage() {
   return (
     <div className={styles.profilePage}>
       <div className={styles.header}>
-        <h2 className={styles.pageTitle}>Profile information</h2>
+        <h2 className={styles.pageTitle}>{t("profile.title")}</h2>
         {isEdited ? (
           <button className={styles.save} onClick={handleSaveEdit}>
-            Save
+            {t("ui.actions.save")}
           </button>
         ) : (
           <button className={styles.editButton} onClick={handleOpenEdit}>
-            Edit profile
+            {t("ui.actions.editProfile")}
           </button>
         )}
       </div>

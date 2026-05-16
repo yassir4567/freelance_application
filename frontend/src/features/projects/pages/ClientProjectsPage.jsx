@@ -78,7 +78,7 @@ function ClientProjectsPage() {
             ))
           ) : (
             <div className={styles.empty}>
-              <p className={styles.emptyMsg}>Empty projects ...</p>
+              <p className={styles.emptyMsg}>{t("ui.states.emptyProjects")}</p>
               <PiEmptyBold className={styles.emptyIcon} />
             </div>
           )}

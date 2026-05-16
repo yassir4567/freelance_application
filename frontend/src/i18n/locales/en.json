@@ -58,7 +58,7 @@
       "viewDetail": "View detail",
       "sendProposal": "Send proposal",
       "accept": "Accept",
-      "reject": "Rejected",
+      "reject": "Reject",
       "submit": "Submit",
       "addLink": "Add Link",
       "clearAll": "Clear all",
@@ -139,6 +139,212 @@
       "status": "Filter by status",
       "sortBy": "Sort by"
     }
+  },
+  "ui": {
+    "actions": {
+      "back": "Back",
+      "backToUsers": "Back to users",
+      "cancel": "Cancel",
+      "close": "Close",
+      "save": "Save",
+      "saving": "Saving...",
+      "editProfile": "Edit profile",
+      "logout": "Logout",
+      "login": "Log in",
+      "signup": "Sign up",
+      "send": "Send",
+      "completeProfile": "Complete profile",
+      "addSkill": "Add skill",
+      "addSkills": "Add skills",
+      "addDeliverable": "Add deliverable",
+      "addCategory": "Add category",
+      "saveCategory": "Save category",
+      "remove": "Remove",
+      "removeItem": "Remove {{item}}",
+      "next": "Next",
+      "previous": "Previous",
+      "messageUser": "Message {{role}}",
+      "messageClient": "Message client",
+      "viewMessages": "View messages",
+      "chooseFile": "Choose file",
+      "activateContract": "Activate contract",
+      "funding": "Funding...",
+      "accepting": "Accepting...",
+      "sending": "Sending...",
+      "activating": "Activating..."
+    },
+    "labels": {
+      "id": "ID",
+      "email": "Email",
+      "role": "Role",
+      "phone": "Phone",
+      "location": "Location",
+      "address": "Address",
+      "country": "Country",
+      "city": "City",
+      "joined": "Joined",
+      "firstName": "First name",
+      "lastName": "Last name",
+      "password": "Password",
+      "confirmPassword": "Confirm password",
+      "bio": "Bio",
+      "portfolio": "Portfolio",
+      "profile": "Profile image",
+      "resume": "Resume",
+      "searchByName": "Search by name",
+      "name": "Name",
+      "allUsers": "All users",
+      "assigned": "Assigned",
+      "freelancerProfile": "Freelancer profile",
+      "contactInformation": "Contact information",
+      "clientActivity": "Client activity",
+      "relatedProjects": "Related projects",
+      "clientProjects": "Client projects",
+      "adminPanel": "Admin panel",
+      "adminAccount": "admin account",
+      "adminDashboard": "Admin dashboard",
+      "dashboard": "Dashboard",
+      "totalUsers": "Total users",
+      "totalProjects": "Total projects",
+      "totalSkills": "Total skills",
+      "totalCategories": "Total categories",
+      "projectStatus": "Project status",
+      "projectsByWorkflow": "Projects by workflow",
+      "escrowAmount": "Escrow amount",
+      "projectGroupsAvailable": "Project groups available",
+      "skillsLinkedToCategories": "Skills linked to categories",
+      "currentlyHeldPayments": "Currently held payments",
+      "inProgressCount": "{{count}} in progress",
+      "clientsAndFreelancers": "{{clients}} clients, {{freelancers}} freelancers",
+      "totalCount": "{{count}} total",
+      "usersCount": "{{count}} users",
+      "skillsCount": "{{count}} skills",
+      "collaboration": "Collaboration",
+      "assignedFreelancer": "Assigned freelancer",
+      "deliveryTime": "Delivery time",
+      "coverLetter": "Cover letter",
+      "more": "more...",
+      "signupAs": "Sign up as:",
+      "paymentSummary": "Payment summary",
+      "allocated": "Allocated",
+      "remaining": "Remaining",
+      "uploadContractPdf": "Upload contract PDF",
+      "uploadContractPdfHint": "Click to choose a PDF file",
+      "submissionLinkPlaceholder": "https://..."
+    },
+    "states": {
+      "loading": "Loading",
+      "loadingDashboardStats": "Loading dashboard stats...",
+      "loadingSkills": "Loading skills...",
+      "loadingCategories": "Loading categories...",
+      "loadingUsers": "Loading users...",
+      "loadingUserDetails": "Loading user details...",
+      "loadingContractDetailsTitle": "Getting contract details ready...",
+      "loadingContractDetailsDescription": "We are fetching the agreement, deliverables, and payment status.",
+      "contractUnavailable": "Contract unavailable",
+      "contractUnavailableTitle": "We could not load this contract.",
+      "pageUnavailable": "Unavailable",
+      "pageUnavailableTitle": "We could not load this page.",
+      "noCategoriesFound": "No categories found.",
+      "noSkillsAdded": "No skills added yet.",
+      "noSkillsAddedShort": "No skills added.",
+      "noUsersFound": "No users found.",
+      "noProjectsFound": "No projects found",
+      "emptyProjects": "Empty projects ...",
+      "noProposals": "No proposals",
+      "selectConversation": "Select conversation",
+      "noSkillsListed": "No skills listed yet",
+      "noSubmissionLinks": "No submission links provided.",
+      "noSubmissionNote": "No submission note provided.",
+      "noDeliverables": "No deliverables have been added to this contract yet.",
+      "noPaymentRecords": "No payment records are available for this contract yet."
+    },
+    "fallbacks": {
+      "notAdded": "Not added",
+      "notSet": "Not set",
+      "notAssigned": "Not assigned",
+      "notAssignedYet": "Not assigned yet",
+      "notAvailable": "Not available",
+      "notSpecified": "Not specified",
+      "notPublishedYet": "Not published yet",
+      "unregistered": "Unregistered",
+      "untitledProject": "Untitled project",
+      "untitledContract": "Untitled contract",
+      "untitledDeliverable": "Untitled deliverable",
+      "assignedFreelancer": "Assigned freelancer",
+      "freelancer": "Freelancer",
+      "noCategory": "No category",
+      "noDescription": "No description available yet.",
+      "noContractDescription": "No contract description has been provided yet.",
+      "noContractFile": "No contract file has been attached yet.",
+      "noDeliverableDescription": "No description was provided for this deliverable.",
+      "documentUnavailable": "Unavailable"
+    },
+    "units": {
+      "day": "day",
+      "month": "month",
+      "year": "year"
+    },
+    "validation": {
+      "skillNameRequired": "Please enter a skill name first",
+      "skillAlreadyAdded": "This skill is already in the list",
+      "chooseCategory": "Please choose a category",
+      "addAtLeastOneSkill": "Please add at least one skill",
+      "categoryNameRequired": "Category name is required",
+      "budgetRequired": "Budget is required",
+      "deliveryTimeRequired": "Delivery time is required",
+      "coverLetterRequired": "Cover letter is required",
+      "coverLetterLength": "Cover letter must be at least 30 characters",
+      "deadlineRequired": "Deadline required"
+    }
+  },
+  "profile": {
+    "title": "Profile information",
+    "personalInformation": "Personal information",
+    "addressInformation": "Address information",
+    "aboutMe": "About me",
+    "complete": {
+      "title": "Complete your profile",
+      "description": "A complete profile helps clients trust you faster"
+    }
+  },
+  "admin": {
+    "dashboard": {
+      "subtitle": "Live platform numbers",
+      "title": "Dashboard overview"
+    },
+    "skills": {
+      "title": "Skills",
+      "formTitle": "Add skills",
+      "formDescription": "Choose one category, add skills one by one, then save.",
+      "chooseCategory": "Choose category",
+      "skillPlaceholder": "Example: React",
+      "pendingTitle": "Skills to save",
+      "success": "Skills added successfully"
+    },
+    "categories": {
+      "title": "Categories",
+      "label": "Category name",
+      "placeholder": "Example: Web Development",
+      "success": "Category added successfully"
+    },
+    "users": {
+      "title": "Users",
+      "userNotFound": "User not found"
+    },
+    "projects": {
+      "title": "Admin projects page"
+    }
+  },
+  "messages": {
+    "title": "Chats",
+    "inputPlaceholder": "Type a message ..."
+  },
+  "sendProposal": {
+    "title": "Send your proposal",
+    "pricePlaceholder": "Enter your price",
+    "deliveryPlaceholder": "Enter your delivery time",
+    "coverLetterPlaceholder": "Cover letter ..."
   },
   "dashboard": {
     "client": {
@@ -336,6 +542,9 @@
       },
       "contractFile": {
         "description": "The signed contract document is available."
+      },
+      "progressCaption": {
+        "releasedAgainstTotal": "{{paid}} released against {{total}} total."
       }
     },
     "deliverables": {
@@ -381,7 +590,9 @@
           "placeholder": "Enter the agreed final price"
         },
         "upload": {
-          "error": "Contract file is required"
+          "error": "Contract file is required",
+          "title": "Upload Contract PDF",
+          "description": "Click to choose a PDF file"
         },
         "description": {
           "label": "Contract description",
@@ -421,8 +632,15 @@
     "modal": {
       "subTitle": "Final confirmation",
       "title": "Activate this contract?",
-      "description": "nce you confirm, the contract will be activated with the terms and deliverables you entered. Make sure everything is correct before continuing.",
+      "description": "Once you confirm, the contract will be activated with the terms and deliverables you entered. Make sure everything is correct before continuing.",
       "confirm" : "Confirm and activate"
+    },
+    "paymentSummary": {
+      "title": "Payment summary"
     }
+  },
+  "fundDeliverable": {
+    "title": "Fund deliverable",
+    "description": "Add a deadline and confirm the escrow funding for this deliverable. The freelancer will be able to start working once the payment is secured."
   }
 }

@@ -18,10 +18,10 @@ function ClientProjectDetail() {
   const { project } = useOutletContext();
   const status = project?.status?.toLowerCase() || "open";
   const formattedStatus = status.split("_").join(" ");
-  const duration = project?.duration?.split("_").join(" ") || "Not specified";
+  const duration = project?.duration?.split("_").join(" ") || t("ui.fallbacks.notSpecified");
   const publishedDate = project?.created_at
     ? formatDate(project.created_at)
-    : "Not published yet";
+    : t("ui.fallbacks.notPublishedYet");
 
   const showAssignedFreelancer =
     project?.status?.toLowerCase() === "completed" ||
@@ -30,7 +30,7 @@ function ClientProjectDetail() {
   const projectStats = [
     {
       label: t("common.labels.budget"),
-      value: project?.budget != null ? `$${project.budget}` : "Not set",
+      value: project?.budget != null ? `$${project.budget}` : t("ui.fallbacks.notSet"),
       icon: <FiDollarSign />,
     },
     {
@@ -48,12 +48,12 @@ function ClientProjectDetail() {
   const projectDetails = [
     {
       label: t("common.labels.experienceLevel"),
-      value: project?.experience_level || "Not specified",
+      value: project?.experience_level || t("ui.fallbacks.notSpecified"),
       icon: <FiTrendingUp />,
     },
     {
       label: t("common.labels.projectSize"),
-      value: project?.size || "Not specified",
+      value: project?.size || t("ui.fallbacks.notSpecified"),
       icon: <FiLayers />,
     },
     {
@@ -102,7 +102,7 @@ function ClientProjectDetail() {
             </h3>
           </div>
           <p className={styles.descriptionText}>
-            {project?.description || "No description available yet."}
+            {project?.description || t("ui.fallbacks.noDescription")}
           </p>
         </div>
 
@@ -122,8 +122,8 @@ function ClientProjectDetail() {
       {showAssignedFreelancer && (
         <div className={styles.hiredFreelancer}>
           <div className={styles.assignedHeader}>
-            <p className={styles.eyebrow}>Collaboration</p>
-            <h2>Assigned Freelancer</h2>
+            <p className={styles.eyebrow}>{t("ui.labels.collaboration")}</p>
+            <h2>{t("ui.labels.assignedFreelancer")}</h2>
           </div>
           <AssignedFreelancerCard freelancer={project?.freelancer} />
         </div>

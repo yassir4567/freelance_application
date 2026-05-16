@@ -2,8 +2,10 @@ import { useEffect, useState } from "react";
 import { getUsers } from "../../../api/admin/getUsers";
 import styles from "../styles/AdminUsersPage.module.css";
 import UsersTable from "../components/UsersTable";
+import { useTranslation } from "react-i18next";
 
 function AdminUsersPage() {
+  const { t } = useTranslation();
   const [users, setUsers] = useState([]);
   const [search, setSearch] = useState("");
   const [role, setRole] = useState("");
@@ -34,19 +36,19 @@ function AdminUsersPage() {
     <div className={styles.content}>
       <div className={styles.header}>
         <div>
-          <p className={styles.subtitle}>Admin dashboard</p>
-          <h1>Users</h1>
+          <p className={styles.subtitle}>{t("ui.labels.adminDashboard")}</p>
+          <h1>{t("admin.users.title")}</h1>
         </div>
-        <span className={styles.count}>{users.length} users</span>
+        <span className={styles.count}>{t("ui.labels.usersCount", { count: users.length })}</span>
       </div>
 
       <div className={styles.filters}>
         <div className={styles.field}>
-          <label htmlFor="user-search">Search by name</label>
+          <label htmlFor="user-search">{t("ui.labels.searchByName")}</label>
           <input
             id="user-search"
             type="text"
-            placeholder="Search by name"
+            placeholder={t("ui.labels.searchByName")}
             value={search}
             onChange={(e) => setSearch(e.target.value)}
           />
@@ -59,7 +61,7 @@ function AdminUsersPage() {
             value={role}
             onChange={(e) => setRole(e.target.value)}
           >
-            <option value="">All users</option>
+            <option value="">{t("ui.labels.allUsers")}</option>
             <option value="client">Client</option>
             <option value="freelancer">Freelancer</option>
           </select>
@@ -69,7 +71,7 @@ function AdminUsersPage() {
       {error && <p className={styles.error}>{error}</p>}
 
       {loading ? (
-        <p className={styles.state}>Loading users...</p>
+        <p className={styles.state}>{t("ui.states.loadingUsers")}</p>
       ) : (
         <UsersTable users={users} />
       )}

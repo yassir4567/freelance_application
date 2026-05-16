@@ -1,17 +1,19 @@
 import { FiShield } from "react-icons/fi";
 import { useAuth } from "../../context/AuthContext";
 import styles from "./AdminHeader.module.css";
+import { useTranslation } from "react-i18next";
 
 function AdminHeader() {
   const { user } = useAuth();
+  const { t } = useTranslation();
   const fullName = getFullName(user);
   const initial = fullName.charAt(0).toUpperCase();
 
   return (
     <header className={styles.header}>
       <div>
-        <p className={styles.eyebrow}>Admin panel</p>
-        <h2>Welcome back, {fullName}</h2>
+        <p className={styles.eyebrow}>{t("ui.labels.adminPanel")}</p>
+        <h2>{t("common.labels.welcome")} {fullName}</h2>
       </div>
 
       <div className={styles.profile}>
@@ -24,7 +26,7 @@ function AdminHeader() {
           <div className={styles.avatar}>{initial}</div>
           <div>
             <strong>{fullName}</strong>
-            <span>{user?.email || "admin account"}</span>
+            <span>{user?.email || t("ui.labels.adminAccount")}</span>
           </div>
         </div>
       </div>

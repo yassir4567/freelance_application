@@ -34,7 +34,7 @@ function ContractPayments({ deliverables, paymentSummary }) {
     },
     {
       id: 4,
-      title: t("common.options.status.pending"),
+      title: "Pending",
       value: formatCurrency(paymentSummary?.pendingAmount),
       className: `${styles.paymentCard} ${styles.remainingCard}`,
     },
@@ -78,7 +78,7 @@ function ContractPayments({ deliverables, paymentSummary }) {
                     <h1 className={styles.paymentItemTitle}>
                       {valueOrFallback(
                         deliverable.title,
-                        "Untitled deliverable",
+                        t("ui.fallbacks.untitledDeliverable"),
                       )}
                     </h1>
                   </div>
@@ -103,7 +103,7 @@ function ContractPayments({ deliverables, paymentSummary }) {
             })
           ) : (
             <div className={styles.emptyState}>
-              No payment records are available for this contract yet.
+              {t("ui.states.noPaymentRecords")}
             </div>
           )}
         </div>

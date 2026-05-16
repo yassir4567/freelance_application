@@ -89,7 +89,7 @@ function ClientProposalCard({
               to={`/dashboard/client/messages?chat=${proposal.contract?.conversation.id}`}
               className={`${styles.link} ${styles.message}`}
             >
-              message
+              {t("ui.actions.messageClient")}
             </NavLink>
           )}
         </div>

@@ -1,9 +1,11 @@
 import styles from "../../styles/ProfileCard.module.css";
 import profile from "../../../../assets/images/profile.png";
 import { useAuth } from "../../../../context/AuthContext";
+import { useTranslation } from "react-i18next";
 
 function ProfileCard() {
   const { user } = useAuth();
+  const { t } = useTranslation();
 
 
   return (
@@ -12,7 +14,7 @@ function ProfileCard() {
         <div className={styles.imageWrapper}>
           <div className={styles.imageBox}>
             <div className={styles.image}>
-              <img src={profile} alt="Profile image" />
+              <img src={profile} alt={t("ui.labels.profile")} />
             </div>
           </div>
         </div>

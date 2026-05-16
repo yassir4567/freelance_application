@@ -1,11 +1,13 @@
 import { Navigate, Outlet } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
+import { useTranslation } from "react-i18next";
 
 function ProtectedRoutes({ role }) {
   const { user, isLoading } = useAuth();
+  const { t } = useTranslation();
 
   if (isLoading) {
-    return <div>Loading</div>;
+    return <div>{t("ui.states.loading")}</div>;
   }
 
   if (!user) {

@@ -219,7 +219,7 @@ function PostProjectForm({ is_profile_complete }) {
       </div>
       <div className={styles.row}>
         <div className={styles.inputBox}>
-          <label>Skills</label>
+          <label>{t("common.labels.skills")}</label>
           <select
             className={styles.select}
             value=""

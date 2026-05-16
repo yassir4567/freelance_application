@@ -1,13 +1,15 @@
 import styles from "../styles/AssignedFreelancerCard.module.css";
 import profile from "../../../assets/images/profile.png";
 import { FiExternalLink, FiMessageSquare, FiTag, FiUserCheck } from "react-icons/fi";
+import { useTranslation } from "react-i18next";
 
 function AssignedFreelancerCard({ freelancer }) {
+  const { t } = useTranslation();
   const skills =
     freelancer?.skills?.map((sk) => ({ id: sk.id, name: sk.name })) || [];
   const fullName = freelancer?.user
     ? `${freelancer.user.first_name} ${freelancer.user.last_name}`
-    : "Assigned freelancer";
+    : t("ui.fallbacks.assignedFreelancer");
 
   return (
     <div className={styles.freelancerCard}>
@@ -19,7 +21,7 @@ function AssignedFreelancerCard({ freelancer }) {
           <div className={styles.freelancerInfo}>
             <span className={styles.assignedBadge}>
               <FiUserCheck />
-              Assigned
+              {t("ui.labels.assigned")}
             </span>
             <h3 className={styles.freelancerFullName}>{fullName}</h3>
             <p className={styles.freelancerTitle}>
@@ -31,7 +33,7 @@ function AssignedFreelancerCard({ freelancer }) {
         <div className={styles.freelancerCardActions}>
           <button className={styles.viewMessagesBtn}>
             <FiMessageSquare />
-            View messages
+            {t("ui.actions.viewMessages")}
           </button>
         </div>
       </div>
@@ -41,7 +43,7 @@ function AssignedFreelancerCard({ freelancer }) {
           <span className={styles.categoryIcon}>
             <FiTag />
           </span>
-          {freelancer?.category?.name || "No category"}
+          {freelancer?.category?.name || t("ui.fallbacks.noCategory")}
         </div>
         <div className={styles.freelancerSkills}>
           {skills.length > 0 ? (
@@ -51,7 +53,7 @@ function AssignedFreelancerCard({ freelancer }) {
               </div>
             ))
           ) : (
-            <div className={styles.emptySkills}>No skills listed yet</div>
+            <div className={styles.emptySkills}>{t("ui.states.noSkillsListed")}</div>
           )}
         </div>
       </div>
