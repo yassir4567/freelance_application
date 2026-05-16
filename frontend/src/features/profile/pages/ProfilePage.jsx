@@ -13,6 +13,9 @@ function ProfilePage() {
   const { t } = useTranslation();
   const [isEdited, setIsEdited] = useState(false);
 
+  const [avatar, setAvatar] = useState(null);
+  const [preview, setPreview] = useState(null);
+
   const [personalInformationForm, setPersonalInformationForm] = useState({
     first_name: user.first_name || "",
     last_name: user.last_name || "",
@@ -36,26 +39,52 @@ function ProfilePage() {
     setIsEdited(true);
   };
 
+  console.log(user);
+  
   const handleSaveEdit = async () => {
     if (user.role === "client") {
-      const payload = {
-        ...personalInformationForm,
-        ...profileAddress,
-      };
+      const payload = new FormData();
+      const { first_name, last_name, phone } = personalInformationForm;
+      const { address, country, city } = profileAddress;
+
+      payload.append("first_name", first_name);
+      payload.append("last_name", last_name);
+      payload.append("phone", phone);
+      payload.append("address", address);
+      payload.append("country", country);
+      payload.append("city", city);
+      if (avatar) {
+        payload.append("avatar", avatar);
+      }
 
       const result = await updateClientProfile(payload);
+
       setUser(result.data);
       setIsEdited(false);
     }
 
     if (user.role === "freelancer") {
-      const payload = {
-        ...personalInformationForm,
-        ...profileAddress,
-        ...aboutFreelancer,
-      };
+      const payload = new FormData();
+      const { first_name, last_name, phone } = personalInformationForm;
+      const { address, country, city } = profileAddress;
+      const { title, bio, portfolio, category_id } = aboutFreelancer;
+
+      payload.append("first_name", first_name);
+      payload.append("last_name", last_name);
+      payload.append("phone", phone);
+      payload.append("address", address);
+      payload.append("country", country);
+      payload.append("city", city);
+      if (avatar) {
+        payload.append("avatar", avatar);
+      }
+      payload.append("title", title);
+      payload.append("bio", bio);
+      payload.append("portfolio", portfolio);
+      payload.append("category_id", category_id);
 
       const result = await updateFreelancerProfile(payload);
+
       console.log(result);
 
       setUser(result.data);
@@ -64,39 +93,49 @@ function ProfilePage() {
   };
 
   return (
-    <div className={styles.profilePage}>
-      <div className={styles.header}>
-        <h2 className={styles.pageTitle}>{t("profile.title")}</h2>
-        {isEdited ? (
-          <button className={styles.save} onClick={handleSaveEdit}>
-            {t("ui.actions.save")}
-          </button>
-        ) : (
-          <button className={styles.editButton} onClick={handleOpenEdit}>
-            {t("ui.actions.editProfile")}
-          </button>
-        )}
+    <div className={styles.page}>
+      <div className={styles.profileSideBar}>
+        <ProfileSideBar
+          setAvatar={setAvatar}
+          preview={preview}
+          setPreview={setPreview}
+          isEdited={isEdited}
+        />
       </div>
+      <div className={styles.profilePage}>
+        <div className={styles.header}>
+          <h2 className={styles.pageTitle}>{t("profile.title")}</h2>
+          {isEdited ? (
+            <button className={styles.save} onClick={handleSaveEdit}>
+              {t("ui.actions.save")}
+            </button>
+          ) : (
+            <button className={styles.editButton} onClick={handleOpenEdit}>
+              {t("ui.actions.editProfile")}
+            </button>
+          )}
+        </div>
 
-      <form className={styles.main}>
-        <ProfileInformation
-          isEdited={isEdited}
-          form={personalInformationForm}
-          setForm={setPersonalInformationForm}
-        />
-        <ProfileAddress
-          isEdited={isEdited}
-          form={profileAddress}
-          setForm={setProfileAddress}
-        />
-        {user.role === "freelancer" && (
-          <AboutMe
+        <form className={styles.main}>
+          <ProfileInformation
             isEdited={isEdited}
-            form={aboutFreelancer}
-            setForm={setAboutFreelancer}
+            form={personalInformationForm}
+            setForm={setPersonalInformationForm}
           />
-        )}
-      </form>
+          <ProfileAddress
+            isEdited={isEdited}
+            form={profileAddress}
+            setForm={setProfileAddress}
+          />
+          {user.role === "freelancer" && (
+            <AboutMe
+              isEdited={isEdited}
+              form={aboutFreelancer}
+              setForm={setAboutFreelancer}
+            />
+          )}
+        </form>
+      </div>
     </div>
   );
 }

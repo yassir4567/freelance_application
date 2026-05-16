@@ -106,10 +106,18 @@ class AuthController extends Controller
 
         $user = $request->user();
 
+        if ($user->role === 'freelancer') {
+            $user->load("freelancer");
+        }
+
         return response()->json([
             'success' => true,
             'data' => [
-                'user' => $user,
+                'user' => [
+                    ...$user->toArray(),
+                    'avatar_url' => $user->avatar ? asset("storage/" . $user->avatar) : null,
+
+                ],
                 'profile' => $user->getProfileCompletion()
             ]
         ]);

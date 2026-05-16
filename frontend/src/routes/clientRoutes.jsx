@@ -10,7 +10,6 @@ import ContractDetail from "../features/contracts/pages/ContractDetail";
 import MessagesPage from "../features/messages/pages/MessagesPage";
 import ProtectedRoutes from "./ProtectedRoutes";
 import ProfilePage from "../features/profile/pages/ProfilePage";
-import ProfileLayout from "../features/profile/layouts/ProfileLayout";
 import ClientActiveContract from "../features/contracts/pages/ClientActiveContract";
 
 export const clientRoutes = [
@@ -41,9 +40,8 @@ export const clientRoutes = [
           { path: "messages", element: <MessagesPage /> },
           {
             path: "profile",
-            element: <ProfileLayout />,
-            children: [{ index: true, element: <ProfilePage /> }],
-          },
+            element: <ProfilePage />,
+          }
         ],
       },
     ],

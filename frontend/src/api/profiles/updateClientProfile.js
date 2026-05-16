@@ -1,16 +1,15 @@
 import { BASE_URL, getToken } from "../config";
 
-const updateClientProfile = async (form) => {
+const updateClientProfile = async (payload) => {
   try {
     const token = getToken();
     const response = await fetch(`${BASE_URL}/client/update-profile`, {
       method: "PUT",
       headers: {
         Accept: "application/json",
-        "Content-type": "application/json",
         Authorization: `Bearer ${token}`,
       },
-      body: JSON.stringify(form),
+      body: payload
     });
 
     const data = await response.json();

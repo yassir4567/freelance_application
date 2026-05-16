@@ -28,7 +28,6 @@
     position: relative;
     border-bottom-left-radius: 42px;
     border-bottom-right-radius: 42px;
-    /* overflow: hidden; */
 }
 
 .imageWrapper::before,
@@ -72,7 +71,6 @@
     border-radius: 50%;
     overflow: hidden;
     background: linear-gradient(180deg, #ffffff 0%, var(--color-secondary-light) 100%);
-    border: 3px solid rgba(255, 255, 255, 0.9);
 }
 
 .image img {
@@ -80,6 +78,10 @@
     height: 100%;
     object-fit: cover;
     display: block;
+}
+
+.avatar {
+    display: none;
 }
 
 .userInfo {

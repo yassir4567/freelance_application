@@ -8,7 +8,6 @@ import FreelancerContractsPage from "../features/contracts/pages/FreelancerContr
 import ContractDetail from "../features/contracts/pages/ContractDetail";
 import MessagesPage from "../features/messages/pages/MessagesPage";
 import ProfilePage from "../features/profile/pages/ProfilePage";
-import ProfileLayout from "../features/profile/layouts/ProfileLayout";
 
 export const freelancerRoutes = [
   {
@@ -27,9 +26,8 @@ export const freelancerRoutes = [
           { path: "messages", element: <MessagesPage /> },
           {
             path: "profile",
-            element: <ProfileLayout />,
-            children: [{ index: true, element: <ProfilePage /> }],
-          },
+            element: <ProfilePage />,
+          }
         ],
       },
     ],
