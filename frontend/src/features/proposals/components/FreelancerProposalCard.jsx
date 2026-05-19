@@ -11,7 +11,6 @@ function FreelancerProposalCard({ proposal }) {
     accepted: "status-success",
     rejected: "status-danger",
   };
-  console.log(proposal);
 
   return (
     <div className={styles.proposalCard}>
