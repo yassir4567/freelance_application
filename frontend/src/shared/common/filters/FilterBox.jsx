@@ -11,7 +11,9 @@ function FilterBox({
   const { t } = useTranslation();
   return (
     <div className={styles.FilterSection}>
-      <Search value={inputValues.search} onChange={handleInputsChange} />
+      <div className={styles.searchFilter}>
+        <Search value={inputValues.search} onChange={handleInputsChange} />
+      </div>
 
       <div className={styles.StatusBox}>
         <select

@@ -16,9 +16,14 @@
 }
 
 .contractsOverview {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  display: flex ;
+  flex-wrap: wrap;
   gap: 30px;
+}
+
+.contractsOverviewCard {
+  width: 100%;
+  min-width: 270px;
 }
 
 .contractsOverviewCard p:nth-child(2) {

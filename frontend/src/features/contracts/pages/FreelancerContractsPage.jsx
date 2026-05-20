@@ -21,8 +21,6 @@ function FreelancerContractsPage() {
   useEffect(() => {
     const loadContractStats = async () => {
       const result = await getFreelancerContractStats();
-      console.log(result.data);
-
       setContractStats(result.data);
     };
     loadContractStats();
