@@ -6,6 +6,7 @@
   display: flex;
   gap: 15px;
   align-items: center;
+  flex-wrap: wrap;
 }
 
 .pageDescription {
@@ -15,7 +16,7 @@
 }
 
 .statusBtn {
-  min-width: 150px;
+  min-width: 200px;
   font-size: var(--fs-md);
   text-transform: capitalize;
   height: 40px;
@@ -88,3 +89,12 @@
   margin-top: 50px;
   margin-bottom: 100px;
 }
+
+
+
+@media (max-width: 1020px) {
+  .statusBtn {
+    flex: 1;
+  }
+}
+

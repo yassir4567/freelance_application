@@ -122,3 +122,15 @@
     background-color: var(--color-secondary);
     color: var(--color-white);
 }
+
+
+@media (max-width: 500px) {
+  .infosBoxWrapper {
+    grid-template-columns: 1fr;
+    gap: 25px;
+  }
+
+  .link {
+    font-size: var(--fs-sm) !important;
+  }
+}
