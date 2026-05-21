@@ -11,6 +11,7 @@ use App\Http\Controllers\ClientProposalController;
 use App\Http\Controllers\ConversationController;
 use App\Http\Controllers\DeliverableController;
 use App\Http\Controllers\DeliverablePaymentController;
+use App\Http\Controllers\FeedbackController;
 use App\Http\Controllers\FreelancerContractController;
 use App\Http\Controllers\FreelancerDashboardController;
 use App\Http\Controllers\FreelancerProfileController;
@@ -54,9 +55,12 @@ Route::middleware('auth:sanctum')->group(function () {
         // ? Payments
         Route::post('/deliverables/{deliverableId}/payments/fund', [DeliverablePaymentController::class, 'fund']);
 
-         // ? Deliverables 
+        // ? Deliverables 
         Route::put('/deliverables/{id}/accept', [DeliverableController::class, 'accept']);
         Route::put('/deliverables/{id}/request-revision', [DeliverableController::class, 'requestRevision']);
+
+        // ? feedback 
+        Route::post('/leave-feedback/{contractId}', [FeedbackController::class, 'store']);
     });
 
     Route::middleware('role:freelancer')->group(function () {

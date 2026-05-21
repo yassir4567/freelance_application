@@ -29,4 +29,9 @@ class Contract extends Model
     {
         return $this->hasOne(Conversation::class);
     }
+
+    public function feedback(): HasOne
+    {
+        return $this->hasOne(Feedback::class);
+    }
 }

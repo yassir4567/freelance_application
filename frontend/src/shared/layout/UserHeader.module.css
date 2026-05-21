@@ -142,6 +142,7 @@
 
 .menu {
   font-size: var(--fs-xl);
+  display: none;
 }
 
 .mobileMenu {
@@ -170,6 +171,10 @@
     inset: 0;
     background-color: var(--color-light);
     backdrop-filter: blur(2px);
+  }
+
+  .menu {
+    display: block;
   }
 
   .mobileMenu {
