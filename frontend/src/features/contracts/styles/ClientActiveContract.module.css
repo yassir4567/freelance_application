@@ -50,7 +50,7 @@
     border: 2px solid var(--color-border);
     background-color: var(--color-light);
     padding: 34px;
-    border-radius: 24px;
+    border-radius: 10px;
     /* box-shadow: 0 5px 16px #e0dede; */
 }
 

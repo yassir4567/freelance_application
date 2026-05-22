@@ -2,7 +2,7 @@
     background-color: var(--color-white);
     border: 1px solid var(--color-border);
     padding: 22px;
-    border-radius: 24px;
+    border-radius: 10px;
     box-shadow: 0 10px 16px #e0dede;
 }
 
@@ -24,7 +24,7 @@
     align-items: center;
     justify-content: space-between;
     padding: 10px 22px;
-    border-radius: 18px;
+    border-radius: 10px;
     border: 1px solid var(--color-border);
     box-shadow: 0 10px 10px #e9e6e68a;
 }

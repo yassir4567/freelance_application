@@ -137,7 +137,6 @@ function ClientActiveContract() {
       ),
     );
 
-    console.log(payload);
 
     const result = await setUpContract(contractId, payload);
     setIsSubmitting(false);

@@ -6,7 +6,7 @@
 
 .userMinCard {
   border: 1px solid var(--color-border);
-  border-radius: 22px;
+  border-radius: 10px;
   background: var(--color-light);
   box-shadow: var(--bx-shadow-2);
   padding: 22px;
@@ -84,18 +84,21 @@
 
 .contractStaffRight {
   display: flex;
-  flex-direction: column;
+  /* flex-direction: column; */
+  flex-wrap: wrap;
   gap: 12px;
 }
 
 .contractStaffRightItem {
   border: 1px solid var(--color-border);
-  border-radius: 18px;
+  border-radius: 10px;
   background: var(--color-light);
   box-shadow: var(--bx-shadow-2);
   padding: 16px;
   display: flex;
   gap: 13px;
+  min-width: 300px;
+  flex: 1;
 }
 
 .itemIcon {
@@ -125,20 +128,15 @@
   font-weight: 700;
 }
 
-@media (max-width: 1100px) {
-  .contractStaff {
-    display: grid;
-    grid-template-columns: 1fr;
-  }
 
-  .contractStaffRight {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-  }
+
+@media (max-width: 980px) {
+  /* .contractStaffRight {
+    flex-direction: column;
+  } */
 }
-
-@media (max-width: 760px) {
+/* @media (max-width: 760px) {
   .contractStaffRight {
     grid-template-columns: 1fr;
   }
-}
+} */
