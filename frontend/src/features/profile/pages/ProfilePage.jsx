@@ -41,6 +41,7 @@ function ProfilePage() {
 
   console.log(user);
   
+
   const handleSaveEdit = async () => {
     if (user.role === "client") {
       const payload = new FormData();

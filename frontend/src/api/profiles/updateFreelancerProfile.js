@@ -3,8 +3,10 @@ import { BASE_URL, getToken } from "../config";
 const updateFreelancerProfile = async (payload) => {
   try {
     const token = getToken();
+    payload.set("_method", "PUT");
+
     const response = await fetch(`${BASE_URL}/freelancer/update-profile`, {
-      method: "PUT",
+      method: "POST",
       headers: {
         Accept: "application/json",
         Authorization: `Bearer ${token}`,

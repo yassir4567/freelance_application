@@ -15,6 +15,8 @@ function ProfileCard({ setAvatar, preview, setPreview, isEdited }) {
 
   const src = preview ? preview : user.avatar_url ? user.avatar_url : profile;
 
+  console.log(src);
+  
   return (
     <div className={styles.container}>
       <div className={styles.wrapper}>
