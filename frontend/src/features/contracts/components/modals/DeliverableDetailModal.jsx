@@ -13,9 +13,11 @@ import {
   valueOrFallback,
 } from "../../utils/contractDisplay";
 import { useTranslation } from "react-i18next";
+import LeaveFeedbackForm from "../LeaveFeedbackForm";
 
 function DeliverableDetailModal({
   deliverable,
+  deliverables,
   isOpen,
   onClose,
   statusLabel,
@@ -30,6 +32,7 @@ function DeliverableDetailModal({
   const [acceptError, setAcceptError] = useState("");
   const [isRequestingRevision, setIsRequestingRevision] = useState(false);
   const [revisionError, setRevisionError] = useState("");
+  const [isLastDeliverable, setIsLastDeliverable] = useState(false);
 
   // * stop the scrolling when modal is open
   useEffect(() => {
@@ -67,6 +70,13 @@ function DeliverableDetailModal({
 
   const handleAccept = async () => {
     setAcceptError("");
+
+    const lastDeliverable = deliverables[deliverables.length - 1];
+    if (lastDeliverable.id === deliverable.id) {
+      setIsLastDeliverable(true);
+      return;
+    }
+
     setIsAccepting(true);
 
     const result = await acceptDeliverable(deliverable.id);
@@ -80,7 +90,9 @@ function DeliverableDetailModal({
     const contractResult = await getClientContractDetail(contract.id);
 
     if (!contractResult.success) {
-      setAcceptError(contractResult.message || t("ui.states.contractUnavailableTitle"));
+      setAcceptError(
+        contractResult.message || t("ui.states.contractUnavailableTitle"),
+      );
       setIsAccepting(false);
       return;
     }
@@ -105,7 +117,9 @@ function DeliverableDetailModal({
     const contractResult = await getClientContractDetail(contract.id);
 
     if (!contractResult.success) {
-      setRevisionError(contractResult.message || t("ui.states.contractUnavailableTitle"));
+      setRevisionError(
+        contractResult.message || t("ui.states.contractUnavailableTitle"),
+      );
       setIsRequestingRevision(false);
       return;
     }
@@ -192,7 +206,10 @@ function DeliverableDetailModal({
               {deliverable.position ?? deliverable.id}
             </p>
             <h3 className={styles.title}>
-              {valueOrFallback(deliverable.title, t("ui.fallbacks.untitledDeliverable"))}
+              {valueOrFallback(
+                deliverable.title,
+                t("ui.fallbacks.untitledDeliverable"),
+              )}
             </h3>
           </div>
 
@@ -265,8 +282,7 @@ function DeliverableDetailModal({
                 {deliverable.deliverable_links.map((link, index) => (
                   <div key={index} className={styles.linkItem}>
                     <span>
-                      {t("common.labels.link")}{" "}
-                      {index + 1}:
+                      {t("common.labels.link")} {index + 1}:
                     </span>
                     <a href={link} target="_blank" rel="noreferrer">
                       {link}
@@ -275,7 +291,9 @@ function DeliverableDetailModal({
                 ))}
               </div>
             ) : (
-              <p className={styles.emptyState}>{t("ui.states.noSubmissionLinks")}</p>
+              <p className={styles.emptyState}>
+                {t("ui.states.noSubmissionLinks")}
+              </p>
             )}
           </div>
         )}
@@ -302,6 +320,25 @@ function DeliverableDetailModal({
             contractId={contract.id}
             onClose={onClose}
           />
+        )}
+
+        {isLastDeliverable && (
+          <div className={styles.feedbackBox}>
+            <div className={styles.feedbackBoxHeader}>
+              <h3 className={styles.feedbackBoxTitle}>Feedback form</h3>
+              <p className={styles.feedbackBoxDescription}>
+                This is the final deliverable. Once you accept it, the contract
+                will be marked as completed . <br />
+                leave feedback for the freelancer.
+              </p>
+            </div>
+            <LeaveFeedbackForm
+              contract={contract}
+              setContract={setContract}
+              onClose={onClose}
+              deliverable={deliverable}
+            />
+          </div>
         )}
       </div>
     </div>

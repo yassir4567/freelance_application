@@ -38,7 +38,7 @@ class FeedbackController extends Controller
         }
 
         $validated = $request->validate([
-            'contenu' => "required|string",
+            "contenu" => "required|string",
             "note" => "required|integer|min:0|max:5"
         ]);
 

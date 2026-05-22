@@ -26,7 +26,6 @@ function DeliverableCard({
   const [isFundModalOpen, setIsFundModalOpen] = useState(false);
   const { user } = useAuth();
 
-  // console.log(deliverable);
 
   const role = user?.role;
   const statusLabel =
@@ -114,6 +113,7 @@ function DeliverableCard({
       {isDetailModalOpen && (
         <DeliverableDetailModal
           deliverable={deliverable}
+          deliverables={deliverables}
           isOpen={isDetailModalOpen}
           onClose={() => setIsDetailModalOpen(false)}
           statusLabel={DELIVERABLE_STATUS_LABEL}
