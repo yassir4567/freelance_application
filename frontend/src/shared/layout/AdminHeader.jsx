@@ -12,7 +12,6 @@ function AdminHeader() {
   return (
     <header className={styles.header}>
       <div>
-        <p className={styles.eyebrow}>{t("ui.labels.adminPanel")}</p>
         <h2>{t("common.labels.welcome")} {fullName}</h2>
       </div>
 

@@ -49,7 +49,6 @@ function AdminSideBar() {
     <div className={styles.sidebar}>
       <div>
         <div className={styles.brand}>
-          <span>FA</span>
           <div>
             <h2>Admin</h2>
             <p>{t("ui.labels.dashboard")}</p>
