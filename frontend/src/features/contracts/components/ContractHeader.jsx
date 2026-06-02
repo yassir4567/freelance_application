@@ -16,7 +16,7 @@ function ContractHeader({ statusClass, headerContent, role }) {
 
   return (
     <div className={styles.contractDetailHeader}>
-      <div className={styles.heroGlow}></div>
+      {/* <div className={styles.heroGlow}></div> */}
       <div className={styles.headerTop}>
         <NavLink
           to={`/dashboard/${role}/contracts`}

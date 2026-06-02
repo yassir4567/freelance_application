@@ -16,8 +16,7 @@ return new class extends Migration
             $table->foreignId('conversation_id')->constrained()->onDelete('cascade');
             $table->foreignId('sender_id')->constrained('users');
             $table->text('message');
-            $table->enum('type', ['text', 'image', 'pdf', 'link']);
-            $table->string('fichier_url')->nullable();
+            $table->enum('type', ['text', 'link']);
             $table->timestamps();
         });
     }
