@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreProjectRequest;
 use App\Models\Project;
 use App\Models\Proposal;
 use Illuminate\Http\Request;
@@ -90,22 +91,9 @@ class ClientProjectController extends Controller
             'data' => $projectData
         ]);
     }
-
-
-    public function store(Request $request)
+    public function store(StoreProjectRequest $request)
     {
-        $allowed_duration = ['less_than_1_month', '1_to_3_month', '3_to_6_month', 'more_than_6_month'];
-        $validated = $request->validate([
-            'category_id' => 'required|exists:categories,id',
-            'title' => 'required|string|min:3|max:255',
-            'description' => 'required|string|min:20|max:1500',
-            'budget' => 'required|numeric|gt:5|max:100000',
-            'experience_level' => 'required|string|in:junior,mid-level,senior',
-            'size' => 'required|string|in:small,medium,large',
-            'duration' => ['required', 'string', Rule::in($allowed_duration)],
-            'skills' => 'required|array|min:1',
-            'skills.*' => Rule::exists('category_skill', 'skill_id')->where('category_id', $request->category_id),
-        ]);
+        $validated = $request->validated();
 
         $user = $request->user();
 
