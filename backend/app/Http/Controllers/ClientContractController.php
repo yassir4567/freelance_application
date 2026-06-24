@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ActiveContractRequest;
 use App\Models\Contract;
 use App\Models\Payment;
 use Illuminate\Http\Request;
@@ -204,7 +205,7 @@ class ClientContractController extends Controller
         ]);
     }
 
-    public function activateContract(Request $request, string $id)
+    public function activateContract(ActiveContractRequest $request, string $id)
     {
         $client = $request->user();
 
@@ -226,22 +227,8 @@ class ClientContractController extends Controller
             ], 409);
         }
 
-        $validated = $request->validate([
-            'description' => 'required|string|min:100|max:2000',
-            'final_price' => 'required|numeric|min:5',
-            'final_deadline' => 'required|date|after:today',
-            'deliverables' => 'required|string',
-            'contract_pdf' => 'required|file|mimes:pdf|max:5120',
-        ]);
-
-        $deliverables = json_decode($validated['deliverables'], true);
-
-        if (!is_array($deliverables)) {
-            return response()->json([
-                'success' => false,
-                'message' => 'Invalid deliverables format',
-            ], 422);
-        }
+        $validated = $request->validated() ;
+        $deliverables = $validated['deliverables'] ;
 
 
         $updatedContract = DB::transaction(function () use ($request, $contract, $deliverables, $validated) {
