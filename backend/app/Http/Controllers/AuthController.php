@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\LoginUserRequest;
+use App\Http\Requests\RegisterUserRequest;
 use App\Models\Freelancer;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -12,12 +14,9 @@ use Illuminate\Support\Facades\Hash;
 class AuthController extends Controller
 {
     //
-    public function login(Request $request)
+    public function login(LoginUserRequest $request)
     {
-        $credentials = $request->validate([
-            'email' => 'required|email',
-            'password' => 'required|string',
-        ]);
+        $credentials = $request->validated();
 
         if (!Auth::attempt($credentials)) {
             return response()->json([
@@ -39,15 +38,9 @@ class AuthController extends Controller
         ], 200);
     }
 
-    public function register(Request $request)
+    public function register(RegisterUserRequest $request)
     {
-        $validated = $request->validate([
-            'first_name' => 'required|string|max:25',
-            'last_name' => 'required|string|max:25',
-            'email' => 'required|email|max:255|unique:users,email',
-            'password' => 'required|string|min:8|confirmed',
-            'role' => 'required|in:client,freelancer',
-        ]);
+        $validated = $request->validated();
 
 
         $result = DB::transaction(function () use ($validated) {
