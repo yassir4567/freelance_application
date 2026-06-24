@@ -32,7 +32,6 @@ function ContractDetail() {
   const role = user?.role;
 
   useEffect(() => {
-    let ignore = false;
 
     const loadContract = async () => {
       if (!user || !contractId || !role) {
@@ -47,7 +46,6 @@ function ContractDetail() {
           ? await getClientContractDetail(contractId)
           : await getFreelancerContractDetail(contractId);
 
-      if (ignore) return;
 
       if (result.success) {
         setContract(result.data ?? null);
@@ -61,10 +59,6 @@ function ContractDetail() {
     };
 
     loadContract();
-
-    return () => {
-      ignore = true;
-    };
   }, [user, contractId, role]);
 
   const deliverables = useMemo(() => contract?.deliverables ?? [], [contract]);

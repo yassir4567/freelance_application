@@ -3,10 +3,12 @@ import { BASE_URL, getToken } from "../config";
 const setUpContract = async (contractId, payload) => {
   try {
     const token = getToken();
+    payload.set("_method", "PUT");
+
     const response = await fetch(
       `${BASE_URL}/client/contracts/${contractId}/activate`,
       {
-        method: "PUT",
+        method: "POST",
         headers: {
           Accept: "application/json",
           ...(token && { Authorization: `Bearer ${token}` }),

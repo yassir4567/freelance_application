@@ -14,7 +14,6 @@ function ClientContractsPage() {
   const [contractStats, setContractStats] = useState([]);
   const [filterParams, setFilterParams] = useSearchParams();
 
-  console.log(contracts);
   
   const search = filterParams.get("search") || "";
   const sort = filterParams.get("sort") || "";

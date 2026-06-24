@@ -89,7 +89,7 @@ function FreelancerDashboardPage() {
             </NavLink>
           </div>
         </div>
-        <div className={styles.quickAction}>
+        {/* <div className={styles.quickAction}>
           <h3 className={styles.title}>
             {t("dashboard.freelancer.actions.title")}
           </h3>
@@ -104,7 +104,7 @@ function FreelancerDashboardPage() {
               {t("common.actions.checkMessages")}
             </NavLink>
           </div>
-        </div>
+        </div> */}
       </div>
     </div>
   );
