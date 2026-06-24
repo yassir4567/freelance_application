@@ -2,29 +2,18 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\UpdateFreelancerProfileRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
 class FreelancerProfileController extends Controller
 {
     //
-    public function update(Request $request)
+    public function update(UpdateFreelancerProfileRequest $request)
     {
         $user = $request->user();
 
-        $validated = $request->validate([
-            'first_name' => 'required|string|max:25',
-            'last_name' => 'required|string|max:25',
-            'phone' => 'nullable|string',
-            'country' => 'nullable|string',
-            'avatar' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
-            'address' => 'nullable|string',
-            'city' => 'nullable|string',
-            'title' => 'nullable|string',
-            'portfolio' => 'nullable|url',
-            'bio' => 'nullable|string',
-            'category_id' => 'nullable|exists:categories,id'
-        ]);
+        $validated = $request->validated();
 
         $userData = [
             'first_name' => $validated['first_name'],

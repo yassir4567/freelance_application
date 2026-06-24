@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\UpdateClientProfileRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -9,18 +10,10 @@ class ClientProfileController extends Controller
 {
     //
 
-    public function update(Request $request)
+    public function update(UpdateClientProfileRequest $request)
     {
         $client = $request->user();
-        $validated = $request->validate([
-            'first_name' => 'required|string|max:25',
-            'last_name' => 'required|string|max:25',
-            'phone' => 'nullable|string',
-            'country' => 'nullable|string',
-            'address' => 'nullable|string',
-            'city' => 'nullable|string',
-            'avatar' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048'
-        ]);
+        $validated = $request->validated();
 
 
         $data = [
