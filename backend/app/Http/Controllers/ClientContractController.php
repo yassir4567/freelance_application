@@ -207,18 +207,8 @@ class ClientContractController extends Controller
 
     public function activateContract(ActiveContractRequest $request, string $id)
     {
-        $client = $request->user();
-
         $contract = Contract::where('id', $id)->firstOrFail();
-
         $contract->load('proposal.project');
-
-        if ($contract->proposal->project->client_id !== $client->id) {
-            return response()->json([
-                'success' => false,
-                'message' => 'Unauthorized action.',
-            ], 403);
-        }
 
         if ($contract->status !== 'pending') {
             return response()->json([

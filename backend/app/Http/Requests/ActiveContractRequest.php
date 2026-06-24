@@ -2,7 +2,7 @@
 
 namespace App\Http\Requests;
 
-use Illuminate\Contracts\Validation\ValidationRule;
+use App\Models\Contract;
 use Illuminate\Foundation\Http\FormRequest;
 
 class ActiveContractRequest extends FormRequest
@@ -10,10 +10,24 @@ class ActiveContractRequest extends FormRequest
 
     public function authorize(): bool
     {
-        return $this->user()?->role === 'client';
+        $user = $this->user();
+
+        if (!$user || $user->role !== 'client') {
+            return false;
+        }
+
+        $contractId = $this->route('id');
+
+        $contract = Contract::with('proposal.project')->find($contractId);
+
+        if (!$contract) {
+            return false;
+        }
+
+        return $contract->proposal->project->client_id === $user->id;
     }
 
-    public function prepareForValidation()
+    protected function prepareForValidation()
     {
         if (is_string($this->deliverables)) {
             $this->merge([
@@ -35,7 +49,7 @@ class ActiveContractRequest extends FormRequest
             'deliverables.*.title' => 'required|string',
             'deliverables.*.amount' => 'required|numeric|min:1',
             'deliverables.*.description' => 'required|string|min:30',
-            'deliverables.*.position' => 'required|numeric|min:1',
+            'deliverables.*.position' => 'required|integer|min:1|distinct',
         ];
     }
 }
