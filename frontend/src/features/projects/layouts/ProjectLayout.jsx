@@ -6,9 +6,9 @@ import {
   useParams,
 } from "react-router-dom";
 import styles from "../styles/ProjectLayout.module.css";
-import { getClientProjectDetail } from "../../../api/projects/getClientProjectDetail";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
+import { projectApi } from "../../../api/projects/projectApi";
 
 function ProjectLayout() {
   const { t } = useTranslation();
@@ -18,7 +18,7 @@ function ProjectLayout() {
 
   useEffect(() => {
     const loadProject = async () => {
-      const result = await getClientProjectDetail(projectId);
+      const result = await projectApi.getClientProjectDetail(projectId);
       if (!result.success) {
         navigate("/dashboard/client/projects");
       }

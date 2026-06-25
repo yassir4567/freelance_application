@@ -4,8 +4,8 @@ import { PiEmptyBold } from "react-icons/pi";
 import { useSearchParams } from "react-router-dom";
 import ClientProjectCard from "../components/ClientProjectCard";
 import FilterBox from "../../../shared/common/filters/FilterBox";
-import { getClientProjects } from "../../../api/projects/getClientProjects";
 import { useTranslation } from "react-i18next";
+import { projectApi } from "../../../api/projects/projectApi";
 
 function ClientProjectsPage() {
   const { t } = useTranslation();
@@ -19,7 +19,9 @@ function ClientProjectsPage() {
 
   useEffect(() => {
     const loadProjects = async () => {
-      const result = await getClientProjects(filterParams.toString());
+      const result = await projectApi.getClientProjects(
+        filterParams.toString(),
+      );
       setProjects(result.data);
     };
     loadProjects();

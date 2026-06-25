@@ -7,10 +7,10 @@ import { IoMdTime } from "react-icons/io";
 import { SiLevelsdotfyi } from "react-icons/si";
 import { SlSizeFullscreen } from "react-icons/sl";
 import { useEffect, useState } from "react";
-import { getBrowseProjectDetail } from "../../../api/projects/getBrowseProjectDetail";
 import { formatDate } from "../../../utils/helpers";
 import SendProposalModal from "../../proposals/components/SendProposalModal";
 import { useTranslation } from "react-i18next";
+import { projectApi } from "../../../api/projects/projectApi";
 
 function BrowseProjectDetail() {
   const { t } = useTranslation();
@@ -20,9 +20,7 @@ function BrowseProjectDetail() {
 
   useEffect(() => {
     const loadProject = async () => {
-      const response = await getBrowseProjectDetail(projectId);
-      console.log(response.data);
-
+      const response = await projectApi.getBrowseProjectDetail(projectId);
       setData(response.data);
     };
     loadProject();
@@ -153,8 +151,7 @@ function BrowseProjectDetail() {
               {t("browseProjectDetail.postedProjects")}
             </p>
             <p>
-              {t("common.labels.memberSince")}{" "}
-              {formatDate(client?.created_at)}
+              {t("common.labels.memberSince")} {formatDate(client?.created_at)}
             </p>
           </div>
         </div>

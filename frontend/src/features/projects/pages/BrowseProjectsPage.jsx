@@ -5,10 +5,10 @@ import Search from "../../../shared/ui/Search";
 import styles from "../styles/BrowseProjectsPage.module.css";
 import { useEffect, useState } from "react";
 import { getCategories } from "../../../api/categories/getCategories";
-import { getBrowseProjects } from "../../../api/projects/getBrowseProjects";
 import { emptyText } from "../../../utils/helpers";
 import { useSearchParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import { projectApi } from "../../../api/projects/projectApi";
 
 function BrowseProjectsPage() {
   const { t } = useTranslation();
@@ -118,7 +118,9 @@ function BrowseProjectsPage() {
   // * send get projects request
   useEffect(() => {
     const loadProjects = async () => {
-      const result = await getBrowseProjects(searchParams.toString());
+      const result = await projectApi.getBrowseProjects(
+        searchParams.toString(),
+      );
       setProjects(result.data);
     };
     loadProjects();
@@ -140,9 +142,7 @@ function BrowseProjectsPage() {
 
   return (
     <div className={styles.findProjectPage}>
-      <h1 className="pageTitle">
-        {t("browseProjects.title")}
-      </h1>
+      <h1 className="pageTitle">{t("browseProjects.title")}</h1>
       <div className={styles.searchBox}>
         <div className={styles.search}>
           <Search value={filters.search} onChange={handleInputsChange} />
@@ -177,7 +177,9 @@ function BrowseProjectsPage() {
                 <FreelancerProjectCard key={project.id} project={project} />
               ))
             ) : (
-              <div className={styles.empty}>{t("ui.states.noProjectsFound")}</div>
+              <div className={styles.empty}>
+                {t("ui.states.noProjectsFound")}
+              </div>
             )}
           </div>
         </div>

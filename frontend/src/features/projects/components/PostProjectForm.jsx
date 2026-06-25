@@ -4,9 +4,9 @@ import { MdRemove } from "react-icons/md";
 import { emptyText, emptyArray } from "../../../utils/helpers";
 import { getSkills } from "../../../api/skills/getSkills";
 import { getCategories } from "../../../api/categories/getCategories";
-import { postProject } from "../../../api/projects/postProject";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import { projectApi } from "../../../api/projects/projectApi";
 
 function PostProjectForm({ is_profile_complete }) {
   const { t } = useTranslation();
@@ -68,7 +68,6 @@ function PostProjectForm({ is_profile_complete }) {
     : [];
 
   // * Handle inputs onChange
-
   const handleInputChange = (e) => {
     const { name, value } = e.target;
 
@@ -123,11 +122,13 @@ function PostProjectForm({ is_profile_complete }) {
     }
 
     if (project.category_id && project.skills.length === 0) {
-      newErrors.skills =t("common.validation.skillsRequired");
+      newErrors.skills = t("common.validation.skillsRequired");
     }
 
     if (project.experience_level.trim() === "") {
-      newErrors.experience_level = t("common.validation.experienceLevelRequired");
+      newErrors.experience_level = t(
+        "common.validation.experienceLevelRequired",
+      );
     }
 
     if (project.size.trim() === "") {
@@ -147,7 +148,7 @@ function PostProjectForm({ is_profile_complete }) {
     if (project.budget.trim() === "") {
       newErrors.budget = t("common.validation.budgetRequired");
     } else if (+project.budget < 5) {
-      newErrors.budget =  t("postjob.errors.budgetLessThanFive");
+      newErrors.budget = t("postjob.errors.budgetLessThanFive");
     }
 
     if (Object.keys(newErrors).length > 0) {
@@ -172,7 +173,7 @@ function PostProjectForm({ is_profile_complete }) {
       skills: project.skills.map((sk) => sk.id),
     };
 
-    const result = await postProject(processedProject);
+    const result = await projectApi.postProject(processedProject);
     if (result.success) {
       navigate("/dashboard/client/projects");
     }
@@ -328,9 +329,7 @@ function PostProjectForm({ is_profile_complete }) {
               checked={project.size === "small"}
               disabled={!is_profile_complete}
             />
-            <label htmlFor="small">
-              {t("common.options.size.small")}
-            </label>
+            <label htmlFor="small">{t("common.options.size.small")}</label>
           </div>
           <div className={styles.radioBox}>
             <input
@@ -343,9 +342,7 @@ function PostProjectForm({ is_profile_complete }) {
               checked={project.size === "medium"}
               disabled={!is_profile_complete}
             />
-            <label htmlFor="medium">
-              {t("common.options.size.medium")}
-            </label>
+            <label htmlFor="medium">{t("common.options.size.medium")}</label>
           </div>
           <div className={styles.radioBox}>
             <input
@@ -358,9 +355,7 @@ function PostProjectForm({ is_profile_complete }) {
               checked={project.size === "large"}
               disabled={!is_profile_complete}
             />
-            <label htmlFor="large">
-              {t("common.options.size.large")}
-            </label>
+            <label htmlFor="large">{t("common.options.size.large")}</label>
           </div>
           {errors.size && <div className={styles.error}>{errors.size}</div>}
         </div>
@@ -437,9 +432,7 @@ function PostProjectForm({ is_profile_complete }) {
 
       <div className={styles.row}>
         <div className={styles.inputBox}>
-          <label htmlFor="description">
-            {t("common.labels.description")}
-          </label>
+          <label htmlFor="description">{t("common.labels.description")}</label>
           <textarea
             name="description"
             className={styles.textarea}

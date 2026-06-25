@@ -3,7 +3,7 @@ import styles from "../styles/FreelancerProjectsHeaderFilter.module.css";
 
 function FreelancerProjectsHeaderFilter({ filters, onChange, categories }) {
   const { t } = useTranslation();
-
+  
   return (
     <div className={styles.headerFilter}>
       <div className={styles.filterItem}>
