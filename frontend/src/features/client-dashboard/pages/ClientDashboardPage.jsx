@@ -9,10 +9,10 @@ import SimpleCard from "../../../shared/ui/SimpleCard";
 import RecentProjectsTable from "../components/RecentProjectsTable";
 import Welcome from "../../../shared/common/Welcome";
 import { useEffect, useState } from "react";
-import { getDashboardData } from "../../../api/dashboard/getDashboardData";
 import { useAuth } from "../../../context/AuthContext";
 import CompleteProfileAlert from "../../../shared/common/CompleteProfileAlert";
 import { useTranslation } from "react-i18next";
+import { dashboardApi } from "../../../api/dashboard/dashboardApi";
 
 function ClientDashboardPage() {
   const {t} = useTranslation()
@@ -22,7 +22,9 @@ function ClientDashboardPage() {
 
   useEffect(() => {
     const loadStats = async () => {
-      const result = await getDashboardData("client");
+      const result = await dashboardApi.getDashboardData("client");
+      console.log(result);
+      
       setData(result.data);
     };
     loadStats();

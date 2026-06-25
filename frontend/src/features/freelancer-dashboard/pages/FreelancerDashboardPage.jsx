@@ -7,10 +7,10 @@ import { VscGitPullRequestDone } from "react-icons/vsc";
 import profile from "../../../assets/images/profile.png";
 import { NavLink } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { getDashboardData } from "../../../api/dashboard/getDashboardData";
 import { useAuth } from "../../../context/AuthContext";
 import CompleteProfileAlert from "../../../shared/common/CompleteProfileAlert";
 import { useTranslation } from "react-i18next";
+import { dashboardApi } from "../../../api/dashboard/dashboardApi";
 
 function FreelancerDashboardPage() {
   const [data, setData] = useState([]);
@@ -18,7 +18,7 @@ function FreelancerDashboardPage() {
   const { t } = useTranslation();
   useEffect(() => {
     const loadStats = async () => {
-      const result = await getDashboardData("freelancer");
+      const result = await dashboardApi.getDashboardData("freelancer");
       setData(result.data);
     };
     loadStats();
@@ -89,22 +89,6 @@ function FreelancerDashboardPage() {
             </NavLink>
           </div>
         </div>
-        {/* <div className={styles.quickAction}>
-          <h3 className={styles.title}>
-            {t("dashboard.freelancer.actions.title")}
-          </h3>
-          <div className={styles.actions}>
-            <NavLink to="find-project" className={styles.actionLink}>
-              {t("common.actions.browseProjects")}
-            </NavLink>
-            <NavLink to="my-proposals" className={styles.actionLink}>
-              {t("common.actions.viewMyProposals")}
-            </NavLink>
-            <NavLink className={styles.actionLink}>
-              {t("common.actions.checkMessages")}
-            </NavLink>
-          </div>
-        </div> */}
       </div>
     </div>
   );

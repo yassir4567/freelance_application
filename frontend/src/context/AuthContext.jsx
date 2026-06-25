@@ -18,9 +18,7 @@ const AuthProvider = ({ children }) => {
       }
 
       const result = await authApi.me();
-
-      console.log(result);
-
+      
       if (!result.success) {
         localStorage.removeItem("token");
         setUser(null);
