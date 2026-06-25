@@ -2,11 +2,11 @@ import { useEffect, useState } from "react";
 import styles from "../styles/PostProjectForm.module.css";
 import { MdRemove } from "react-icons/md";
 import { emptyText, emptyArray } from "../../../utils/helpers";
-import { getSkills } from "../../../api/skills/getSkills";
-import { getCategories } from "../../../api/categories/getCategories";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { projectApi } from "../../../api/projects/projectApi";
+import { categoryApi } from "../../../api/categories/categoryApi";
+import { skillApi } from "../../../api/skills/skillApi";
 
 function PostProjectForm({ is_profile_complete }) {
   const { t } = useTranslation();
@@ -37,7 +37,7 @@ function PostProjectForm({ is_profile_complete }) {
 
   // * load skills
   const loadSkills = async () => {
-    const result = await getSkills();
+    const result = await skillApi.getSkills();
     const skillsHadCategory = result.data.filter(
       (res) => res.categories.length > 0,
     );
@@ -46,7 +46,7 @@ function PostProjectForm({ is_profile_complete }) {
 
   // * load categories
   const loadCategories = async () => {
-    const result = await getCategories();
+    const result = await categoryApi.getCategories();
     setCategories(result.data);
   };
 

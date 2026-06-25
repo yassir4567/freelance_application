@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react";
-import { addCategory } from "../../../api/admin/addCategory";
-import { getAdminCategories } from "../../../api/admin/getCategories";
 import styles from "../styles/AdminCategoriesPage.module.css";
 import { useTranslation } from "react-i18next";
+import { categoryApi } from "../../../api/categories/categoryApi";
 
 function AdminCategoriePage() {
   const { t } = useTranslation();
@@ -19,7 +18,7 @@ function AdminCategoriePage() {
       setLoading(true);
       setError("");
 
-      const result = await getAdminCategories();
+      const result = await categoryApi.getCategoriesForAdmin();
 
       if (result.success) {
         setCategories(result.data);
@@ -46,7 +45,9 @@ function AdminCategoriePage() {
 
     setSaving(true);
 
-    const result = await addCategory(name.trim());
+    const payload = { name };
+
+    const result = await categoryApi.addCategory(payload);
 
     if (result.success) {
       setCategories((currentCategories) => [result.data, ...currentCategories]);

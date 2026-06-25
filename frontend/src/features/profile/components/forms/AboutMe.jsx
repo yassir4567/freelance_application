@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import styles from "../../styles/AboutMe.module.css";
-import { getCategories } from "../../../../api/categories/getCategories";
 import { useTranslation } from "react-i18next";
+import { categoryApi } from "../../../../api/categories/categoryApi";
 
 function AboutMe({ isEdited, form, setForm }) {
   const { t } = useTranslation();
@@ -9,7 +9,7 @@ function AboutMe({ isEdited, form, setForm }) {
 
   useEffect(() => {
     const loadCategories = async () => {
-      const result = await getCategories();
+      const result = await categoryApi.getCategories();
       if (result.success) {
         setCategories(result.data);
       }

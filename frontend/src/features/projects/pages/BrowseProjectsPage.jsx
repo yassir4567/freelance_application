@@ -4,11 +4,11 @@ import FreelancerProjectsHeaderFilter from "../components/FreelancerProjectsHead
 import Search from "../../../shared/ui/Search";
 import styles from "../styles/BrowseProjectsPage.module.css";
 import { useEffect, useState } from "react";
-import { getCategories } from "../../../api/categories/getCategories";
 import { emptyText } from "../../../utils/helpers";
 import { useSearchParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { projectApi } from "../../../api/projects/projectApi";
+import { categoryApi } from "../../../api/categories/categoryApi";
 
 function BrowseProjectsPage() {
   const { t } = useTranslation();
@@ -62,7 +62,7 @@ function BrowseProjectsPage() {
   // * load categories from API
   useEffect(() => {
     const loadCategories = async () => {
-      const result = await getCategories();
+      const result = await categoryApi.getCategories();
       setCategories(result.data);
     };
     loadCategories();

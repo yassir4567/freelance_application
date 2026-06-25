@@ -1,8 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
-import { addSkills } from "../../../api/admin/addSkills";
-import { getCategorySkills } from "../../../api/admin/getCategorySkills";
 import styles from "../styles/AdminSkillsPage.module.css";
 import { useTranslation } from "react-i18next";
+import { skillApi } from "../../../api/skills/skillApi";
 
 function AdminSkillsPage() {
   const { t } = useTranslation();
@@ -21,7 +20,7 @@ function AdminSkillsPage() {
       setLoading(true);
       setError("");
 
-      const result = await getCategorySkills();
+      const result = await skillApi.getCategorySkills();
 
       if (result.success) {
         setCategories(result.data);
@@ -89,10 +88,11 @@ function AdminSkillsPage() {
 
     setSaving(true);
 
-    const result = await addSkills({
-      categoryId,
+    const payload = {
+      category_id: categoryId,
       skills: pendingSkills,
-    });
+    };
+    const result = await skillApi.addSkills(payload);
 
     if (result.success) {
       setCategories((currentCategories) =>
@@ -188,7 +188,11 @@ function AdminSkillsPage() {
                 {t("ui.actions.addSkill")}
               </button>
 
-              <button type="submit" className={styles.saveBtn} disabled={saving}>
+              <button
+                type="submit"
+                className={styles.saveBtn}
+                disabled={saving}
+              >
                 {saving ? t("ui.actions.saving") : t("ui.actions.save")}
               </button>
             </div>
@@ -237,7 +241,8 @@ function AdminSkillsPage() {
                 <h2>{category.name}</h2>
                 <span>
                   {t("ui.labels.skillsCount", {
-                    count: category.skills_count || category.skills?.length || 0,
+                    count:
+                      category.skills_count || category.skills?.length || 0,
                   })}
                 </span>
               </div>
