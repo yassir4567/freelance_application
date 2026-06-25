@@ -12,7 +12,9 @@ async function request(endpoint, options = {}) {
     ...options.headers,
   };
 
-  if (!(options.body instanceof FormData)) {
+  const hasBody = options.body !== undefined;
+
+  if (hasBody && !(options.body instanceof FormData)) {
     headers["Content-Type"] = "application/json";
   }
 

@@ -1,8 +1,5 @@
 import { createContext, useContext, useEffect, useState } from "react";
-import { getCurrentUser } from "../api/auth/getCurrentUser";
-import { loginUser } from "../api/auth/login";
-import { logoutUser } from "../api/auth/logout";
-import { registerUser } from "../api/auth/register";
+import { authApi } from "../api/auth/authApi";
 
 const AuthContext = createContext(null);
 
@@ -20,7 +17,9 @@ const AuthProvider = ({ children }) => {
         return;
       }
 
-      const result = await getCurrentUser();
+      const result = await authApi.me();
+
+      console.log(result);
 
       if (!result.success) {
         localStorage.removeItem("token");
@@ -38,7 +37,7 @@ const AuthProvider = ({ children }) => {
   }, []);
 
   async function login(credentials) {
-    const result = await loginUser(credentials);
+    const result = await authApi.login(credentials);
 
     if (!result.success) {
       return result;
@@ -58,7 +57,7 @@ const AuthProvider = ({ children }) => {
   }
 
   async function logout() {
-    const result = await logoutUser();
+    const result = await authApi.logout();
 
     localStorage.removeItem("token");
     setUser(null);
@@ -67,11 +66,14 @@ const AuthProvider = ({ children }) => {
 
   // * register user function
   async function register(formData) {
-    const result = await registerUser(formData);
+    const result = await authApi.register(formData);
 
     if (!result.success) {
       return result;
     }
+
+    console.log(result.data);
+    
 
     const { token, user, profile } = result.data;
     localStorage.setItem("token", token);

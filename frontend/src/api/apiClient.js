@@ -6,22 +6,28 @@ const apiClient = {
       method: "GET",
     });
   },
-  post(endpoint, data) {
+  post(endpoint, data = undefined) {
     return request(endpoint, {
       method: "POST",
-      body: data instanceof FormData ? data : JSON.stringify(data),
+      ...(data !== undefined && {
+        body: data instanceof FormData ? data : JSON.stringify(data),
+      }),
     });
   },
-  put(endpoint, data) {
+  put(endpoint, data = undefined) {
     return request(endpoint, {
       method: "PUT",
-      body: data instanceof FormData ? data : JSON.stringify(data),
+      ...(data !== undefined && {
+        body: data instanceof FormData ? data : JSON.stringify(data),
+      }),
     });
   },
-  patch(endpoint, data) {
+  patch(endpoint, data = undefined) {
     return request(endpoint, {
       method: "PATCH",
-      body: data instanceof FormData ? data : JSON.stringify(data),
+      ...(data !== undefined && {
+        body: data instanceof FormData ? data : JSON.stringify(data),
+      }),
     });
   },
   delete(endpoint, data) {

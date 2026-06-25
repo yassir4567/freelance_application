@@ -65,11 +65,6 @@ function LoginPage() {
 
         {error && <p className={styles.error}>{error}</p>}
 
-        {/* <div className={styles.remember}>
-          <input type="checkbox" id="remember" />
-          <label htmlFor="remember">remember me</label>
-        </div> */}
-
         <button type="submit" className={styles.login}>
           Log in
         </button>
