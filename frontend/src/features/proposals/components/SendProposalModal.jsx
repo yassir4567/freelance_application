@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import styles from "../styles/SendProposalModal.module.css";
-import { sendProposal } from "../../../api/proposals/sendProposal";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import { proposalApi } from "../../../api/proposals/proposalApi";
 
 function SendProposalModal({ projectId, isOpen, onClose }) {
   const { t } = useTranslation();
@@ -78,7 +78,7 @@ function SendProposalModal({ projectId, isOpen, onClose }) {
       delivery_time: `${form.delivery_time} ${form.unit}`,
     };
 
-    const result = await sendProposal(projectId ,payload);
+    const result = await proposalApi.send(projectId ,payload);
     if (!result.success) {
       setErrors(result.errors ?? []);
       return;

@@ -2,10 +2,8 @@ import styles from "../styles/ProjectProposalsPage.module.css";
 import { useParams } from "react-router-dom";
 import ClientProposalCard from "../components/ClientProposalCard";
 import { useEffect, useState } from "react";
-import { getClientProjectProposals } from "../../../api/proposals/getClientProjectProposals";
-import { acceptProposal } from "../../../api/proposals/acceptProposal";
-import { rejectProposal } from "../../../api/proposals/rejectProposal";
 import { useTranslation } from "react-i18next";
+import { proposalApi } from "../../../api/proposals/proposalApi";
 
 function ProposalsList() {
   const { t } = useTranslation();
@@ -14,14 +12,14 @@ function ProposalsList() {
 
   useEffect(() => {
     const loadProposals = async () => {
-      const result = await getClientProjectProposals(projectId);
+      const result = await proposalApi.getClientProjectProposals(projectId);
       setProposals(result.data);
     };
     loadProposals();
   }, []);
 
   const acceptFreelancerProposal = async (proposalId) => {
-    const result = await acceptProposal(projectId, proposalId);
+    const result = await proposalApi.accept(projectId, proposalId);
     if (result.success) {
       setProposals((prev) =>
         prev.map((proposal) =>
@@ -32,7 +30,7 @@ function ProposalsList() {
   };
 
   const rejectFreelancerProposal = async (proposalId) => {
-    const result = await rejectProposal(projectId, proposalId);
+    const result = await proposalApi.reject(projectId, proposalId);
     if (result.success) {
       setProposals((prev) =>
         prev.map((proposal) =>

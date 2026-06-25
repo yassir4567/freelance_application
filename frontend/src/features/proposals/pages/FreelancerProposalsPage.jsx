@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
 import styles from "../styles/FreelancerProposalsPage.module.css";
-import { getFreelancerProposals } from "../../../api/proposals/getFreelancerProposals";
 import { useSearchParams } from "react-router-dom";
 import FreelancerProposalCard from "../components/FreelancerProposalCard";
 import { useTranslation } from "react-i18next";
+import { proposalApi } from "../../../api/proposals/proposalApi";
+
 function FreelancerProposalsPage() {
   const { t } = useTranslation();
   const [proposals, setProposals] = useState([]);
@@ -15,7 +16,9 @@ function FreelancerProposalsPage() {
   useEffect(() => {
     const loadProposals = async () => {
       setIsLoading(true);
-      const result = await getFreelancerProposals(searchParams.toString());
+      const result = await proposalApi.getFreelancerProposals(
+        searchParams.toString(),
+      );
       setProposals(result.data || []);
       setIsLoading(false);
     };
@@ -44,9 +47,7 @@ function FreelancerProposalsPage() {
 
       <div className={styles.filterBtnsContainer}>
         <p className={styles.totalProposals}>
-          <span>
-            {t("freelancerProposals.total")} : 
-          </span>
+          <span>{t("freelancerProposals.total")} :</span>
           {!isLoading && <span>{proposals.length}</span>}
         </p>
         <div className={styles.filterBtnsWrapper}>
