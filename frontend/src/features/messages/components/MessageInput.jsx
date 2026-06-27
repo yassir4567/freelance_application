@@ -2,9 +2,9 @@ import styles from "../styles/MessageInput.module.css";
 import { IoSend } from "react-icons/io5";
 import { ImAttachment } from "react-icons/im";
 import { useState } from "react";
-import { sendMessage } from "../../../api/messages/sendMessage";
 import { useSearchParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import { conversationApi } from "../../../api/messages/conversationApi";
 
 function MessageInput({ setMessages }) {
   const { t } = useTranslation();
@@ -19,7 +19,8 @@ function MessageInput({ setMessages }) {
 
     if (message.trim() === "") return;
 
-    const result = await sendMessage(conversationId, message);
+    const payload = { message: message };
+    const result = await conversationApi.sendMessage(conversationId, payload);
 
     if (result.success) {
       setMessages((prev) => [...prev, result.data]);

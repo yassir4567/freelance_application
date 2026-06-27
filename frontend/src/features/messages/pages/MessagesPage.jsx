@@ -2,9 +2,9 @@ import { useEffect, useMemo, useState } from "react";
 import ChatList from "../components/ChatList";
 import ChatMessages from "../components/ChatMessages";
 import styles from "../styles/MessagesPage.module.css";
-import { getConversations } from "../../../api/messages/getConversations";
 import { useSearchParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import { conversationApi } from "../../../api/messages/conversationApi";
 
 function MessagesPage() {
   const { t } = useTranslation();
@@ -13,10 +13,11 @@ function MessagesPage() {
   const conversationId = queryParams.get("chat") || "";
   const contract_status = queryParams.get("status") || "all";
 
-
+  
   useEffect(() => {
     const loadConversations = async () => {
-      const result = await getConversations(contract_status);
+      const queryString = `contract_status=${contract_status}`
+      const result = await conversationApi.getConversations(queryString);
       setConversations(result.data);
     };
     loadConversations();

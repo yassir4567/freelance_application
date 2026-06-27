@@ -4,10 +4,9 @@ import ProfileInformation from "../components/forms/ProfileInformation";
 import ProfileSideBar from "../components/ProfileSideBar";
 import styles from "../styles/ProfilePage.module.css";
 import { useAuth } from "../../../context/AuthContext";
-import updateClientProfile from "../../../api/profiles/updateClientProfile";
 import AboutMe from "../components/forms/AboutMe";
-import updateFreelancerProfile from "../../../api/profiles/updateFreelancerProfile";
 import { useTranslation } from "react-i18next";
+import { profileApi } from "../../../api/profiles/profileApi";
 function ProfilePage() {
   const { user, setUser } = useAuth();
   const { t } = useTranslation();
@@ -40,10 +39,11 @@ function ProfilePage() {
   };
 
   console.log(user);
-  
 
   const handleSaveEdit = async () => {
-    if (user.role === "client") {
+    const role = user?.role;
+
+    if (role === "client") {
       const payload = new FormData();
       const { first_name, last_name, phone } = personalInformationForm;
       const { address, country, city } = profileAddress;
@@ -58,13 +58,13 @@ function ProfilePage() {
         payload.append("avatar", avatar);
       }
 
-      const result = await updateClientProfile(payload);
+      const result = await profileApi.update(role, payload);
 
       setUser(result.data);
       setIsEdited(false);
     }
 
-    if (user.role === "freelancer") {
+    if (role === "freelancer") {
       const payload = new FormData();
       const { first_name, last_name, phone } = personalInformationForm;
       const { address, country, city } = profileAddress;
@@ -84,9 +84,7 @@ function ProfilePage() {
       payload.append("portfolio", portfolio);
       payload.append("category_id", category_id);
 
-      const result = await updateFreelancerProfile(payload);
-
-      console.log(result);
+      const result = await profileApi.update(role, payload);
 
       setUser(result.data);
       setIsEdited(false);

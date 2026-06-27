@@ -3,8 +3,8 @@ import styles from "../styles/ChatMessages.module.css";
 import MessageInput from "./MessageInput";
 import MessageItem from "./MessageItem";
 import MessagesHeader from "./MessagesHeader";
-import { getMessages } from "../../../api/messages/getMessages";
 import { useAuth } from "../../../context/AuthContext";
+import { conversationApi } from "../../../api/messages/conversationApi";
 
 function ChatMessages({ conversation }) {
   const messagesRef = useRef(null);
@@ -17,7 +17,7 @@ function ChatMessages({ conversation }) {
 
   useEffect(() => {
     const loadMessages = async () => {
-      const result = await getMessages(conversation.id);
+      const result = await conversationApi.getMessages(conversation.id);
       setMessages(result.data[0].messages);
     };
 
