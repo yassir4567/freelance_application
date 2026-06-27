@@ -1,12 +1,11 @@
 import { useEffect, useState } from "react";
 import styles from "../styles/FreelancerContractsPage.module.css";
-import { getFreelancerContractStats } from "../../../api/contracts/getFreelancerContractStats";
 import SimpleCard from "../../../shared/ui/SimpleCard";
 import FilterBox from "../../../shared/common/filters/FilterBox";
 import { useSearchParams } from "react-router-dom";
-import { getFreelancerContracts } from "../../../api/contracts/getFreelancerContracts";
 import ContractCard from "../components/ContractCard";
 import { useTranslation } from "react-i18next";
+import { contractApi } from "../../../api/contracts/contractApi";
 
 function FreelancerContractsPage() {
   const { t } = useTranslation();
@@ -20,7 +19,7 @@ function FreelancerContractsPage() {
 
   useEffect(() => {
     const loadContractStats = async () => {
-      const result = await getFreelancerContractStats();
+      const result = await contractApi.getContractsStats('freelancer');
       setContractStats(result.data);
     };
     loadContractStats();
@@ -28,7 +27,8 @@ function FreelancerContractsPage() {
 
   useEffect(() => {
     const loadContracts = async () => {
-      const result = await getFreelancerContracts(filterParams.toString());
+      const queryString = filterParams.toString()
+      const result = await contractApi.getContracts('freelancer' , queryString)
       setContracts(result.data);
     };
     loadContracts();

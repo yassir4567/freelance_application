@@ -7,9 +7,7 @@ import ContractPayments from "../components/ContractPayments";
 import ContractTabs from "../components/ContractTabs";
 import { useEffect, useMemo, useState } from "react";
 import { useParams, useSearchParams } from "react-router-dom";
-import { getClientContractDetail } from "../../../api/contracts/getClientContractDetail";
 import { useAuth } from "../../../context/AuthContext";
-import { getFreelancerContractDetail } from "../../../api/contracts/getFreelancerContractDetail";
 import {
   calculatePercent,
   CONTRACT_STATUS_CLASS,
@@ -17,6 +15,7 @@ import {
 } from "../utils/contractDisplay";
 import profile from "../../../assets/images/profile.png";
 import { useTranslation } from "react-i18next";
+import { contractApi } from "../../../api/contracts/contractApi";
 
 const VALID_TABS = ["overview", "deliverables", "payments"];
 
@@ -41,11 +40,7 @@ function ContractDetail() {
       setIsLoading(true);
       setErrorMessage("");
 
-      const result =
-        role === "client"
-          ? await getClientContractDetail(contractId)
-          : await getFreelancerContractDetail(contractId);
-
+      const result = await contractApi.getContractDetails(role , contractId)
 
       if (result.success) {
         setContract(result.data ?? null);

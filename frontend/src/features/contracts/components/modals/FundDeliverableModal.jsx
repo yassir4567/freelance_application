@@ -2,8 +2,8 @@ import { useEffect, useState } from "react";
 import styles from "../../styles/FundDeliverableModal.module.css";
 import { RiRefund2Line } from "react-icons/ri";
 import { fundDeliverable } from "../../../../api/payments/fundDeliverable";
-import { getClientContractDetail } from "../../../../api/contracts/getClientContractDetail";
 import { useTranslation } from "react-i18next";
+import { contractApi } from "../../../../api/contracts/contractApi";
 
 function FundDeliverableModal({
   isOpen,
@@ -93,7 +93,7 @@ function FundDeliverableModal({
       return;
     }
 
-    const contractResult = await getClientContractDetail(contract.id);
+    const contractResult = await contractApi.getContractDetails('client' ,contract.id);
     setContract(contractResult.data);
     onClose();
   };

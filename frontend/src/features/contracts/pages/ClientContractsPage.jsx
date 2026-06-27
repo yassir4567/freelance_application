@@ -4,9 +4,8 @@ import ContractCard from "../components/ContractCard";
 import { useEffect, useMemo, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import FilterBox from "../../../shared/common/filters/FilterBox";
-import { getClientContractStats } from "../../../api/contracts/getClientContractStats";
-import { getClientContracts } from "../../../api/contracts/getClientContracts";
 import { useTranslation } from "react-i18next";
+import { contractApi } from "../../../api/contracts/contractApi";
 
 function ClientContractsPage() {
   const { t } = useTranslation();
@@ -14,14 +13,13 @@ function ClientContractsPage() {
   const [contractStats, setContractStats] = useState([]);
   const [filterParams, setFilterParams] = useSearchParams();
 
-  
   const search = filterParams.get("search") || "";
   const sort = filterParams.get("sort") || "";
   const status = filterParams.get("status") || "";
 
   useEffect(() => {
     const loadContractStats = async () => {
-      const result = await getClientContractStats();
+      const result = await contractApi.getContractsStats('client');
       setContractStats(result.data);
     };
     loadContractStats();
@@ -29,7 +27,8 @@ function ClientContractsPage() {
 
   useEffect(() => {
     const loadContracts = async () => {
-      const result = await getClientContracts(filterParams.toString());
+      const queryString = filterParams.toString();
+      const result = await contractApi.getContracts("client", queryString);
       setContracts(result.data);
     };
     loadContracts();
@@ -103,11 +102,9 @@ function ClientContractsPage() {
       </div>
 
       <div className={styles.overviewSection}>
-        <h2 className={styles.overviewTitle}>
-          {t("common.labels.overview")}
-        </h2>
+        <h2 className={styles.overviewTitle}>{t("common.labels.overview")}</h2>
         <div className={styles.contractsOverview}>
-          {overviewCards.map((ov) => (
+          {overviewCards?.map((ov) => (
             <SimpleCard
               key={ov.id}
               title={ov.title}
@@ -134,7 +131,7 @@ function ClientContractsPage() {
         </div>
 
         <div className={styles.contractsList}>
-          {contracts.map((contract) => (
+          {contracts?.map((contract) => (
             <ContractCard key={contract.id} contract={contract} />
           ))}
         </div>

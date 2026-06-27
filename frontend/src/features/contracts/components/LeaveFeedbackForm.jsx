@@ -1,8 +1,8 @@
 import { useState } from "react";
 import styles from "../styles/LeaveFeedbackForm.module.css";
 import { leaveFeedback } from "../../../api/feedbacks/leaveFeedback";
-import { getClientContractDetail } from "../../../api/contracts/getClientContractDetail";
 import { acceptDeliverable } from "../../../api/deliverables/acceptDeliverable";
+import { contractApi } from "../../../api/contracts/contractApi";
 
 function LeaveFeedbackForm({ contract, setContract, onClose, deliverable }) {
   const [isSubmit, setIsSubmit] = useState(false);
@@ -59,7 +59,7 @@ function LeaveFeedbackForm({ contract, setContract, onClose, deliverable }) {
       return;
     }
 
-    const contractResult = await getClientContractDetail(contract.id);
+    const contractResult = await contractApi.getContractDetails('client' , contract.id)
 
     if (contractResult.success) {
       setContract(contractResult.data);

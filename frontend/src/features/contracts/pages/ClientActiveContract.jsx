@@ -1,7 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import styles from "../styles/ClientActiveContract.module.css";
 import { NavLink, useNavigate, useParams } from "react-router-dom";
-import { getSetupContractInfo } from "../../../api/contracts/getSetupContractInfo";
 import ClientActiveContractHeader from "../components/ClientActiveContractHeader";
 import { useAuth } from "../../../context/AuthContext";
 import { FiArrowLeft } from "react-icons/fi";
@@ -12,8 +11,8 @@ import SetUpContractPaymentSummary from "../components/SetUpContractPaymentSumma
 import CreatedDeliverableCollapse from "../components/CreatedDeliverableCollapse";
 import SetUpContractFinalStep from "../components/SetUpContractFinalStep";
 import SubmitSetupModal from "../components/modals/SubmitSetupModal";
-import { setUpContract } from "../../../api/contracts/setUpContract";
 import { useTranslation } from "react-i18next";
+import { contractApi } from "../../../api/contracts/contractApi";
 
 function ClientActiveContract() {
   const { t } = useTranslation();
@@ -45,7 +44,7 @@ function ClientActiveContract() {
   useEffect(() => {
     const loadSetupInfo = async () => {
       setIsLoading(true);
-      const result = await getSetupContractInfo(contractId);
+      const result = await contractApi.getSetUpContractInfo(contractId);
       if (result.success) {
         setSetupInfo(result.data ?? null);
         setIsLoading(false);
@@ -138,7 +137,7 @@ function ClientActiveContract() {
     );
 
 
-    const result = await setUpContract(contractId, payload);
+    const result = await contractApi.setUpContract(contractId, payload);
     setIsSubmitting(false);
 
     if (!result.success) {

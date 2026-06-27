@@ -2,8 +2,8 @@ import { useState } from "react";
 import styles from "../styles/SubmitDeliverableForm.module.css";
 import { FaPlus } from "react-icons/fa6";
 import { submitDeliverable } from "../../../api/deliverables/submitDeliverable";
-import { getFreelancerContractDetail } from "../../../api/contracts/getFreelancerContractDetail";
 import { useTranslation } from "react-i18next";
+import { contractApi } from "../../../api/contracts/contractApi";
 
 function SubmitDeliverableForm({
   setContract,
@@ -73,7 +73,10 @@ function SubmitDeliverableForm({
       return;
     }
 
-    const contractResult = await getFreelancerContractDetail(contractId);
+    const contractResult = await contractApi.getContractDetails(
+      "freelancer",
+      contractId,
+    );
     setContract(contractResult.data);
     onClose();
   };
@@ -102,9 +105,7 @@ function SubmitDeliverableForm({
         {errors.note && <p className={styles.error}>{errors.note}</p>}
       </div>
       <div className={styles.inputBox}>
-        <label className={styles.label}>
-          {t("common.labels.link")}
-        </label>
+        <label className={styles.label}>{t("common.labels.link")}</label>
         {links.map((link, index) => (
           <input
             key={index}
@@ -126,9 +127,7 @@ function SubmitDeliverableForm({
         </div>
         <div className={styles.addLinkBtn} onClick={handleAddLink}>
           <FaPlus />
-          <span>
-             {t("common.actions.addLink")}
-          </span>
+          <span>{t("common.actions.addLink")}</span>
         </div>
       </div>
     </form>

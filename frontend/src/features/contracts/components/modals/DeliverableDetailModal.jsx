@@ -3,7 +3,6 @@ import { IoClose } from "react-icons/io5";
 import styles from "../../styles/DeliverableDetailModal.module.css";
 import SubmitDeliverableForm from "../SubmitDeliverableForm";
 import { acceptDeliverable } from "../../../../api/deliverables/acceptDeliverable";
-import { getClientContractDetail } from "../../../../api/contracts/getClientContractDetail";
 import { requestDeliverableRevision } from "../../../../api/deliverables/requestDeliverableRevision";
 import {
   formatCurrency,
@@ -14,6 +13,7 @@ import {
 } from "../../utils/contractDisplay";
 import { useTranslation } from "react-i18next";
 import LeaveFeedbackForm from "../LeaveFeedbackForm";
+import { contractApi } from "../../../../api/contracts/contractApi";
 
 function DeliverableDetailModal({
   deliverable,
@@ -87,7 +87,7 @@ function DeliverableDetailModal({
       return;
     }
 
-    const contractResult = await getClientContractDetail(contract.id);
+    const contractResult = await contractApi.getContractDetails('client' ,contract.id);
 
     if (!contractResult.success) {
       setAcceptError(
@@ -114,7 +114,7 @@ function DeliverableDetailModal({
       return;
     }
 
-    const contractResult = await getClientContractDetail(contract.id);
+    const contractResult = await contractApi.getContractDetails('client' ,contract.id);
 
     if (!contractResult.success) {
       setRevisionError(
