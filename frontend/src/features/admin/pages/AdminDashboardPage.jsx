@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
-import { getDashboardStats } from "../../../api/admin/getDashboardStats";
 import DashboardCards from "../components/DashboardCards";
 import styles from "../styles/AdminDashboardPage.module.css";
 import { useTranslation } from "react-i18next";
+import { dashboardApi } from "../../../api/dashboard/dashboardApi";
 
 function AdminDashboard() {
   const { t } = useTranslation();
@@ -15,7 +15,7 @@ function AdminDashboard() {
       setLoading(true);
       setError("");
 
-      const result = await getDashboardStats();
+      const result = await dashboardApi.getDashboardData('admin');
 
       if (result.success) {
         setDashboardData(result.data);

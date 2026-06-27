@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { NavLink, useParams } from "react-router-dom";
-import { getUserDetails } from "../../../api/admin/getUserDetails";
 import styles from "../styles/UserDetails.module.css";
 import { useTranslation } from "react-i18next";
+import { adminApi } from "../../../api/admin/adminApi";
 
 function UserDetails() {
   const { t } = useTranslation();
@@ -16,7 +16,7 @@ function UserDetails() {
       setLoading(true);
       setError("");
 
-      const result = await getUserDetails(id);
+      const result = await adminApi.getUserDetails(id);
 
       if (result.success) {
         setUser(result.data);
@@ -74,27 +74,69 @@ function UserDetails() {
       <section className={styles.grid}>
         <div className={styles.card}>
           <h2>{t("ui.labels.contactInformation")}</h2>
-          <Info label={t("ui.labels.phone")} value={user.phone} fallback={t("ui.fallbacks.notAdded")} />
-          <Info label={t("ui.labels.location")} value={location} fallback={t("ui.fallbacks.notAdded")} />
-          <Info label={t("ui.labels.address")} value={user.address} fallback={t("ui.fallbacks.notAdded")} />
-          <Info label={t("ui.labels.joined")} value={formatDate(user.created_at, t("ui.fallbacks.notAdded"))} fallback={t("ui.fallbacks.notAdded")} />
+          <Info
+            label={t("ui.labels.phone")}
+            value={user.phone}
+            fallback={t("ui.fallbacks.notAdded")}
+          />
+          <Info
+            label={t("ui.labels.location")}
+            value={location}
+            fallback={t("ui.fallbacks.notAdded")}
+          />
+          <Info
+            label={t("ui.labels.address")}
+            value={user.address}
+            fallback={t("ui.fallbacks.notAdded")}
+          />
+          <Info
+            label={t("ui.labels.joined")}
+            value={formatDate(user.created_at, t("ui.fallbacks.notAdded"))}
+            fallback={t("ui.fallbacks.notAdded")}
+          />
         </div>
 
         {isFreelancer && (
           <div className={styles.card}>
             <h2>{t("ui.labels.freelancerProfile")}</h2>
-            <Info label={t("common.labels.title")} value={freelancer?.title} fallback={t("ui.fallbacks.notAdded")} />
-            <Info label={t("common.labels.category")} value={freelancer?.category} fallback={t("ui.fallbacks.notAdded")} />
-            <Info label={t("ui.labels.portfolio")} value={freelancer?.portfolio_url} isLink fallback={t("ui.fallbacks.notAdded")} />
-            <Info label={t("ui.labels.resume")} value={freelancer?.resume_url} isLink fallback={t("ui.fallbacks.notAdded")} />
-            <Info label={t("ui.labels.totalProjects")} value={user.total_projects} fallback={t("ui.fallbacks.notAdded")} />
+            <Info
+              label={t("common.labels.title")}
+              value={freelancer?.title}
+              fallback={t("ui.fallbacks.notAdded")}
+            />
+            <Info
+              label={t("common.labels.category")}
+              value={freelancer?.category}
+              fallback={t("ui.fallbacks.notAdded")}
+            />
+            <Info
+              label={t("ui.labels.portfolio")}
+              value={freelancer?.portfolio_url}
+              isLink
+              fallback={t("ui.fallbacks.notAdded")}
+            />
+            <Info
+              label={t("ui.labels.resume")}
+              value={freelancer?.resume_url}
+              isLink
+              fallback={t("ui.fallbacks.notAdded")}
+            />
+            <Info
+              label={t("ui.labels.totalProjects")}
+              value={user.total_projects}
+              fallback={t("ui.fallbacks.notAdded")}
+            />
           </div>
         )}
 
         {!isFreelancer && (
           <div className={styles.card}>
             <h2>{t("ui.labels.clientActivity")}</h2>
-            <Info label={t("ui.labels.totalProjects")} value={user.total_projects} fallback={t("ui.fallbacks.notAdded")} />
+            <Info
+              label={t("ui.labels.totalProjects")}
+              value={user.total_projects}
+              fallback={t("ui.fallbacks.notAdded")}
+            />
           </div>
         )}
       </section>
@@ -122,7 +164,11 @@ function UserDetails() {
       )}
 
       <section className={styles.totalCard}>
-        <span>{isFreelancer ? t("ui.labels.relatedProjects") : t("ui.labels.clientProjects")}</span>
+        <span>
+          {isFreelancer
+            ? t("ui.labels.relatedProjects")
+            : t("ui.labels.clientProjects")}
+        </span>
         <strong>{user.total_projects || 0}</strong>
       </section>
     </div>

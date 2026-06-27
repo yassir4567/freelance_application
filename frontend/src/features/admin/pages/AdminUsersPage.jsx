@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
-import { getUsers } from "../../../api/admin/getUsers";
 import styles from "../styles/AdminUsersPage.module.css";
 import UsersTable from "../components/UsersTable";
 import { useTranslation } from "react-i18next";
+import { adminApi } from "../../../api/admin/adminApi";
 
 function AdminUsersPage() {
   const { t } = useTranslation();
@@ -17,8 +17,18 @@ function AdminUsersPage() {
       setLoading(true);
       setError("");
 
-      const result = await getUsers({ role, search });
+      const params = new URLSearchParams();
+      if (role) {
+        params.append("role", role);
+      }
+      if (search) {
+        params.append("search", search);
+      }
 
+      const queryString = params.toString();
+
+      const result = await adminApi.getUsers(queryString);
+      
       if (result.success) {
         setUsers(result.data);
       } else {
@@ -39,7 +49,9 @@ function AdminUsersPage() {
           <p className={styles.subtitle}>{t("ui.labels.adminDashboard")}</p>
           <h1>{t("admin.users.title")}</h1>
         </div>
-        <span className={styles.count}>{t("ui.labels.usersCount", { count: users.length })}</span>
+        <span className={styles.count}>
+          {t("ui.labels.usersCount", { count: users.length })}
+        </span>
       </div>
 
       <div className={styles.filters}>
