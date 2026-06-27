@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import styles from "../../styles/FundDeliverableModal.module.css";
 import { RiRefund2Line } from "react-icons/ri";
-import { fundDeliverable } from "../../../../api/payments/fundDeliverable";
 import { useTranslation } from "react-i18next";
 import { contractApi } from "../../../../api/contracts/contractApi";
+import { paymentApi } from "../../../../api/payments/paymentApi";
 
 function FundDeliverableModal({
   isOpen,
@@ -85,7 +85,7 @@ function FundDeliverableModal({
     };
 
     setIsSubmitting(true);
-    const result = await fundDeliverable(payload, deliverable.id);
+    const result = await paymentApi.fundDeliverable(deliverable.id, payload);
 
     setIsSubmitting(false);
     if (!result.success) {
@@ -93,7 +93,10 @@ function FundDeliverableModal({
       return;
     }
 
-    const contractResult = await contractApi.getContractDetails('client' ,contract.id);
+    const contractResult = await contractApi.getContractDetails(
+      "client",
+      contract.id,
+    );
     setContract(contractResult.data);
     onClose();
   };
@@ -105,9 +108,7 @@ function FundDeliverableModal({
           <RiRefund2Line className={styles.icon} />
         </div>
         <h2 className={styles.title}>{t("fundDeliverable.title")}</h2>
-        <p className={styles.description}>
-          {t("fundDeliverable.description")}
-        </p>
+        <p className={styles.description}>{t("fundDeliverable.description")}</p>
 
         <form onSubmit={handleSubmit} className={styles.form}>
           <div className={styles.inputBox}>
@@ -134,7 +135,9 @@ function FundDeliverableModal({
               className={styles.fundBtn}
               disabled={isSubmitting}
             >
-              {isSubmitting ? t("ui.actions.funding") : t("common.actions.fund")}
+              {isSubmitting
+                ? t("ui.actions.funding")
+                : t("common.actions.fund")}
             </button>
           </div>
         </form>

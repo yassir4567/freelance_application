@@ -2,8 +2,6 @@ import { Fragment, useEffect, useState } from "react";
 import { IoClose } from "react-icons/io5";
 import styles from "../../styles/DeliverableDetailModal.module.css";
 import SubmitDeliverableForm from "../SubmitDeliverableForm";
-import { acceptDeliverable } from "../../../../api/deliverables/acceptDeliverable";
-import { requestDeliverableRevision } from "../../../../api/deliverables/requestDeliverableRevision";
 import {
   formatCurrency,
   formatDisplayDate,
@@ -14,6 +12,7 @@ import {
 import { useTranslation } from "react-i18next";
 import LeaveFeedbackForm from "../LeaveFeedbackForm";
 import { contractApi } from "../../../../api/contracts/contractApi";
+import { deliverableApi } from "../../../../api/deliverables/deliverableApi";
 
 function DeliverableDetailModal({
   deliverable,
@@ -79,7 +78,7 @@ function DeliverableDetailModal({
 
     setIsAccepting(true);
 
-    const result = await acceptDeliverable(deliverable.id);
+    const result = await deliverableApi.accept(deliverable.id);
 
     if (!result.success) {
       setAcceptError(result.message || t("ui.states.pageUnavailableTitle"));
@@ -106,7 +105,7 @@ function DeliverableDetailModal({
     setRevisionError("");
     setIsRequestingRevision(true);
 
-    const result = await requestDeliverableRevision(deliverable.id);
+    const result = await deliverableApi.revision(deliverable.id);
 
     if (!result.success) {
       setRevisionError(result.message || t("ui.states.pageUnavailableTitle"));

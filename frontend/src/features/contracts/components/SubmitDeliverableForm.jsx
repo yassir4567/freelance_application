@@ -1,9 +1,9 @@
 import { useState } from "react";
 import styles from "../styles/SubmitDeliverableForm.module.css";
 import { FaPlus } from "react-icons/fa6";
-import { submitDeliverable } from "../../../api/deliverables/submitDeliverable";
 import { useTranslation } from "react-i18next";
 import { contractApi } from "../../../api/contracts/contractApi";
+import { deliverableApi } from "../../../api/deliverables/deliverableApi";
 
 function SubmitDeliverableForm({
   setContract,
@@ -66,7 +66,7 @@ function SubmitDeliverableForm({
       links: safeLinks,
     };
 
-    const result = await submitDeliverable(payload, deliverableId);
+    const result = await deliverableApi.submit(deliverableId, payload);
 
     if (!result.success) {
       console.log(result);

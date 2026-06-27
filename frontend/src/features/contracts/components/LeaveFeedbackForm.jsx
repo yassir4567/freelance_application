@@ -1,8 +1,8 @@
 import { useState } from "react";
 import styles from "../styles/LeaveFeedbackForm.module.css";
 import { leaveFeedback } from "../../../api/feedbacks/leaveFeedback";
-import { acceptDeliverable } from "../../../api/deliverables/acceptDeliverable";
 import { contractApi } from "../../../api/contracts/contractApi";
+import { deliverableApi } from "../../../api/deliverables/deliverableApi";
 
 function LeaveFeedbackForm({ contract, setContract, onClose, deliverable }) {
   const [isSubmit, setIsSubmit] = useState(false);
@@ -47,7 +47,7 @@ function LeaveFeedbackForm({ contract, setContract, onClose, deliverable }) {
       note: form.note,
     };
 
-    const acceptResult = await acceptDeliverable(deliverable.id);
+    const acceptResult = await deliverableApi.accept(deliverable.id);
     if (!acceptResult.success) {
       setIsSubmit(false);
       return;
