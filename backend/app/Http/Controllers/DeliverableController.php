@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\SubmitDeliverableRequest;
 use App\Models\Deliverable;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -10,7 +11,7 @@ class DeliverableController extends Controller
 {
     //
 
-    public function submit(Request $request, string $id)
+    public function submit(SubmitDeliverableRequest $request, string $id)
     {
         $freelancer = $request->user()->freelancer;
 
@@ -21,11 +22,7 @@ class DeliverableController extends Controller
             })
             ->firstOrFail();
 
-        $validated = $request->validate([
-            'submission_note' => 'required|min:3|max:500',
-            'links' => 'required|array|min:1',
-            'links.*' => 'required|url',
-        ]);
+        $validated = $request->validated() ;
 
         if (! in_array($deliverable->status, ['unlocked', 'revision_request'])) {
             return response()->json([
