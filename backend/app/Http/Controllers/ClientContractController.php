@@ -7,6 +7,7 @@ use App\Models\Contract;
 use App\Models\Payment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Gate;
 
 class ClientContractController extends Controller
 {
@@ -207,21 +208,16 @@ class ClientContractController extends Controller
 
     public function activateContract(ActiveContractRequest $request, string $id)
     {
-        $contract = Contract::where('id', $id)->firstOrFail();
-        $contract->load('proposal.project');
+        $validated = $request->validated();
+        $deliverables = $validated['deliverables'];
 
-        if ($contract->status !== 'pending') {
-            return response()->json([
-                'success' => false,
-                'message' => 'Only pending contracts can be confirmed.',
-            ], 409);
-        }
+        $updatedContract = DB::transaction(function () use ($request, $id, $deliverables, $validated) {
+            $contract = Contract::with('proposal.project')
+                ->where('id', $id)
+                ->firstOrFail();
 
-        $validated = $request->validated() ;
-        $deliverables = $validated['deliverables'] ;
+            Gate::authorize('activate', $contract);
 
-
-        $updatedContract = DB::transaction(function () use ($request, $contract, $deliverables, $validated) {
             $project = $contract->proposal->project;
 
             $pdfPath = $request->file('contract_pdf')->store('contracts', 'public');
@@ -266,6 +262,5 @@ class ClientContractController extends Controller
             'message' => 'Contract activated successfully',
             'data' => $updatedContract,
         ]);
-
     }
 }
