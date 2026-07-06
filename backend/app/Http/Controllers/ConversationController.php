@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Conversation;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class ConversationController extends Controller
 {
@@ -13,6 +14,8 @@ class ConversationController extends Controller
         $user = $request->user();
 
         $role = $user->role;
+
+        Gate::authorize('viewAny', Conversation::class);
 
         $query = Conversation::query()
             ->select('id', 'contract_id', 'created_at');

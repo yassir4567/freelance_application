@@ -5,15 +5,16 @@ namespace App\Http\Controllers;
 use App\Models\Conversation;
 use App\Models\Message;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class MessageController extends Controller
 {
     //
     public function index(Request $request, string $id)
     {
-        $conversation = Conversation::where('id', $id)
-            ->with('messages')
-            ->get();
+        $conversation = Conversation::with('messages')->findOrFail($id);
+
+        Gate::authorize('readMessages', $conversation);
 
         return response()->json([
             'success' => true,
@@ -25,6 +26,11 @@ class MessageController extends Controller
     public function send(Request $request, string $id)
     {
         $sender = $request->user();
+
+        $conversation = Conversation::findOrFail($id);
+
+        Gate::authorize('sendMessage', $conversation);
+
         $validated = $request->validate([
             'message' => 'required|max:255',
         ]);
@@ -33,6 +39,7 @@ class MessageController extends Controller
             'sender_id' => $sender->id,
             'conversation_id' => (int) $id,
             'message' => $validated['message'],
+            'type' => 'text'
         ]);
 
 

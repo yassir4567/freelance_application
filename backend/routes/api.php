@@ -98,10 +98,14 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/categories', [CategoryController::class, 'index']);
     Route::get('/skills', [SkillController::class, 'index']);
 
-    // ? conversations 
-    Route::get('/conversations', [ConversationController::class, 'index']);
 
-    // ? messages 
-    Route::get('/conversations/{id}/messages', [MessageController::class, 'index']);
-    Route::post('/conversations/{id}/send-message', [MessageController::class, 'send']);
+    Route::middleware('role:client,freelancer')->group(function () {
+        // ? conversations 
+        Route::get('/conversations', [ConversationController::class, 'index']);
+
+        // ? messages 
+        Route::get('/conversations/{id}/messages', [MessageController::class, 'index']);
+        Route::post('/conversations/{id}/send-message', [MessageController::class, 'send']);
+    });
+
 });
