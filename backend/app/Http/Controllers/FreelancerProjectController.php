@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Project;
 use App\Models\Proposal;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class FreelancerProjectController extends Controller
 {
@@ -82,6 +83,8 @@ class FreelancerProjectController extends Controller
 
     public function show(Request $request, string $id)
     {
+
+
         $freelancer = $request->user()->freelancer;
 
         $project = Project::with([
@@ -89,6 +92,8 @@ class FreelancerProjectController extends Controller
             'category:id,name',
             'skills:id,name'
         ])->findOrFail($id);
+        
+        Gate::authorize('freelancerViewDetail', $project);
 
         $countClientProjects = Project::where('client_id', $project->client_id)->count();
 

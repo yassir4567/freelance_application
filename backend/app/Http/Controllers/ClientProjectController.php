@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreProjectRequest;
 use App\Models\Project;
 use App\Models\Proposal;
+use Gate;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 
@@ -48,6 +49,7 @@ class ClientProjectController extends Controller
 
     public function show(Request $request, string $id)
     {
+
         $client = $request->user();
 
         $project = $client->projects()
@@ -68,6 +70,10 @@ class ClientProjectController extends Controller
             ->withCount('proposals')
             ->with(['category:id,name', 'skills:id,name'])
             ->firstOrFail();
+
+        Gate::authorize('viewClientProject' , $project);
+
+
 
         $freelancer = null;
         if (in_array($project->status, ['completed', 'in_progress'])) {
@@ -94,7 +100,6 @@ class ClientProjectController extends Controller
     public function store(StoreProjectRequest $request)
     {
         $validated = $request->validated();
-
         $user = $request->user();
 
         $project = Project::create([
