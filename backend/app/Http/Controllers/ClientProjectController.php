@@ -49,29 +49,25 @@ class ClientProjectController extends Controller
 
     public function show(Request $request, string $id)
     {
-
-        $client = $request->user();
-
-        $project = $client->projects()
-            ->select(
-                'id',
-                'client_id',
-                'category_id',
-                'title',
-                'description',
-                'budget',
-                'status',
-                'experience_level',
-                'size',
-                'duration',
-                'created_at'
-            )
+        $project = Project::select(
+            'id',
+            'client_id',
+            'category_id',
+            'title',
+            'description',
+            'budget',
+            'status',
+            'experience_level',
+            'size',
+            'duration',
+            'created_at'
+        )
             ->where('id', $id)
             ->withCount('proposals')
             ->with(['category:id,name', 'skills:id,name'])
             ->firstOrFail();
 
-        Gate::authorize('viewClientProject' , $project);
+        Gate::authorize('viewClientProject', $project);
 
 
 

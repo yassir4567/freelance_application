@@ -7,18 +7,19 @@ use App\Models\Conversation;
 use App\Models\Project;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use function PHPUnit\Framework\returnArgument;
+use Illuminate\Support\Facades\Gate;
 
 class ClientProposalController extends Controller
 {
     //
     public function index(Request $request, string $id)
     {
-        $client = $request->user();
-        $project = $client->projects()
-            ->select('id', 'status')
+        $project = Project::select('id', 'status', 'client_id')
             ->where('id', $id)
             ->firstOrFail();
+
+        Gate::authorize('clientViewProposals', $project);
+
         $proposals = $project->proposals()->select(
             'id',
             'project_id',
@@ -63,19 +64,7 @@ class ClientProposalController extends Controller
             ], 404);
         }
 
-        if (!in_array($project->status, ['open', 'in_review'])) {
-            return response()->json([
-                'success' => false,
-                'message' => 'This project is not accepting proposals.'
-            ], 409);
-        }
-
-        if ($proposal->status !== 'pending') {
-            return response()->json([
-                'success' => false,
-                'message' => 'Only pending proposals can be accepted.'
-            ], 409);
-        }
+        Gate::authorize('accept', $proposal);
 
         $result = DB::transaction(function () use ($project, $proposal) {
             $proposal->update([
@@ -131,12 +120,7 @@ class ClientProposalController extends Controller
             ], 404);
         }
 
-        if ($proposal->status !== 'pending') {
-            return response()->json([
-                'success' => false,
-                'message' => 'Only pending proposals can be rejected'
-            ], 409);
-        }
+        Gate::authorize('reject', $proposal);
 
         $proposal->update([
             'status' => 'rejected',

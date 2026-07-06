@@ -20,7 +20,7 @@ function BrowseProjectDetail() {
 
   useEffect(() => {
     const loadProject = async () => {
-      const response = await projectApi.getBrowseProjectDetail(projectId);
+      const response = await projectApi.getBrowseProjectDetail(projectId);      
       if (response.success) {
         setProject(response.data);
       }

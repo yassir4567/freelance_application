@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Project;
 use App\Models\Proposal;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class FreelancerProposalController extends Controller
 {
@@ -41,12 +42,7 @@ class FreelancerProposalController extends Controller
     {
         $project = Project::findOrFail($projectId);
 
-        if (!in_array($project->status, ['open', 'in_review'])) {
-            return response()->json([
-                'success' => false,
-                'message' => 'This project is not accepting proposals',
-            ], 422);
-        }
+        Gate::authorize('sendProposal', $project);
 
         $freelancer = $request->user()->freelancer;
 

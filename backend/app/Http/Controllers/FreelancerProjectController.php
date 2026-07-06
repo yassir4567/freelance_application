@@ -91,7 +91,7 @@ class FreelancerProjectController extends Controller
             'skills:id,name'
         ])->findOrFail($id);
 
-        Gate::authorize('freelancerViewDetail', $project);
+        Gate::authorize('viewAvailableProject', $project);
 
         $countClientProjects = Project::where('client_id', $project->client_id)->count();
 

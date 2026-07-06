@@ -13,7 +13,11 @@ function ProposalsList() {
   useEffect(() => {
     const loadProposals = async () => {
       const result = await proposalApi.getClientProjectProposals(projectId);
-      setProposals(result.data);
+      if (result.success) {
+        console.log(result.data);
+        
+        setProposals(result.data);
+      }
     };
     loadProposals();
   }, []);
