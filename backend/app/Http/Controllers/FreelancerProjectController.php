@@ -83,8 +83,6 @@ class FreelancerProjectController extends Controller
 
     public function show(Request $request, string $id)
     {
-
-
         $freelancer = $request->user()->freelancer;
 
         $project = Project::with([
@@ -92,7 +90,7 @@ class FreelancerProjectController extends Controller
             'category:id,name',
             'skills:id,name'
         ])->findOrFail($id);
-        
+
         Gate::authorize('freelancerViewDetail', $project);
 
         $countClientProjects = Project::where('client_id', $project->client_id)->count();

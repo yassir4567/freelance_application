@@ -15,13 +15,15 @@ import { projectApi } from "../../../api/projects/projectApi";
 function BrowseProjectDetail() {
   const { t } = useTranslation();
   const { projectId } = useParams();
-  const [project, setData] = useState({});
+  const [project, setProject] = useState(null);
   const [showSendProposalModal, setShowSendProposalModal] = useState(false);
 
   useEffect(() => {
     const loadProject = async () => {
       const response = await projectApi.getBrowseProjectDetail(projectId);
-      setData(response.data);
+      if (response.success) {
+        setProject(response.data);
+      }
     };
     loadProject();
   }, []);
@@ -31,18 +33,23 @@ function BrowseProjectDetail() {
   const onClose = () => {
     setShowSendProposalModal(false);
   };
+  
+  // ! just for now
+  if(!project) {
+    return <p>Project not found</p>
+  }
 
   return (
     <div className={styles.projectDetailPage}>
       <div className={styles.leftSide}>
         <div className={styles.header}>
           <h1 className={`pageTitle ${styles.projectTitle}`}>
-            {project.project?.title}
+            {project?.project?.title}
           </h1>
           <div className={styles.minHeader}>
             <div className={styles.postedDate}>
               <MdOutlineDateRange className={styles.icon} />
-              <span>{formatDate(project.project?.created_at)}</span>
+              <span>{formatDate(project?.project?.created_at)}</span>
             </div>
             <div className={styles.country}>
               <CiLocationOn className={styles.icon} />
@@ -56,7 +63,7 @@ function BrowseProjectDetail() {
           <h5 className={styles.sectionTitle}>
             {t("common.labels.description")}
           </h5>
-          <p className={styles.description}>{project.project?.description}</p>
+          <p className={styles.description}>{project?.project?.description}</p>
 
           <div className={styles.devider}></div>
 
@@ -66,7 +73,7 @@ function BrowseProjectDetail() {
                 <IoPricetagsOutline className={styles.icon} />
                 <span>{t("common.labels.price")}</span>
               </h5>
-              <p className={styles.infoP}>{project.project?.budget}$</p>
+              <p className={styles.infoP}>{project?.project?.budget}$</p>
             </div>
 
             <div className={styles.info}>
@@ -75,7 +82,7 @@ function BrowseProjectDetail() {
                 <span>{t("common.labels.duration")}</span>
               </h5>
               <p className={styles.infoP}>
-                {project.project?.duration.split("_").join(" ")}
+                {project?.project?.duration.split("_").join(" ")}
               </p>
             </div>
 
@@ -85,7 +92,7 @@ function BrowseProjectDetail() {
                 <span>{t("common.labels.experience")}</span>
               </h5>
               <p className={styles.infoP}>
-                {project.project?.experience_level}
+                {project?.project?.experience_level}
               </p>
             </div>
 
@@ -94,7 +101,7 @@ function BrowseProjectDetail() {
                 <SlSizeFullscreen className={styles.icon} />
                 <span>{t("common.labels.projectSize")}</span>
               </h5>
-              <p className={styles.infoP}>{project.project?.size}</p>
+              <p className={styles.infoP}>{project?.project?.size}</p>
             </div>
           </div>
 
@@ -105,7 +112,7 @@ function BrowseProjectDetail() {
               {t("browseProjectDetail.requiredSkills")}
             </h5>
             <div className={styles.skills}>
-              {project.project?.skills.map((skill) => (
+              {project?.project?.skills.map((skill) => (
                 <div key={skill.id} className={styles.skill}>
                   {skill.name}
                 </div>
@@ -117,7 +124,7 @@ function BrowseProjectDetail() {
 
       <div className={styles.rightSide}>
         <div className={styles.actions}>
-          {project.isProposalSent ? (
+          {project?.isProposalSent ? (
             <div className={styles.proposalAlreadySent}>
               <p>{t("browseProjectDetail.alreadySent")} </p>
               <NavLink
@@ -147,7 +154,7 @@ function BrowseProjectDetail() {
               {client?.last_name}
             </p>
             <p>
-              {project.client_projects_count}{" "}
+              {project?.client_projects_count}{" "}
               {t("browseProjectDetail.postedProjects")}
             </p>
             <p>
