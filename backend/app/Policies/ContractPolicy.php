@@ -13,4 +13,12 @@ class ContractPolicy
             && $contract->proposal->project->client_id === $user->id
             && $contract->status === 'pending';
     }
+
+    public function leaveFeedback(User $user, Contract $contract)
+    {
+        return $user->role === 'client'
+            && $contract->proposal->project->client_id === $user->id
+            && $contract->status === 'completed'
+            && !$contract->feedback()->exists();
+    }
 }

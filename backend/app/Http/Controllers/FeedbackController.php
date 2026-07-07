@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Contract;
 use App\Models\Feedback;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class FeedbackController extends Controller
 {
@@ -14,28 +15,7 @@ class FeedbackController extends Controller
 
         $contract = Contract::findOrFail($contractId);
 
-        if ($contract->status !== 'completed') {
-            return response()->json([
-                'success' => false,
-                'message' => 'only completed contract can get feedback'
-            ]);
-        }
-
-        $client = $request->user();
-
-        if ($contract->proposal->project->client_id !== $client->id) {
-            return response()->json([
-                'success' => false,
-                'message' => 'unauthorized'
-            ]);
-        }
-
-        if ($contract->feedback()->exists()) {
-            return response()->json([
-                'success' => false,
-                'message' => 'feedback already exists for this contract'
-            ], 409);
-        }
+        Gate::authorize('leaveFeedback', $contract);
 
         $validated = $request->validate([
             "contenu" => "required|string",
