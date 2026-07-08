@@ -6,37 +6,25 @@ import { IoPricetagsOutline } from "react-icons/io5";
 import { IoMdTime } from "react-icons/io";
 import { SiLevelsdotfyi } from "react-icons/si";
 import { SlSizeFullscreen } from "react-icons/sl";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { formatDate } from "../../../utils/helpers";
 import SendProposalModal from "../../proposals/components/SendProposalModal";
 import { useTranslation } from "react-i18next";
 import { projectApi } from "../../../api/projects/projectApi";
+import useProject from "../hooks/useProject";
 
 function BrowseProjectDetail() {
   const { t } = useTranslation();
-  const { projectId } = useParams();
-  const [project, setProject] = useState(null);
+  const { project, client, projectId } = useProject();
   const [showSendProposalModal, setShowSendProposalModal] = useState(false);
-
-  useEffect(() => {
-    const loadProject = async () => {
-      const response = await projectApi.getBrowseProjectDetail(projectId);      
-      if (response.success) {
-        setProject(response.data);
-      }
-    };
-    loadProject();
-  }, []);
-
-  const client = project?.project?.client;
 
   const onClose = () => {
     setShowSendProposalModal(false);
   };
-  
+
   // ! just for now
-  if(!project) {
-    return <p>Project not found</p>
+  if (!project) {
+    return <p>Project not found</p>;
   }
 
   return (
