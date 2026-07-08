@@ -1,56 +1,18 @@
-import { useEffect, useMemo, useState } from "react";
 import styles from "../styles/ClientProjectsPage.module.css";
 import { PiEmptyBold } from "react-icons/pi";
-import { useSearchParams } from "react-router-dom";
 import ClientProjectCard from "../components/ClientProjectCard";
 import FilterBox from "../../../shared/common/filters/FilterBox";
 import { useTranslation } from "react-i18next";
-import { projectApi } from "../../../api/projects/projectApi";
+import useProjects from "../hooks/useProjects";
+import useClientProjectsFilters from "../hooks/useClientProjectsFilters";
 
 function ClientProjectsPage() {
   const { t } = useTranslation();
-  const [projects, setProjects] = useState([]);
-  const [filterParams, setFilterParams] = useSearchParams();
 
-  // * get query params
-  const search = filterParams.get("search") || "";
-  const sort = filterParams.get("sort") || "";
-  const status = filterParams.get("status") || "";
+  const { searchParams, inputValues, handleInputsChange, handleClearFilters } =
+    useClientProjectsFilters();
 
-  useEffect(() => {
-    const loadProjects = async () => {
-      const result = await projectApi.getClientProjects(
-        filterParams.toString(),
-      );
-      setProjects(result.data);
-    };
-    loadProjects();
-  }, [filterParams]);
-
-  // * handle inputs changes
-  const handleInputsChange = (e) => {
-    const { name, value } = e.target;
-
-    const params = new URLSearchParams(filterParams);
-    if (value && value.trim() !== "") {
-      params.set(name, value);
-    } else {
-      params.delete(name);
-    }
-    setFilterParams(params);
-  };
-
-  // * clear all filters
-  const handleClearFilters = () => {
-    setFilterParams({});
-  };
-
-  // * inputs values
-  const inputValues = {
-    search: search,
-    status: status,
-    sort: sort,
-  };
+  const { projects } = useProjects(searchParams, "client");
 
   const statusValues = [
     "open",

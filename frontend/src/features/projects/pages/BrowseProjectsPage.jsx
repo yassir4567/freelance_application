@@ -4,10 +4,8 @@ import FreelancerProjectsHeaderFilter from "../components/FreelancerProjectsHead
 import Search from "../../../shared/ui/Search";
 import styles from "../styles/BrowseProjectsPage.module.css";
 import { useTranslation } from "react-i18next";
-import { projectApi } from "../../../api/projects/projectApi";
-import { categoryApi } from "../../../api/categories/categoryApi";
 import useBrowseProjectsFilters from "../hooks/useBrowseProjectsFilters";
-import useBrowseProjects from "../hooks/useBrowseProjects";
+import useProjects from "../hooks/useProjects";
 import useCategories from "../../../hooks/useCategories";
 
 function BrowseProjectsPage() {
@@ -20,7 +18,7 @@ function BrowseProjectsPage() {
     handleInputsChange,
   } = useBrowseProjectsFilters();
 
-  const { projects } = useBrowseProjects(searchParams);
+  const { projects } = useProjects(searchParams, "freelancer");
 
   const { categories } = useCategories();
 
