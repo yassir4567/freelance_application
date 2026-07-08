@@ -16,7 +16,7 @@ function useProjects(searchParams, role) {
       setProjects(result.data);
     };
     loadProjects();
-  }, [searchParams]);
+  }, [searchParams, role]);
 
   return { projects };
 }
