@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { contractApi } from "../../../api/contracts/contractApi";
 import { useTranslation } from "react-i18next";
+import { formatMoney } from "../../../utils/helpers";
 
 function useContracts(searchParams, role) {
   const { t } = useTranslation();
@@ -32,25 +33,25 @@ function useContracts(searchParams, role) {
           {
             id: 0,
             title: t("common.labels.completedContracts"),
-            total: contractStats?.completed_contracts_count || "__",
+            total: contractStats?.completed_contracts_count ?? "__",
             subTitle: t("contractsList.stats.completed.subTitle"),
           },
           {
             id: 2,
             title: t("common.labels.activeContracts"),
-            total: contractStats?.active_contracts_count || "__",
+            total: contractStats?.active_contracts_count ?? "__",
             subTitle: t("contractsList.stats.active.subTitle"),
           },
           {
             id: 1,
             title: t("contractsList.stats.spending.title"),
-            total: `$${contractStats?.total_spent?.toFixed(3)}` || "__",
+            total: formatMoney(contractStats?.total_spent) ?? "__",
             subTitle: t("contractsList.stats.spending.subTitle"),
           },
           {
             id: 3,
             title: t("contractsList.stats.escrow.title"),
-            total: `$${contractStats?.total_in_escrow?.toFixed(3)}` || "__",
+            total: formatMoney(contractStats?.total_in_escrow) ?? "__",
             subTitle: t("contractsList.stats.escrow.subTitle"),
           },
         ]
@@ -58,19 +59,19 @@ function useContracts(searchParams, role) {
           {
             id: 0,
             title: t("common.labels.completedContracts"),
-            total: contractStats?.completed_contracts || "__",
+            total: contractStats?.completed_contracts ?? "__",
             subTitle: t("contractsList.stats.completed.subTitle"),
           },
           {
             id: 2,
             title: t("common.labels.activeContracts"),
-            total: contractStats?.active_contracts || "__",
+            total: contractStats?.active_contracts ?? "__",
             subTitle: t("contractsList.stats.active.subTitle"),
           },
           {
             id: 1,
             title: t("contractsList.stats.earning.title"),
-            total: `$${contractStats?.total_earnings?.toFixed(3)}` || "__",
+            total: formatMoney(contractStats?.total_earnings) ?? "__",
             subTitle: t("contractsList.stats.earning.subTitle"),
           },
         ];

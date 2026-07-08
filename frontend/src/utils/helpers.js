@@ -24,3 +24,6 @@ export function getRelativeTime(date) {
   return dayjs(date).fromNow();
 }
 
+export function formatMoney(value) {
+  return value == null ? "__" : `$${Number(value).toFixed(3)}`;
+}
