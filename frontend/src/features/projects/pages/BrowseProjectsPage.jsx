@@ -3,142 +3,26 @@ import FreelancerProjectsFilter from "../components/FreelancerProjectsFilter";
 import FreelancerProjectsHeaderFilter from "../components/FreelancerProjectsHeaderFilter";
 import Search from "../../../shared/ui/Search";
 import styles from "../styles/BrowseProjectsPage.module.css";
-import { useEffect, useState } from "react";
-import { emptyText } from "../../../utils/helpers";
-import { useSearchParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { projectApi } from "../../../api/projects/projectApi";
 import { categoryApi } from "../../../api/categories/categoryApi";
+import useBrowseProjectsFilters from "../hooks/useBrowseProjectsFilters";
+import useBrowseProjects from "../hooks/useBrowseProjects";
+import useCategories from "../../../hooks/useCategories";
 
 function BrowseProjectsPage() {
   const { t } = useTranslation();
-  const [categories, setCategories] = useState([]);
-  const [projects, setProjects] = useState([]);
-  const [searchParams, setSearchParams] = useSearchParams();
-  const [filters, setFilters] = useState({
-    search: "",
-    price: "",
-    experience: "",
-    size: "",
-    nbr_proposals: "",
-    sort: "",
-    category_id: "",
-  });
+  const {
+    filters,
+    searchParams,
+    handleApplyFilters,
+    handleClearAllFilters,
+    handleInputsChange,
+  } = useBrowseProjectsFilters();
 
-  // * get filters from url query params
-  useEffect(() => {
-    let nbr_proposals = "";
-    let price = "";
+  const { projects } = useBrowseProjects(searchParams);
 
-    let nbrProposalsMin = searchParams.get("nbr_proposals_min") || "";
-    let nbrProposalsMax = searchParams.get("nbr_proposals_max") || "";
-
-    if (nbrProposalsMin && nbrProposalsMax) {
-      nbr_proposals = `${nbrProposalsMin}-${nbrProposalsMax}`;
-    } else if (nbrProposalsMin) {
-      nbr_proposals = `${nbrProposalsMin}+`;
-    }
-
-    let budgetMin = searchParams.get("budget_min") || "";
-    let budgetMax = searchParams.get("budget_max") || "";
-
-    if (budgetMin && budgetMax) {
-      price = `${budgetMin}-${budgetMax}`;
-    } else if (budgetMin) {
-      price = `${budgetMin}+`;
-    }
-
-    setFilters({
-      search: searchParams.get("search") || "",
-      category_id: searchParams.get("category_id") || "",
-      sort: searchParams.get("sort") || "",
-      experience: searchParams.get("experience") || "",
-      size: searchParams.get("size") || "",
-      nbr_proposals,
-      price,
-    });
-  }, []);
-
-  // * load categories from API
-  useEffect(() => {
-    const loadCategories = async () => {
-      const result = await categoryApi.getCategories();
-      setCategories(result.data);
-    };
-    loadCategories();
-  }, []);
-
-  const handleInputsChange = (e) => {
-    const { name, value } = e.target;
-
-    setFilters((prev) => ({ ...prev, [name]: value }));
-  };
-
-  // * apply filters
-  const handleApplyFilters = async () => {
-    const params = new URLSearchParams();
-    if (!emptyText(filters.search)) {
-      params.set("search", filters.search);
-    }
-    if (!emptyText(filters.category_id)) {
-      params.set("category_id", filters.category_id);
-    }
-    if (!emptyText(filters.sort)) {
-      params.set("sort", filters.sort);
-    }
-    if (!emptyText(filters.experience)) {
-      params.set("experience", filters.experience);
-    }
-    if (!emptyText(filters.size)) {
-      params.set("size", filters.size);
-    }
-    if (!emptyText(filters.nbr_proposals)) {
-      if (filters.nbr_proposals.includes("-")) {
-        let [min, max] = filters.nbr_proposals.split("-");
-        params.set("nbr_proposals_min", min);
-        params.set("nbr_proposals_max", max);
-      } else if (filters.nbr_proposals.includes("+")) {
-        let min = filters.nbr_proposals.replace("+", "");
-        params.set("nbr_proposals_min", min);
-      }
-    }
-    if (!emptyText(filters.price)) {
-      if (filters.price.includes("-")) {
-        let [min, max] = filters.price.split("-");
-        params.set("budget_min", min);
-        params.set("budget_max", max);
-      } else if (filters.price.includes("+")) {
-        let min = filters.price.replace("+", "");
-        params.set("budget_min", min);
-      }
-    }
-    setSearchParams(params);
-  };
-
-  // * send get projects request
-  useEffect(() => {
-    const loadProjects = async () => {
-      const result = await projectApi.getBrowseProjects(
-        searchParams.toString(),
-      );
-      setProjects(result.data);
-    };
-    loadProjects();
-  }, [searchParams]);
-
-  // * clear all filters
-  const handleClearAllFilters = () => {
-    setFilters({
-      search: "",
-      price: "",
-      experience: "",
-      size: "",
-      nbr_proposals: "",
-      sort: "",
-      category_id: "",
-    });
-    setSearchParams({});
-  };
+  const { categories } = useCategories();
 
   return (
     <div className={styles.findProjectPage}>
