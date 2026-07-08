@@ -23,7 +23,7 @@ function useContracts(searchParams, role) {
       setContracts(result.data);
     };
     loadContracts();
-  }, [searchParams]);
+  }, [searchParams, role]);
 
   // * overview cards
 
