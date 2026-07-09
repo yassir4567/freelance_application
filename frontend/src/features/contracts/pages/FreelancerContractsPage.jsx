@@ -5,16 +5,39 @@ import ContractCard from "../components/ContractCard";
 import { useTranslation } from "react-i18next";
 import useContractsFilters from "../hooks/useContractsFilters";
 import useContracts from "../hooks/useContracts";
+import { formatMoney } from "../../../utils/helpers";
 
 function FreelancerContractsPage() {
   const { t } = useTranslation();
 
-  const { searchParams, handleInputsChange, handleClearFilters, filterValues } = useContractsFilters()
+  const { searchParams, handleInputsChange, handleClearFilters, filterValues } =
+    useContractsFilters();
 
-  const { contracts, contractStats, overviewCards } = useContracts(
+  const { contracts, contractStats } = useContracts(
     searchParams,
     "freelancer",
   );
+
+  const overviewCards = [
+    {
+      id: 0,
+      title: t("common.labels.completedContracts"),
+      total: contractStats?.completed_contracts ?? "__",
+      subTitle: t("contractsList.stats.completed.subTitle"),
+    },
+    {
+      id: 2,
+      title: t("common.labels.activeContracts"),
+      total: contractStats?.active_contracts ?? "__",
+      subTitle: t("contractsList.stats.active.subTitle"),
+    },
+    {
+      id: 1,
+      title: t("contractsList.stats.earning.title"),
+      total: formatMoney(contractStats?.total_earnings) ?? "__",
+      subTitle: t("contractsList.stats.earning.subTitle"),
+    },
+  ];
 
   // * status values
   const statusValues = ["active", "completed", "cancelled"];

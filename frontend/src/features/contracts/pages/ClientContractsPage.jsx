@@ -5,17 +5,43 @@ import FilterBox from "../../../shared/common/filters/FilterBox";
 import { useTranslation } from "react-i18next";
 import useContracts from "../hooks/useContracts";
 import useContractsFilters from "../hooks/useContractsFilters";
+import { formatMoney } from "../../../utils/helpers";
 
 function ClientContractsPage() {
   const { t } = useTranslation();
 
-  const { searchParams, handleInputsChange, handleClearFilters, filterValues } = useContractsFilters()
+  const { searchParams, handleInputsChange, handleClearFilters, filterValues } =
+    useContractsFilters();
 
-  const { contracts, contractStats, overviewCards } = useContracts(
-    searchParams,
-    "client",
-  );
-  
+  const { contracts, contractStats } = useContracts(searchParams, "client");
+
+  const overviewCards = [
+    {
+      id: 0,
+      title: t("common.labels.completedContracts"),
+      total: contractStats?.completed_contracts_count ?? "__",
+      subTitle: t("contractsList.stats.completed.subTitle"),
+    },
+    {
+      id: 2,
+      title: t("common.labels.activeContracts"),
+      total: contractStats?.active_contracts_count ?? "__",
+      subTitle: t("contractsList.stats.active.subTitle"),
+    },
+    {
+      id: 1,
+      title: t("contractsList.stats.spending.title"),
+      total: formatMoney(contractStats?.total_spent) ?? "__",
+      subTitle: t("contractsList.stats.spending.subTitle"),
+    },
+    {
+      id: 3,
+      title: t("contractsList.stats.escrow.title"),
+      total: formatMoney(contractStats?.total_in_escrow) ?? "__",
+      subTitle: t("contractsList.stats.escrow.subTitle"),
+    },
+  ];
+
   // * status values
   const statusValues = ["pending", "active", "completed", "cancelled"];
 
