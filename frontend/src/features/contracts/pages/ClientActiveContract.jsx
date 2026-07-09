@@ -1,6 +1,6 @@
-import { useEffect, useMemo, useState } from "react";
+import { useState } from "react";
 import styles from "../styles/ClientActiveContract.module.css";
-import { NavLink, useNavigate, useParams } from "react-router-dom";
+import { NavLink, useParams } from "react-router-dom";
 import ClientActiveContractHeader from "../components/ClientActiveContractHeader";
 import { useAuth } from "../../../context/AuthContext";
 import { FiArrowLeft } from "react-icons/fi";
@@ -12,141 +12,50 @@ import CreatedDeliverableCollapse from "../components/CreatedDeliverableCollapse
 import SetUpContractFinalStep from "../components/SetUpContractFinalStep";
 import SubmitSetupModal from "../components/modals/SubmitSetupModal";
 import { useTranslation } from "react-i18next";
-import { contractApi } from "../../../api/contracts/contractApi";
+import useContractSetUpInfo from "../hooks/useContractSetUpInfo";
+import useContractSetUpForm from "../hooks/useContractSetUpForm";
+import useSubmitContractSetUp from "../hooks/useSubmitContractSetUp";
 
 function ClientActiveContract() {
   const { t } = useTranslation();
-  const navigate = useNavigate();
-  const [setupInfo, setSetupInfo] = useState(null);
-  const [isLoading, setIsLoading] = useState(true);
-  const [success, setSuccess] = useState(false);
-  const [showModal, setShowModal] = useState(false);
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [setUpContractFormData, setSetUpContractFormData] = useState({
-    final_price: "",
-    final_deadline: "",
-    description: "",
-    contract_pdf: null,
-  });
-
-  const [deliverables, setDeliverables] = useState([]);
-
-  const [deliverableForm, setDeliverableForm] = useState({
-    title: "",
-    description: "",
-    amount: "",
-  });
-
-  const [step, setStep] = useState(0);
-  const { user } = useAuth();
   const { contractId } = useParams();
+  const { isLoading, success, setupInfo, freelancerInfo, contractInfo } =
+    useContractSetUpInfo(contractId);
+  const {
+    step,
+    nextStep,
+    previousStep,
 
-  useEffect(() => {
-    const loadSetupInfo = async () => {
-      setIsLoading(true);
-      const result = await contractApi.getSetUpContractInfo(contractId);
-      if (result.success) {
-        setSetupInfo(result.data ?? null);
-        setIsLoading(false);
-        setSuccess(result.success);
-        return;
-      }
+    setUpContractFormData,
+    setSetUpContractFormData,
 
-      setIsLoading(false);
-      setSuccess(result.success);
-    };
-    loadSetupInfo();
-  }, [contractId]);
+    deliverables,
+    setDeliverables,
 
-  const freelancerInfo = useMemo(() => {
-    const freelancer = setupInfo?.proposal?.freelancer;
-    return {
-      id: freelancer?.id,
-      user_id: freelancer?.user_id,
-      title: freelancer?.title,
-      first_name: freelancer?.user?.first_name,
-      last_name: freelancer?.user.last_name,
-    };
-  }, [setupInfo]);
+    deliverableForm,
+    setDeliverableForm,
 
-  const contractInfo = useMemo(() => {
-    return {
-      projectTitle: setupInfo?.proposal?.project?.title,
-      contractStatus: setupInfo?.status,
-    };
-  }, [setupInfo]);
+    handleAddDeliverable,
+    handleRemoveDeliverable,
 
-  const nextStep = () => {
-    console.log(setUpContractFormData);
+    totalDeliverables,
+    totalDeliverablesAmount,
+  } = useContractSetUpForm();
 
-    setStep((currentStep) => currentStep + 1);
-  };
-
-  const previousStep = () => {
-    setStep((currentStep) => currentStep - 1);
-  };
-
-  // * add deliverable to deliverables list
-  const handleAddDeliverable = (form) => {
-    setDeliverables((prev) => [...prev, form]);
-    setDeliverableForm({
-      title: "",
-      description: "",
-      amount: "",
-    });
-  };
-
-  // * remove deliverable
-  const handleRemoveDeliverable = (index) => {
-    const filtredDeliverables = deliverables.filter((_, i) => i !== index);
-    setDeliverables(filtredDeliverables);
-  };
-
-  const role = user?.role;
-  const totalDeliverables = deliverables.length;
-  const totalDeliverablesAmount = deliverables.reduce(
-    (acc, cur) => acc + +cur.amount,
-    0,
+  const { isSubmitting, handleSubmitContractSetUp } = useSubmitContractSetUp(
+    contractId,
+    setUpContractFormData,
+    deliverables,
   );
 
-  // * show and close send modal functions
+  const [showModal, setShowModal] = useState(false);
+
+  const { user } = useAuth();
+
+  const role = user?.role;
+
   const onShowSendModal = () => setShowModal(true);
   const onCloseSendModal = () => setShowModal(false);
-
-  // * handle send activate contract data to backend
-  const handleSubmitContractSetUp = async () => {
-    if (isSubmitting) return;
-    setIsSubmitting(true);
-
-    const payload = new FormData();
-
-    payload.append("final_price", setUpContractFormData.final_price);
-    payload.append("final_deadline", setUpContractFormData.final_deadline);
-    payload.append("description", setUpContractFormData.description);
-    payload.append("contract_pdf", setUpContractFormData.contract_pdf);
-    payload.append(
-      "deliverables",
-      JSON.stringify(
-        deliverables.map((deliverable, index) => ({
-          title: deliverable.title,
-          amount: Number(deliverable.amount),
-          description: deliverable.description,
-          position: index + 1,
-        })),
-      ),
-    );
-
-
-    const result = await contractApi.setUpContract(contractId, payload);
-    setIsSubmitting(false);
-
-    if (!result.success) {
-      console.log(result);
-      return;
-    }
-    navigate(`/dashboard/client/contracts/${contractId}`);
-    return;
-  };
 
   if (isLoading) return <div>{t("ui.states.loading")}...</div>;
 
@@ -155,7 +64,9 @@ function ClientActiveContract() {
       <div className={styles.contractSetUpPage}>
         <div className={`${styles.stateCard} ${styles.errorState}`}>
           <p className={styles.stateKicker}>{t("ui.states.pageUnavailable")}</p>
-          <h1 className={styles.stateMessage}>{t("ui.states.pageUnavailableTitle")}</h1>
+          <h1 className={styles.stateMessage}>
+            {t("ui.states.pageUnavailableTitle")}
+          </h1>
           <NavLink
             to={`/dashboard/client/contracts`}
             className={styles.backLink}
