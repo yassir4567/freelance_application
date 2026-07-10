@@ -1,5 +1,5 @@
-import { createContext, useContext, useEffect, useState } from "react";
-import { authApi } from "../api/auth/authApi";
+import React, { createContext, useContext, useEffect, useState } from "react";
+import { authApi } from "../api/auth/authApi.ts";
 
 const AuthContext = createContext(null);
 
@@ -18,7 +18,7 @@ const AuthProvider = ({ children }) => {
       }
 
       const result = await authApi.me();
-      
+
       if (!result.success) {
         localStorage.removeItem("token");
         setUser(null);
@@ -71,7 +71,6 @@ const AuthProvider = ({ children }) => {
     }
 
     console.log(result.data);
-    
 
     const { token, user, profile } = result.data;
     localStorage.setItem("token", token);
