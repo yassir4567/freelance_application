@@ -15,16 +15,13 @@ import { useTranslation } from "react-i18next";
 import { dashboardApi } from "../../../api/dashboard/dashboardApi";
 
 function ClientDashboardPage() {
-  const {t} = useTranslation()
+  const { t } = useTranslation();
   const [data, setData] = useState([]);
   const { user, profileCompletionState } = useAuth();
-
 
   useEffect(() => {
     const loadStats = async () => {
       const result = await dashboardApi.getDashboardData("client");
-      console.log(result);
-      
       setData(result.data);
     };
     loadStats();
@@ -102,7 +99,9 @@ function ClientDashboardPage() {
       </div>
 
       <div className={styles.recentProjects}>
-        <h1 className={styles.recentTitle}>{t("dashboard.client.table.title")}</h1>
+        <h1 className={styles.recentTitle}>
+          {t("dashboard.client.table.title")}
+        </h1>
         <RecentProjectsTable projects={data?.recent_projects} />
       </div>
     </div>

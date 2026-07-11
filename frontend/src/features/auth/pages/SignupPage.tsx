@@ -1,14 +1,17 @@
 import { Link, Navigate, useNavigate } from "react-router-dom";
 import styles from "../styles/Signup.module.css";
-import { useState } from "react";
+import { useState, type ChangeEvent, type SubmitEvent } from "react";
+import type { RegisterCredentials, Role } from "../../../types/user.types.ts";
 import { useAuth } from "../../../context/AuthContext";
+
+type FormErrorsType = Partial<Record<keyof RegisterCredentials, string>>;
 
 function SignupPage() {
   const { user, register } = useAuth();
 
   const navigate = useNavigate();
 
-  const [form, setForm] = useState({
+  const [form, setForm] = useState<RegisterCredentials>({
     first_name: "",
     last_name: "",
     email: "",
@@ -17,8 +20,8 @@ function SignupPage() {
     role: "",
   });
 
-  const [errors, setErrors] = useState({});
-  const [generalError, setGeneralError] = useState();
+  const [errors, setErrors] = useState<FormErrorsType>({});
+  const [generalError, setGeneralError] = useState<string>("");
 
   // * if user already logged in redirect him to his dashboard
   if (user) {
@@ -31,15 +34,20 @@ function SignupPage() {
     }
   }
 
-  const handleInputsChange = (e) => {
+  const handleInputsChange = (e: ChangeEvent<HTMLInputElement>): void => {
     const { name, value } = e.target;
-    setForm((prev) => ({ ...prev, [name]: value }));
+    const field = name as keyof RegisterCredentials;
+
+    setForm((prev) => ({ ...prev, [field]: value }));
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (
+    e: SubmitEvent<HTMLFormElement>,
+  ): Promise<void> => {
     e.preventDefault();
+    setGeneralError("");
     setErrors({});
-    let newErrors = {};
+    const newErrors: FormErrorsType = {};
     if (form.first_name.trim().length > 25) {
       newErrors.first_name = "First name must be < 25 letter";
     }
@@ -65,9 +73,9 @@ function SignupPage() {
     }
 
     const result = await register(form);
-    
+
     if (!result.success) {
-      setGeneralError(result.message);
+      setGeneralError(result.message || "Register failed");
       return;
     }
 
@@ -101,7 +109,6 @@ function SignupPage() {
               <p className={styles.error}>{errors.first_name}</p>
             )}
           </div>
-
           <div>
             <label className={styles.label}>Last Name</label>
             <input
@@ -126,7 +133,7 @@ function SignupPage() {
             name="email"
             value={form.email}
             onChange={handleInputsChange}
-            className={`${styles.input}`}
+            className={styles.input}
             placeholder="Enter your email"
             required
           />
@@ -176,6 +183,7 @@ function SignupPage() {
               id="freelancer"
               name="role"
               value="freelancer"
+              checked={form.role === "freelancer"}
               onChange={handleInputsChange}
               className={styles.input}
               required
@@ -191,6 +199,7 @@ function SignupPage() {
               id="client"
               name="role"
               value="client"
+              checked={form.role === "client"}
               onChange={handleInputsChange}
               className={styles.input}
               required
@@ -206,12 +215,14 @@ function SignupPage() {
           )}
         </div>
 
-        <button className={styles.signup}>Sign up</button>
+        <button type="submit" className={styles.signup}>
+          Sign up
+        </button>
 
         <p className={styles.auth_switch}>
           <span>Already have an account ?</span>
-          <Link to="/login">
-            <button className={styles.login}>log in</button>
+          <Link to="/login" className={styles.login}>
+            log in
           </Link>
         </p>
       </form>

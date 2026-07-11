@@ -1,6 +1,6 @@
 const BASE_URL: string = "http://127.0.0.1:8000/api";
 
-type ValidationErrors = Record<string, string[]>;
+export type ValidationErrors = Record<string, string[]>;
 
 type ApiSuccess<T> = {
   success: true;
@@ -32,7 +32,6 @@ async function request<T = unknown>(
   endpoint: string,
   options: RequestInit = {},
 ): Promise<ApiResponse<T>> {
-  
   const token = getToken();
 
   const headers = new Headers(options.headers);

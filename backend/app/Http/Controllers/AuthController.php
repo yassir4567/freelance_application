@@ -13,7 +13,6 @@ use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
-    //
     public function login(LoginUserRequest $request)
     {
         $credentials = $request->validated();
@@ -31,7 +30,13 @@ class AuthController extends Controller
         return response()->json([
             'message' => 'Logged in successfully',
             'data' => [
-                'user' => $user,
+                'user' => [
+                    'id' => $user->id,
+                    'first_name' => $user->first_name,
+                    'last_name' => $user->last_name,
+                    'email' => $user->email,
+                    'role' => $user->role,
+                ],
                 'profile' => $user->getProfileCompletion(),
                 'token' => $token,
             ],
@@ -41,7 +46,6 @@ class AuthController extends Controller
     public function register(RegisterUserRequest $request)
     {
         $validated = $request->validated();
-
 
         $result = DB::transaction(function () use ($validated) {
             $user = User::create([
@@ -66,7 +70,6 @@ class AuthController extends Controller
             ];
         });
 
-
         return response()->json(
             [
                 'message' => 'User created successfully',
@@ -88,7 +91,6 @@ class AuthController extends Controller
 
     public function logout(Request $request)
     {
-
         $token = $request->user()->currentAccessToken();
         $token->delete();
         return response()->json(['message' => 'Logged out successefuly']);
@@ -96,7 +98,6 @@ class AuthController extends Controller
 
     public function me(Request $request)
     {
-
         $user = $request->user();
 
         if ($user->role === 'freelancer') {
@@ -107,9 +108,13 @@ class AuthController extends Controller
             'success' => true,
             'data' => [
                 'user' => [
-                    ...$user->toArray(),
+                    // ...$user->toArray(),
+                    'id' => $user->id,
+                    'first_name' => $user->first_name,
+                    'last_name' => $user->last_name,
+                    'email' => $user->email,
+                    'role' => $user->role,
                     'avatar_url' => $user->avatar ? asset("storage/" . $user->avatar) : null,
-
                 ],
                 'profile' => $user->getProfileCompletion()
             ]

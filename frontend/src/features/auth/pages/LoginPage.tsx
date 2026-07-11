@@ -1,18 +1,18 @@
 import { Link, Navigate, useNavigate } from "react-router-dom";
 import styles from "../styles/Login.module.css";
 import { useAuth } from "../../../context/AuthContext";
-import { useEffect, useState } from "react";
+import { useState, type SubmitEvent } from "react";
+import type { LoginCredentials } from "../../../types/user.types.ts";
 
 function LoginPage() {
   const navigate = useNavigate();
   const { user, login } = useAuth();
-  const [form, setForm] = useState({
+  const [form, setForm] = useState<LoginCredentials>({
     email: "",
     password: "",
   });
-  const [error, setError] = useState("");
+  const [error, setError] = useState<string>("");
 
-  
   // * if user already logged in redirect him to his dashboard
   if (user) {
     if (user.role === "freelancer") {
@@ -24,13 +24,15 @@ function LoginPage() {
     }
   }
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (
+    e: SubmitEvent<HTMLFormElement>,
+  ): Promise<void> => {
     e.preventDefault();
 
     const result = await login(form);
 
     if (!result.success) {
-      setError(result.message);
+      setError(result.message || "Login failed");
       return;
     }
 
@@ -72,8 +74,8 @@ function LoginPage() {
         <p className={styles.auth_switch}>
           <span>Don’t have an account ?</span>
 
-          <Link to="/signup">
-            <button className={styles.signup}>signup</button>
+          <Link to="/signup" className={styles.signup}>
+            Sign up
           </Link>
         </p>
       </form>
