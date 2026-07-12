@@ -39,18 +39,34 @@ class FreelancerDashboardController extends Controller
             ->whereHas('proposal', function ($q) use ($freelancer) {
                 $q->where('freelancer_id', $freelancer->id);
             })->with([
-                'proposal:id,project_id,freelancer_id' ,
-                'proposal.project:id,client_id,title',
-                'proposal.project.client:id,first_name,last_name,avatar',
-            ])->latest()->take(3)->get();
+                    'proposal:id,project_id,freelancer_id',
+                    'proposal.project:id,client_id,title',
+                    'proposal.project.client:id,first_name,last_name,avatar',
+                ])->latest()->take(3)->get();
 
+        $processedActiveContracts = $active_contracts->map(function ($contract) {
+            $project = $contract->proposal->project;
+            $client = $project->client;
+            return [
+                'id' => $contract->id,
+                'title' => $project->title,
+                'client' => [
+                    'id' => $client->id,
+                    'first_name' => $client->first_name,
+                    'last_name' => $client->last_name,
+                    'avatar' => $client->avatar,
+                ],
+                'final_price' => $contract->final_price,
+                'final_deadline' => $contract->final_deadline
+            ];
+        });
 
         return response()->json([
             'success' => true,
             'message' => 'Stats retrieved successfully',
             'data' => [
                 'stats' => $stats,
-                'active_contracts' => $active_contracts
+                'active_contracts' => $processedActiveContracts
             ]
         ]);
     }

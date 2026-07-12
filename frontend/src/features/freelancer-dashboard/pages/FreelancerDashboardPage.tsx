@@ -4,39 +4,62 @@ import FreelancerActiveContracts from "../components/FreelancerActiveContracts";
 import styles from "../styles/FreelancerDashboardPage.module.css";
 import { AiOutlineProject, AiOutlineDeliveredProcedure } from "react-icons/ai";
 import { VscGitPullRequestDone } from "react-icons/vsc";
-import profile from "../../../assets/images/profile.png";
-import { NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useAuth } from "../../../context/AuthContext";
 import CompleteProfileAlert from "../../../shared/common/CompleteProfileAlert";
 import { useTranslation } from "react-i18next";
 import { dashboardApi } from "../../../api/dashboard/dashboardApi";
+import type { FreelancerDashboard } from "../../../types/dashboard.types";
 
 function FreelancerDashboardPage() {
-  const [data, setData] = useState([]);
-  const { user, isLoading, profileCompletionState } = useAuth();
+  const [data, setData] = useState<FreelancerDashboard | null>(null);
+  const { user, profileCompletionState } = useAuth();
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string>("");
   const { t } = useTranslation();
   useEffect(() => {
     const loadStats = async () => {
-      const result = await dashboardApi.getDashboardData("freelancer");
+      setIsLoading(true);
+      const result =
+        await dashboardApi.getDashboardData<FreelancerDashboard>("freelancer");
+
+      setIsLoading(false);
+      if (!result.success) {
+        setError(result.message || "Error in fetching dashboard data");
+        return;
+      }
+
       setData(result.data);
     };
     loadStats();
   }, []);
+
+  if (isLoading) {
+    return <p>Loading ...</p>;
+  }
+
+  if (error !== "") {
+    return <p>{error}</p>;
+  }
+
+  if (!user || !data || !profileCompletionState) {
+    return null;
+  }
 
   const overview_cards = [
     {
       id: 0,
       title: t(`dashboard.${user.role}.cards.activeProjects.title`),
       description: t(`dashboard.${user.role}.cards.activeProjects.subTitle`),
-      total: data?.stats?.active_projects || 0,
+      total: data.stats.active_projects || 0,
       icon: <AiOutlineProject />,
     },
     {
       id: 1,
       title: t(`dashboard.${user.role}.cards.acceptedProposals.title`),
       description: t(`dashboard.${user.role}.cards.acceptedProposals.subTitle`),
-      total: data?.stats?.accepted_proposals || 0,
+      total: data.stats.accepted_proposals || 0,
       icon: <VscGitPullRequestDone />,
     },
     {
@@ -45,7 +68,7 @@ function FreelancerDashboardPage() {
       description: t(
         `dashboard.${user.role}.cards.completedContracts.subTitle`,
       ),
-      total: data?.stats?.completed_contracts || 0,
+      total: data.stats.completed_contracts || 0,
       icon: <AiOutlineDeliveredProcedure />,
     },
   ];
@@ -72,7 +95,7 @@ function FreelancerDashboardPage() {
             value={card.total}
             description={card.description}
             icon={card.icon}
-            className={styles.overview_card}
+            className={styles.overview_card ?? ""}
           />
         ))}
       </div>
@@ -82,11 +105,11 @@ function FreelancerDashboardPage() {
           <h3 className={styles.title}>
             {t("dashboard.freelancer.table.title")}
           </h3>
-          <FreelancerActiveContracts contracts={data?.active_contracts} />
+          <FreelancerActiveContracts contracts={data.active_contracts} />
           <div className={styles.allContractsLink}>
-            <NavLink className={styles.link}>
+            <Link to="/dashboard/freelancer/contracts" className={styles.link}>
               {t("dashboard.freelancer.table.action")}
-            </NavLink>
+            </Link>
           </div>
         </div>
       </div>

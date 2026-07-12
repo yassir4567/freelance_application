@@ -1,12 +1,19 @@
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import styles from "../styles/FreelancerActiveContracts.module.css";
 import { formatDate } from "../../../utils/helpers";
 import avatar from "../../../assets/images/profile.png";
 import { useTranslation } from "react-i18next";
+import type { FreelancerDashboardActiveContracts } from "../../../types/dashboard.types";
 
-function FreelancerActiveContracts({ contracts }) {
+type FreelancerActiveContractsProps = {
+  contracts: FreelancerDashboardActiveContracts[];
+};
+
+function FreelancerActiveContracts({
+  contracts,
+}: FreelancerActiveContractsProps) {
   const { t } = useTranslation();
-  const hasContracts = contracts?.length > 0;
+  const hasContracts = contracts.length > 0;
   return (
     <table className={styles.table}>
       <thead>
@@ -25,12 +32,8 @@ function FreelancerActiveContracts({ contracts }) {
               id,
               final_price,
               final_deadline,
-              proposal: {
-                project: {
-                  title,
-                  client: { first_name, last_name },
-                },
-              },
+              title,
+              client: { first_name, last_name },
             } = contract;
 
             return (
@@ -49,16 +52,16 @@ function FreelancerActiveContracts({ contracts }) {
                   {formatDate(final_deadline)}
                 </td>
                 <td>
-                  <NavLink to={`contracts/${id}`} className={styles.link}>
+                  <Link to={`contracts/${id}`} className={styles.link}>
                     View details
-                  </NavLink>
+                  </Link>
                 </td>
               </tr>
             );
           })
         ) : (
           <tr>
-            <td colSpan="5" className={styles.empty}>
+            <td colSpan={5} className={styles.empty}>
               You don't have active contracts yet
             </td>
           </tr>
