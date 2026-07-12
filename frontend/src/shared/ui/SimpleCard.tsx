@@ -1,11 +1,21 @@
+import type React from "react";
 import styles from "./SimpleCard.module.css";
+
+type SimpleCardProps = {
+  title?: string;
+  value?: string | number | null;
+  description?: string | null;
+  icon?: React.ReactNode;
+  className?: string;
+};
+
 function SimpleCard({
   title,
   value = null,
   description = null,
   icon,
   className = "",
-}) {
+}: SimpleCardProps) {
   return (
     <div className={`${className} ${styles.card}`}>
       {(icon || title) && (

@@ -11,40 +11,40 @@ function buildBody(data: unknown): Pick<RequestInit, "body"> {
 }
 
 const apiClient = {
-  get<TReponse = unknown>(endpoint: string): Promise<ApiResponse<TReponse>> {
-    return request<TReponse>(endpoint, {
+  get<TResponse = unknown>(endpoint: string): Promise<ApiResponse<TResponse>> {
+    return request<TResponse>(endpoint, {
       method: "GET",
     });
   },
-  post<TReponse = unknown, TBody = unknown>(
+  post<TResponse = unknown, TBody = unknown>(
     endpoint: string,
     data?: TBody | FormData,
   ) {
-    return request<TReponse>(endpoint, {
+    return request<TResponse>(endpoint, {
       method: "POST",
       ...buildBody(data),
     });
   },
-  put<TReponse = unknown, TBody = unknown>(
+  put<TResponse = unknown, TBody = unknown>(
     endpoint: string,
     data?: TBody | FormData,
   ) {
-    return request<TReponse>(endpoint, {
+    return request<TResponse>(endpoint, {
       method: "PUT",
       ...buildBody(data),
     });
   },
-  patch<TReponse = unknown, TBody = unknown>(
+  patch<TResponse = unknown, TBody = unknown>(
     endpoint: string,
     data = undefined,
   ) {
-    return request<TReponse>(endpoint, {
+    return request<TResponse>(endpoint, {
       method: "PATCH",
       ...buildBody(data),
     });
   },
-  delete<TReponse = unknown>(endpoint: string) {
-    return request<TReponse>(endpoint, {
+  delete<TResponse = unknown>(endpoint: string) {
+    return request<TResponse>(endpoint, {
       method: "DELETE",
     });
   },
