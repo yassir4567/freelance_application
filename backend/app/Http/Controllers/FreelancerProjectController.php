@@ -74,10 +74,37 @@ class FreelancerProjectController extends Controller
         }
 
         $projects = $query->get();
+
+
+        $processedProjects = $projects->map(function ($project) {
+
+            $skills = $project->skills->map(function ($skill) {
+                return [
+                    'id' => $skill->id,
+                    'name' => $skill->name
+                ];
+            });
+
+            return [
+                'id' => $project->id,
+                'category_id' => $project->category_id,
+                'title' => $project->title,
+                'description' => $project->description,
+                'budget' => $project->budget,
+                'status' => $project->status,
+                'experience_level' => $project->experience_level,
+                'duration' => $project->duration,
+                'created_at' => $project->created_at,
+                'proposals_count' => $project->proposals_count,
+                'category' => $project->category,
+                'skills' => $skills
+            ];
+        });
+
         return response()->json([
             'success' => true,
             'message' => 'Projects retrieved successfully',
-            'data' => $projects
+            'data' => $processedProjects
         ]);
     }
 

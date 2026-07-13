@@ -40,10 +40,22 @@ class ClientProjectController extends Controller
 
         $projects = $query->latest()->get();
 
+        $processedProjects = $projects->map(function ($project) {
+
+            return [
+                'id' => $project->id,
+                'title' => $project->title,
+                'budget' => $project->budget,
+                'status' => $project->status,
+                'created_at' => $project->created_at,
+                'proposals_count' => $project->proposals_count
+            ];
+        });
+
         return response()->json([
             'success' => true,
             'message' => 'Projects retrieved successfully',
-            'data' => $projects
+            'data' => $processedProjects
         ]);
     }
 

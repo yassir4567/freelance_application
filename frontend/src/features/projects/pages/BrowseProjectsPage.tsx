@@ -18,9 +18,24 @@ function BrowseProjectsPage() {
     handleInputsChange,
   } = useBrowseProjectsFilters();
 
-  const { projects } = useProjects(searchParams, "freelancer");
+  const { projects, isLoading, error } = useProjects(
+    searchParams,
+    "freelancer",
+  );
 
   const { categories } = useCategories();
+
+  if (!projects) {
+    return null;
+  }
+
+  if (isLoading) {
+    return <p>Loading ...</p>;
+  }
+
+  if (error) {
+    return <p>{error}</p>;
+  }
 
   return (
     <div className={styles.findProjectPage}>

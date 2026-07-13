@@ -5,6 +5,7 @@ import FilterBox from "../../../shared/common/filters/FilterBox";
 import { useTranslation } from "react-i18next";
 import useProjects from "../hooks/useProjects";
 import useClientProjectsFilters from "../hooks/useClientProjectsFilters";
+import type { ProjectStatus } from "../../../types/project.types";
 
 function ClientProjectsPage() {
   const { t } = useTranslation();
@@ -12,15 +13,27 @@ function ClientProjectsPage() {
   const { searchParams, inputValues, handleInputsChange, handleClearFilters } =
     useClientProjectsFilters();
 
-  const { projects } = useProjects(searchParams, "client");
+  const { projects, isLoading, error } = useProjects(searchParams, "client");
 
-  const statusValues = [
+  const statusValues: ProjectStatus[] = [
     "open",
     "in_progress",
     "in_review",
     "completed",
     "cancelled",
   ];
+
+  if (!projects) {
+    return null;
+  }
+
+  if (isLoading) {
+    return <p>Loading ...</p>;
+  }
+
+  if (error) {
+    return <p>{error}</p>;
+  }
 
   return (
     <div className={styles.projectsPage}>
