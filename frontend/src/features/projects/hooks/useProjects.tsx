@@ -1,34 +1,37 @@
 import { useEffect, useState } from "react";
 import { projectApi } from "../../../api/projects/projectApi";
-import type {
-  BrowseProjects,
-  ClientProjects,
-} from "../../../types/project.types";
 
-function useProjects(searchParams: URLSearchParams, role: string) {
-  const [projects, setProjects] = useState<BrowseProjects[] | ClientProjects[] | null>(
-    [],
-  );
+export type ProjectsHookType<TProjects> = {
+  projects: TProjects[] | null;
+  isLoading: boolean;
+  error: string;
+};
+
+function useProjects<TProjects>(
+  searchParams: URLSearchParams,
+  role: string,
+): ProjectsHookType<TProjects> {
+  const [projects, setProjects] = useState<TProjects[] | null>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [error, setError] = useState<string>("");
 
-  useEffect(() => {
-    const loadProjects = async () => {
+  useEffect((): void => {
+    const loadProjects = async (): Promise<void> => {
       setError("");
       setIsLoading(true);
       let result = null;
       if (role === "freelancer") {
-        result = await projectApi.getBrowseProjects<BrowseProjects[]>(
+        result = await projectApi.getBrowseProjects<TProjects[]>(
           searchParams.toString(),
         );
       } else if (role === "client") {
-        result = await projectApi.getClientProjects<ClientProjects[]>(
+        result = await projectApi.getClientProjects<TProjects[]>(
           searchParams.toString(),
         );
       }
 
       if (!result) {
-        return;
+        return;        
       }
 
       if (!result.success) {

@@ -2,6 +2,26 @@ import { useSearchParams } from "react-router-dom";
 import { emptyText } from "../../../utils/helpers";
 import { useEffect, useState } from "react";
 
+export type BrowseProjectsObjectFilters = {
+  search: string;
+  price: string;
+  experience: string;
+  size: string;
+  nbr_proposals: string;
+  sort: string;
+  category_id: string;
+};
+
+export type BrowseProjectsFilters = {
+  filters: BrowseProjectsObjectFilters;
+  searchParams: URLSearchParams;
+  handleApplyFilters: () => Promise<void>;
+  handleClearAllFilters: () => void;
+  handleInputsChange: (
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
+  ) => void;
+};
+
 const initFilters = {
   search: "",
   price: "",
@@ -12,17 +32,18 @@ const initFilters = {
   category_id: "",
 };
 
-function useBrowseProjectsFilters() {
+function useBrowseProjectsFilters(): BrowseProjectsFilters {
   const [searchParams, setSearchParams] = useSearchParams();
-  const [filters, setFilters] = useState(initFilters);
+  const [filters, setFilters] =
+    useState<BrowseProjectsObjectFilters>(initFilters);
 
   // * get filters from url query params
-  useEffect(() => {
-    let nbr_proposals = "";
-    let price = "";
+  useEffect((): void => {
+    let nbr_proposals: string = "";
+    let price: string = "";
 
-    let nbrProposalsMin = searchParams.get("nbr_proposals_min") || "";
-    let nbrProposalsMax = searchParams.get("nbr_proposals_max") || "";
+    let nbrProposalsMin: string = searchParams.get("nbr_proposals_min") || "";
+    let nbrProposalsMax: string = searchParams.get("nbr_proposals_max") || "";
 
     if (nbrProposalsMin && nbrProposalsMax) {
       nbr_proposals = `${nbrProposalsMin}-${nbrProposalsMax}`;
@@ -30,8 +51,8 @@ function useBrowseProjectsFilters() {
       nbr_proposals = `${nbrProposalsMin}+`;
     }
 
-    let budgetMin = searchParams.get("budget_min") || "";
-    let budgetMax = searchParams.get("budget_max") || "";
+    let budgetMin: string = searchParams.get("budget_min") || "";
+    let budgetMax: string = searchParams.get("budget_max") || "";
 
     if (budgetMin && budgetMax) {
       price = `${budgetMin}-${budgetMax}`;
@@ -50,13 +71,20 @@ function useBrowseProjectsFilters() {
     });
   }, []);
 
-  const handleInputsChange = (e) => {
+  const handleInputsChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
+  ): void => {
     const { name, value } = e.target;
 
-    setFilters((prev) => ({ ...prev, [name]: value }));
+    setFilters(
+      (prev: BrowseProjectsObjectFilters): BrowseProjectsObjectFilters => ({
+        ...prev,
+        [name]: value,
+      }),
+    );
   };
 
-  const handleApplyFilters = async () => {
+  const handleApplyFilters = async (): Promise<void> => {
     const params = new URLSearchParams();
     if (!emptyText(filters.search)) {
       params.set("search", filters.search);
@@ -76,8 +104,8 @@ function useBrowseProjectsFilters() {
     if (!emptyText(filters.nbr_proposals)) {
       if (filters.nbr_proposals.includes("-")) {
         let [min, max] = filters.nbr_proposals.split("-");
-        params.set("nbr_proposals_min", min);
-        params.set("nbr_proposals_max", max);
+        if (min) params.set("nbr_proposals_min", min);
+        if (max) params.set("nbr_proposals_max", max);
       } else if (filters.nbr_proposals.includes("+")) {
         let min = filters.nbr_proposals.replace("+", "");
         params.set("nbr_proposals_min", min);
@@ -86,8 +114,8 @@ function useBrowseProjectsFilters() {
     if (!emptyText(filters.price)) {
       if (filters.price.includes("-")) {
         let [min, max] = filters.price.split("-");
-        params.set("budget_min", min);
-        params.set("budget_max", max);
+        if (min) params.set("budget_min", min);
+        if (max) params.set("budget_max", max);
       } else if (filters.price.includes("+")) {
         let min = filters.price.replace("+", "");
         params.set("budget_min", min);
@@ -97,7 +125,7 @@ function useBrowseProjectsFilters() {
   };
 
   // * clear all filters
-  const handleClearAllFilters = () => {
+  const handleClearAllFilters = (): void => {
     setFilters(initFilters);
     setSearchParams({});
   };
@@ -107,7 +135,7 @@ function useBrowseProjectsFilters() {
     searchParams,
     handleApplyFilters,
     handleClearAllFilters,
-    handleInputsChange
+    handleInputsChange,
   };
 }
 

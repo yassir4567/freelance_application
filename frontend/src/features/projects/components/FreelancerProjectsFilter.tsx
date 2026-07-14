@@ -1,15 +1,24 @@
 import { useTranslation } from "react-i18next";
 import styles from "../styles/FreelancerProjectsFilter.module.css";
+import type { BrowseProjectsObjectFilters } from "../hooks/useBrowseProjectsFilters";
 
-function FreelancerProjectsFilter({ filters, onChange }) {
+type FreelancerProjectsFilterProps = {
+  filters: BrowseProjectsObjectFilters;
+  onChange: (
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
+  ) => void;
+};
+
+function FreelancerProjectsFilter({
+  filters,
+  onChange,
+}: FreelancerProjectsFilterProps) {
   const { t } = useTranslation();
 
   return (
     <div className={styles.SideBarFilters}>
       <div className={styles.filterBox}>
-        <label className={styles.label}>
-          {t("common.labels.price")}
-        </label>
+        <label className={styles.label}>{t("common.labels.price")}</label>
         <div className={styles.filterItems}>
           <div className={styles.filterItem}>
             <input
@@ -114,9 +123,7 @@ function FreelancerProjectsFilter({ filters, onChange }) {
       </div>
 
       <div className={styles.filterBox}>
-        <label className={styles.label}>
-          {t("common.labels.projectSize")}
-        </label>
+        <label className={styles.label}>{t("common.labels.projectSize")}</label>
         <div className={styles.filterItems}>
           <div className={styles.filterItem}>
             <input
@@ -127,9 +134,7 @@ function FreelancerProjectsFilter({ filters, onChange }) {
               checked={filters.size === "small"}
               onChange={onChange}
             />
-            <label htmlFor="small">
-              {t("common.options.size.small")}
-            </label>
+            <label htmlFor="small">{t("common.options.size.small")}</label>
           </div>
           <div className={styles.filterItem}>
             <input
@@ -140,9 +145,7 @@ function FreelancerProjectsFilter({ filters, onChange }) {
               checked={filters.size === "medium"}
               onChange={onChange}
             />
-            <label htmlFor="medium">
-              {t("common.options.size.medium")}
-            </label>
+            <label htmlFor="medium">{t("common.options.size.medium")}</label>
           </div>
           <div className={styles.filterItem}>
             <input
@@ -153,9 +156,7 @@ function FreelancerProjectsFilter({ filters, onChange }) {
               checked={filters.size === "large"}
               onChange={onChange}
             />
-            <label htmlFor="large">
-              {t("common.options.size.large")}
-            </label>
+            <label htmlFor="large">{t("common.options.size.large")}</label>
           </div>
         </div>
       </div>
@@ -214,7 +215,7 @@ function FreelancerProjectsFilter({ filters, onChange }) {
               onChange={onChange}
             />
             <label htmlFor="25-50">
-               {t("browseProjects.filters.proposals.options.25to50")}
+              {t("browseProjects.filters.proposals.options.25to50")}
             </label>
           </div>
           <div className={styles.filterItem}>

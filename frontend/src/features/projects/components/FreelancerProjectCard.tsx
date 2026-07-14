@@ -2,8 +2,13 @@ import { NavLink } from "react-router-dom";
 import { formatDate } from "../../../utils/helpers";
 import styles from "../styles/FreelancerProjectCard.module.css";
 import { useTranslation } from "react-i18next";
+import type { BrowseProject } from "../../../types/project.types";
 
-function FreelancerProjectCard({ project }) {
+type FreelancerProjectCardProps = {
+  project: BrowseProject;
+};
+
+function FreelancerProjectCard({ project }: FreelancerProjectCardProps) {
   const { t } = useTranslation();
   let shortedDescription;
 
@@ -18,6 +23,7 @@ function FreelancerProjectCard({ project }) {
     shortedDescription = project.description;
   }
 
+  
   return (
     <div className={styles.projectCard}>
       <div className={styles.cardHeader}>
@@ -28,7 +34,10 @@ function FreelancerProjectCard({ project }) {
           <h2 className={styles.title}>{project.title}</h2>
         </div>
         <div className={styles.detailBtn}>
-          <NavLink to={`../projects/${project.id}`} className={styles.btn}>
+          <NavLink
+            to={`../projects/${project.id}`}
+            className={styles.btn ?? ""}
+          >
             {t("common.actions.viewDetail")}
           </NavLink>
         </div>

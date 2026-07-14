@@ -92,6 +92,7 @@ class FreelancerProjectController extends Controller
                 'description' => $project->description,
                 'budget' => $project->budget,
                 'status' => $project->status,
+                'size' => $project->size,
                 'experience_level' => $project->experience_level,
                 'duration' => $project->duration,
                 'created_at' => $project->created_at,

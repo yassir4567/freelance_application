@@ -3,17 +3,27 @@ import { PiEmptyBold } from "react-icons/pi";
 import ClientProjectCard from "../components/ClientProjectCard";
 import FilterBox from "../../../shared/common/filters/FilterBox";
 import { useTranslation } from "react-i18next";
-import useProjects from "../hooks/useProjects";
-import useClientProjectsFilters from "../hooks/useClientProjectsFilters";
-import type { ProjectStatus } from "../../../types/project.types";
+import useProjects, { type ProjectsHookType } from "../hooks/useProjects";
+import useClientProjectsFilters, {
+  type ClientProjectFilters,
+} from "../hooks/useClientProjectsFilters";
+import type {
+  ClientProject,
+  ProjectStatus,
+} from "../../../types/project.types";
 
 function ClientProjectsPage() {
   const { t } = useTranslation();
 
-  const { searchParams, inputValues, handleInputsChange, handleClearFilters } =
-    useClientProjectsFilters();
+  const {
+    searchParams,
+    inputValues,
+    handleInputsChange,
+    handleClearFilters,
+  }: ClientProjectFilters = useClientProjectsFilters();
 
-  const { projects, isLoading, error } = useProjects(searchParams, "client");
+  const { projects, isLoading, error }: ProjectsHookType<ClientProject> =
+    useProjects<ClientProject>(searchParams, "client");
 
   const statusValues: ProjectStatus[] = [
     "open",
@@ -34,7 +44,7 @@ function ClientProjectsPage() {
   if (error) {
     return <p>{error}</p>;
   }
-
+ 
   return (
     <div className={styles.projectsPage}>
       <h1 className="pageTitle">{t("clientProjects.title")}</h1>
@@ -49,8 +59,8 @@ function ClientProjectsPage() {
         </div>
 
         <div className={styles.projectsSection}>
-          {projects.length ? (
-            projects.map((project) => (
+          {projects.length > 0 ? (
+            projects.map((project: ClientProject) => (
               <ClientProjectCard key={project.id} project={project} />
             ))
           ) : (

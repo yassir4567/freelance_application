@@ -4,9 +4,14 @@ import FreelancerProjectsHeaderFilter from "../components/FreelancerProjectsHead
 import Search from "../../../shared/ui/Search";
 import styles from "../styles/BrowseProjectsPage.module.css";
 import { useTranslation } from "react-i18next";
-import useBrowseProjectsFilters from "../hooks/useBrowseProjectsFilters";
-import useProjects from "../hooks/useProjects";
-import useCategories from "../../../hooks/useCategories";
+import useBrowseProjectsFilters, {
+  type BrowseProjectsFilters,
+} from "../hooks/useBrowseProjectsFilters";
+import useProjects, { type ProjectsHookType } from "../hooks/useProjects";
+import useCategories, {
+  type CategoryHookType,
+} from "../../../hooks/useCategories";
+import type { BrowseProject } from "../../../types/project.types";
 
 function BrowseProjectsPage() {
   const { t } = useTranslation();
@@ -16,25 +21,37 @@ function BrowseProjectsPage() {
     handleApplyFilters,
     handleClearAllFilters,
     handleInputsChange,
-  } = useBrowseProjectsFilters();
+  }: BrowseProjectsFilters = useBrowseProjectsFilters();
 
-  const { projects, isLoading, error } = useProjects(
+  const {
+    projects,
+    isLoading: isProjectsLoading,
+    error: projectsError,
+  }: ProjectsHookType<BrowseProject> = useProjects<BrowseProject>(
     searchParams,
     "freelancer",
   );
 
-  const { categories } = useCategories();
+  const {
+    categories,
+    isLoading: isCategoriesLoading,
+    error: categoriesError,
+  }: CategoryHookType = useCategories();
 
-  if (!projects) {
+  if (!projects || !categories) {
     return null;
   }
 
-  if (isLoading) {
+  if (isProjectsLoading || isCategoriesLoading) {
     return <p>Loading ...</p>;
   }
 
-  if (error) {
-    return <p>{error}</p>;
+  if (projectsError) {
+    return <p>{projectsError}</p>;
+  }
+
+  if (categoriesError) {
+    return <p>{categoriesError}</p>;
   }
 
   return (
@@ -70,7 +87,7 @@ function BrowseProjectsPage() {
 
           <div className={styles.projects}>
             {projects.length > 0 ? (
-              projects.map((project) => (
+              projects.map((project: BrowseProject) => (
                 <FreelancerProjectCard key={project.id} project={project} />
               ))
             ) : (
