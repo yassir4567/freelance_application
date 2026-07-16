@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
 import { projectApi } from "../../../api/projects/projectApi";
+import type { Role } from "../../../types/user.types";
 
 export type ProjectHookType<TProject> = {
   project: TProject | null;
@@ -8,23 +8,31 @@ export type ProjectHookType<TProject> = {
   error: string;
 };
 
-function useProject<TProject>(projectId: string): ProjectHookType<TProject> {
+function useProject<TProject>(
+  projectId: string,
+  role: Omit<Role, "admin">,
+): ProjectHookType<TProject> {
   const [project, setProject] = useState<TProject | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [error, setError] = useState<string>("");
 
   useEffect((): void => {
     const loadProject = async (): Promise<void> => {
-      const response =
-        await projectApi.getBrowseProjectDetail<TProject>(projectId);
-
-      if (!response.success) {
-        setError(response.message || "Error in fetching project data");
-        return;
+      setError("");
+      setIsLoading(true);
+      let result = null;
+      if (role == "freelancer") {
+        result = await projectApi.getBrowseProjectDetail<TProject>(projectId);
+      } else {
+        result = await projectApi.getClientProjectDetail<TProject>(projectId);
       }
 
       setIsLoading(false);
-      setProject(response.data);
+      if (!result.success) {
+        setError(result.message || "Error in fetching project data");
+        return;
+      }
+      setProject(result.data);
     };
     loadProject();
   }, []);

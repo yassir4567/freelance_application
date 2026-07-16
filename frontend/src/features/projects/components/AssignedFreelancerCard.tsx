@@ -1,22 +1,34 @@
 import styles from "../styles/AssignedFreelancerCard.module.css";
 import profile from "../../../assets/images/profile.png";
-import { FiExternalLink, FiMessageSquare, FiTag, FiUserCheck } from "react-icons/fi";
+import {
+  FiExternalLink,
+  FiMessageSquare,
+  FiTag,
+  FiUserCheck,
+} from "react-icons/fi";
 import { useTranslation } from "react-i18next";
+import type { AssignedFreelancerType } from "../layouts/ProjectLayout";
 
-function AssignedFreelancerCard({ freelancer }) {
+type AssignedFreelancerCardProps = {
+  freelancer: AssignedFreelancerType;
+};
+
+function AssignedFreelancerCard({ freelancer }: AssignedFreelancerCardProps) {
   const { t } = useTranslation();
   const skills =
-    freelancer?.skills?.map((sk) => ({ id: sk.id, name: sk.name })) || [];
-  const fullName = freelancer?.user
-    ? `${freelancer.user.first_name} ${freelancer.user.last_name}`
-    : t("ui.fallbacks.assignedFreelancer");
+    freelancer.skills.map((sk) => ({ id: sk.id, name: sk.name })) || [];
+  const fullName = freelancer.first_name + " " + freelancer.last_name;
 
   return (
     <div className={styles.freelancerCard}>
       <div className={styles.freelancerCardHeader}>
         <div className={styles.profileBlock}>
           <div className={styles.avatarWrap}>
-            <img src={profile} alt="freelancer image" className={styles.avatar} />
+            <img
+              src={profile}
+              alt="freelancer image"
+              className={styles.avatar}
+            />
           </div>
           <div className={styles.freelancerInfo}>
             <span className={styles.assignedBadge}>
@@ -25,7 +37,7 @@ function AssignedFreelancerCard({ freelancer }) {
             </span>
             <h3 className={styles.freelancerFullName}>{fullName}</h3>
             <p className={styles.freelancerTitle}>
-              {freelancer?.title || "Freelancer"}
+              {freelancer.title || "Freelancer"}
             </p>
           </div>
         </div>
@@ -43,7 +55,7 @@ function AssignedFreelancerCard({ freelancer }) {
           <span className={styles.categoryIcon}>
             <FiTag />
           </span>
-          {freelancer?.category?.name || t("ui.fallbacks.noCategory")}
+          {freelancer.category.name || t("ui.fallbacks.noCategory")}
         </div>
         <div className={styles.freelancerSkills}>
           {skills.length > 0 ? (
@@ -53,7 +65,9 @@ function AssignedFreelancerCard({ freelancer }) {
               </div>
             ))
           ) : (
-            <div className={styles.emptySkills}>{t("ui.states.noSkillsListed")}</div>
+            <div className={styles.emptySkills}>
+              {t("ui.states.noSkillsListed")}
+            </div>
           )}
         </div>
       </div>

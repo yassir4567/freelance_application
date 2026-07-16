@@ -12,7 +12,6 @@ use Illuminate\Validation\Rule;
 class ClientProjectController extends Controller
 {
     //
-
     public function index(Request $request)
     {
         $client = $request->user();
@@ -82,7 +81,6 @@ class ClientProjectController extends Controller
         Gate::authorize('viewClientProject', $project);
 
 
-
         $freelancer = null;
         if (in_array($project->status, ['completed', 'in_progress'])) {
             $acceptedProposal = Proposal::where('project_id', $project->id)
@@ -96,13 +94,46 @@ class ClientProjectController extends Controller
             $freelancer = $acceptedProposal?->freelancer;
         }
 
-        $projectData = $project->toArray();
-        $projectData['freelancer'] = $freelancer;
+
+        $data = [
+            'project' => [
+                'id' => $project->id,
+                'title' => $project->title,
+                'description' => $project->description,
+                'budget' => $project->budget,
+                'status' => $project->status,
+                'size' => $project->size,
+                'experience_level' => $project->experience_level,
+                'duration' => $project->duration,
+                'created_at' => $project->created_at,
+                'proposals_count' => $project->proposals_count,
+                'category' => [
+                    'id' => $project->category->id,
+                    'name' => $project->category->name
+                ],
+                'skills' => $project->skills->map->only(['id', 'name'])
+            ]
+        ];
+
+        if ($freelancer) {
+            $data['freelancer'] = [
+                'id' => $freelancer->id,
+                'user_id' => $freelancer->user->id,
+                'first_name' => $freelancer->user->first_name,
+                'last_name' => $freelancer->user->last_name,
+                'title' => $freelancer->title,
+                'category' => [
+                    'id' => $freelancer->category->id,
+                    'name' => $freelancer->category->name,
+                ],
+                'skills' => $freelancer->skills->map->only(['id', 'name'])
+            ];
+        }
 
         return response()->json([
             'success' => true,
             'message' => 'Project retrieved successfully',
-            'data' => $projectData
+            'data' => $data
         ]);
     }
     public function store(StoreProjectRequest $request)

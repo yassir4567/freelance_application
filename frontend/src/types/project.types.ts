@@ -1,3 +1,6 @@
+import type { Category } from "./category.type";
+import type { Skill } from "./skill.type";
+
 export type ProjectStatus =
   | "open"
   | "in_progress"
@@ -15,27 +18,24 @@ type Duration =
   | "3_to_6_month"
   | "more_than_6_month";
 
-type CategoryOrSkills = {
-  id: number;
-  name: string;
-};
-
-type Project = {
+export type Project = {
   id: number;
   title: string;
   budget: string;
   status: ProjectStatus;
-  created_at: string;
-  proposals_count: number;
-};
-
-export type BrowseProject = Project & {
   description: string;
   experience_level: ExperienceLevel;
   duration: Duration;
   size: ProjectSize;
-  category: CategoryOrSkills;
-  skills: CategoryOrSkills[];
+  category: Category;
+  skills: Skill[];
+  created_at: string;
+  proposals_count: number;
 };
 
-export type ClientProject = Project;
+export type BrowseProject = Project;
+
+export type ClientProject = Pick<
+  Project,
+  "id" | "title" | "budget" | "status" | "created_at" | "proposals_count"
+>;

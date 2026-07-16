@@ -24,22 +24,18 @@ function useProjects<TProjects>(
         result = await projectApi.getBrowseProjects<TProjects[]>(
           searchParams.toString(),
         );
-      } else if (role === "client") {
+      } else {
         result = await projectApi.getClientProjects<TProjects[]>(
           searchParams.toString(),
         );
       }
-
-      if (!result) {
-        return;        
-      }
+      setIsLoading(false);
 
       if (!result.success) {
         setError(result.message || "Error in fetching project data");
         return;
       }
 
-      setIsLoading(false);
       setProjects(result.data);
     };
     loadProjects();

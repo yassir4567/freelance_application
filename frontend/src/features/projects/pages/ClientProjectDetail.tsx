@@ -1,7 +1,7 @@
 import { useOutletContext } from "react-router-dom";
 import styles from "../styles/ClientProjectDetail.module.css";
 import AssignedFreelancerCard from "../components/AssignedFreelancerCard";
-import { formatDate } from "../../../utils/helpers";
+import { formatDate, formatSnakeCase } from "../../../utils/helpers";
 import {
   FiCalendar,
   FiClock,
@@ -12,25 +12,37 @@ import {
   FiUsers,
 } from "react-icons/fi";
 import { useTranslation } from "react-i18next";
+import type { Project } from "../../../types/project.types";
+import type { AssignedFreelancerType } from "../layouts/ProjectLayout";
+
+type ProjectOutletContext = {
+  project: Project;
+  freelancer: AssignedFreelancerType;
+};
 
 function ClientProjectDetail() {
   const { t } = useTranslation();
-  const { project } = useOutletContext();
-  const status = project?.status?.toLowerCase() || "open";
-  const formattedStatus = status.split("_").join(" ");
-  const duration = project?.duration?.split("_").join(" ") || t("ui.fallbacks.notSpecified");
-  const publishedDate = project?.created_at
+  const { project, freelancer } = useOutletContext<ProjectOutletContext>();
+  const status = project.status.toLowerCase() || "open";
+  const formattedStatus = formatSnakeCase(project.status);
+  const duration =
+    formatSnakeCase(project.duration) || t("ui.fallbacks.notSpecified");
+  const publishedDate = project.created_at
     ? formatDate(project.created_at)
     : t("ui.fallbacks.notPublishedYet");
 
   const showAssignedFreelancer =
-    project?.status?.toLowerCase() === "completed" ||
-    project?.status?.toLowerCase() === "in_progress";
+    project.status.toLowerCase() === "completed" ||
+    project.status.toLowerCase() === "in_progress" ||
+    freelancer !== null;
 
   const projectStats = [
     {
       label: t("common.labels.budget"),
-      value: project?.budget != null ? `$${project.budget}` : t("ui.fallbacks.notSet"),
+      value:
+        project.budget != null
+          ? `$${project.budget}`
+          : t("ui.fallbacks.notSet"),
       icon: <FiDollarSign />,
     },
     {
@@ -40,7 +52,7 @@ function ClientProjectDetail() {
     },
     {
       label: t("common.labels.proposals"),
-      value: project?.proposals_count ?? 0,
+      value: project.proposals_count ?? 0,
       icon: <FiUsers />,
     },
   ];
@@ -48,12 +60,12 @@ function ClientProjectDetail() {
   const projectDetails = [
     {
       label: t("common.labels.experienceLevel"),
-      value: project?.experience_level || t("ui.fallbacks.notSpecified"),
+      value: project.experience_level || t("ui.fallbacks.notSpecified"),
       icon: <FiTrendingUp />,
     },
     {
       label: t("common.labels.projectSize"),
-      value: project?.size || t("ui.fallbacks.notSpecified"),
+      value: project.size || t("ui.fallbacks.notSpecified"),
       icon: <FiLayers />,
     },
     {
@@ -68,9 +80,7 @@ function ClientProjectDetail() {
       <section className={styles.projectDetail}>
         <div className={styles.detailHeader}>
           <div>
-            <p className={styles.eyebrow}>
-              {t("common.labels.overview")}
-            </p>
+            <p className={styles.eyebrow}>{t("common.labels.overview")}</p>
             <h2 className={styles.detailTitle}>
               {t("clientProjectDetail.title")}
             </h2>
@@ -97,12 +107,10 @@ function ClientProjectDetail() {
             <span className={styles.sectionIcon}>
               <FiFileText />
             </span>
-            <h3>
-              {t("common.labels.description")}
-            </h3>
+            <h3>{t("common.labels.description")}</h3>
           </div>
           <p className={styles.descriptionText}>
-            {project?.description || t("ui.fallbacks.noDescription")}
+            {project.description || t("ui.fallbacks.noDescription")}
           </p>
         </div>
 
@@ -125,7 +133,7 @@ function ClientProjectDetail() {
             <p className={styles.eyebrow}>{t("ui.labels.collaboration")}</p>
             <h2>{t("ui.labels.assignedFreelancer")}</h2>
           </div>
-          <AssignedFreelancerCard freelancer={project?.freelancer} />
+          <AssignedFreelancerCard freelancer={freelancer} />
         </div>
       )}
     </div>
