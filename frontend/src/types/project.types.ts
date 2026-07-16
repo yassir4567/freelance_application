@@ -30,7 +30,6 @@ type Project = {
 };
 
 export type BrowseProject = Project & {
-  category_id: number;
   description: string;
   experience_level: ExperienceLevel;
   duration: Duration;

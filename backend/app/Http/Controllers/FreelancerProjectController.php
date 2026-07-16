@@ -87,7 +87,6 @@ class FreelancerProjectController extends Controller
 
             return [
                 'id' => $project->id,
-                'category_id' => $project->category_id,
                 'title' => $project->title,
                 'description' => $project->description,
                 'budget' => $project->budget,
@@ -109,7 +108,7 @@ class FreelancerProjectController extends Controller
         ]);
     }
 
-    public function show(Request $request, string $id)
+    public function show(Request $request, int $id)
     {
         $freelancer = $request->user()->freelancer;
 
@@ -130,9 +129,32 @@ class FreelancerProjectController extends Controller
             'success' => true,
             'message' => 'Project Retrieved successfully',
             'data' => [
-                'project' => $project,
+                'project' => [
+                    'id' => $project->id,
+                    'title' => $project->title,
+                    'description' => $project->description,
+                    'budget' => $project->budget,
+                    'status' => $project->status,
+                    'size' => $project->size,
+                    'experience_level' => $project->experience_level,
+                    'duration' => $project->duration,
+                    'created_at' => $project->created_at,
+                    'category' => [
+                        'id' => $project->category->id,
+                        'name' => $project->category->name
+                    ],
+                    'skills' => $project->skills->map->only(['id', 'name'])
+                ],
+                'client' => [
+                    'id' => $project->client->id,
+                    'first_name' => $project->client->first_name,
+                    'last_name' => $project->client->last_name,
+                    'country' => $project->client->country,
+                    'address' => $project->client->address,
+                    'created_at' => $project->client->created_at,
+                ],
                 'client_projects_count' => $countClientProjects,
-                'isProposalSent' => $isAlreadySent
+                'is_proposal_sent' => $isAlreadySent
             ]
         ]);
     }
