@@ -1,12 +1,21 @@
 import styles from "../styles/PostProjectForm.module.css";
 import { MdRemove } from "react-icons/md";
 import { useTranslation } from "react-i18next";
-import useCategories from "../../../hooks/useCategories";
-import usePostProjectForm from "../hooks/usePostProjectForm";
+import useCategories, {
+  type CategoryHookType,
+} from "../../../hooks/useCategories";
+import usePostProjectForm, {
+  type UsePostProjectFormReturn,
+} from "../hooks/usePostProjectForm";
+import type { Skill } from "../../../types/skill.type";
 
-function PostProjectForm({ is_profile_complete }) {
+type PostProjectFormProps = {
+  is_profile_complete: boolean;
+};
+
+function PostProjectForm({ is_profile_complete }: PostProjectFormProps) {
   const { t } = useTranslation();
-  const { categories } = useCategories();
+  const { categories, isLoading, error }: CategoryHookType = useCategories();
   const {
     skillsOptions,
     project,
@@ -14,7 +23,11 @@ function PostProjectForm({ is_profile_complete }) {
     handleInputChange,
     handleSubmit,
     handleRemoveSkill,
-  } = usePostProjectForm();
+  }: UsePostProjectFormReturn = usePostProjectForm();
+
+  if (isLoading) return <p>Loading</p>;
+  if (error) return <p>{error}</p>;
+  if (!categories) return null;
 
   return (
     <form onSubmit={handleSubmit} className={styles.form}>
@@ -76,7 +89,7 @@ function PostProjectForm({ is_profile_complete }) {
                   ? t("postjob.form.skills.placeholders.noSkillsAvailable")
                   : t("postjob.form.skills.placeholders.main")}
             </option>
-            {skillsOptions.map((skill) => (
+            {skillsOptions.map((skill: Skill) => (
               <option key={skill.id} value={skill.id}>
                 {skill.name}
               </option>
@@ -85,7 +98,7 @@ function PostProjectForm({ is_profile_complete }) {
           {errors.skills && <div className={styles.error}>{errors.skills}</div>}
         </div>
         <div className={styles.selectedSkills}>
-          {project.skills.map((skill) => (
+          {project.skills.map((skill: Skill) => (
             <div key={skill.id} className={styles.skill}>
               <span>{skill.name}</span>
               <button onClick={(e) => handleRemoveSkill(e, skill.id)}>

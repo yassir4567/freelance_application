@@ -18,7 +18,7 @@ type AuthProviderProps = {
   children: React.ReactNode;
 };
 
-type ProfileCompelation = {
+export type ProfileCompelation = {
   is_profile_completed: boolean;
   missing_fields: string[];
   percentage: number;

@@ -33,10 +33,6 @@ function ClientProjectsPage() {
     "cancelled",
   ];
 
-  if (!projects) {
-    return null;
-  }
-
   if (isLoading) {
     return <p>Loading ...</p>;
   }

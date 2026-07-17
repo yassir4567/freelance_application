@@ -1,4 +1,3 @@
-import { useState } from "react";
 import PostProjectForm from "../components/PostProjectForm";
 import styles from "../styles/PostProjectPage.module.css";
 import { useAuth } from "../../../context/AuthContext";
@@ -9,6 +8,10 @@ function PostProjectPage() {
   const { profileCompletionState } = useAuth();
 
   const { t } = useTranslation();
+
+  if (!profileCompletionState) {
+    return null;
+  }
 
   return (
     <div>

@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { projectApi } from "../../../api/projects/projectApi";
 
 export type ProjectsHookType<TProjects> = {
-  projects: TProjects[] | null;
+  projects: TProjects[];
   isLoading: boolean;
   error: string;
 };
@@ -11,7 +11,7 @@ function useProjects<TProjects>(
   searchParams: URLSearchParams,
   role: string,
 ): ProjectsHookType<TProjects> {
-  const [projects, setProjects] = useState<TProjects[] | null>([]);
+  const [projects, setProjects] = useState<TProjects[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [error, setError] = useState<string>("");
 
@@ -36,7 +36,7 @@ function useProjects<TProjects>(
         return;
       }
 
-      setProjects(result.data);
+      setProjects(result.data ?? []);
     };
     loadProjects();
   }, [searchParams, role]);

@@ -1,8 +1,13 @@
 import { NavLink } from "react-router-dom";
 import styles from "./CompleteProfileAlert.module.css";
 import { useTranslation } from "react-i18next";
+import type { Role } from "../../types/user.types";
 
-function CompleteProfileAlert({ role }) {
+type CompleteProfileAlertProps = {
+  role: Role;
+};
+
+function CompleteProfileAlert({ role }: CompleteProfileAlertProps) {
   const { t } = useTranslation();
 
   return (
@@ -14,7 +19,10 @@ function CompleteProfileAlert({ role }) {
         </p>
       </div>
       <div className={styles.linkBox}>
-        <NavLink to={`/dashboard/${role}/profile`} className={styles.link}>
+        <NavLink
+          to={`/dashboard/${role}/profile`}
+          className={styles.link ?? ""}
+        >
           {t("ui.actions.completeProfile")}
         </NavLink>
       </div>

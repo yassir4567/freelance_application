@@ -13,10 +13,18 @@ class SkillController extends Controller
     {
         $skills = Skill::select('id', 'name')->with('categories:id,name')->get();
 
+        $processedSkills = $skills->map(function($skill) {
+            return [
+                'id' => $skill->id ,
+                'name' => $skill->name ,
+                'categories' => $skill->categories->map->only(['id', 'name'])
+            ];
+        });
+
         return response()->json([
             'success' => true,
             'message' => 'Skills retrieved successfully',
-            'data' => $skills
+            'data' => $processedSkills
         ], 200);
     }
 

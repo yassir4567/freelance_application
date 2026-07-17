@@ -155,10 +155,28 @@ class ClientProjectController extends Controller
 
         $project->skills()->attach($validated['skills']);
 
+        $processedProject = [
+            'id' => $project->id,
+            'title' => $project->title,
+            'description' => $project->description,
+            'budget' => $project->budget,
+            'status' => $project->status,
+            'size' => $project->size,
+            'experience_level' => $project->experience_level,
+            'duration' => $project->duration,
+            'created_at' => $project->created_at,
+            'proposals_count' => $project->proposals_count,
+            'category' => [
+                'id' => $project->category->id,
+                'name' => $project->category->name
+            ],
+            'skills' => $project->skills->map->only(['id', 'name'])
+        ];
+
         return response()->json([
             'success' => 'true',
             'message' => 'Project created successfully',
-            'data' => $project->load(['skills:id,name', 'category:id,name'])
+            'data' => $processedProject
         ]);
     }
 }

@@ -38,10 +38,6 @@ function BrowseProjectsPage() {
     error: categoriesError,
   }: CategoryHookType = useCategories();
 
-  if (!projects || !categories) {
-    return null;
-  }
-
   if (isProjectsLoading || isCategoriesLoading) {
     return <p>Loading ...</p>;
   }

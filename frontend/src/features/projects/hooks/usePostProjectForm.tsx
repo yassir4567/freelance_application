@@ -1,10 +1,25 @@
 import { useState } from "react";
-import useSkills from "../../../hooks/useSkills";
+import useSkills, { type SkillHookType } from "../../../hooks/useSkills";
 import { useTranslation } from "react-i18next";
 import { projectApi } from "../../../api/projects/projectApi";
 import { useNavigate } from "react-router-dom";
+import type { Skill } from "../../../types/skill.type";
+import type { Project } from "../../../types/project.types";
 
-const initProject = {
+type PostProject = {
+  title: string;
+  category_id: string;
+  experience_level: string;
+  size: string;
+  duration: string;
+  description: string;
+  budget: string;
+  skills: Skill[];
+};
+
+type ProjectErrors = Partial<Record<keyof PostProject, string>>;
+
+const initProject: PostProject = {
   title: "",
   category_id: "",
   skills: [],
@@ -15,7 +30,7 @@ const initProject = {
   budget: "",
 };
 
-const initErrors = {
+const initErrors: ProjectErrors = {
   category_id: "",
   title: "",
   skills: "",
@@ -26,14 +41,38 @@ const initErrors = {
   budget: "",
 };
 
-function usePostProjectForm() {
+export type UsePostProjectFormReturn = {
+  skillsOptions: Skill[];
+  project: PostProject;
+  errors: ProjectErrors;
+  handleInputChange: (
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
+    >,
+  ) => void;
+  handleSubmit: (e: React.SubmitEvent) => Promise<void>;
+  handleRemoveSkill: (
+    e: React.MouseEvent<HTMLButtonElement>,
+    skillId: number,
+  ) => void;
+};
+
+type CreateProjectPayload = Omit<PostProject, "skills"> & {
+  skills: number[];
+};
+
+function usePostProjectForm(): UsePostProjectFormReturn {
   const { t } = useTranslation();
   const navigate = useNavigate();
-  const [project, setProject] = useState(initProject);
-  const [errors, setErrors] = useState(initErrors);
+  const [project, setProject] = useState<PostProject>(initProject);
+  const [errors, setErrors] = useState<ProjectErrors>(initErrors);
   const { skills } = useSkills();
 
-  const handleInputChange = (e) => {
+  const handleInputChange = (
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
+    >,
+  ): void => {
     const { name, value } = e.target;
 
     if (name === "category_id") {
@@ -61,11 +100,11 @@ function usePostProjectForm() {
     }));
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: React.SubmitEvent): Promise<void> => {
     e.preventDefault();
 
     setErrors({});
-    const newErrors = {};
+    const newErrors: ProjectErrors = {};
 
     // * Validate inputs
     if (project.title.trim() === "") {
@@ -123,18 +162,23 @@ function usePostProjectForm() {
     // * if no errors send the job to the backend
 
     // * conversion from skills as a array of objects to an array of ids
-    const processedProject = {
+    const processedProject: CreateProjectPayload = {
       ...project,
-      skills: project.skills.map((sk) => sk.id),
+      skills: project.skills.map((sk) => +sk.id),
     };
 
-    const result = await projectApi.postProject(processedProject);
+    const result = await projectApi.postProject<Project, CreateProjectPayload>(
+      processedProject,
+    );
     if (result.success) {
       navigate("/dashboard/client/projects");
     }
   };
 
-  const handleRemoveSkill = (e, skillId) => {
+  const handleRemoveSkill = (
+    e: React.MouseEvent<HTMLButtonElement>,
+    skillId: number,
+  ): void => {
     e.preventDefault();
     setProject((prev) => ({
       ...prev,
@@ -142,7 +186,7 @@ function usePostProjectForm() {
     }));
   };
 
-  const skillsOptions = project.category_id
+  const skillsOptions: Skill[] = project.category_id
     ? skills.filter(
         (skill) =>
           skill.categories?.some(

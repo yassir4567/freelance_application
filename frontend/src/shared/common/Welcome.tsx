@@ -1,6 +1,10 @@
 import styles from "./Welcome.module.css";
 
-function Welcome({ welcome, min_description }) {
+type WelcomeProps = {
+  welcome: string;
+  min_description: string;
+};
+function Welcome({ welcome, min_description }: WelcomeProps) {
   return (
     <div className={styles.welcomeContent}>
       <h1 className="pageTitle">{welcome}</h1>
