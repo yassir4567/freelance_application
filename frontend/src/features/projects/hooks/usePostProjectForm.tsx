@@ -4,14 +4,19 @@ import { useTranslation } from "react-i18next";
 import { projectApi } from "../../../api/projects/projectApi";
 import { useNavigate } from "react-router-dom";
 import type { Skill } from "../../../types/skill.type";
-import type { Project } from "../../../types/project.types";
+import type {
+  Project,
+  ProjectDuration,
+  ProjectExperienceLevel,
+  ProjectSize,
+} from "../../../types/project.types";
 
 type PostProject = {
   title: string;
   category_id: string;
-  experience_level: string;
-  size: string;
-  duration: string;
+  experience_level: ProjectExperienceLevel | "";
+  size: ProjectSize | "";
+  duration: ProjectDuration | "";
   description: string;
   budget: string;
   skills: Skill[];

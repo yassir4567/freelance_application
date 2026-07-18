@@ -116,7 +116,7 @@ class FreelancerProjectController extends Controller
             'client:id,role,first_name,last_name,country,address,created_at',
             'category:id,name',
             'skills:id,name'
-        ])->findOrFail($id);
+        ])->withCount('proposals')->findOrFail($id);
 
         Gate::authorize('viewAvailableProject', $project);
 
@@ -139,6 +139,7 @@ class FreelancerProjectController extends Controller
                     'experience_level' => $project->experience_level,
                     'duration' => $project->duration,
                     'created_at' => $project->created_at,
+                    'proposals_count' => $project->proposals_count,
                     'category' => [
                         'id' => $project->category->id,
                         'name' => $project->category->name

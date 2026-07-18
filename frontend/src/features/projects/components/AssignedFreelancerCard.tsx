@@ -7,7 +7,7 @@ import {
   FiUserCheck,
 } from "react-icons/fi";
 import { useTranslation } from "react-i18next";
-import type { AssignedFreelancerType } from "../layouts/ProjectLayout";
+import type { AssignedFreelancerType } from "../hooks/useClientProject";
 
 type AssignedFreelancerCardProps = {
   freelancer: AssignedFreelancerType;

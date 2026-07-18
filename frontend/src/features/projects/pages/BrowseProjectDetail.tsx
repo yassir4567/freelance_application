@@ -10,27 +10,15 @@ import { useState } from "react";
 import { formatDate } from "../../../utils/helpers";
 import SendProposalModal from "../../proposals/components/SendProposalModal";
 import { useTranslation } from "react-i18next";
-import useProject, { type ProjectHookType } from "../hooks/useProject";
-import type { BrowseProject } from "../../../types/project.types";
-import type { User } from "../../../types/user.types";
-
-type ClientProjectType = Pick<
-  User,
-  "id" | "first_name" | "last_name" | "country" | "address" | "created_at"
->;
-
-type ProjectDataType = {
-  project: BrowseProject;
-  client: ClientProjectType;
-  client_projects_count: number;
-  is_proposal_sent: boolean;
-};
+import type { BrowseProjectHookType } from "../hooks/useBrowseProject";
+import useBrowseProject from "../hooks/useBrowseProject";
 
 function BrowseProjectDetail() {
   const { projectId } = useParams();
   const { t } = useTranslation();
-  const { project, isLoading, error }: ProjectHookType<ProjectDataType> =
-    useProject<ProjectDataType>(projectId!, "freelancer");
+  const { project, isLoading, error }: BrowseProjectHookType = useBrowseProject(
+    projectId!,
+  );
   const [showSendProposalModal, setShowSendProposalModal] = useState(false);
 
   const onClose = () => {
@@ -41,15 +29,14 @@ function BrowseProjectDetail() {
   if (isLoading) {
     return <p>Loading ...</p>;
   }
-  
-  if (!project) {
-    return <p>Project not found</p>;
-  }
 
   if (error) {
     return <p>{error}</p>;
   }
 
+  if (!project) {
+    return <p>Project not found</p>;
+  }
   const client = project.client;
 
   return (

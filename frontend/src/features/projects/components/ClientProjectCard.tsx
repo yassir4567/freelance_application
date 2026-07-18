@@ -3,12 +3,12 @@ import styles from "../styles/ClientProjectCard.module.css";
 import { formatDate, formatSnakeCase } from "../../../utils/helpers";
 import { useTranslation } from "react-i18next";
 import type {
-  ClientProject,
+  ClientProjectList,
   ProjectStatus,
 } from "../../../types/project.types";
 
 type ClientProjectCardProps = {
-  project: ClientProject;
+  project: ClientProjectList;
 };
 
 function ClientProjectCard({ project }: ClientProjectCardProps) {

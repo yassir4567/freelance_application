@@ -13,11 +13,11 @@ import {
 } from "react-icons/fi";
 import { useTranslation } from "react-i18next";
 import type { Project } from "../../../types/project.types";
-import type { AssignedFreelancerType } from "../layouts/ProjectLayout";
+import type { AssignedFreelancerType } from "../hooks/useClientProject";
 
 type ProjectOutletContext = {
   project: Project;
-  freelancer: AssignedFreelancerType;
+  freelancer: AssignedFreelancerType | null;
 };
 
 function ClientProjectDetail() {
@@ -30,11 +30,6 @@ function ClientProjectDetail() {
   const publishedDate = project.created_at
     ? formatDate(project.created_at)
     : t("ui.fallbacks.notPublishedYet");
-
-  const showAssignedFreelancer =
-    project.status.toLowerCase() === "completed" ||
-    project.status.toLowerCase() === "in_progress" ||
-    freelancer !== null;
 
   const projectStats = [
     {
@@ -127,7 +122,7 @@ function ClientProjectDetail() {
         </div>
       </section>
 
-      {showAssignedFreelancer && (
+      {freelancer !== null && (
         <div className={styles.hiredFreelancer}>
           <div className={styles.assignedHeader}>
             <p className={styles.eyebrow}>{t("ui.labels.collaboration")}</p>

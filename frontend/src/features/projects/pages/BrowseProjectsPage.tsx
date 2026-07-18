@@ -7,11 +7,12 @@ import { useTranslation } from "react-i18next";
 import useBrowseProjectsFilters, {
   type BrowseProjectsFilters,
 } from "../hooks/useBrowseProjectsFilters";
-import useProjects, { type ProjectsHookType } from "../hooks/useProjects";
 import useCategories, {
   type CategoryHookType,
 } from "../../../hooks/useCategories";
-import type { BrowseProject } from "../../../types/project.types";
+import useBrowseProjects, {
+  type BrowseProjectsHookType,
+} from "../hooks/useBrowseProjects";
 
 function BrowseProjectsPage() {
   const { t } = useTranslation();
@@ -27,10 +28,7 @@ function BrowseProjectsPage() {
     projects,
     isLoading: isProjectsLoading,
     error: projectsError,
-  }: ProjectsHookType<BrowseProject> = useProjects<BrowseProject>(
-    searchParams,
-    "freelancer",
-  );
+  }: BrowseProjectsHookType = useBrowseProjects(searchParams);
 
   const {
     categories,
@@ -83,7 +81,7 @@ function BrowseProjectsPage() {
 
           <div className={styles.projects}>
             {projects.length > 0 ? (
-              projects.map((project: BrowseProject) => (
+              projects.map((project) => (
                 <FreelancerProjectCard key={project.id} project={project} />
               ))
             ) : (

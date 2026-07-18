@@ -1,45 +1,34 @@
-import { NavLink, Outlet, useNavigate, useParams } from "react-router-dom";
+import { NavLink, Outlet, useParams } from "react-router-dom";
 import styles from "../styles/ProjectLayout.module.css";
 import { useTranslation } from "react-i18next";
-import useProject, { type ProjectHookType } from "../hooks/useProject";
-import type { ClientProject } from "../../../types/project.types";
-import type { Freelancer } from "../../../types/user.types";
-import type { Category } from "../../../types/category.type";
-import type { Skill } from "../../../types/skill.type";
-
-export type AssignedFreelancerType = Pick<
-  Freelancer,
-  "id" | "user_id" | "first_name" | "last_name" | "title"
-> & {
-  category: Category;
-  skills: Skill[];
-};
-
-export type ClientProjectDataType = {
-  project: ClientProject;
-  freelancer?: AssignedFreelancerType;
-};
+import type { ClientProjectList, Project } from "../../../types/project.types";
+import type {
+  AssignedFreelancerType,
+  ClientProjectHookType,
+} from "../hooks/useClientProject";
+import useClientProject from "../hooks/useClientProject";
 
 function ProjectLayout() {
   const { t } = useTranslation();
   const { projectId } = useParams();
-  const { project, isLoading, error }: ProjectHookType<ClientProjectDataType> =
-    useProject<ClientProjectDataType>(projectId!, "client");
+  const { project, isLoading, error }: ClientProjectHookType = useClientProject(
+    projectId!,
+  );
 
   // ! just for now
   if (isLoading) {
     return <p>Loading ...</p>;
   }
 
-  if (!project) {
-    return <p>Project not found</p>;
-  }
-
   if (error) {
     return <p>{error}</p>;
   }
 
-  const projectData: ClientProject = project.project;
+  if (!project) {
+    return <p>Project not found</p>;
+  }
+  
+  const projectData: Project = project.project;
   let freelancer: AssignedFreelancerType | null = null;
   if (project.freelancer) {
     freelancer = project.freelancer;

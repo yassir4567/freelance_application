@@ -1,17 +1,17 @@
 import { useEffect, useState } from "react";
 import { projectApi } from "../../../api/projects/projectApi";
+import type { ClientProjectList } from "../../../types/project.types";
 
-export type ProjectsHookType<TProjects> = {
-  projects: TProjects[];
+export type ClientProjectsHookType = {
+  projects: ClientProjectList[];
   isLoading: boolean;
   error: string;
 };
 
-function useProjects<TProjects>(
+function useClientProjects(
   searchParams: URLSearchParams,
-  role: string,
-): ProjectsHookType<TProjects> {
-  const [projects, setProjects] = useState<TProjects[]>([]);
+): ClientProjectsHookType {
+  const [projects, setProjects] = useState<ClientProjectList[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [error, setError] = useState<string>("");
 
@@ -19,16 +19,9 @@ function useProjects<TProjects>(
     const loadProjects = async (): Promise<void> => {
       setError("");
       setIsLoading(true);
-      let result = null;
-      if (role === "freelancer") {
-        result = await projectApi.getBrowseProjects<TProjects[]>(
-          searchParams.toString(),
-        );
-      } else {
-        result = await projectApi.getClientProjects<TProjects[]>(
-          searchParams.toString(),
-        );
-      }
+      let result = await projectApi.getClientProjects<ClientProjectList[]>(
+        searchParams.toString(),
+      );
       setIsLoading(false);
 
       if (!result.success) {
@@ -39,9 +32,9 @@ function useProjects<TProjects>(
       setProjects(result.data ?? []);
     };
     loadProjects();
-  }, [searchParams, role]);
+  }, [searchParams]);
 
   return { projects, isLoading, error };
 }
 
-export default useProjects;
+export default useClientProjects;
