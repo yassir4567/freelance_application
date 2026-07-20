@@ -2,8 +2,8 @@ import { useEffect, useState } from "react";
 import { projectApi } from "../../../api/projects/projectApi";
 import type { Freelancer } from "../../../types/user.types";
 import type { Project } from "../../../types/project.types";
-import type { Category } from "../../../types/category.type";
-import type { Skill } from "../../../types/skill.type";
+import type { Category } from "../../../types/category.types";
+import type { Skill } from "../../../types/skill.types";
 
 export type AssignedFreelancerType = Pick<
   Freelancer,

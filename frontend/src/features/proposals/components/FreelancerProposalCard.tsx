@@ -2,11 +2,16 @@ import { useTranslation } from "react-i18next";
 import { formatDate, getRelativeTime } from "../../../utils/helpers";
 import styles from "../styles/FreelancerProposalCard.module.css";
 import { NavLink } from "react-router-dom";
+import type { FreelancerProposalType } from "../../../types/proposal.types";
 
-function FreelancerProposalCard({ proposal }) {
+type FreelancerProposalCardProps = {
+  proposal: FreelancerProposalType;
+};
+
+function FreelancerProposalCard({ proposal }: FreelancerProposalCardProps) {
   const { t } = useTranslation();
 
-  const proposalStatus = {
+  const proposalStatus: Record<string, string> = {
     pending: "status-accent",
     accepted: "status-success",
     rejected: "status-danger",
@@ -41,23 +46,17 @@ function FreelancerProposalCard({ proposal }) {
         <div className={styles.infosBox}>
           <div className={styles.infosBoxWrapper}>
             <div className={styles.infoItem}>
-              <p className={styles.label}>
-                {t("common.labels.price")}
-              </p>
+              <p className={styles.label}>{t("common.labels.price")}</p>
               <p className={styles.value}>${proposal.price}</p>
             </div>
 
             <div className={styles.infoItem}>
-              <p className={styles.label}>
-                {t("common.labels.delivery")}
-              </p>
+              <p className={styles.label}>{t("common.labels.delivery")}</p>
               <p className={styles.value}>{proposal.delivery_time}</p>
             </div>
 
             <div className={styles.infoItem}>
-              <p className={styles.label}>
-                {t("common.labels.sent")}
-              </p>
+              <p className={styles.label}>{t("common.labels.sent")}</p>
               <p className={styles.value}>
                 {getRelativeTime(proposal.created_at)}
               </p>
@@ -68,8 +67,8 @@ function FreelancerProposalCard({ proposal }) {
         {proposal.status === "accepted" && (
           <div className={styles.action}>
             <NavLink
-              to={`/dashboard/freelancer/messages?chat=${proposal.contract.conversation.id}`}
-              className={styles.link}
+              to={`/dashboard/freelancer/messages?chat=${proposal.conversation.id}`}
+              className={styles.link ?? ""}
             >
               {t("ui.actions.messageClient")}
             </NavLink>

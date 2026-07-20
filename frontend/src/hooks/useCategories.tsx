@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { categoryApi } from "../api/categories/categoryApi";
-import type { Category } from "../types/category.type";
+import type { Category } from "../types/category.types";
 
 export type CategoryHookType = {
   categories: Category[];

@@ -1,5 +1,5 @@
-import type { Category } from "./category.type";
-import type { Skill } from "./skill.type";
+import type { Category } from "./category.types";
+import type { Skill } from "./skill.types";
 
 export type ProjectStatus =
   | "open"

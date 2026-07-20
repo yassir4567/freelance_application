@@ -7,7 +7,7 @@ import useCategories, {
 import usePostProjectForm, {
   type UsePostProjectFormReturn,
 } from "../hooks/usePostProjectForm";
-import type { Skill } from "../../../types/skill.type";
+import type { Skill } from "../../../types/skill.types";
 
 type PostProjectFormProps = {
   is_profile_complete: boolean;

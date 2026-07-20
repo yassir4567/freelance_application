@@ -1,6 +1,6 @@
 import { useTranslation } from "react-i18next";
 import styles from "../styles/FreelancerProjectsHeaderFilter.module.css";
-import type { Category } from "../../../types/category.type";
+import type { Category } from "../../../types/category.types";
 import type { BrowseProjectsObjectFilters } from "../hooks/useBrowseProjectsFilters";
 import type React from "react";
 

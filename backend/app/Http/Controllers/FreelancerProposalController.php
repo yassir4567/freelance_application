@@ -31,10 +31,45 @@ class FreelancerProposalController extends Controller
 
         $proposals = $query->latest()->get();
 
+        $processedProposals = $proposals->map(function ($proposal) {
+            $data = [
+                'id' => $proposal->id,
+                'cover_letter' => $proposal->cover_letter,
+                'status' => $proposal->status,
+                'delivery_time' => $proposal->delivery_time,
+                'price' => (float) $proposal->price,
+                'created_at' => $proposal->created_at,
+                'project' => [
+                    'id' => $proposal->project->id,
+                    'title' => $proposal->project->title,
+                    'client' => [
+                        'id' => $proposal->project->client_id,
+                        'first_name' => $proposal->project->client->first_name,
+                        'last_name' => $proposal->project->client->last_name,
+                    ],
+                    'category' => [
+                        'id' => $proposal->project->category->id,
+                        'name' => $proposal->project->category->name,
+                    ]
+                ]
+            ];
+
+            if ($proposal->contract()->exists()) {
+                $data['conversation'] = [
+                    'id' => $proposal->contract->conversation->id,
+                    'contract_id' => $proposal->contract->id,
+                    'created_at' => $proposal->contract->conversation->created_at,
+                ];
+            }
+
+
+            return $data;
+        });
+
         return response()->json([
             'success' => true,
             'message' => 'Proposals retrieved successfully',
-            'data' => $proposals
+            'data' => $processedProposals
         ], 200);
     }
 

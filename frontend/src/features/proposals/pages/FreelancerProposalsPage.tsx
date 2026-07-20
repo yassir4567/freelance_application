@@ -1,31 +1,27 @@
-import { useEffect, useState } from "react";
 import styles from "../styles/FreelancerProposalsPage.module.css";
 import { useSearchParams } from "react-router-dom";
 import FreelancerProposalCard from "../components/FreelancerProposalCard";
 import { useTranslation } from "react-i18next";
-import { proposalApi } from "../../../api/proposals/proposalApi";
+import useFreelancerProposals from "../hooks/useFreelancerProposals";
+import type { ProposalStatus } from "../../../types/proposal.types";
+
+const STATUS: (ProposalStatus | "all")[] = [
+  "all",
+  "pending",
+  "accepted",
+  "rejected",
+];
 
 function FreelancerProposalsPage() {
   const { t } = useTranslation();
-  const [proposals, setProposals] = useState([]);
   const [searchParams, setSearchParams] = useSearchParams("");
-  const [isLoading, setIsLoading] = useState(false);
+  const { proposals, isLoading, error } = useFreelancerProposals(
+    searchParams.toString(),
+  );
 
   const selectedStatus = searchParams.get("status") || "all";
 
-  useEffect(() => {
-    const loadProposals = async () => {
-      setIsLoading(true);
-      const result = await proposalApi.getFreelancerProposals(
-        searchParams.toString(),
-      );
-      setProposals(result.data || []);
-      setIsLoading(false);
-    };
-    loadProposals();
-  }, [searchParams]);
-
-  const handleSelectStatus = (status) => {
+  const handleSelectStatus = (status: ProposalStatus | "all") => {
     if (status === selectedStatus) return;
 
     if (status === "all") {
@@ -35,6 +31,10 @@ function FreelancerProposalsPage() {
 
     setSearchParams({ status: status });
   };
+
+  if (isLoading) return <p>Loading...</p>;
+  if (error) return <p>{error}</p>;
+  if (!proposals) return <p>No proposals founds</p>;
 
   return (
     <div className={styles.proposalsPage}>
@@ -47,11 +47,11 @@ function FreelancerProposalsPage() {
 
       <div className={styles.filterBtnsContainer}>
         <p className={styles.totalProposals}>
-          <span>{t("freelancerProposals.total")} :</span>
+          <span>{t("freelancerPropo!) resals.total")} :</span>
           {!isLoading && <span>{proposals.length}</span>}
         </p>
         <div className={styles.filterBtnsWrapper}>
-          {["all", "pending", "accepted", "rejected"].map((status) => (
+          {STATUS.map((status: ProposalStatus | "all") => (
             <div
               key={status}
               className={`${styles.statusBtn} ${styles[status]} ${selectedStatus === status ? styles.active : ""}`}

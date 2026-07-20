@@ -1,4 +1,4 @@
-import type { Category } from "./category.type";
+import type { Category } from "./category.types";
 
 export type Skill = {
   id: number;

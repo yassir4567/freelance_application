@@ -3,7 +3,7 @@ import useSkills, { type SkillHookType } from "../../../hooks/useSkills";
 import { useTranslation } from "react-i18next";
 import { projectApi } from "../../../api/projects/projectApi";
 import { useNavigate } from "react-router-dom";
-import type { Skill } from "../../../types/skill.type";
+import type { Skill } from "../../../types/skill.types";
 import type {
   Project,
   ProjectDuration,

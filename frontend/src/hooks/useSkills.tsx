@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { skillApi } from "../api/skills/skillApi";
-import type { Skill } from "../types/skill.type";
+import type { Skill } from "../types/skill.types";
 
 export type SkillHookType = {
   skills: Skill[];
