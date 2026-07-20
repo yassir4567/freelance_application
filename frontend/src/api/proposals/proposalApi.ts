@@ -1,12 +1,12 @@
 import apiClient from "../apiClient";
 
 const proposalApi = {
-  accept<TResponse>(projectId: string, proposalId: string) {
+  accept<TResponse>(projectId: string, proposalId: number) {
     return apiClient.put<TResponse>(
       `/client/projects/${projectId}/proposals/${proposalId}/accept`,
     );
   },
-  reject<TResponse>(projectId: string, proposalId: string) {
+  reject<TResponse>(projectId: string, proposalId: number) {
     return apiClient.put<TResponse>(
       `/client/projects/${projectId}/proposals/${proposalId}/reject`,
     );

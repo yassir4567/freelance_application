@@ -36,10 +36,38 @@ class ClientProposalController extends Controller
                 'contract:id,proposal_id',
                 'contract.conversation:id,contract_id'
             ])->latest()->get();
+
+        $processedProposals = $proposals->map(function ($proposal) {
+            $data = [
+                'id' => $proposal->id,
+                'cover_letter' => $proposal->cover_letter,
+                'status' => $proposal->status,
+                'price' => (float) $proposal->price,
+                'delivery_time' => $proposal->delivery_time,
+                'created_at' => $proposal->created_at,
+                'freelancer' => [
+                    'id' => $proposal->freelancer->id,
+                    'title' => $proposal->freelancer->title,
+                    'user_id' => $proposal->freelancer->user_id,
+                    'first_name' => $proposal->freelancer->user->first_name,
+                    'last_name' => $proposal->freelancer->user->last_name,
+                ],
+            ];
+
+            if ($proposal->contract && $proposal->contract->conversation) {
+                $data['conversation'] = [
+                    'id' => $proposal->contract->conversation->id,
+                    'contract_id' => $proposal->contract->id,
+                    'created_at' => $proposal->contract->conversation->created_at,
+                ];
+            }
+
+            return $data;
+        });
         return response()->json([
             'success' => true,
             'message' => 'Project proposals retrieved successfully',
-            'data' => $proposals
+            'data' => $processedProposals
         ]);
     }
 
@@ -92,10 +120,31 @@ class ClientProposalController extends Controller
             ]);
         });
 
+        $processedProposal = [
+            'id' => $result->id,
+            'cover_letter' => $result->cover_letter,
+            'status' => $result->status,
+            'price' => (float) $result->price,
+            'delivery_time' => $result->delivery_time,
+            'created_at' => $result->created_at,
+            'freelancer' => [
+                'id' => $result->freelancer->id,
+                'user_id' => $result->freelancer->user_id,
+                'title' => $result->freelancer->title,
+                'first_name' => $result->freelancer->user->first_name,
+                'last_name' => $result->freelancer->user->last_name,
+            ],
+            'conversation' => [
+                'id' => $result->contract->conversation->id,
+                'contract_id' => $result->contract->id,
+                'created_at' => $result->contract->conversation->created_at,
+            ]
+        ];
+
         return response()->json([
             'success' => true,
             'message' => 'Proposal accepted successfully',
-            'data' => $result
+            'data' => $processedProposal
         ]);
     }
 
@@ -126,15 +175,26 @@ class ClientProposalController extends Controller
             'status' => 'rejected',
         ]);
 
+        $processedProposal = [
+            'id' => $proposal->id,
+            'cover_letter' => $proposal->cover_letter,
+            'status' => $proposal->status,
+            'price' => (float) $proposal->price,
+            'delivery_time' => $proposal->delivery_time,
+            'created_at' => $proposal->created_at,
+            'freelancer' => [
+                'id' => $proposal->freelancer->id,
+                'user_id' => $proposal->freelancer->user_id,
+                'title' => $proposal->freelancer->title,
+                'first_name' => $proposal->freelancer->user->first_name,
+                'last_name' => $proposal->freelancer->user->last_name,
+            ]
+        ];
+
         return response()->json([
             'success' => true,
             'message' => 'Proposal rejected successfully',
-            'data' => $proposal->fresh()->load([
-                'freelancer:id,title,user_id',
-                'freelancer.user:id,first_name,last_name,avatar',
-                'contract:id,proposal_id',
-                'contract.conversation:id,contract_id,created_at'
-            ]),
+            'data' => $processedProposal
         ], 200);
     }
 }

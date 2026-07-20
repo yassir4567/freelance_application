@@ -21,7 +21,7 @@ function BrowseProjectDetail() {
   );
   const [showSendProposalModal, setShowSendProposalModal] = useState(false);
 
-  const onClose = () => {
+  const onClose = (): void => {
     setShowSendProposalModal(false);
   };
 
@@ -165,7 +165,7 @@ function BrowseProjectDetail() {
         <SendProposalModal
           isOpen={showSendProposalModal}
           onClose={onClose}
-          projectId={projectId}
+          projectId={projectId!}
         />
       )}
     </div>

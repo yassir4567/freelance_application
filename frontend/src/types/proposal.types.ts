@@ -1,7 +1,7 @@
 import type { Category } from "./category.types";
 import type { Conversation } from "./conversation.types";
 import type { Project } from "./project.types";
-import type { User } from "./user.types";
+import type { Freelancer, User } from "./user.types";
 
 export type ProposalStatus = "pending" | "accepted" | "rejected";
 
@@ -20,5 +20,11 @@ export type FreelancerProposalType = Proposal & {
     client: Pick<User, "id" | "first_name" | "last_name">;
     category: Category;
   };
-  conversation: Conversation;
+  conversation?: Conversation;
+};
+
+export type ClientProjectProposalType = Proposal & {
+  freelancer: Pick<User, "id" | "first_name" | "last_name"> &
+    Pick<Freelancer, "user_id" | "title">;
+  conversation?: Conversation;
 };

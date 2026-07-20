@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { proposalApi } from "../../../api/proposals/proposalApi";
 import type { FreelancerProposalType } from "../../../types/proposal.types";
 
-
 type useFreelancerProposalsReturn = {
   proposals: FreelancerProposalType[];
   isLoading: boolean;
@@ -18,11 +17,10 @@ function useFreelancerProposals(query: string): useFreelancerProposalsReturn {
     const loadProposals = async (): Promise<void> => {
       setIsLoading(true);
       setError("");
-      const result = await proposalApi.getFreelancerProposals<
-        FreelancerProposalType[]
-      >(
-        query,
-      );
+      const result =
+        await proposalApi.getFreelancerProposals<FreelancerProposalType[]>(
+          query,
+        );
       setIsLoading(false);
       if (!result.success) {
         setError(result.message || "Error in fetching data");

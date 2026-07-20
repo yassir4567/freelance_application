@@ -34,7 +34,6 @@ function FreelancerProposalsPage() {
 
   if (isLoading) return <p>Loading...</p>;
   if (error) return <p>{error}</p>;
-  if (!proposals) return <p>No proposals founds</p>;
 
   return (
     <div className={styles.proposalsPage}>
@@ -47,7 +46,7 @@ function FreelancerProposalsPage() {
 
       <div className={styles.filterBtnsContainer}>
         <p className={styles.totalProposals}>
-          <span>{t("freelancerPropo!) resals.total")} :</span>
+          <span>{t("freelancerProposals.total")} :</span>
           {!isLoading && <span>{proposals.length}</span>}
         </p>
         <div className={styles.filterBtnsWrapper}>

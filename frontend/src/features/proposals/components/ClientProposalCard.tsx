@@ -1,16 +1,27 @@
 import { NavLink } from "react-router-dom";
 import styles from "../styles/ClientProposalCard.module.css";
-import { IoStarSharp } from "react-icons/io5";
 import profile from "../../../assets/images/profile.png";
 import { formatDate } from "../../../utils/helpers";
 import { useTranslation } from "react-i18next";
+import type { ClientProjectProposalType } from "../../../types/proposal.types";
+
+type ClientProposalCardProps = {
+  proposal: ClientProjectProposalType;
+  isAccepting: boolean;
+  isRejecting: boolean;
+  acceptFreelancerProposal: (proposalId: number) => void;
+  rejectFreelancerProposal: (proposalId: number) => void;
+};
+
 function ClientProposalCard({
   proposal,
+  isAccepting,
+  isRejecting,
   acceptFreelancerProposal,
   rejectFreelancerProposal,
-}) {
+}: ClientProposalCardProps) {
   const { t } = useTranslation();
-  const freelancer = proposal?.freelancer;
+  const freelancer = proposal.freelancer;
 
   const statusClass = {
     pending: styles.pending,
@@ -29,7 +40,7 @@ function ClientProposalCard({
           />
           <div className={styles.freelancerInfo}>
             <h3 className={styles.freelancerFullName}>
-              {freelancer.user.first_name} {freelancer.user.last_name}
+              {freelancer.first_name} {freelancer.last_name}
             </h3>
             <p className={styles.freelancerTitle}>{freelancer.title} </p>
           </div>
@@ -71,25 +82,27 @@ function ClientProposalCard({
               <button
                 className={`${styles.actionBtn} ${styles.accept}`}
                 onClick={() => acceptFreelancerProposal(proposal.id)}
+                disabled={isAccepting || isRejecting}
               >
-                {t("common.actions.accept")}
+                {isAccepting ? "Accepting" : t("common.actions.accept")}
               </button>
               <button
                 className={`${styles.actionBtn} ${styles.reject}`}
                 onClick={() => rejectFreelancerProposal(proposal.id)}
+                disabled={isAccepting || isRejecting}
               >
-                {t("common.actions.reject")}
+                {isRejecting ? "Rejecting" : t("common.actions.reject")}
               </button>
             </>
           )}
         </div>
         <div className={styles.secondaryActions}>
-          {proposal.status === "accepted" && (
+          {proposal.status === "accepted" && proposal.conversation && (
             <NavLink
-              to={`/dashboard/client/messages?chat=${proposal.contract?.conversation.id}`}
+              to={`/dashboard/client/messages?chat=${proposal.conversation.id}`}
               className={`${styles.link} ${styles.message}`}
             >
-              {t("ui.actions.messageClient")}
+              {t("ui.actions.messageFreelancer")}
             </NavLink>
           )}
         </div>

@@ -1,21 +1,50 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "../styles/SendProposalModal.module.css";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { proposalApi } from "../../../api/proposals/proposalApi";
+import type { FreelancerProposalType } from "../../../types/proposal.types";
 
-function SendProposalModal({ projectId, isOpen, onClose }) {
+type SendProposalModalProps = {
+  projectId: string;
+  isOpen: boolean;
+  onClose: () => void;
+};
+
+type SendProposalForm = {
+  cover_letter: string;
+  delivery_time: string;
+  unit: "day" | "month" | "year";
+  budget: string;
+};
+
+type SendProposalFormErrors = Partial<Record<keyof SendProposalForm, string>>;
+
+type SendProposalPayload = Pick<
+  SendProposalForm,
+  "cover_letter" | "delivery_time"
+> & {
+  price: number;
+};
+
+function SendProposalModal({
+  projectId,
+  isOpen,
+  onClose,
+}: SendProposalModalProps) {
   const { t } = useTranslation();
   const navigate = useNavigate();
 
-  const [form, setForm] = useState({
+  const [form, setForm] = useState<SendProposalForm>({
     cover_letter: "",
     delivery_time: "",
     unit: "day",
     budget: "",
   });
 
-  const [errors, setErrors] = useState({});
+  const [errors, setErrors] = useState<SendProposalFormErrors>({});
+
+  const [submitError, setSubmitError] = useState<string>("");
 
   // * stop the scrolling when modal is open
   useEffect(() => {
@@ -32,7 +61,7 @@ function SendProposalModal({ projectId, isOpen, onClose }) {
   useEffect(() => {
     if (!isOpen) return;
 
-    const hanldeEscape = (event) => {
+    const hanldeEscape = (event: KeyboardEvent) => {
       if (event.key === "Escape") onClose();
     };
 
@@ -42,16 +71,20 @@ function SendProposalModal({ projectId, isOpen, onClose }) {
     };
   }, [isOpen, onClose]);
 
-  const handleChangeInput = (e) => {
+  const handleChangeInput = (
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
+    >,
+  ) => {
     const { name, value } = e.target;
     setForm((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: React.SubmitEvent) => {
     e.preventDefault();
 
     setErrors({});
-    let newErrors = {};
+    let newErrors: SendProposalFormErrors = {};
 
     if (!form.budget.trim()) {
       newErrors.budget = t("ui.validation.budgetRequired");
@@ -72,20 +105,25 @@ function SendProposalModal({ projectId, isOpen, onClose }) {
       return;
     }
 
-    const payload = {
+    const payload: SendProposalPayload = {
       cover_letter: form.cover_letter,
       price: +form.budget,
       delivery_time: `${form.delivery_time} ${form.unit}`,
     };
 
-    const result = await proposalApi.send(projectId ,payload);
+    const result = await proposalApi.send<
+      FreelancerProposalType,
+      SendProposalPayload
+    >(projectId, payload);
     if (!result.success) {
-      setErrors(result.errors ?? []);
+      setSubmitError(result.message || "Error in Submiting");
       return;
     }
 
     navigate("/dashboard/freelancer/my-proposals");
   };
+
+  if (submitError) return <p>{submitError}</p>;
 
   return (
     <div className={styles.overlay} onClick={onClose}>

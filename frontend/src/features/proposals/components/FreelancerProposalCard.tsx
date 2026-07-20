@@ -64,7 +64,7 @@ function FreelancerProposalCard({ proposal }: FreelancerProposalCardProps) {
           </div>
         </div>
 
-        {proposal.status === "accepted" && (
+        {proposal.status === "accepted" && proposal.conversation && (
           <div className={styles.action}>
             <NavLink
               to={`/dashboard/freelancer/messages?chat=${proposal.conversation.id}`}

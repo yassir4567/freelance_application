@@ -165,6 +165,7 @@
       "previous": "Previous",
       "messageUser": "Message {{role}}",
       "messageClient": "Message client",
+      "messageFreelancer": "Message freelancer",
       "viewMessages": "View messages",
       "chooseFile": "Choose file",
       "activateContract": "Activate contract",
