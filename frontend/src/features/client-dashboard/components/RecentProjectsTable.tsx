@@ -2,8 +2,13 @@ import styles from "../styles/RecentProjectsTable.module.css";
 import { getRelativeTime } from "../../../utils/helpers";
 import { NavLink } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import type { ClientDashboardRecentProjects } from "../../../types/dashboard.types";
 
-function RecentProjectsTable({ projects }) {
+type RecentProjectsTable = {
+  projects: ClientDashboardRecentProjects[];
+};
+
+function RecentProjectsTable({ projects }: RecentProjectsTable) {
   const { t } = useTranslation();
   const statusClasses = {
     open: "status-success",
@@ -13,7 +18,7 @@ function RecentProjectsTable({ projects }) {
     cancelled: "status-danger",
   };
 
-  const hasProjects = projects?.length;
+  const hasProjects = projects.length;
   return (
     <table className={styles.table}>
       <thead>
@@ -29,7 +34,7 @@ function RecentProjectsTable({ projects }) {
       </thead>
       <tbody>
         {hasProjects ? (
-          projects?.map((project) => (
+          projects.map((project) => (
             <tr key={project.id}>
               <td className={styles.titleCell}>
                 <span>{project.title}</span>
@@ -48,13 +53,13 @@ function RecentProjectsTable({ projects }) {
               <td className={styles.actions}>
                 <NavLink
                   to={`projects/${project.id}`}
-                  className={styles.actionBtn}
+                  className={styles.actionBtn ?? ""}
                 >
                   View Details
                 </NavLink>
                 <NavLink
                   to={`projects/${project.id}/proposals`}
-                  className={styles.actionBtn}
+                  className={styles.actionBtn ?? ""}
                 >
                   View Proposals
                 </NavLink>
@@ -63,7 +68,7 @@ function RecentProjectsTable({ projects }) {
           ))
         ) : (
           <tr>
-            <td colSpan="5" className={styles.empty}>
+            <td colSpan={5} className={styles.empty}>
               You don't have active contracts yet
             </td>
           </tr>

@@ -30,7 +30,7 @@ type ClientDashboardStats = {
   total_projects: number;
 };
 
-type ClientDashboardRecentProjects = {
+export type ClientDashboardRecentProjects = {
   id: number;
   status: ProjectStatus;
   title: string;
