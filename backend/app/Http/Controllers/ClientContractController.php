@@ -24,7 +24,7 @@ class ClientContractController extends Controller
                     'proposal.freelancer:id,user_id,title',
                     'proposal.freelancer.user:id,first_name,last_name,avatar',
                     'deliverables:id,contract_id,title,deadline,status,created_at',
-                    'conversation:id,contract_id',
+                    'conversation:id,created_at,contract_id',
                 ]);
 
         if ($request->filled('search')) {
@@ -59,7 +59,7 @@ class ClientContractController extends Controller
                     'revision_request',
                 ])->first();
 
-                return [
+                $data = [
                     'id' => $contract->id,
                     'status' => $contract->status,
                     'final_price' => $contract->final_price,
@@ -68,13 +68,27 @@ class ClientContractController extends Controller
                         'id' => $contract->proposal->freelancer->id,
                         'first_name' => $contract->proposal->freelancer->user->first_name,
                         'last_name' => $contract->proposal->freelancer->user->last_name,
-                        'avatar' => $contract->proposal->freelancer->user->avatar,
+                        'avatar' => $contract->proposal->freelancer->user->avatar
                     ],
-                    'current_deliverable' => $current_deliverable,
                     'total_deliverables' => $total_deliverables,
                     'completed_deliverables' => $completed_deliverables,
-                    'conversation' => $contract->conversation,
+                    'conversation' => [
+                        'id' => $contract->conversation->id,
+                    ],
                 ];
+
+                if ($current_deliverable !== null) {
+                    $data['current_deliverable'] = [
+                        'id' => $current_deliverable->id,
+                        'title' => $current_deliverable->title,
+                        'deadline' => $current_deliverable->deadline,
+                        'status' => $current_deliverable->status,
+                        'created_at' => $current_deliverable->created_at,
+                    ];
+                }
+
+
+                return $data;
 
             });
 

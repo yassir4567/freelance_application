@@ -55,7 +55,7 @@ class FreelancerContractController extends Controller
                     'revision_request'
                 ])->first();
 
-                return [
+                $data = [
                     'id' => $contract->id,
                     'status' => $contract->status,
                     'final_price' => $contract->final_price,
@@ -66,11 +66,24 @@ class FreelancerContractController extends Controller
                         'last_name' => $contract->proposal->project->client->last_name,
                         'avatar' => $contract->proposal->project->client->avatar,
                     ],
-                    'current_deliverable' => $current_deliverable,
                     'total_deliverables' => $total_deliverables,
                     'completed_deliverables' => $completed_deliverables,
-                    'conversation' => $contract->conversation
+                    'conversation' => [
+                        'id' => $contract->conversation->id,
+                    ],
                 ];
+
+                if ($current_deliverable !== null) {
+                    $data['current_deliverable'] = [
+                        'id' => $current_deliverable->id,
+                        'title' => $current_deliverable->title,
+                        'deadline' => $current_deliverable->deadline,
+                        'status' => $current_deliverable->status,
+                        'created_at' => $current_deliverable->created_at,
+                    ];
+                }
+
+                return $data;
             });
 
         return response()->json([

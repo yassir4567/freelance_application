@@ -6,35 +6,39 @@ import { useTranslation } from "react-i18next";
 import useContractsFilters from "../hooks/useContractsFilters";
 import useContracts from "../hooks/useContracts";
 import { formatMoney } from "../../../utils/helpers";
+import type { FreelancerContractListItem } from "../../../types/contract.types";
 
 function FreelancerContractsPage() {
   const { t } = useTranslation();
 
   const { searchParams, handleInputsChange, handleClearFilters, filterValues } =
     useContractsFilters();
-
-  const { contracts, contractStats } = useContracts(
-    searchParams,
-    "freelancer",
-  );
+  const {
+    contracts,
+    isContractsLoading,
+    contractsError,
+    contractStats,
+    isContractsStatsLoading,
+    contractsStatsError,
+  } = useContracts<FreelancerContractListItem>(searchParams, "freelancer");
 
   const overviewCards = [
     {
       id: 0,
       title: t("common.labels.completedContracts"),
-      total: contractStats?.completed_contracts ?? "__",
+      total: contractStats.completed_contracts ?? "__",
       subTitle: t("contractsList.stats.completed.subTitle"),
     },
     {
       id: 2,
       title: t("common.labels.activeContracts"),
-      total: contractStats?.active_contracts ?? "__",
+      total: contractStats.active_contracts ?? "__",
       subTitle: t("contractsList.stats.active.subTitle"),
     },
     {
       id: 1,
       title: t("contractsList.stats.earning.title"),
-      total: formatMoney(contractStats?.total_earnings) ?? "__",
+      total: formatMoney(`${contractStats.total_earnings}`) ?? "__",
       subTitle: t("contractsList.stats.earning.subTitle"),
     },
   ];
@@ -60,7 +64,7 @@ function FreelancerContractsPage() {
               title={ov.title}
               value={ov.total}
               description={ov.subTitle}
-              className={styles.contractsOverviewCard}
+              className={styles.contractsOverviewCard ?? ""}
             />
           ))}
         </div>
@@ -81,7 +85,7 @@ function FreelancerContractsPage() {
         </div>
 
         <div className={styles.contractsList}>
-          {contracts?.map((contract) => (
+          {contracts.map((contract) => (
             <ContractCard key={contract.id} contract={contract} />
           ))}
         </div>
