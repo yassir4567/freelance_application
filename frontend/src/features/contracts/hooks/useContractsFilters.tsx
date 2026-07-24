@@ -1,18 +1,28 @@
 import { useSearchParams } from "react-router-dom";
 
-function useContractsFilters() {
+type useContractsFiltersReturn = {
+  searchParams: URLSearchParams;
+  handleInputsChange: (
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
+  ) => void;
+  handleClearFilters: () => void;
+  filterValues: Record<string, string>;
+};
+
+function useContractsFilters(): useContractsFiltersReturn {
   const [searchParams, setSearchParams] = useSearchParams();
 
   const search = searchParams.get("search") || "";
   const sort = searchParams.get("sort") || "";
   const status = searchParams.get("status") || "";
 
-  const handleInputsChange = (e) => {
+  const handleInputsChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
+  ): void => {
     const { name, value } = e.target;
 
     setSearchParams((prev) => {
       const nextParams = new URLSearchParams(prev);
-
       if (value && value.trim() !== "") {
         nextParams.set(name, value);
       } else {

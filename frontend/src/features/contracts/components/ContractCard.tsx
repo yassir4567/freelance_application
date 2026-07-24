@@ -11,14 +11,32 @@ import {
   valueOrFallback,
 } from "../utils/contractDisplay";
 import { useTranslation } from "react-i18next";
+import type {
+  ClientContractListItem,
+  FreelancerContractListItem,
+} from "../../../types/contract.types";
+import type { User } from "../../../types/user.types";
 
-function ContractCard({ contract }) {
+type ContractCardProps =
+  | {
+      contract: ClientContractListItem;
+      role: "client";
+    }
+  | {
+      contract: FreelancerContractListItem;
+      role: "freelancer";
+    };
+
+function ContractCard({ contract, role }: ContractCardProps) {
   const { t } = useTranslation();
-  const {
-    user: { role },
-  } = useAuth();
 
-  const other_user = contract.freelancer ?? contract.client ?? {};
+  let other_user: Pick<
+    User,
+    "id" | "first_name" | "last_name" | "avatar"
+  > | null = null;
+
+  if (role == "client") other_user = contract.freelancer;
+  else other_user = contract.client;
 
   const otherUserLabel = role === "client" ? "Freelancer" : "Client";
   const messagePath = contract.conversation?.id
@@ -33,7 +51,10 @@ function ContractCard({ contract }) {
             <img src={profile} className={styles.avatar} alt="User profile" />
             <div className={styles.contractCardHeaderTitleBox}>
               <h2 className={styles.projectTitle}>
-                {valueOrFallback(contract.project_title, t("ui.fallbacks.untitledProject"))}
+                {valueOrFallback(
+                  contract.project_title,
+                  t("ui.fallbacks.untitledProject"),
+                )}
               </h2>
               <p className={styles.name}>
                 {valueOrFallback(
@@ -64,7 +85,10 @@ function ContractCard({ contract }) {
                   {t("common.labels.budget")}
                 </h5>
                 <div className={styles.contractSubCardContent}>
-                  {formatCurrency(contract.final_price, t("ui.fallbacks.notSet"))}
+                  {formatCurrency(
+                    contract.final_price,
+                    t("ui.fallbacks.notSet"),
+                  )}
                 </div>
               </div>
               <div className={styles.contractSubCard}>
@@ -109,7 +133,7 @@ function ContractCard({ contract }) {
             </NavLink>
             <NavLink
               to={`${contract.id}?tab=deliverables`}
-              className={styles.navlink}
+              className={styles.navlink ?? ""}
             >
               {t("common.actions.viewDeliverables")}
             </NavLink>
@@ -117,12 +141,12 @@ function ContractCard({ contract }) {
         ) : (
           <NavLink
             to={`/dashboard/client/contracts/${contract.id}/setup`}
-            className={styles.navlink}
+            className={styles.navlink ?? ""}
           >
             {t("ui.actions.activateContract")}
           </NavLink>
         )}
-        <NavLink to={messagePath} className={styles.navlink}>
+        <NavLink to={messagePath} className={styles.navlink ?? ""}>
           {t("ui.actions.messageUser", { role: otherUserLabel })}
         </NavLink>
       </div>

@@ -97,7 +97,7 @@ function ClientContractsPage() {
 
         <div className={styles.contractsList}>
           {contracts.map((contract) => (
-            <ContractCard key={contract.id} contract={contract} />
+            <ContractCard key={contract.id} contract={contract} role="client" />
           ))}
         </div>
       </div>

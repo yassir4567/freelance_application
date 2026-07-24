@@ -2,12 +2,21 @@ import styles from "./FilterBox.module.css";
 import Search from "../../ui/Search";
 import { useTranslation } from "react-i18next";
 
+type FilterBoxProps = {
+  inputValues: Record<string, string>;
+  statusValues: string[];
+  handleInputsChange: (
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
+  ) => void;
+  handleClearFilters: () => void;
+};
+
 function FilterBox({
   inputValues,
   statusValues,
   handleInputsChange,
   handleClearFilters,
-}) {
+}: FilterBoxProps) {
   const { t } = useTranslation();
   return (
     <div className={styles.FilterSection}>
@@ -48,7 +57,9 @@ function FilterBox({
         </select>
       </div>
       <div className={styles.clearAllFilters}>
-        <button onClick={handleClearFilters}>{t("common.actions.clearAll")}</button>
+        <button onClick={handleClearFilters}>
+          {t("common.actions.clearAll")}
+        </button>
       </div>
     </div>
   );
